@@ -1,0 +1,52 @@
+.account-box
+    +box
+.account-box-title
+    +title
+
+// signin.js
+.signin
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: flex-start
+    margin-top: 15px
+    margin-bottom: 15px
+    .signin-title
+        font-family: "NotoSansCJKtc-Bold"
+        font-size: 24px
+        color: $text-black
+    .tips
+        font-family: "NotoSansCJKtc-Medium"
+        font-size: 14px
+        font-weight: 500px
+        color: $text-gray
+    .signin-form
+        display: flex
+        flex-direction: column
+        .sign-label
+            +label-text
+            color: $text-black
+            margin-top: 30px
+            margin-bottom: 10px
+        .notice
+            height: 22px
+            font-family: "NotoSansCJKtc-Bold"
+            font-size: 14px
+            margin: 15px
+        .link
+            font-family: "NotoSansCJKTC-Bold"
+            font-size: 14px
+            color: $text-orange
+            text-decoration: none
+        #no-color
+            font-family: "NotoSansCJKTC-Medium"
+            font-size: 14px
+            color: $text-black
+            margin-top: 20px
+        .signin-submit
+            +btn-submit
+            box-shadow: 0 0 0 4px rgba(255, 168, 61, 0.2)
+
+// edit.js
+.edit-form
+    +in-container-form(($text-black))
