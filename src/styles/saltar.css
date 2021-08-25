@@ -166,6 +166,8 @@ nav.superNav .navBtnGroup .btn-login {
   background-color: #ffa83d;
   color: white;
   cursor: pointer;
+  font-family: "NotoSansCJKtc-Medium";
+  font-size: 1rem;
 }
 
 nav.superNav .navBtnGroup .btn-signin {
@@ -178,6 +180,8 @@ nav.superNav .navBtnGroup .btn-signin {
   background-color: #ffffff;
   color: #ffa83d;
   cursor: pointer;
+  font-family: "NotoSansCJKtc-Medium";
+  font-size: 1rem;
 }
 
 .main {
