@@ -2,6 +2,7 @@ import Home from "./Home/Home";
 import SignIn from "./Account/SignIn";
 import Management from "./Ticket/Management";
 import Infomation from "./Ticket/Infomation";
+import MemberList from "./Ticket/MemberList";
 import Edit from "./Account/Edit";
 import Show from "./Activity/Show";
 
@@ -31,6 +32,10 @@ let routes = [
     {
         path: "/ticket/management/infomation",
         component: Infomation,
+    },
+    {
+        path: "/ticket/management/memberList",
+        component: MemberList,
     },
 ];
 

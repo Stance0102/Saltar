@@ -770,44 +770,18 @@ nav.subNav li img {
   width: 1608px;
 }
 
-ul, li {
-  list-style: none;
-  padding: 0;
-}
-
-.container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  padding: 0 1rem;
-  background: linear-gradient(45deg, #209cff, #68e0cf);
-  padding: 3rem 0;
-}
-
-.wrapper {
-  background: #eaf6ff;
-  padding: 2rem;
-  border-radius: 15px;
-}
-
-h1 {
-  font-size: 1.1rem;
-  font-family: sans-serif;
-}
-
 .sessions {
   margin-top: 2rem;
   border-radius: 12px;
   position: relative;
 }
 
-li {
+.sessions ul, .sessions li {
+  list-style: none;
+  padding: 0;
+}
+
+.sessions li {
   padding-bottom: 1.5rem;
   border-left: 1px solid #abaaed;
   position: relative;
@@ -815,12 +789,12 @@ li {
   margin-left: 10px;
 }
 
-li:last-child {
+.sessions li:last-child {
   border: 0px;
   padding-bottom: 0;
 }
 
-li:before {
+.sessions li:before {
   content: '';
   width: 15px;
   height: 15px;
@@ -835,20 +809,20 @@ li:before {
   top: 0px;
 }
 
-.time {
+.sessions li .time {
   color: #2a2839;
   font-family: 'Poppins', sans-serif;
   font-weight: 500;
 }
 
-p {
+.sessions li p {
   color: #4f4f4f;
   font-family: sans-serif;
   line-height: 1.5;
   margin-top: 0.4rem;
 }
 
-p {
+.sessions li p {
   font-size: .9rem;
 }
 /*# sourceMappingURL=saltar.css.map */
