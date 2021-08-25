@@ -68,3 +68,65 @@
         .form-save
             +btn-submit
             width: 138px
+
+= row-box($title-count, $success-color, $fail-color)
+    display: flex
+    flex-direction: column
+    justify-content: start
+    align-items: center
+    margin-top: 35px
+    .row-box-title
+        display: flex
+        justify-content: start
+        align-items: center
+        width: 100%
+        padding-left: 80px
+        margin-bottom: 10px
+        h6
+            font-family: "NotoSansCJKtc-Regular"
+            font-size: 0.9rem
+            color: $text-gray
+            width: 100%/$title-count
+    .row-container
+        display: flex
+        justify-content: start
+        align-items: center
+        width: 1608px
+        height: 64px
+        border-radius: 8px
+        border: solid 2px #bdbdbd
+        background-color: #fff
+        margin-bottom: 25px
+        &:hover
+            border: solid 2px $text-orange
+        .row-textbox
+            display: flex
+            justify-content: start
+            align-items: center
+            width: 97%
+        .row-text
+            font-family: "NotoSansCJKtc-Medium"
+            font-size: 1rem
+            font-weight: 500
+            color: $text-black
+            width: 100%/$title-count
+        .row-number
+            font-family: "NotoSansCJKtc-Bold"
+            color: $text-orange
+            font-size: 1rem
+            width: 3%
+            margin-left: 30px
+        .success
+            color: $success-color
+            font-family: "NotoSansCJKtc-Bold"
+            font-weight: 0
+        .fail
+            color: $fail-color
+            font-family: "NotoSansCJKtc-Bold"
+            font-weight: 0
+        .row-btn-group
+            display: flex
+            justify-content: space-around
+            align-items: center
+            width: 150px
+            margin-left: 80px

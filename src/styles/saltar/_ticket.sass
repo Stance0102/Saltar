@@ -4,63 +4,43 @@
 .ticket-box-title
     +title
 
-// management.js
-.ticket-all
-    display: flex
-    flex-direction: column
-    justify-content: start
-    align-items: center
-    margin-top: 35px
-    .ticket-title
-        display: flex
-        justify-content: start
-        align-items: center
-        width: 100%
-        padding-left: 80px
-        margin-bottom: 10px
-        h6
-            width: 33%
-            font-family: "NotoSansCJKtc-Regular"
-            font-size: 0.9rem
-            color: $text-gray
-    .ticket-row
-        display: flex
-        justify-content: start
-        align-items: center
-        width: 1608px
-        height: 64px
-        border-radius: 8px
-        border: solid 2px #bdbdbd
-        background-color: #fff
-        margin-bottom: 25px
-        &:hover
-            border: solid 2px $text-orange
-        .ticket-main
-            display: flex
-            justify-content: start
-            align-items: center
-            width: 97%
-        .ticket-text
-            font-family: "NotoSansCJKtc-Medium"
-            font-size: 1rem
-            font-weight: 500
-            color: $text-black
-            width: 33%
-        .number
-            font-family: "NotoSansCJKtc-Bold"
-            color: $text-orange
-            font-size: 1rem
-            width: 3%
-            margin-left: 30px
-        .success
-            color: $text-green
-            font-family: "NotoSansCJKtc-Bold"
-            font-weight: 0
-        .fail
-            color: $text-red
-            font-family: "NotoSansCJKtc-Bold"
-            font-weight: 0
+// Management.js
+.management-row-box
+    +row-box(4, $text-green, $text-red)
 
-// infomation.js
+// TicketType.js
 .ticket-form
     +in-container-form(#aeaeae)
+
+// MemberList.js
+.member-row-box
+    +row-box(6, $text-orange, $text-gray)
+    .check
+        width: 45px
+        height: 40px
+        display: flex
+        flex-direction: row
+        justify-content: center
+        align-items: center
+        border: none
+        border-radius: 8px
+        background-color: rgba(165, 165, 165, 0.3)
+        cursor: pointer
+        &:checked
+            background-color: rgba(255, 168, 61, 0.3)
+        &:hover
+            border: 2.5px solid rgba(165, 165, 165, 1)
+
+    .delete
+        width: 45px
+        height: 40px
+        display: flex
+        flex-direction: row
+        justify-content: center
+        align-items: center
+        border: none
+        border-radius: 8px
+        background-color: rgba(255, 55, 55, 0.3)
+        cursor: pointer
+        &:hover
+            border: 2.5px solid rgba(255, 55, 55, 1)

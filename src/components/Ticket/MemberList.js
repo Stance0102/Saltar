@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import garbage_can_Icon from "../../images/garbage_can_Icon.svg";
+import tick_Icon from "../../images/tick_Icon.svg";
 
 const MemberList = () => {
     return (
@@ -18,44 +19,46 @@ const MemberList = () => {
                         <h6>票卷種類</h6>
                         <h6>票卷使用狀態</h6>
                     </div>
-                    <Link to="/ticket/management/memberList">
-                        <div className="row-container">
-                            <h6 className="row-number">01</h6>
-                            <div className="row-textbox">
-                                <h6 className="row-text act-name">李慶毅</h6>
-                                <h6 className="row-text">
-                                    c107118102@nkust.edu.tw
-                                </h6>
-                                <h6 className="row-text">0925420706</h6>
-                                <h6 className="row-text">外系票</h6>
-                                <h6 className="row-text success">已使用</h6>
-                                <div className="row-btn-group">
-                                    <button className="delete">
-                                        <img src={garbage_can_Icon} alt="" />
-                                    </button>
-                                </div>
+                    <div className="row-container">
+                        <h6 className="row-number">01</h6>
+                        <div className="row-textbox">
+                            <h6 className="row-text act-name">李慶毅</h6>
+                            <h6 className="row-text">
+                                c107118102@nkust.edu.tw
+                            </h6>
+                            <h6 className="row-text">0925420706</h6>
+                            <h6 className="row-text">外系票</h6>
+                            <h6 className="row-text success">已使用</h6>
+                            <div className="row-btn-group">
+                                <button className="check">
+                                    <img src={tick_Icon} alt="" />
+                                </button>
+                                <button className="delete">
+                                    <img src={garbage_can_Icon} alt="" />
+                                </button>
                             </div>
                         </div>
-                    </Link>
-                    <Link to="/ticket/management/memberList">
-                        <div className="row-container">
-                            <h6 className="row-number">02</h6>
-                            <div className="row-textbox">
-                                <h6 className="row-text act-name">高瑋志</h6>
-                                <h6 className="row-text">
-                                    c107118102@nkust.edu.tw
-                                </h6>
-                                <h6 className="row-text">0925420706</h6>
-                                <h6 className="row-text">非外系票</h6>
-                                <h6 className="row-text fail">未使用</h6>
-                                <div className="row-btn-group">
-                                    <button className="delete">
-                                        <img src={garbage_can_Icon} alt="" />
-                                    </button>
-                                </div>
+                    </div>
+                    <div className="row-container">
+                        <h6 className="row-number">02</h6>
+                        <div className="row-textbox">
+                            <h6 className="row-text">李慶毅</h6>
+                            <h6 className="row-text">
+                                c107118102@nkust.edu.tw
+                            </h6>
+                            <h6 className="row-text">0925420706</h6>
+                            <h6 className="row-text">非外系票</h6>
+                            <h6 className="row-text fail">未使用</h6>
+                            <div className="row-btn-group">
+                                <button className="check">
+                                    <img src={tick_Icon} alt="" />
+                                </button>
+                                <button className="delete">
+                                    <img src={garbage_can_Icon} alt="" />
+                                </button>
                             </div>
                         </div>
-                    </Link>
+                    </div>
                 </div>
             </div>
         </div>

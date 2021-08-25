@@ -1,10 +1,10 @@
 import React from "react";
 
-const Infomation = () => {
+const Add = () => {
     return (
         <div className="ticket-box">
             <div className="ticket-box-title">
-                <p>票卷資訊</p>
+                <p>新增票種</p>
                 <hr />
             </div>
             <div className="container">
@@ -46,4 +46,4 @@ const Infomation = () => {
     );
 };
 
-export default Infomation;
+export default Add;

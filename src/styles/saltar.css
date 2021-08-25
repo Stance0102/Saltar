@@ -537,7 +537,7 @@ nav.subNav li img {
   width: 1608px;
 }
 
-.ticket-all {
+.management-row-box {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -554,7 +554,7 @@ nav.subNav li img {
   margin-top: 35px;
 }
 
-.ticket-all .ticket-title {
+.management-row-box .row-box-title {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -569,14 +569,14 @@ nav.subNav li img {
   margin-bottom: 10px;
 }
 
-.ticket-all .ticket-title h6 {
-  width: 33%;
+.management-row-box .row-box-title h6 {
   font-family: "NotoSansCJKtc-Regular";
   font-size: 0.9rem;
   color: #a5a5a5;
+  width: 25%;
 }
 
-.ticket-all .ticket-row {
+.management-row-box .row-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -594,11 +594,11 @@ nav.subNav li img {
   margin-bottom: 25px;
 }
 
-.ticket-all .ticket-row:hover {
+.management-row-box .row-container:hover {
   border: solid 2px #ffb559;
 }
 
-.ticket-all .ticket-row .ticket-main {
+.management-row-box .row-container .row-textbox {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -611,15 +611,15 @@ nav.subNav li img {
   width: 97%;
 }
 
-.ticket-all .ticket-row .ticket-text {
+.management-row-box .row-container .row-text {
   font-family: "NotoSansCJKtc-Medium";
   font-size: 1rem;
   font-weight: 500;
   color: #000000;
-  width: 33%;
+  width: 25%;
 }
 
-.ticket-all .ticket-row .number {
+.management-row-box .row-container .row-number {
   font-family: "NotoSansCJKtc-Bold";
   color: #ffb559;
   font-size: 1rem;
@@ -627,16 +627,29 @@ nav.subNav li img {
   margin-left: 30px;
 }
 
-.ticket-all .ticket-row .success {
+.management-row-box .row-container .success {
   color: #4ca46f;
   font-family: "NotoSansCJKtc-Bold";
   font-weight: 0;
 }
 
-.ticket-all .ticket-row .fail {
+.management-row-box .row-container .fail {
   color: #ff3737;
   font-family: "NotoSansCJKtc-Bold";
   font-weight: 0;
+}
+
+.management-row-box .row-container .row-btn-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 150px;
+  margin-left: 80px;
 }
 
 .ticket-form {
@@ -727,6 +740,177 @@ nav.subNav li img {
   width: 138px;
 }
 
+.member-row-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 35px;
+}
+
+.member-row-box .row-box-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  padding-left: 80px;
+  margin-bottom: 10px;
+}
+
+.member-row-box .row-box-title h6 {
+  font-family: "NotoSansCJKtc-Regular";
+  font-size: 0.9rem;
+  color: #a5a5a5;
+  width: 16.66667%;
+}
+
+.member-row-box .row-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 1608px;
+  height: 64px;
+  border-radius: 8px;
+  border: solid 2px #bdbdbd;
+  background-color: #fff;
+  margin-bottom: 25px;
+}
+
+.member-row-box .row-container:hover {
+  border: solid 2px #ffb559;
+}
+
+.member-row-box .row-container .row-textbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 97%;
+}
+
+.member-row-box .row-container .row-text {
+  font-family: "NotoSansCJKtc-Medium";
+  font-size: 1rem;
+  font-weight: 500;
+  color: #000000;
+  width: 16.66667%;
+}
+
+.member-row-box .row-container .row-number {
+  font-family: "NotoSansCJKtc-Bold";
+  color: #ffb559;
+  font-size: 1rem;
+  width: 3%;
+  margin-left: 30px;
+}
+
+.member-row-box .row-container .success {
+  color: #ffb559;
+  font-family: "NotoSansCJKtc-Bold";
+  font-weight: 0;
+}
+
+.member-row-box .row-container .fail {
+  color: #a5a5a5;
+  font-family: "NotoSansCJKtc-Bold";
+  font-weight: 0;
+}
+
+.member-row-box .row-container .row-btn-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 150px;
+  margin-left: 80px;
+}
+
+.member-row-box .check {
+  width: 45px;
+  height: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: none;
+  border-radius: 8px;
+  background-color: rgba(165, 165, 165, 0.3);
+  cursor: pointer;
+}
+
+.member-row-box .check:checked {
+  background-color: rgba(255, 168, 61, 0.3);
+}
+
+.member-row-box .check:hover {
+  border: 2.5px solid #a5a5a5;
+}
+
+.member-row-box .delete {
+  width: 45px;
+  height: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: none;
+  border-radius: 8px;
+  background-color: rgba(255, 55, 55, 0.3);
+  cursor: pointer;
+}
+
+.member-row-box .delete:hover {
+  border: 2.5px solid #ff3737;
+}
+
 .activity-box {
   width: 100%;
   padding: 20px;
@@ -770,59 +954,73 @@ nav.subNav li img {
   width: 1608px;
 }
 
-.sessions {
-  margin-top: 2rem;
+.show {
   border-radius: 12px;
-  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
 }
 
-.sessions ul, .sessions li {
+.show .show-title {
+  color: #ffb559;
+  font-family: "NotoSansCJKtc-Bold";
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  margin-left: 10px;
+}
+
+.show ul, .show li {
   list-style: none;
   padding: 0;
 }
 
-.sessions li {
-  padding-bottom: 1.5rem;
-  border-left: 1px solid #abaaed;
+.show li {
+  padding-bottom: 3rem;
+  border-left: 3px solid #ffb559;
   position: relative;
-  padding-left: 20px;
-  margin-left: 10px;
+  padding-left: 30px;
+  margin-left: 20px;
 }
 
-.sessions li:last-child {
+.show li:last-child {
   border: 0px;
-  padding-bottom: 0;
+  left: 2px;
 }
 
-.sessions li:before {
+.show li:before {
   content: '';
-  width: 15px;
-  height: 15px;
+  width: 18px;
+  height: 18px;
   background: white;
-  border: 1px solid #4e5ed3;
-  -webkit-box-shadow: 3px 3px 0px #bab5f8;
-          box-shadow: 3px 3px 0px #bab5f8;
-  box-shadow: 3px 3px 0px #bab5f8;
+  border: 1px solid #ffb559;
+  background-color: #ffb559;
   border-radius: 50%;
   position: absolute;
-  left: -10px;
+  left: -11px;
   top: 0px;
 }
 
-.sessions li .time {
+.show li .time {
   color: #2a2839;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 500;
+  font-family: "NotoSansCJKtc-Bold";
+  font-size: 1.15rem;
+  line-height: 1;
 }
 
-.sessions li p {
-  color: #4f4f4f;
-  font-family: sans-serif;
-  line-height: 1.5;
-  margin-top: 0.4rem;
-}
-
-.sessions li p {
-  font-size: .9rem;
+.show li font {
+  color: #a5a5a5;
+  font-family: "NotoSansCJKtc-Medium";
+  font-size: 0.9rem;
+  margin-left: 10px;
 }
 /*# sourceMappingURL=saltar.css.map */
