@@ -1,14 +1,9 @@
 import React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 // Img
 import menu_Icon from "../../images/menuIcon.svg";
 
 const SuperNav = () => {
-    const location = {
-        pathname: "/signin",
-        state: { fromDashboard: true },
-    };
-
     return (
         <nav className="superNav">
             <ul>

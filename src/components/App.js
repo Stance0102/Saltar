@@ -1,52 +1,59 @@
-import React from "react";
+import React, {
+    useContext,
+    createContext,
+    useState,
+    Suspense,
+    lazy,
+} from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import routes from "./Router";
+import * as routes from "./Router";
 import SuperNav from "./Nav/SuperNav";
 import SubNav from "./Nav/SubNav";
-// ----IMG----
-import controlerIcon_02 from "../images/controlerIcon_02.svg";
-import analysisIcon from "../images/analysisIcon.svg";
-import actControl from "../images/actControl.svg";
-import editorIcon from "../images/editorIcon.svg";
-import vector_gray_Icon from "../images/vector_gray_Icon.svg";
-import web_Icon from "../images/web_Icon.svg";
+
+const LogIn = lazy(() => import("./Account/Login"));
+const SignIn = lazy(() => import("./Account/SignIn"));
+const Dashboard = lazy(() => import("./Home/Dashboard"));
 
 const App = () => {
     return (
-        <Router>
-            <div>
-                <SuperNav />
-
-                <div className="main">
-                    <SubNav />
-                    <div className="content">
-                        <Switch>
-                            {routes.map((route, key) => {
-                                if (route.exact) {
-                                    return (
-                                        <Route
-                                            key={key}
-                                            exact
-                                            path={route.path}
-                                            component={route.component}
-                                        />
-                                    );
-                                } else {
-                                    return (
-                                        <Route
-                                            key={key}
-                                            path={route.path}
-                                            component={route.component}
-                                        />
-                                    );
-                                }
-                            })}
-                        </Switch>
-                    </div>
-                </div>
-            </div>
-        </Router>
+        <>
+            <Router>
+                <Suspense fallback={<p>Loading...</p>}>
+                    <Route path={routes.LOGIN} component={LogIn} />
+                    <Route path={routes.SIGNIN} component={SignIn} />
+                    <Route path={routes.DASHBOARD} component={Dashboard} />
+                </Suspense>
+            </Router>
+        </>
     );
 };
 
 export default App;
+
+{
+    /* <div className="main">
+    <SubNav />
+    <div className="content">
+        {CMSroutes.map((route, key) => {
+            if (route.exact) {
+                return (
+                    <Route
+                        key={key}
+                        exact
+                        path={route.path}
+                        component={route.component}
+                    />
+                );
+            } else {
+                return (
+                    <Route
+                        key={key}
+                        path={route.path}
+                        component={route.component}
+                    />
+                );
+            }
+        })}
+    </div>
+</div>; */
+}

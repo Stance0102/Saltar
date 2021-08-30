@@ -1,5 +1,20 @@
 import React from "react";
 
+let Shows = [
+    {
+        id: 1,
+        time: "18:00",
+        showName: "亂場",
+        note: "亂場請務必脫掉口罩",
+    },
+    {
+        id: 2,
+        time: "19:00",
+        showName: "亂場",
+        note: "亂場請務必脫掉口罩",
+    },
+];
+
 const Show = () => {
     return (
         <div className="activity-box">
@@ -9,35 +24,23 @@ const Show = () => {
                 <div className="container">
                     <ul className="show">
                         <div className="show-title">活動即時資訊</div>
-                        <li>
-                            <div className="time">
-                                18:00 進場 <font>(入場請務必戴好口罩)</font>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="time">
-                                18:00 進場 <font>(入場請務必戴好口罩)</font>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="time">
-                                18:00 進場 <font>(入場請務必戴好口罩)</font>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="time">
-                                18:00 進場 <font>(入場請務必戴好口罩)</font>
-                            </div>
-                        </li>
-                        <li>
-                            <div className="time">
-                                18:00 進場 <font>(入場請務必戴好口罩)</font>
-                            </div>
-                        </li>
+                        {Shows.map((show, index) => {
+                            return <ShowDetail key={show.id} {...show} />;
+                        })}
                     </ul>
                 </div>
             </div>
         </div>
+    );
+};
+
+const ShowDetail = ({ time, showName, note }) => {
+    return (
+        <li>
+            <div className="time">
+                {time} {showName} <font>({note})</font>
+            </div>
+        </li>
     );
 };
 

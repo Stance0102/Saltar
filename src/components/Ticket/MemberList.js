@@ -5,7 +5,7 @@ import tick_Icon from "../../images/tick_Icon.svg";
 
 const MemberList = () => {
     return (
-        <div>
+        <>
             <div className="ticket-box">
                 <div className="ticket-box-title">
                     <p>活動參加狀況</p>
@@ -61,7 +61,7 @@ const MemberList = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 
