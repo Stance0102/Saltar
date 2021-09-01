@@ -1,24 +1,24 @@
-import React, { useState } from "react";
-import { useHistory, useLocation } from "react-router";
-import useAuth from "../App";
+import React from "react";
+import { useHistory } from "react-router-dom";
+import Auth from "../Auth";
 
 const Login = () => {
-    let history = useHistory();
-    let location = useLocation();
-    let auth = useAuth();
-
-    let { from } = location.state || { from: { pathname: "/" } };
-    let login = () => {
-        auth.signIn(() => {
-            history.replace(from);
-        });
-    };
+    const history = useHistory();
 
     return (
         <div className="signin">
+            <button
+                onClick={() => {
+                    Auth.login(() => {
+                        history.push("/dashboard");
+                    });
+                }}
+            >
+                測試登入
+            </button>
             <p className="signin-title">登入</p>
             {/* <form className="signin-form"> */}
-            <label className="sign-label" for="email">
+            <label className="sign-label" htmlFor="email">
                 帳號
             </label>
             <input
@@ -28,7 +28,7 @@ const Login = () => {
                 // value={username}
             />
 
-            <label className="sign-label" for="pw">
+            <label className="sign-label" htmlFor="pw">
                 密碼
             </label>
             <input

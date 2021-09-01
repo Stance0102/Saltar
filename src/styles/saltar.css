@@ -96,6 +96,10 @@ input {
   padding-left: 15px;
 }
 
+button {
+  cursor: pointer;
+}
+
 nav.superNav {
   width: 100vw;
   height: 72px;
@@ -165,7 +169,6 @@ nav.superNav .navBtnGroup .btn-login {
   border: solid 2px #ffffff;
   background-color: #ffa83d;
   color: white;
-  cursor: pointer;
   font-family: "NotoSansCJKtc-Medium";
   font-size: 1rem;
 }
@@ -179,7 +182,6 @@ nav.superNav .navBtnGroup .btn-signin {
   border-radius: 100px;
   background-color: #ffffff;
   color: #ffa83d;
-  cursor: pointer;
   font-family: "NotoSansCJKtc-Medium";
   font-size: 1rem;
 }
@@ -255,10 +257,10 @@ nav.subNav li img {
   display: flex;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: start;
+          justify-content: flex-start;
   -webkit-box-align: start;
       -ms-flex-align: start;
-          align-items: start;
+          align-items: flex-start;
   width: 1608px;
   height: 100%;
   background-color: #fff;
@@ -269,6 +271,12 @@ nav.subNav li img {
   padding-left: 20px;
   padding-right: 20px;
   margin-top: 20px;
+}
+
+.errorMsg {
+  color: #ff3737;
+  font-family: "NotoSansCJKtc-Medium";
+  font-size: 1.1rem;
 }
 
 .account-box {
@@ -283,7 +291,7 @@ nav.subNav li img {
           flex-direction: column;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: start;
+          justify-content: flex-start;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -299,10 +307,10 @@ nav.subNav li img {
           flex-direction: column;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: start;
+          justify-content: flex-start;
   -webkit-box-align: start;
       -ms-flex-align: start;
-          align-items: start;
+          align-items: flex-start;
   font-family: "NotoSansCJKtc-Bold";
   font-size: 22px;
   color: black;
@@ -420,7 +428,7 @@ nav.subNav li img {
           flex-direction: column;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: start;
+          justify-content: flex-start;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -439,10 +447,10 @@ nav.subNav li img {
           flex-direction: column;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: start;
+          justify-content: flex-start;
   -webkit-box-align: start;
       -ms-flex-align: start;
-          align-items: start;
+          align-items: flex-start;
   margin-bottom: 15px;
 }
 
@@ -510,7 +518,7 @@ nav.subNav li img {
           flex-direction: column;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: start;
+          justify-content: flex-start;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -526,10 +534,10 @@ nav.subNav li img {
           flex-direction: column;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: start;
+          justify-content: flex-start;
   -webkit-box-align: start;
       -ms-flex-align: start;
-          align-items: start;
+          align-items: flex-start;
   font-family: "NotoSansCJKtc-Bold";
   font-size: 22px;
   color: black;
@@ -551,7 +559,7 @@ nav.subNav li img {
           flex-direction: column;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: start;
+          justify-content: flex-start;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -564,7 +572,7 @@ nav.subNav li img {
   display: flex;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: start;
+          justify-content: flex-start;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -586,7 +594,7 @@ nav.subNav li img {
   display: flex;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: start;
+          justify-content: flex-start;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -608,7 +616,7 @@ nav.subNav li img {
   display: flex;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: start;
+          justify-content: flex-start;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -666,7 +674,7 @@ nav.subNav li img {
           flex-direction: column;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: start;
+          justify-content: flex-start;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -685,10 +693,10 @@ nav.subNav li img {
           flex-direction: column;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: start;
+          justify-content: flex-start;
   -webkit-box-align: start;
       -ms-flex-align: start;
-          align-items: start;
+          align-items: flex-start;
   margin-bottom: 15px;
 }
 
@@ -754,7 +762,7 @@ nav.subNav li img {
           flex-direction: column;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: start;
+          justify-content: flex-start;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -767,7 +775,7 @@ nav.subNav li img {
   display: flex;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: start;
+          justify-content: flex-start;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -789,7 +797,7 @@ nav.subNav li img {
   display: flex;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: start;
+          justify-content: flex-start;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -811,7 +819,7 @@ nav.subNav li img {
   display: flex;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: start;
+          justify-content: flex-start;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -908,7 +916,6 @@ nav.subNav li img {
   border: none;
   border-radius: 8px;
   background-color: rgba(255, 55, 55, 0.3);
-  cursor: pointer;
 }
 
 .member-row-box .delete:hover {
@@ -927,7 +934,7 @@ nav.subNav li img {
           flex-direction: column;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: start;
+          justify-content: flex-start;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -943,10 +950,10 @@ nav.subNav li img {
           flex-direction: column;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: start;
+          justify-content: flex-start;
   -webkit-box-align: start;
       -ms-flex-align: start;
-          align-items: start;
+          align-items: flex-start;
   font-family: "NotoSansCJKtc-Bold";
   font-size: 22px;
   color: black;
@@ -969,10 +976,10 @@ nav.subNav li img {
           flex-direction: column;
   -webkit-box-pack: start;
       -ms-flex-pack: start;
-          justify-content: start;
+          justify-content: flex-start;
   -webkit-box-align: start;
       -ms-flex-align: start;
-          align-items: start;
+          align-items: flex-start;
 }
 
 .show .show-title {

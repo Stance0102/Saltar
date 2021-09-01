@@ -21,14 +21,14 @@
     padding: 20px
     display: flex
     flex-direction: column
-    justify-content: start
+    justify-content: flex-start
     align-items: center
 
 = title
     display: flex
     flex-direction: column
-    justify-content: start
-    align-items: start
+    justify-content: flex-start
+    align-items: flex-start
     font-family: "NotoSansCJKtc-Bold"
     font-size: 22px
     color: black
@@ -40,7 +40,7 @@
 = in-container-form($text-color)
     display: flex
     flex-direction: column
-    justify-content: start
+    justify-content: flex-start
     align-items: center
     width: 100%
     height: 100%
@@ -48,8 +48,8 @@
     .input-group
         display: flex
         flex-direction: column
-        justify-content: start
-        align-items: start
+        justify-content: flex-start
+        align-items: flex-start
         margin-bottom: 15px
         .input-label
             +label-text
@@ -72,12 +72,12 @@
 = row-box($title-count, $success-color, $fail-color)
     display: flex
     flex-direction: column
-    justify-content: start
+    justify-content: flex-start
     align-items: center
     margin-top: 35px
     .row-box-title
         display: flex
-        justify-content: start
+        justify-content: flex-start
         align-items: center
         width: 100%
         padding-left: 80px
@@ -89,7 +89,7 @@
             width: 100%/$title-count
     .row-container
         display: flex
-        justify-content: start
+        justify-content: flex-start
         align-items: center
         width: 1608px
         height: 64px
@@ -101,7 +101,7 @@
             border: solid 2px $text-orange
         .row-textbox
             display: flex
-            justify-content: start
+            justify-content: flex-start
             align-items: center
             width: 97%
         .row-text

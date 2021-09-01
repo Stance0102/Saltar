@@ -1,37 +1,44 @@
-import React, {
-    useContext,
-    createContext,
-    useState,
-    Suspense,
-    lazy,
-} from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React, { Suspense, lazy } from "react";
+import { Switch, Route } from "react-router-dom";
 import * as routes from "./Router";
+import { ProtectedRoute } from "./Protected.route";
 import SuperNav from "./Nav/SuperNav";
-import SubNav from "./Nav/SubNav";
+import Auth from "./Auth";
 
 const LogIn = lazy(() => import("./Account/Login"));
 const SignIn = lazy(() => import("./Account/SignIn"));
 const Dashboard = lazy(() => import("./Home/Dashboard"));
 
+const isLogged = Auth.isAuthenticated;
+
 const App = () => {
     return (
         <>
-            <Router>
-                <Suspense fallback={<p>Loading...</p>}>
+            <Suspense fallback={<p>Loading...</p>}>
+                <SuperNav isLogged={isLogged} />
+                <Switch>
                     <Route path={routes.LOGIN} component={LogIn} />
                     <Route path={routes.SIGNIN} component={SignIn} />
-                    <Route path={routes.DASHBOARD} component={Dashboard} />
-                </Suspense>
-            </Router>
+                    <ProtectedRoute
+                        exact
+                        path={routes.DASHBOARD}
+                        component={Dashboard}
+                    />
+                    <Route
+                        path="*"
+                        component={() => {
+                            <p>404 找不到此頁面</p>;
+                        }}
+                    />
+                </Switch>
+            </Suspense>
         </>
     );
 };
 
 export default App;
 
-{
-    /* <div className="main">
+/* <div className="main">
     <SubNav />
     <div className="content">
         {CMSroutes.map((route, key) => {
@@ -56,4 +63,3 @@ export default App;
         })}
     </div>
 </div>; */
-}

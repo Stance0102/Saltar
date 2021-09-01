@@ -1,12 +1,3 @@
-import SignIn from "./Account/SignIn";
-import Management from "./Ticket/Management";
-import Add from "./Ticket/TicketType";
-import MemberList from "./Ticket/MemberList";
-import Edit from "./Account/Edit";
-import Show from "./Activity/Show";
-import Login from "./Account/Login";
-import Dashboard from "./Home/Dashboard";
-
 // DASHBOARD Routes
 export const DASHBOARD = "/dashboard";
 export const EDIT = "/account/edit";

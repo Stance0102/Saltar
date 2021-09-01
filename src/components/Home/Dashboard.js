@@ -1,11 +1,17 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { CMSroutes } from "../Router";
-import SuperNav from "../Nav/SuperNav";
 import SubNav from "../Nav/SubNav";
 
 const Dashboard = () => {
-    return <></>;
+    return (
+        <>
+            <h1>Dashboard</h1>
+
+            <div className="main">
+                <SubNav />
+                <div className="content"></div>
+            </div>
+        </>
+    );
 };
 
 export default Dashboard;
