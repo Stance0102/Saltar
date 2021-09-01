@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import swal from "sweetalert";
 
 const url = "http://163.18.42.222:8888";
@@ -40,7 +39,7 @@ const signin = async (username, password, email, telNumber) => {
             headers: {
                 "content-type": "application/json",
             },
-            mode: "no-cors",
+            mode: "cors",
             body: JSON.stringify({
                 username: `${email}`,
                 actualname: `${username}`,
@@ -52,8 +51,14 @@ const signin = async (username, password, email, telNumber) => {
                 is_admin: true,
             }),
         })
-            .then((res) => res.json())
-            .then((data) => console.log(data))
+            .then((res) => {
+                if (res.ok) {
+                    console.log(res.json());
+                } else {
+                    console.log(res);
+                }
+            })
+            // .then((data) => console.log(data))
             .catch((e) => console.log(e));
         return swal("成功！", "註冊完成囉！快去登入吧！", "success");
     } catch (err) {
