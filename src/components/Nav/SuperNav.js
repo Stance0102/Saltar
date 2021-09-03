@@ -1,12 +1,12 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
-// Components
-import Auth from "../Auth";
+import { Link } from "react-router-dom";
+import * as routes from "../Router";
+// import Auth from "../Auth";
 // Img
 import menu_Icon from "../../images/menuIcon.svg";
 
-const SuperNav = (isLogged) => {
-    const history = useHistory();
+const SuperNav = () => {
+    // const history = useHistory();
 
     return (
         <nav className="superNav">
@@ -29,7 +29,7 @@ const SuperNav = (isLogged) => {
             </div> */}
 
             <div className="navBtnGroup">
-                {isLogged && (
+                {/* {isLogged && (
                     <button
                         className="btn-login"
                         onClick={() => {
@@ -40,17 +40,17 @@ const SuperNav = (isLogged) => {
                     >
                         登出
                     </button>
-                )}
-                {!isLogged && (
-                    <Link to="/login">
-                        <button className="btn-login">登入</button>
-                    </Link>
-                )}
-                {!isLogged && (
-                    <Link to="/siginin">
-                        <button className="btn-signin">註冊</button>
-                    </Link>
-                )}
+                )} */}
+                {/* {!isLogged && ( */}
+                <Link to={routes.LOGIN}>
+                    <button className="btn-login">登入</button>
+                </Link>
+                {/* )} */}
+                {/* {!isLogged && ( */}
+                <Link to={routes.SIGNIN}>
+                    <button className="btn-signin">註冊</button>
+                </Link>
+                {/* )} */}
             </div>
         </nav>
     );

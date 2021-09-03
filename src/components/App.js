@@ -1,36 +1,41 @@
 import React, { Suspense, lazy } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import * as routes from "./Router";
 import { ProtectedRoute } from "./Protected.route";
+import "../styles/saltar.css";
+
 import SuperNav from "./Nav/SuperNav";
-import Auth from "./Auth";
+import Login from "./Account/Login";
 
+const Authenticate = lazy(() => import("./Home/Authenticate"));
 const LogIn = lazy(() => import("./Account/Login"));
-const SignIn = lazy(() => import("./Account/SignIn"));
+const SignIn = lazy(() => import("./Account/Signin"));
 const Dashboard = lazy(() => import("./Home/Dashboard"));
-
-const isLogged = Auth.isAuthenticated;
+const Edit = lazy(() => import("./Account/Edit"));
+const Show = lazy(() => import("./Activity/Show"));
+const Add = lazy(() => import("./Ticket/Add"));
+const Management = lazy(() => import("./Ticket/Management"));
+const MemberList = lazy(() => import("./Ticket/MemberList"));
 
 const App = () => {
     return (
         <>
             <Suspense fallback={<p>Loading...</p>}>
-                <SuperNav isLogged={isLogged} />
-                <Switch>
-                    <Route path={routes.LOGIN} component={LogIn} />
-                    <Route path={routes.SIGNIN} component={SignIn} />
-                    <ProtectedRoute
-                        exact
-                        path={routes.DASHBOARD}
-                        component={Dashboard}
-                    />
-                    <Route
-                        path="*"
-                        component={() => {
-                            <p>404 找不到此頁面</p>;
-                        }}
-                    />
-                </Switch>
+                <Router>
+                    <div>
+                        <SuperNav />
+
+                        <Switch>
+                            <Route exact path={routes.LOGIN}>
+                                <Login />
+                            </Route>
+                            <Route path={routes.SIGNIN} component={SignIn} />
+                            <Route path={routes.DASHBOARD}>
+                                <Dashboard />
+                            </Route>
+                        </Switch>
+                    </div>
+                </Router>
             </Suspense>
         </>
     );
@@ -38,28 +43,6 @@ const App = () => {
 
 export default App;
 
-/* <div className="main">
-    <SubNav />
-    <div className="content">
-        {CMSroutes.map((route, key) => {
-            if (route.exact) {
-                return (
-                    <Route
-                        key={key}
-                        exact
-                        path={route.path}
-                        component={route.component}
-                    />
-                );
-            } else {
-                return (
-                    <Route
-                        key={key}
-                        path={route.path}
-                        component={route.component}
-                    />
-                );
-            }
-        })}
-    </div>
-</div>; */
+{
+    /* <ProtectedRoute exact path={routes.DASHBOARD} component={Dashboard} />; */
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import * as routes from "../Router";
 // Img
 import controlerIcon_02 from "../../images/controlerIcon_02.svg";
 import analysisIcon from "../../images/analysisIcon.svg";
@@ -8,7 +9,7 @@ import editorIcon from "../../images/editorIcon.svg";
 import vector_gray_Icon from "../../images/vector_gray_Icon.svg";
 import web_Icon from "../../images/web_Icon.svg";
 
-const SubNav = () => {
+const SubNav = ({ url }) => {
     return (
         <nav className="subNav">
             <ul>
@@ -21,21 +22,21 @@ const SubNav = () => {
                     客戶分析
                 </li>
 
-                <Link to="/ticket/management">
+                <Link to={`${url}/${routes.TICKET_MANAGEMENT}`}>
                     <li>
                         <img src={vector_gray_Icon} alt="" />
                         票卷管理
                     </li>
                 </Link>
 
-                <Link to="/activity/show">
+                <Link to={`${url}/${routes.SHOW}`}>
                     <li>
                         <img src={actControl} alt="" />
                         活動控制
                     </li>
                 </Link>
 
-                <Link to="/account/edit">
+                <Link to={`${url}/${routes.EDIT}`}>
                     <li>
                         <img src={editorIcon} alt="" />
                         系學會/社團資料編輯

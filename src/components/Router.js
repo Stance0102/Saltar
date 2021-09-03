@@ -1,10 +1,10 @@
 // DASHBOARD Routes
 export const DASHBOARD = "/dashboard";
-export const EDIT = "/account/edit";
-export const SHOW = "/activity/show";
-export const TICKET_MANAGEMENT = "/ticket/management";
-export const TICKET_ADD = "/ticket/management/add";
-export const TICKET_MEMBERLIST = "/ticket/management/memberList";
+export const EDIT = "accountEdit";
+export const SHOW = "activityShow";
+export const TICKET_MANAGEMENT = "ticketManagement";
+export const TICKET_ADD = "ticketManagemenAdd";
+export const TICKET_MEMBERLIST = "ticketManagementMemberList";
 // AUTH Routes
-export const LOGIN = "/login";
+export const LOGIN = "/";
 export const SIGNIN = "/signin";
