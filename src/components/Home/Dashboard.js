@@ -12,7 +12,7 @@ const MemberList = lazy(() => import("../Ticket/MemberList"));
 const Dashboard = () => {
     let { path, url } = useRouteMatch();
     return (
-        <div className="main">
+        <>
             <SubNav url={url} />
             <div className="content">
                 <Switch>
@@ -21,7 +21,7 @@ const Dashboard = () => {
                     </Route>
                 </Switch>
             </div>
-        </div>
+        </>
     );
 };
 

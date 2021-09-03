@@ -24,16 +24,20 @@ const App = () => {
                 <Router>
                     <div>
                         <SuperNav />
-
-                        <Switch>
-                            <Route exact path={routes.LOGIN}>
-                                <Login />
-                            </Route>
-                            <Route path={routes.SIGNIN} component={SignIn} />
-                            <Route path={routes.DASHBOARD}>
-                                <Dashboard />
-                            </Route>
-                        </Switch>
+                        <div className="main">
+                            <Switch>
+                                <Route exact path={routes.LOGIN}>
+                                    <Login />
+                                </Route>
+                                <Route
+                                    path={routes.SIGNIN}
+                                    component={SignIn}
+                                />
+                                <Route path={routes.DASHBOARD}>
+                                    <Dashboard />
+                                </Route>
+                            </Switch>
+                        </div>
                     </div>
                 </Router>
             </Suspense>
