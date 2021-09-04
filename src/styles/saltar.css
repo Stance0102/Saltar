@@ -1056,14 +1056,21 @@ nav.subNav li img {
   font-size: 2.2rem;
   color: #000000;
   text-align: left;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background-color: rgba(0, 0, 0, 0);
+  border-bottom: 2px solid #a5a5a5;
+  border-radius: 0;
   width: 100%;
   margin-bottom: 15px;
 }
 
+.one-page .one-page-content .act-name:focus, .one-page .one-page-content .act-name:active, .one-page .one-page-content .act-name:hover, .one-page .one-page-content .act-name:checked {
+  outline: none;
+}
+
 .one-page .one-page-content .act-info {
-  font-family: "NotoSansCJKtc-Regular";
-  color: #a5a5a5;
-  font-size: 1rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1084,7 +1091,11 @@ nav.subNav li img {
 }
 
 .one-page .one-page-content .act-info div {
+  font-family: "NotoSansCJKtc-Regular";
+  color: #a5a5a5;
   margin-left: 10px;
+  font-size: 1rem;
+  width: 33%;
 }
 
 .one-page .one-page-content .act-info div img {
@@ -1092,6 +1103,30 @@ nav.subNav li img {
   height: 1rem;
   margin-left: 10px;
   margin-right: 10px;
+}
+
+.one-page .one-page-content .act-info div input {
+  font-family: "NotoSansCJKtc-Regular";
+  color: #a5a5a5;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid #a5a5a5;
+  border-radius: 0;
+  font-size: 1rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-right: 0;
+  padding-left: 10px;
+  height: 32px;
+  width: 80%;
+  block-size: -webkit-fit-content;
+  block-size: -moz-fit-content;
+  block-size: fit-content;
+}
+
+.one-page .one-page-content .act-info div input:focus, .one-page .one-page-content .act-info div input:active, .one-page .one-page-content .act-info div input:hover, .one-page .one-page-content .act-info div input:checked {
+  outline: none;
 }
 
 .one-page .one-page-content .act-img {
@@ -1139,14 +1174,12 @@ nav.subNav li img {
 
 .one-page .one-page-content .act-description {
   width: 100%;
-  min-height: 450px;
+  height: 100%;
+  min-height: 215px;
   border-radius: 14px;
   -webkit-box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);
           box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);
   background-color: #fff;
-  font-family: "NotoSansCJKtc-Regular";
-  color: #000000;
-  font-size: 1rem;
   padding: 25px;
   margin-bottom: 20px;
 }
@@ -1158,6 +1191,22 @@ nav.subNav li img {
   font-size: 1.4rem;
   text-align: left;
   margin-bottom: 15px;
+}
+
+.one-page .one-page-content .act-description .context {
+  margin-top: 5px;
+  padding: 0;
+  border: none;
+  width: 100%;
+  min-height: 215px;
+  resize: none;
+  font-size: 1rem;
+  font-family: "NotoSansCJKtc-Regular";
+  color: #000000;
+}
+
+.one-page .one-page-content .act-description .context:focus, .one-page .one-page-content .act-description .context:active, .one-page .one-page-content .act-description .context:hover, .one-page .one-page-content .act-description .context:checked {
+  outline: none;
 }
 
 .one-page .one-page-content .act-show {
@@ -1247,15 +1296,20 @@ nav.subNav li img {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 100px;
-  height: 40px;
+  width: 100%;
+  height: 60px;
   border-radius: 8px;
   border: solid 1px #ffa83d;
-  background-color: #fff;
-  color: #ffb559;
+  background-color: #ffb559;
+  color: #fff;
   font-family: "NotoSansCJKtc-Medium";
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   margin-top: 30px;
   margin-bottom: 30px;
+}
+
+.one-page .one-page-content .save-btn:hover {
+  background-color: #fff;
+  color: #ffb559;
 }
 /*# sourceMappingURL=saltar.css.map */
