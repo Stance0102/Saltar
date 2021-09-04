@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import * as routes from "../Router";
 
 const LogIn = lazy(() => import("../Account/Login"));
-const SignIn = lazy(() => import("../Account/Signin"));
+const SignIn = lazy(() => import("../Account/SignIn"));
 
 const Authenticate = () => {
     return (
