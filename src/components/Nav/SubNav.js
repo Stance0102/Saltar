@@ -29,12 +29,12 @@ const SubNav = ({ url }) => {
                     </li>
                 </Link>
 
-                <Link to={`${url}/${routes.SHOW}`}>
-                    <li>
-                        <img src={actControl} alt="" />
-                        活動控制
-                    </li>
-                </Link>
+                {/* <Link to={`${url}/${routes.SHOW}`}> */}
+                <li>
+                    <img src={actControl} alt="" />
+                    活動控制
+                </li>
+                {/* </Link> */}
 
                 <Link to={`${url}/${routes.EDIT}`}>
                     <li>
@@ -42,10 +42,12 @@ const SubNav = ({ url }) => {
                         系學會/社團資料編輯
                     </li>
                 </Link>
-                <li>
-                    <img src={web_Icon} alt="" />
-                    一頁式活動網站設定
-                </li>
+                <Link to={`${url}/${routes.ONE_PAGE}`}>
+                    <li>
+                        <img src={web_Icon} alt="" />
+                        一頁式活動網站設定
+                    </li>
+                </Link>
             </ul>
         </nav>
     );

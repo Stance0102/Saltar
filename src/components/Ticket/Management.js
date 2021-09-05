@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import * as routes from "../Router";
 // Img
 import editorIcon from "../../images/editorIcon.svg";
 
@@ -16,7 +17,7 @@ const Management = () => {
                     <h6>目前報名人數/目標人數</h6>
                     <h6>販售狀態</h6>
                 </div>
-                <Link to="/dashboard/ticket/management/memberList">
+                <Link to={`/dashboard/${routes.TICKET_MEMBERLIST}`}>
                     <div className="row-container">
                         <h6 className="row-number">01</h6>
                         <div className="row-textbox">
