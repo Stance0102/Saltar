@@ -19,7 +19,10 @@
 // Switch Contant Container
 = box
     width: 100%
-    padding: 20px
+    padding-top: 10px
+    padding-bottom: 20px
+    padding-left: 20px
+    padding-right: 20px
     display: flex
     flex-direction: column
     justify-content: flex-start
@@ -33,10 +36,13 @@
     font-family: "NotoSansCJKtc-Bold"
     font-size: 22px
     color: black
+    width: 100%
+    height: 10%
+    margin-bottom: 15px
     hr
-        margin-top: 20px
+        margin-top: 5px
         border: 1.2px solid #e0e0e0
-        width: 1608px
+        width: 100%
 
 = in-container-form($text-color)
     display: flex
@@ -45,19 +51,19 @@
     align-items: center
     width: 100%
     height: 100%
-    padding-top: 10px
     .input-group
         display: flex
         flex-direction: column
         justify-content: flex-start
         align-items: flex-start
         margin-bottom: 15px
+        width: 100%
         .input-label
             +label-text
             color: $text-color
             margin-bottom: 10px
         input
-            width: 1561px
+            width: 100%
     .form-btn-group
         display: flex
         justify-content: flex-end
@@ -75,13 +81,13 @@
     flex-direction: column
     justify-content: flex-start
     align-items: center
-    margin-top: 35px
+    width: 100%
     .row-box-title
         display: flex
         justify-content: flex-start
         align-items: center
         width: 100%
-        padding-left: 80px
+        padding-left: 10%
         margin-bottom: 10px
         h6
             font-family: "NotoSansCJKtc-Regular"
@@ -92,7 +98,7 @@
         display: flex
         justify-content: flex-start
         align-items: center
-        width: 1608px
+        width: 100%
         height: 64px
         border-radius: 8px
         border: solid 2px #bdbdbd
@@ -104,7 +110,8 @@
             display: flex
             justify-content: flex-start
             align-items: center
-            width: 97%
+            width: 95%
+            margin-left: 5%
         .row-text
             font-family: "NotoSansCJKtc-Medium"
             font-size: 1rem
