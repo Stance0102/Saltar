@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import * as routes from "../Router";
 
 const LogIn = lazy(() => import("../Account/Login"));
-const SignIn = lazy(() => import("../Account/SignIn"));
+const SignUp = lazy(() => import("../Account/signup"));
 
 const Authenticate = () => {
     return (
@@ -11,7 +11,7 @@ const Authenticate = () => {
             <div className="content">
                 <Switch>
                     <Route path={routes.LOGIN} component={LogIn} />
-                    <Route path={routes.SIGNIN} component={SignIn} />
+                    <Route path={routes.SIGNUP} component={SignUp} />
                 </Switch>
             </div>
         </div>

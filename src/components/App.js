@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import { Provider } from "react-redux";
-import store from "../store";
+import store from "../store/store";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import * as routes from "./Router";
 import { ProtectedRoute } from "./Protected.route";
@@ -11,7 +11,7 @@ import Login from "./Account/Login";
 
 const Authenticate = lazy(() => import("./Home/Authenticate"));
 const LogIn = lazy(() => import("./Account/Login"));
-const SignIn = lazy(() => import("./Account/SignIn"));
+const SignUp = lazy(() => import("./Account/signup"));
 const Dashboard = lazy(() => import("./Home/Dashboard"));
 const Edit = lazy(() => import("./Account/Edit"));
 const Show = lazy(() => import("./Activity/Show"));
@@ -33,8 +33,8 @@ const App = () => {
                                         <Login />
                                     </Route>
                                     <Route
-                                        path={routes.SIGNIN}
-                                        component={SignIn}
+                                        path={routes.SIGNUP}
+                                        component={SignUp}
                                     />
                                     <Route path={routes.DASHBOARD}>
                                         <Dashboard />
