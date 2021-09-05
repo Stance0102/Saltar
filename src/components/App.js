@@ -31,9 +31,10 @@ const App = () => {
                                         path={routes.SIGNUP}
                                         component={SignUp}
                                     />
-                                    <Route path={routes.DASHBOARD}>
-                                        <Dashboard />
-                                    </Route>
+                                    <ProtectedRoute
+                                        path={routes.DASHBOARD}
+                                        component={Dashboard}
+                                    />
                                     <Route component={ErrorPage} />
                                 </Switch>
                             </div>
@@ -48,5 +49,5 @@ const App = () => {
 export default App;
 
 {
-    /* <ProtectedRoute exact path={routes.DASHBOARD} component={Dashboard} />; */
+    /*  */
 }

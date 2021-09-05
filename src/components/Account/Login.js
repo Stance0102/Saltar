@@ -1,16 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { SetAccount } from "../../store/slice/AccountSlice";
 import { login } from "../agent";
 import { FormInput } from "../Home/_Components";
 import loginPage from "../../images/loginPage.svg";
+import Swal from "sweetalert2";
 
 const Login = () => {
+    console.log(new Date().toLocaleString() + "");
     const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
+    const history = useHistory();
 
     //取出 Redux
     const { isLogin, Id, name, groupId, token } = useSelector(
@@ -30,13 +33,39 @@ const Login = () => {
 
     async function handleLogin(e) {
         e.preventDefault();
-        const data = await login(email, password);
-        if (data.data.status == 0) {
-            const account = data.data.results;
-            //放入 Redux
-            dispatch(SetAccount(account));
-            //放入 localStorage
-            localStorage.setItem("token", account.token);
+        const response = await login(email, password);
+        if (response.status == 200) {
+            switch (response.data.status) {
+                case 0:
+                    const account = response.data.results;
+                    //放入 Redux
+                    dispatch(SetAccount(account));
+                    //放入 localStorage
+                    localStorage.setItem("token", account.token);
+
+                    Swal.fire({
+                        title: "登入成功",
+                        confirmButtonText: "立即開始使用",
+                        confirmButtonColor: "#ffb559",
+                        icon: "success",
+                    }).then(() => {
+                        history.push("/dashboard");
+                    });
+                    break;
+
+                default:
+                    Swal.fire({
+                        title: "登入失敗",
+                        text: "帳號或密碼錯誤!",
+                        confirmButtonText: "關閉",
+                        confirmButtonColor: "#ffb559",
+                        icon: "error",
+                        footer: '<a href="/signup">建立帳號?</a>',
+                    });
+                    break;
+            }
+        } else {
+            console.log(response);
         }
     }
 
@@ -79,7 +108,7 @@ const Login = () => {
                     </button>
                     <p id="no-color">
                         還沒有帳號嗎？
-                        <Link to="/signin" className="link">
+                        <Link to="/signup" className="link">
                             回到註冊頁面
                         </Link>
                     </p>

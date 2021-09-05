@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { signup } from "../agent";
 import { FormInput } from "../Home/_Components";
+import Swal from "sweetalert2";
 // Img
 import loginPage from "../../images/loginPage.svg";
 
@@ -11,6 +12,7 @@ const SignUp = () => {
     const [telNumber, setTelnumber] = useState("");
     const [passWord, setPassword] = useState("");
     const [message, setMessage] = useState("");
+    const history = useHistory();
 
     function onChangeEmail(e) {
         const email = e.target.value;
@@ -41,9 +43,48 @@ const SignUp = () => {
         }
     }
 
-    function handleSignin(e) {
+    async function handleSignup(e) {
         e.preventDefault();
-        signup(userName, passWord, email, telNumber);
+        if (
+            userName == "" ||
+            passWord == "" ||
+            email == "" ||
+            telNumber == ""
+        ) {
+            return Swal.fire({
+                title: "請完整填寫欄位",
+                confirmButtonText: "知道了",
+                confirmButtonColor: "#ffb559",
+                icon: "info",
+            });
+        }
+        const response = await signup(userName, passWord, email, telNumber);
+        if (response.status == 200) {
+            switch (response.data.status) {
+                case 0:
+                    Swal.fire({
+                        title: "註冊成功",
+                        confirmButtonText: "立即登入",
+                        confirmButtonColor: "#ffb559",
+                        icon: "success",
+                    }).then(() => {
+                        history.push("/");
+                    });
+                    break;
+                default:
+                    console.log(response.data);
+                    Swal.fire({
+                        title: "註冊失敗",
+                        text: JSON.stringify(response.data.results),
+                        confirmButtonText: "知道了",
+                        confirmButtonColor: "#ffb559",
+                        icon: "error",
+                    });
+                    break;
+            }
+        } else {
+            console.log(response);
+        }
     }
 
     return (
@@ -59,7 +100,7 @@ const SignUp = () => {
                         目前僅開放 大學社群(社團/系學會)
                     </font>
                 </p>
-                <form className="auth-form" onSubmit={handleSignin}>
+                <form className="auth-form" onSubmit={handleSignup}>
                     <FormInput
                         Id="email"
                         ClassName="auth-label"
