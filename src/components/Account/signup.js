@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { signin } from "../WebAPI";
+import { signup } from "../agent";
 import { FormInput } from "../Home/_Components";
 // Img
 import loginPage from "../../images/loginPage.svg";
 
-const SignIn = () => {
+const SignUp = () => {
     const [email, setEmail] = useState("");
     const [userName, setUsername] = useState("");
     const [telNumber, setTelnumber] = useState("");
@@ -43,7 +43,7 @@ const SignIn = () => {
 
     function handleSignin(e) {
         e.preventDefault();
-        signin(userName, passWord, email, telNumber);
+        signup(userName, passWord, email, telNumber);
     }
 
     return (
@@ -137,4 +137,4 @@ const SignIn = () => {
     );
 };
 
-export default SignIn;
+export default SignUp;

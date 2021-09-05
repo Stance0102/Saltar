@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { FormInput } from "../Home/_Components";
-// Img
-import loginPage from "../../images/loginPage.svg";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { SetAccount } from "../../store/slice/AccountSlice";
+import { login } from "../agent";
 
 const Login = () => {
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    // const [username, setUserName] = useState("");
+    // const [pw, setPw] = useState("");
+    const dispatch = useDispatch();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
 
     function onChangeEmail(e) {
@@ -23,6 +25,23 @@ const Login = () => {
         e.preventDefault();
         Login(email, password);
     }
+
+    //取出 Redux
+    const { isLogin, Id, name, groupId, token } = useSelector(
+        (state) => state.Account
+    );
+    console.log(isLogin, Id, name, groupId, token);
+
+    const LoginButton = async () => {
+        const data = await login(username, pw);
+        if (data.data.status == 0) {
+            const account = data.data.results;
+            //放入 Redux
+            dispatch(SetAccount(account));
+            //放入 localStorage
+            localStorage.setItem("token", account.token);
+        }
+    };
 
     return (
         <>
