@@ -12,6 +12,12 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
 
+    //取出 Redux
+    const { isLogin, Id, name, groupId, token } = useSelector(
+        (state) => state.Account
+    );
+    console.log(isLogin, Id, name, groupId, token);
+
     function onChangeEmail(e) {
         const email = e.target.value;
         setEmail(email);
@@ -24,16 +30,6 @@ const Login = () => {
 
     function handleLogin(e) {
         e.preventDefault();
-        Login(email, password);
-    }
-
-    //取出 Redux
-    const { isLogin, Id, name, groupId, token } = useSelector(
-        (state) => state.Account
-    );
-    console.log(isLogin, Id, name, groupId, token);
-
-    const LoginButton = async () => {
         const data = await login(email, password);
         if (data.data.status == 0) {
             const account = data.data.results;
@@ -42,7 +38,7 @@ const Login = () => {
             //放入 localStorage
             localStorage.setItem("token", account.token);
         }
-    };
+    }
 
     return (
         <>
