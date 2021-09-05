@@ -8,7 +8,6 @@ import loginPage from "../../images/loginPage.svg";
 import Swal from "sweetalert2";
 
 const Login = () => {
-    console.log(new Date().toLocaleString() + "");
     const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
