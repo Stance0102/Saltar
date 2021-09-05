@@ -7,4 +7,4 @@ export const TICKET_ADD = "ticketManagemenAdd";
 export const TICKET_MEMBERLIST = "ticketManagementMemberList";
 // AUTH Routes
 export const LOGIN = "/";
-export const SIGNIN = "/signin";
+export const SIGNUP = "/signup";
