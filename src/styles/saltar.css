@@ -363,7 +363,7 @@ nav.subNav li img {
       -ms-flex-align: center;
           align-items: center;
   width: 45vw;
-  height: 101%;
+  height: 100vmax;
   background-color: rgba(255, 168, 61, 0.15);
 }
 
@@ -409,7 +409,9 @@ nav.subNav li img {
       -ms-flex-direction: column;
           flex-direction: column;
   width: 55%;
-  height: 90%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
 }
 
 .auth .auth-form .auth-label {
