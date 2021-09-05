@@ -28,7 +28,7 @@ const Login = () => {
         setPassword(pw);
     }
 
-    function handleLogin(e) {
+    async function handleLogin(e) {
         e.preventDefault();
         const data = await login(email, password);
         if (data.data.status == 0) {
