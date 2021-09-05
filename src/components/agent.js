@@ -29,6 +29,7 @@ const signup = async (username, password, email, phone) => {
 const updateAccount = async (
     //使用者ID
     user_Id,
+    email,
     username,
     password,
     // address,
