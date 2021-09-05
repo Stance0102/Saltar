@@ -47,7 +47,7 @@ const SuperNav = () => {
                 </Link>
                 {/* )} */}
                 {/* {!isLogged && ( */}
-                <Link to={routes.SIGNIN}>
+                <Link to={routes.SIGNUP}>
                     <button className="btn-signin">註冊</button>
                 </Link>
                 {/* )} */}

@@ -7,4 +7,4 @@ export const TICKET_MEMBERLIST = "ticketManagementMemberList";
 export const ONE_PAGE = "onePage";
 // AUTH Routes
 export const LOGIN = "/";
-export const SIGNIN = "/signin";
+export const SIGNUP = "/signup";
