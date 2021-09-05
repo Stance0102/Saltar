@@ -140,8 +140,8 @@ const selectGroupMemberByGroupId = async (groupId) => {
 };
 
 const updateGroupMember = async (
-    //使用者ID 應該不能改才對?
-    // userId,
+    //使用者ID
+    userId,
     //群組ID 應該不能改才對?
     // groupId,
     isAdmin,
