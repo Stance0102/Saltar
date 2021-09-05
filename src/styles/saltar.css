@@ -382,7 +382,9 @@ nav.subNav li img {
       -ms-flex-align: center;
           align-items: center;
   width: 55vw;
-  height: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
   margin-top: 10px;
   margin-bottom: 10px;
 }
