@@ -1,5 +1,5 @@
 import React from "react";
-
+import { getSchool } from "../agent";
 let Shows = [
     {
         id: 1,
@@ -14,7 +14,7 @@ let Shows = [
         note: "亂場請務必脫掉口罩",
     },
 ];
-
+console.log(getSchool());
 const Show = () => {
     return (
         <div className="activity-box">
