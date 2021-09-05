@@ -26,9 +26,13 @@ const signup = async (username, password, email, phone) => {
     });
 };
 
+const selectAccount = async (userId) => {
+    return axios.get(`${url}/api/Account/get/${userId}`);
+};
+
 const updateAccount = async (
     //使用者ID
-    user_Id,
+    userId,
     email,
     username,
     password,
@@ -38,7 +42,7 @@ const updateAccount = async (
     // devicetoken,
     // is_admin
 ) => {
-    return axios.put(`${url}/api/Account/update/${user_Id}`, {
+    return axios.put(`${url}/api/Account/update/${userId}`, {
         username: email,
         actualname: username,
         password: password,
@@ -49,6 +53,21 @@ const updateAccount = async (
         is_admin: true,
     });
 };
+
+//發驗證信
+const sendValidMail = async (account_Id) => {
+    return axios.post(`${url}/api/Mail/sentAccountMail`, {
+        account_Id: account_Id,
+    });
+};
+
+//確認認證訊息
+const verifyValidMail = async (token) => {
+    return axios.post(`${url}/api/Mail/VaildMailToken`, {
+        token: token,
+    });
+};
+
 /******************************************************
                         群組
 *******************************************************/
@@ -67,6 +86,73 @@ const createGroup = async (
         phone_number: phone_number,
         address: address,
         is_active: true,
+    });
+};
+
+const selectGroup = async (groupId) => {
+    return axios.get(`${url}/api/Groups/get/${groupId}`);
+};
+
+const updateGroup = async (
+    //群組ID
+    groupId,
+    //群組名稱
+    groupName,
+    //群組聯絡人
+    phone_number,
+    //群組聯絡地址
+    address,
+    //是否還存在?
+    is_active
+) => {
+    return axios.put(`${url}/api/Groups/update/${groupId}`, {
+        groupName: groupName,
+        phone_number: phone_number,
+        address: address,
+        is_active: is_active,
+    });
+};
+
+const createGroupMember = async (
+    //使用者ID
+    userId,
+    //群組ID
+    roupId,
+    //管理員 True False
+    isAdmin
+    //是否還存在?
+    // is_active
+) => {
+    return axios.post(`${url}/api/Groups/member/create`, {
+        Account: userId,
+        Group: roupId,
+        isAdmin: isAdmin,
+        is_active: true,
+    });
+};
+
+const selectGroupMemberByUserId = async (userId) => {
+    return axios.get(`${url}/api/Groups/member/get/account/${userId}`);
+};
+
+const selectGroupMemberByGroupId = async (groupId) => {
+    return axios.get(`${url}/api/Groups/member/get/group/${groupId}`);
+};
+
+const updateGroupMember = async (
+    //使用者ID
+    userId,
+    //群組ID 應該不能改才對?
+    // groupId,
+    isAdmin,
+    //是否還存在?
+    is_active
+) => {
+    return axios.put(`${url}/api/Groups/member/update/${userId}`, {
+        // Account: userId,
+        // Group: groupId,
+        isAdmin: isAdmin,
+        is_active: is_active,
     });
 };
 
@@ -103,14 +189,21 @@ const createActivity = async (
 
 const SelectActivity = async (
     //活動Id
-    show_Id
+    actId
 ) => {
-    return axios.get(`${url}/api/Activity/get/${show_Id}`);
+    return axios.get(`${url}/api/Activity/get/${actId}`);
+};
+
+const SelectActivityByGroupId = async (
+    //群組Id
+    groupId
+) => {
+    return axios.get(`${url}/api/Activity/get/group/${groupId}`);
 };
 
 const updateActivity = async (
     //活動ID
-    act_Id,
+    actId,
     //名稱
     act_Name,
     //簡介
@@ -126,7 +219,7 @@ const updateActivity = async (
     //是否公開?
     is_active
 ) => {
-    return axios.put(`${url}/api/Activity/update/${act_Id}`, {
+    return axios.put(`${url}/api/Activity/update/${actId}`, {
         act_Name: act_Name,
         description: description,
         location: location,
@@ -134,6 +227,23 @@ const updateActivity = async (
         endTime: endTime,
         organizer: organizer,
         is_active: is_active,
+    });
+};
+
+const createActivityPhoto = async () => {
+    return axios.post(`${url}/api/Photo/uploadActPhoto`, {});
+};
+
+const selectActivityPhoto = async (actId) => {
+    return axios.get(`${url}/api/Photo/get/act/${actId}`);
+};
+const updateActivityPhoto = async (actId) => {
+    return axios.put(`${url}/api/Photo/update/${actId}`, {});
+};
+
+const getAllInOne = async (actId) => {
+    return axios.post(`${url}/api/Activity/getAllinOne}`, {
+        act_Id: actId,
     });
 };
 
@@ -149,27 +259,27 @@ const createShow = async (
     //節目開始時間
     showTime,
     //活動ID
-    act_Id
+    actId
 ) => {
     return axios.post(`${url}/api/Activity/show/create`, {
         show_Name: show_Name,
         detail: detail,
         showTime: showTime,
-        act: act_Id,
+        act: actId,
         is_active: true,
     });
 };
 
 const selectShowByActivity = async (
     //活動ID
-    act_Id
+    actId
 ) => {
-    return axios.get(`${url}/api/Activity/show/getByAct/${act_Id}`);
+    return axios.get(`${url}/api/Activity/show/getByAct/${actId}`);
 };
 
 const updateShow = async (
     //節目ID
-    show_Id,
+    showId,
     //節目名稱
     show_Name,
     //節目細節
@@ -177,15 +287,15 @@ const updateShow = async (
     //節目開始時間
     showTime,
     //活動ID 這個應該不能改
-    // act_Id,
+    // actId,
     //狀態? true false
     is_active
 ) => {
-    return axios.put(`${url}/api/Activity/show/update/${show_Id}`, {
+    return axios.put(`${url}/api/Activity/show/update/${showId}`, {
         show_Name: show_Name,
         detail: detail,
         showTime: showTime,
-        // act: act_Id,
+        // act: actId,
         is_active: is_active,
     });
 };
@@ -206,7 +316,7 @@ const createTicket = async (
     //價錢
     price,
     //活動ID
-    act_Id,
+    actId,
     //開放狀態? true false
     is_active
 ) => {
@@ -216,28 +326,28 @@ const createTicket = async (
         startTime: startTime,
         endTime: endTime,
         price: price,
-        act: act_Id,
+        act: actId,
         is_active: is_active,
     });
 };
 
 const selectTicketByActivity = async (
     //活動ID
-    act_Id
+    actId
 ) => {
-    return axios.get(`${url}/api/tickets/get/actId/${act_Id}`);
+    return axios.get(`${url}/api/tickets/get/actId/${actId}`);
 };
 
 const selectTicket = async (
     //票券ID
-    ticket_Id
+    ticketId
 ) => {
-    return axios.get(`${url}/api/tickets/get/ticketId/${ticket_Id}`);
+    return axios.get(`${url}/api/tickets/get/ticketId/${ticketId}`);
 };
 
 const updateTicket = async (
     //票券ID
-    ticket_Id,
+    ticketId,
     //票券名稱
     ticket_Name,
     //票券數量
@@ -249,17 +359,236 @@ const updateTicket = async (
     //價錢
     price,
     //活動ID 應該不能改
-    // act_Id,
+    // actId,
     //開放狀態? true false
     is_active
 ) => {
-    return axios.put(`${url}/api/tickets/update/${ticket_Id}`, {
+    return axios.put(`${url}/api/tickets/update/${ticketId}`, {
         ticket_Name: ticket_Name,
         peopleMaxium: peopleMaximum,
         startTime: startTime,
         endTime: endTime,
         price: price,
         is_active: is_active,
+    });
+};
+
+const createTicketMember = async (
+    //名稱
+    actualname,
+    //電話
+    phone,
+    //電子郵件
+    mail,
+    //票券ID
+    ticketId,
+    //性別
+    sex
+    // ? true false
+    // is_active
+) => {
+    return axios.post(`${url}/api/tickets/member/create`, {
+        actualname: actualname,
+        phone: phone,
+        mail: mail,
+        ticketId: ticketId,
+        sex: sex,
+        is_active: true,
+    });
+};
+
+const updateTicketMember = async (
+    //顧客ID
+    ticketMemberId,
+    //名稱
+    actualname,
+    //電話
+    phone,
+    //電子郵件
+    mail,
+    //票券ID
+    ticketId,
+    //性別
+    sex
+    // ? true false
+    // is_active
+) => {
+    return axios.put(`${url}/api/tickets/member/update/${ticketMemberId}`, {
+        actualname: actualname,
+        phone: phone,
+        mail: mail,
+        ticketId: ticketId,
+        sex: sex,
+        is_active: true,
+    });
+};
+
+const validTicket = async (token) => {
+    return axios.post(`${url}/api/tickets/vaildticket`, {
+        token: token,
+    });
+};
+
+const createCustomerTicket = async (
+    //名稱
+    actualname,
+    //電子郵件
+    mail
+) => {
+    return axios.post(`${url}/api/tickets/member/get/customer`, {
+        actualname: actualname,
+        mail: mail,
+    });
+};
+
+const selectTicketMember = async (
+    //票券ID
+    ticketId
+) => {
+    return axios.get(`${url}/api/tickets/member/get/ticket/${ticketId}`);
+};
+
+const createMailFormate = async (
+    //窩ㄅ知道是什麼
+    joinedListId
+) => {
+    return axios.post(`${url}/api/tickets/member/get/customer`, {
+        joinedListId: joinedListId,
+    });
+};
+
+/******************************************************
+                        顧客
+*******************************************************/
+
+const createCustomer = async (
+    actualname,
+    phone,
+    mail,
+    groupID,
+    customer_type,
+    customer_tag,
+    customer_note,
+    sex,
+    is_inSaltar,
+    is_active
+) => {
+    return axios.post(`${url}/api/customer/create`, {
+        actualname: actualname,
+        phone: phone,
+        mail: mail,
+        Group: groupID,
+        customer_type: customer_type,
+        customer_tag: customer_tag,
+        customer_note: customer_note,
+        sex: sex,
+        is_inSaltar: is_inSaltar,
+        is_active: is_active,
+    });
+};
+
+const selectCustomerByGroupId = async (groupId) => {
+    return axios.get(`${url}/api/customer/get/group/${groupId}`);
+};
+
+const selectCustomerByName = async (actualname) => {
+    return axios.get(`${url}/api/customer/get/name/${actualname}`);
+};
+
+const updateCustomer = async (
+    CustomerId,
+    actualname,
+    phone,
+    mail,
+    groupID,
+    customer_type,
+    customer_tag,
+    customer_note,
+    sex,
+    is_inSaltar,
+    is_active
+) => {
+    return axios.put(`${url}/api/customer/update/${CustomerId}`, {
+        actualname: actualname,
+        phone: phone,
+        mail: mail,
+        Group: groupID,
+        customer_type: customer_type,
+        customer_tag: customer_tag,
+        customer_note: customer_note,
+        sex: sex,
+        is_inSaltar: is_inSaltar,
+        is_active: is_active,
+    });
+};
+
+const createCustomerFromExcel = async (excelData, groupId) => {
+    return axios.post(`${url}/api/customer/createfromexcel`, {
+        custom_file: excelData,
+        groupId: groupId,
+    });
+};
+
+const uploadExcelToRFM = async (excelData) => {
+    return axios.post(`${url}/api/customer/uploadAnalyze`, {
+        custom_file: excelData,
+    });
+};
+
+const downloadExcelToRFM = async (excelData) => {
+    return axios.post(`${url}/api/customer/downloadAnalyze`, {
+        custom_file: excelData,
+    });
+};
+
+/******************************************************
+                        分析
+*******************************************************/
+
+const createAnalyze = async (act, customerId, stayTime, is_active) => {
+    return axios.post(`${url}/api/pageAnalyze/page/create`, {
+        act: act,
+        cus_Id: customerId,
+        stayTime: stayTime,
+        is_active: is_active,
+    });
+};
+
+const selectAnalyzeByActId = async (actId) => {
+    return axios.get(`${url}/api/pageAnalyze/act/get/${actId}`);
+};
+
+const selectAnalyzeByPageId = async (pageId) => {
+    return axios.get(`${url}/api/pageAnalyze/page/get/${pageId}`);
+};
+
+const updateAnalyze = async (from, actId) => {
+    return axios.post(`${url}/api/pageAnalyze/act/update`, {
+        from: from,
+        act_Id: actId,
+    });
+};
+
+/******************************************************
+                        Token
+*******************************************************/
+
+const getToken = async (username, password) => {
+    return axios.post(`${url}/api/token-auth`, {
+        username: username,
+        password: password,
+    });
+};
+
+const refreshToken = async (token) => {
+    return axios.post(`${url}/api/token-refresh`, {
+        token: token,
+    });
+};
+
+const verifyToken = async (token) => {
+    return axios.post(`${url}/api/token-verify`, {
+        token: token,
     });
 };
 
@@ -272,14 +601,68 @@ const getSchool = async () => {
 };
 
 //帳號
-export { login, signup, updateAccount };
+export {
+    login,
+    signup,
+    selectAccount,
+    updateAccount,
+    sendValidMail,
+    verifyValidMail,
+};
 //群組
-export { createGroup };
+export {
+    createGroup,
+    selectGroup,
+    updateGroup,
+    createGroupMember,
+    selectGroupMemberByUserId,
+    selectGroupMemberByGroupId,
+    updateGroupMember,
+};
 //活動
-export { createActivity, SelectActivity, updateActivity };
+export {
+    createActivity,
+    SelectActivity,
+    SelectActivityByGroupId,
+    updateActivity,
+    createActivityPhoto,
+    selectActivityPhoto,
+    updateActivityPhoto,
+    getAllInOne,
+};
 //節目
-export { createShow, selectShowByActivity, updateShow };
+export {
+    createShow,
+    selectShowByActivity,
+    updateShow,
+    updateCustomer,
+    createCustomerFromExcel,
+    uploadExcelToRFM,
+    downloadExcelToRFM,
+};
 //票券
-export { createTicket, selectTicket, selectTicketByActivity, updateTicket };
+export {
+    createTicket,
+    selectTicket,
+    selectTicketByActivity,
+    updateTicket,
+    createTicketMember,
+    updateTicketMember,
+    validTicket,
+    createCustomerTicket,
+    selectTicketMember,
+    createMailFormate,
+};
+//顧客
+export { createCustomer, selectCustomerByGroupId, selectCustomerByName };
+//分析
+export {
+    createAnalyze,
+    selectAnalyzeByActId,
+    selectAnalyzeByPageId,
+    updateAnalyze,
+};
+//Token
+export { getToken, refreshToken, verifyToken };
 //其他
 export { getSchool };
