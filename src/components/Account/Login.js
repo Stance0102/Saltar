@@ -28,10 +28,6 @@ const Login = () => {
     return (
         <div className="account-box">
             <div className="signin">
-                
-
-                
-
                 <button
                     className="signin-submit"
                     type="submit"
