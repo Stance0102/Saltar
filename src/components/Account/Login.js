@@ -28,29 +28,9 @@ const Login = () => {
     return (
         <div className="account-box">
             <div className="signin">
-                <p className="signin-title">登入</p>
-                {/* <form className="signin-form"> */}
-                <label className="sign-label" htmlFor="email">
-                    帳號
-                </label>
-                <input
-                    type="text"
-                    name=""
-                    id="username"
-                    onChange={(event) => setUserName(event.target.value)}
-                    // value={username}
-                />
+                
 
-                <label className="sign-label" htmlFor="pw">
-                    密碼
-                </label>
-                <input
-                    type="password"
-                    name=""
-                    id="pw"
-                    onChange={(event) => setPw(event.target.value)}
-                    // value={password}
-                />
+                
 
                 <button
                     className="signin-submit"
