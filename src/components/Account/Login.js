@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { SetAccount } from "../../store/slice/AccountSlice";
+import { setAccount } from "../../store/slice/AccountSlice";
 import { login } from "../agent";
 import { FormInput } from "../Home/_Components";
 import loginPage from "../../images/loginPage.svg";
@@ -15,10 +15,10 @@ const Login = () => {
     const history = useHistory();
 
     //取出 Redux
-    const { isLogin, Id, name, groupId, token } = useSelector(
-        (state) => state.Account
-    );
-    console.log(isLogin, Id, name, groupId, token);
+    // const { isLogin, Id, name, groupId, token } = useSelector(
+    //     (state) => state.Account
+    // );
+    // console.log(isLogin, Id, name, groupId, token);
 
     function onChangeEmail(e) {
         const email = e.target.value;
@@ -38,7 +38,7 @@ const Login = () => {
                 case 0:
                     const account = response.data.results;
                     //放入 Redux
-                    dispatch(SetAccount(account));
+                    dispatch(setAccount(account));
                     //放入 localStorage
                     localStorage.setItem("token", account.token);
 
