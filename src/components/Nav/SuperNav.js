@@ -1,12 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { removeAccount } from "../../store/slice/AccountSlice";
 import * as routes from "../Router";
-// import Auth from "../Auth";
 // Img
 import menu_Icon from "../../images/menuIcon.svg";
 
 const SuperNav = () => {
-    // const history = useHistory();
+    const dispatch = useDispatch();
+    const history = useHistory();
+    const { isLogin } = useSelector((state) => state.Account);
+
+    function handleLogout(e) {
+        e.preventDefault();
+        dispatch(removeAccount());
+        localStorage.removeItem("token");
+        history.push("/");
+    }
 
     return (
         <nav className="superNav">
@@ -18,39 +28,26 @@ const SuperNav = () => {
                     <Link to="/">Saltar</Link>
                 </li>
             </ul>
-            {/* <div className="searchBar">
-                <i class="fas fa-search"></i>
-                <input
-                    className="searchInp"
-                    type="text"
-                    name="searchInp"
-                    placeholder="搜尋Salter"
-                />
-            </div> */}
 
             <div className="navBtnGroup">
-                {/* {isLogged && (
+                {isLogin && (
                     <button
                         className="btn-login"
-                        onClick={() => {
-                            Auth.logout(() => {
-                                history.push("/login");
-                            });
-                        }}
+                        onClick={(e) => handleLogout(e)}
                     >
                         登出
                     </button>
-                )} */}
-                {/* {!isLogged && ( */}
-                <Link to={routes.LOGIN}>
-                    <button className="btn-login">登入</button>
-                </Link>
-                {/* )} */}
-                {/* {!isLogged && ( */}
-                <Link to={routes.SIGNUP}>
-                    <button className="btn-signin">註冊</button>
-                </Link>
-                {/* )} */}
+                )}
+                {!isLogin && (
+                    <Link to={routes.LOGIN}>
+                        <button className="btn-login">登入</button>
+                    </Link>
+                )}
+                {!isLogin && (
+                    <Link to={routes.SIGNUP}>
+                        <button className="btn-signin">註冊</button>
+                    </Link>
+                )}
             </div>
         </nav>
     );

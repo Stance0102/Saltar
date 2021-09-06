@@ -166,12 +166,12 @@ const SignUp = () => {
                     <button className="auth-submit" type="submit">
                         註冊
                     </button>
-                    {/* <p id="no-color">
+                    <p id="no-color">
                         已經有帳號了嗎？
                         <Link to="/" className="link">
                             回到登入頁面
                         </Link>
-                    </p> */}
+                    </p>
                 </form>
             </div>
         </>

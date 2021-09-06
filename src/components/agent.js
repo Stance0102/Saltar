@@ -252,20 +252,20 @@ const getAllInOne = async (actId) => {
 *******************************************************/
 
 const createShow = async (
+    //活動ID
+    actId,
     //節目名稱
     show_Name,
     //節目細節
     detail,
     //節目開始時間
-    showTime,
-    //活動ID
-    actId
+    showTime
 ) => {
     return axios.post(`${url}/api/Activity/show/create`, {
+        act: actId,
         show_Name: show_Name,
         detail: detail,
         showTime: showTime,
-        act: actId,
         is_active: true,
     });
 };
