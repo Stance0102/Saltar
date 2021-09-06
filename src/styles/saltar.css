@@ -88,7 +88,8 @@ a:visited {
 
 input {
   outline-color: #ffb559;
-  height: 56px;
+  min-height: 45px;
+  max-height: 56px;
   border-radius: 8px;
   border: solid 2px #bdbdbd;
   background-color: #fff;
@@ -196,6 +197,7 @@ nav.superNav .navBtnGroup .btn-signin {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
+  width: 100vw;
   height: 100vh;
 }
 
@@ -213,7 +215,7 @@ nav.subNav {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  width: 265px;
+  width: 20%;
   height: 100vmax;
   padding-top: 20px;
   color: #a5a5a5;
@@ -248,7 +250,7 @@ nav.subNav li img {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 100vw;
+  width: 100%;
 }
 
 .container {
@@ -261,8 +263,8 @@ nav.subNav li img {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  width: 1608px;
-  height: 100%;
+  width: 100%;
+  max-height: 90%;
   background-color: #fff;
   -webkit-box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);
           box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);
@@ -270,7 +272,6 @@ nav.subNav li img {
   padding-top: 30px;
   padding-left: 20px;
   padding-right: 20px;
-  margin-top: 20px;
 }
 
 .errorMsg {
@@ -311,7 +312,10 @@ nav.subNav li img {
 
 .account-box {
   width: 100%;
-  padding: 20px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -327,7 +331,7 @@ nav.subNav li img {
           align-items: center;
 }
 
-.account-box-title {
+.account-box .account-box-title {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -344,12 +348,15 @@ nav.subNav li img {
   font-family: "NotoSansCJKtc-Bold";
   font-size: 22px;
   color: black;
+  width: 100%;
+  height: 10%;
+  margin-bottom: 15px;
 }
 
-.account-box-title hr {
-  margin-top: 20px;
+.account-box .account-box-title hr {
+  margin-top: 5px;
   border: 1.2px solid #e0e0e0;
-  width: 1608px;
+  width: 100%;
 }
 
 .index-img {
@@ -363,7 +370,7 @@ nav.subNav li img {
       -ms-flex-align: center;
           align-items: center;
   width: 45vw;
-  height: 100vmax;
+  height: 100%;
   background-color: rgba(255, 168, 61, 0.15);
 }
 
@@ -382,10 +389,7 @@ nav.subNav li img {
       -ms-flex-align: center;
           align-items: center;
   width: 55vw;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  margin-top: 10px;
+  min-height: 100%;
   margin-bottom: 10px;
 }
 
@@ -411,9 +415,7 @@ nav.subNav li img {
       -ms-flex-direction: column;
           flex-direction: column;
   width: 55%;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
+  height: 100%;
 }
 
 .auth .auth-form .auth-label {
@@ -491,7 +493,6 @@ nav.subNav li img {
           align-items: center;
   width: 100%;
   height: 100%;
-  padding-top: 10px;
 }
 
 .edit-form .input-group {
@@ -509,6 +510,7 @@ nav.subNav li img {
       -ms-flex-align: start;
           align-items: flex-start;
   margin-bottom: 15px;
+  width: 100%;
 }
 
 .edit-form .input-group .input-label {
@@ -519,7 +521,7 @@ nav.subNav li img {
 }
 
 .edit-form .input-group input {
-  width: 1561px;
+  width: 100%;
 }
 
 .edit-form .form-btn-group {
@@ -566,7 +568,10 @@ nav.subNav li img {
 
 .ticket-box {
   width: 100%;
-  padding: 20px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -599,12 +604,15 @@ nav.subNav li img {
   font-family: "NotoSansCJKtc-Bold";
   font-size: 22px;
   color: black;
+  width: 100%;
+  height: 10%;
+  margin-bottom: 15px;
 }
 
 .ticket-box-title hr {
-  margin-top: 20px;
+  margin-top: 5px;
   border: 1.2px solid #e0e0e0;
-  width: 1608px;
+  width: 100%;
 }
 
 .management-row-box {
@@ -621,7 +629,7 @@ nav.subNav li img {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-top: 35px;
+  width: 100%;
 }
 
 .management-row-box .row-box-title {
@@ -635,7 +643,7 @@ nav.subNav li img {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
-  padding-left: 80px;
+  padding-left: 10%;
   margin-bottom: 10px;
 }
 
@@ -643,7 +651,7 @@ nav.subNav li img {
   font-family: "NotoSansCJKtc-Regular";
   font-size: 0.9rem;
   color: #a5a5a5;
-  width: 25%;
+  width: 33.33333%;
 }
 
 .management-row-box .row-container {
@@ -656,7 +664,7 @@ nav.subNav li img {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 1608px;
+  width: 100%;
   height: 64px;
   border-radius: 8px;
   border: solid 2px #bdbdbd;
@@ -678,7 +686,8 @@ nav.subNav li img {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 97%;
+  width: 95%;
+  margin-left: 5%;
 }
 
 .management-row-box .row-container .row-text {
@@ -686,7 +695,7 @@ nav.subNav li img {
   font-size: 1rem;
   font-weight: 500;
   color: #000000;
-  width: 25%;
+  width: 33.33333%;
 }
 
 .management-row-box .row-container .row-number {
@@ -738,7 +747,6 @@ nav.subNav li img {
           align-items: center;
   width: 100%;
   height: 100%;
-  padding-top: 10px;
 }
 
 .ticket-form .input-group {
@@ -756,6 +764,7 @@ nav.subNav li img {
       -ms-flex-align: start;
           align-items: flex-start;
   margin-bottom: 15px;
+  width: 100%;
 }
 
 .ticket-form .input-group .input-label {
@@ -766,7 +775,7 @@ nav.subNav li img {
 }
 
 .ticket-form .input-group input {
-  width: 1561px;
+  width: 100%;
 }
 
 .ticket-form .form-btn-group {
@@ -825,7 +834,7 @@ nav.subNav li img {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-top: 35px;
+  width: 100%;
 }
 
 .member-row-box .row-box-title {
@@ -839,7 +848,7 @@ nav.subNav li img {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
-  padding-left: 80px;
+  padding-left: 10%;
   margin-bottom: 10px;
 }
 
@@ -847,7 +856,7 @@ nav.subNav li img {
   font-family: "NotoSansCJKtc-Regular";
   font-size: 0.9rem;
   color: #a5a5a5;
-  width: 16.66667%;
+  width: 20%;
 }
 
 .member-row-box .row-container {
@@ -860,7 +869,7 @@ nav.subNav li img {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 1608px;
+  width: 100%;
   height: 64px;
   border-radius: 8px;
   border: solid 2px #bdbdbd;
@@ -882,7 +891,8 @@ nav.subNav li img {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 97%;
+  width: 95%;
+  margin-left: 5%;
 }
 
 .member-row-box .row-container .row-text {
@@ -890,7 +900,7 @@ nav.subNav li img {
   font-size: 1rem;
   font-weight: 500;
   color: #000000;
-  width: 16.66667%;
+  width: 20%;
 }
 
 .member-row-box .row-container .row-number {
@@ -983,7 +993,10 @@ nav.subNav li img {
 
 .activity-box {
   width: 100%;
-  padding: 20px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1016,12 +1029,15 @@ nav.subNav li img {
   font-family: "NotoSansCJKtc-Bold";
   font-size: 22px;
   color: black;
+  width: 100%;
+  height: 10%;
+  margin-bottom: 15px;
 }
 
 .activity-box-title hr {
-  margin-top: 20px;
+  margin-top: 5px;
   border: 1.2px solid #e0e0e0;
-  width: 1608px;
+  width: 100%;
 }
 
 .one-page {
@@ -1064,13 +1080,16 @@ nav.subNav li img {
   border-left: none;
   border-right: none;
   background-color: rgba(0, 0, 0, 0);
-  border-bottom: 2px solid #a5a5a5;
   border-radius: 0;
   width: 100%;
   margin-bottom: 15px;
 }
 
-.one-page .one-page-content .act-name:focus, .one-page .one-page-content .act-name:active, .one-page .one-page-content .act-name:hover, .one-page .one-page-content .act-name:checked {
+.one-page .one-page-content input.act-name {
+  border-bottom: 2px solid #a5a5a5;
+}
+
+.one-page .one-page-content input.act-name:focus, .one-page .one-page-content input.act-name:active, .one-page .one-page-content input.act-name:hover, .one-page .one-page-content input.act-name:checked {
   outline: none;
 }
 
@@ -1099,7 +1118,7 @@ nav.subNav li img {
   color: #a5a5a5;
   margin-left: 10px;
   font-size: 1rem;
-  width: 33%;
+  width: 30%;
 }
 
 .one-page .one-page-content .act-info div img {
@@ -1122,8 +1141,8 @@ nav.subNav li img {
   padding-bottom: 0;
   padding-right: 0;
   padding-left: 10px;
-  height: 32px;
-  width: 80%;
+  width: 70%;
+  min-height: 10px;
   block-size: -webkit-fit-content;
   block-size: -moz-fit-content;
   block-size: fit-content;
@@ -1194,7 +1213,7 @@ nav.subNav li img {
   font-family: "NotoSansCJKtc-Bold";
   font-size: 1.4rem;
   text-align: left;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .one-page .one-page-content .act-description .context {
@@ -1283,11 +1302,20 @@ nav.subNav li img {
   line-height: 1;
 }
 
-.one-page .one-page-content .act-show font {
+.one-page .one-page-content .act-show .time .note {
   color: #a5a5a5;
   font-family: "NotoSansCJKtc-Medium";
   font-size: 0.9rem;
   margin-left: 10px;
+}
+
+.one-page .one-page-content .act-show .time input {
+  border-bottom: 2px solid #a5a5a5;
+  margin-right: 10px;
+}
+
+.one-page .one-page-content .act-show .time input:focus, .one-page .one-page-content .act-show .time input:active, .one-page .one-page-content .act-show .time input:hover, .one-page .one-page-content .act-show .time input:checked {
+  outline: none;
 }
 
 .one-page .one-page-content .save-btn {
@@ -1315,5 +1343,13 @@ nav.subNav li img {
 .one-page .one-page-content .save-btn:hover {
   background-color: #fff;
   color: #ffb559;
+}
+
+.one-page .one-page-content .edit-btn {
+  width: 20px;
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  margin-left: 20px;
 }
 /*# sourceMappingURL=saltar.css.map */

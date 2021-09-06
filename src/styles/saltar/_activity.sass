@@ -24,10 +24,11 @@
             border-left: none
             border-right: none
             background-color: rgba(0,0,0,0)
-            border-bottom: 2px solid $text-gray
             border-radius: 0
             width: 100%
             margin-bottom: 15px
+        input.act-name
+            border-bottom: 2px solid $text-gray
             &:focus,&:active,&:hover,&:checked
                 outline: none
         .act-info
@@ -46,7 +47,7 @@
                 color: $text-gray
                 margin-left: 10px
                 font-size: 1rem
-                width: 33%
+                width: 30%
                 img
                     width: 1rem
                     height: 1rem
@@ -65,8 +66,8 @@
                     padding-bottom: 0
                     padding-right: 0
                     padding-left: 10px
-                    height: 32px
-                    width: 80%
+                    width: 70%
+                    min-height: 10px
                     block-size: fit-content
                     &:focus,&:active,&:hover,&:checked
                         outline: none
@@ -111,7 +112,7 @@
                 font-family: "NotoSansCJKtc-Bold"
                 font-size: 1.4rem
                 text-align: left
-                margin-bottom: 15px
+                margin-bottom: 20px
             .context
                 margin-top: 5px
                 padding: 0
@@ -171,11 +172,17 @@
                 font-family: "NotoSansCJKtc-Bold"
                 font-size: 1.15rem
                 line-height: 1
-            font
-                color: $text-gray
-                font-family: "NotoSansCJKtc-Medium"
-                font-size: 0.9rem
-                margin-left: 10px
+                .note
+                    color: $text-gray
+                    font-family: "NotoSansCJKtc-Medium"
+                    font-size: 0.9rem
+                    margin-left: 10px
+                input
+                    border-bottom: 2px solid $text-gray
+                    margin-right: 10px
+                    &:focus,&:active,&:hover,&:checked
+                        outline: none
+
         .save-btn
             display: flex
             justify-content: center
@@ -193,3 +200,9 @@
             &:hover
                 background-color: $text-white
                 color: $text-orange
+        .edit-btn
+            width: 20px
+            height: 20px
+            background-color: rgba(0,0,0,0)
+            border: none
+            margin-left: 20px
