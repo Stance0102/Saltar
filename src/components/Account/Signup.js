@@ -16,6 +16,23 @@ const SignUp = () => {
     const [schoolList, setSchoolList] = useState({});
     const history = useHistory();
 
+    useEffect(() => {
+        const setupData = async () => {
+            const response = await getSchool();
+            if (response.status == 200) {
+                switch (response.data.status) {
+                    case 0:
+                        setSchoolList(response.data.results);
+                        break;
+                }
+            } else {
+                console.log(response);
+            }
+        };
+
+        setupData();
+    }, []);
+
     function onChangeEmail(e) {
         const email = e.target.value;
         setEmail(email);
@@ -51,30 +68,14 @@ const SignUp = () => {
         }
     }
 
-    useEffect(() => {
-        const setupData = async () => {
-            const response = await getSchool();
-            if (response.status == 200) {
-                switch (response.data.status) {
-                    case 0:
-                        setSchoolList(response.data.results);
-                        break;
-                }
-            } else {
-                console.log(response);
-            }
-        };
-
-        setupData();
-    }, []);
-
     async function handleSignup(e) {
         e.preventDefault();
         if (
-            userName == "" ||
-            passWord == "" ||
-            email == "" ||
-            telNumber == ""
+            userName === "" ||
+            passWord === "" ||
+            email === "" ||
+            telNumber === "" ||
+            message !== ""
         ) {
             return Swal.fire({
                 title: "請完整填寫欄位",
@@ -83,7 +84,13 @@ const SignUp = () => {
                 icon: "info",
             });
         }
-        const response = await signup(userName, passWord, email, telNumber);
+        const response = await signup(
+            userName,
+            passWord,
+            email,
+            telNumber,
+            school
+        );
         if (response.status == 200) {
             switch (response.data.status) {
                 case 0:

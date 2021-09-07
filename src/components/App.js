@@ -22,7 +22,7 @@ const App = () => {
 
     const token = localStorage.getItem("token");
     if (token != null) {
-        const response = verifyToken(token);
+        // const response = verifyToken(token);
     }
     return (
         <>
@@ -33,39 +33,38 @@ const App = () => {
                         <div className="main">
                             <Switch>
                                 <Route
-                                        exact
-                                        path={routes.LOGIN}
-                                        component={LogIn}
-                                    />
-                                    <Route
-                                        path={routes.SIGNUP}
-                                        component={SignUp}
-                                    />
-                                    <ProtectedRoute
-                                        path={routes.DASHBOARD}
-                                        component={Dashboard}
-                                    />
-                                    <Route
-                                        path={routes.TICKET_INFOMATION}
-                                        component={Infomation}
-                                    />
-                                    <Route
-                                        path={routes.FORGETPW}
-                                        component={ForgetPw}
-                                    />
-                                    <Route
-                                        path={routes.CHANGEPW}
-                                        component={ChangePw}
-                                    />
+                                    exact
+                                    path={routes.LOGIN}
+                                    component={LogIn}
+                                />
+                                <Route
+                                    path={routes.SIGNUP}
+                                    component={SignUp}
+                                />
+                                <ProtectedRoute
+                                    path={routes.DASHBOARD}
+                                    component={Dashboard}
+                                />
+                                <Route
+                                    path={routes.TICKET_INFOMATION}
+                                    component={Infomation}
+                                />
+                                <Route
+                                    path={routes.FORGETPW}
+                                    component={ForgetPw}
+                                />
+                                <Route
+                                    path={routes.CHANGEPW}
+                                    component={ChangePw}
+                                />
 
-                                    <Route
-                                        path={routes.EMAILCHECK}
-                                        component={EmailCheck}
-                                    />
+                                <Route
+                                    path={routes.EMAILCHECK}
+                                    component={EmailCheck}
+                                />
 
-                                    <Route component={ErrorPage} />
+                                <Route component={ErrorPage} />
                             </Switch>
-
                         </div>
                     </div>
                 </Router>

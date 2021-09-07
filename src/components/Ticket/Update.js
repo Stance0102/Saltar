@@ -42,11 +42,11 @@ const Update = () => {
     const submitHandler = async (e) => {
         e.preventDefault();
         if (
-            ticketName == "" ||
-            maximum == "" ||
-            ticketPrice == "" ||
-            startTime == "" ||
-            endTime == ""
+            ticketName === "" ||
+            maximum === "" ||
+            ticketPrice === "" ||
+            startTime === "" ||
+            endTime === ""
         ) {
             return;
         }
@@ -61,7 +61,7 @@ const Update = () => {
             actId,
             true
         );
-        if (response.status == 200) {
+        if (response.status === 200) {
             switch (response.data.status) {
                 case 0:
                     Swal.fire({
@@ -89,7 +89,7 @@ const Update = () => {
     };
 
     useEffect(() => {
-        if (location.state != undefined) {
+        if (location.state !== undefined) {
             setTicket({
                 ...location.state.tickets,
                 actEndTime: location.state.endTime,
