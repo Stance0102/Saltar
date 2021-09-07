@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { createActivity, createShow } from "../agent";
 import Swal from "sweetalert2";
 // Img
@@ -13,6 +14,7 @@ import Organizer_icon from "../../images/Organizer_icon.svg";
 import Edit from "../Account/Edit";
 
 const OnePage = () => {
+    const { groupId } = useSelector((state) => state.Account);
     const location = useLocation();
     const history = useHistory();
     const [img, setImg] = useState("");
@@ -36,7 +38,7 @@ const OnePage = () => {
         if (location.state != undefined) {
             setEditMode(location.state.edit);
         }
-    });
+    }, []);
 
     const onTitleChange = (e) => {
         setActivityData({
@@ -123,7 +125,7 @@ const OnePage = () => {
             activityData.location,
             activityData.currentTime,
             activityData.currentTime,
-            1,
+            groupId,
             true
         );
         if (response.status == 200) {

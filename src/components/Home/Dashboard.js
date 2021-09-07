@@ -6,6 +6,7 @@ import * as routes from "../Router";
 
 const Edit = lazy(() => import("../Account/Edit"));
 const Add = lazy(() => import("../Ticket/Add"));
+const Update = lazy(() => import("../Ticket/Update"));
 const Management = lazy(() => import("../Ticket/Management"));
 const MemberList = lazy(() => import("../Ticket/MemberList"));
 const AddCustomer = lazy(() => import("../Activity/AddCustomer"));
@@ -36,6 +37,9 @@ function BackendFeatures() {
 
         case routes.TICKET_ADD:
             return <Add />;
+
+        case routes.TICKET_UPDATE:
+            return <Update />;
 
         case routes.TICKET_MANAGEMENT:
             return <Management />;

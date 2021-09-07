@@ -1,57 +1,64 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { createTicket } from "../agent";
+import { updateTicket } from "../agent";
 import Swal from "sweetalert2";
 
 const Add = () => {
     const location = useLocation();
     const history = useHistory();
-    const [actId, setActId] = useState("");
+    const [ticket, setTicket] = useState("");
     const [actEndTime, setActEndTime] = useState("");
-    const [ticketName, setTicketName] = useState("");
-    const [maximum, setMaximum] = useState("");
-    const [ticketPrice, setTicketPrice] = useState("");
-    const [startTime, setStartTime] = useState("");
-    const [endTime, setEndTime] = useState("");
+    const {
+        Id: ticketId,
+        act: actId,
+        count,
+        startTime,
+        endTime,
+        peopleMaxium: maximum,
+        price,
+        ticket_Name: ticketName,
+    } = ticket;
 
     const onNameChange = (e) => {
         const ticketName = e.target.value;
-        setTicketName(ticketName);
+        setTicket({ ...ticket, ticket_Name: ticketName });
     };
     const onMaximumChange = (e) => {
         const maximum = e.target.value;
-        setMaximum(maximum);
+        setTicket({ ...ticket, peopleMaxium: maximum });
     };
     const onPriceChange = (e) => {
         const ticketPrice = e.target.value;
-        setTicketPrice(ticketPrice);
+        setTicket({ ...ticket, price: ticketPrice });
     };
     const onStartTimeChange = (e) => {
         const startTime = e.target.value;
-        setStartTime(startTime);
+        setTicket({ ...ticket, startTime: startTime });
     };
     const onEndTimeChange = (e) => {
         const endTime = e.target.value;
-        setEndTime(endTime);
+        setTicket({ ...ticket, endTime: endTime });
     };
     const submitHandler = async (e) => {
         e.preventDefault();
-        if (
-            ticketName == "" ||
-            maximum == "" ||
-            ticketPrice == "" ||
-            startTime == "" ||
-            endTime == ""
-        ) {
-            return;
-        }
-        const response = await createTicket(
-            actId,
+        // if (
+        //     ticketName == "" ||
+        //     maximum == "" ||
+        //     ticketPrice == "" ||
+        //     startTime == "" ||
+        //     endTime == ""
+        // ) {
+        //     return;
+        // }
+        const response = await updateTicket(
+            ticketId,
             ticketName,
             maximum,
             startTime,
             endTime,
-            ticketPrice,
+            price,
+            count,
+            actId,
             true
         );
         console.log(response);
@@ -84,7 +91,7 @@ const Add = () => {
 
     useEffect(() => {
         if (location.state != undefined) {
-            setActId(location.state.actId);
+            setTicket(location.state.tickets);
             setActEndTime(location.state.endTime);
         }
     }, []);
@@ -133,7 +140,7 @@ const Add = () => {
                             step="any"
                             name=""
                             id="email"
-                            value={ticketPrice}
+                            value={price}
                             onChange={(e) => onPriceChange(e)}
                         />
                     </div>

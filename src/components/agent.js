@@ -171,7 +171,7 @@ const createActivity = async (
     startTime,
     //結束時間
     endTime,
-    //活動人數?
+    //主辦方ID
     organizer,
     //是否公開?
     is_active
@@ -305,6 +305,8 @@ const updateShow = async (
 *******************************************************/
 
 const createTicket = async (
+    //活動ID
+    actId,
     //票券名稱
     ticket_Name,
     //票券數量
@@ -315,8 +317,6 @@ const createTicket = async (
     endTime,
     //價錢
     price,
-    //活動ID
-    actId,
     //開放狀態? true false
     is_active
 ) => {
@@ -328,10 +328,11 @@ const createTicket = async (
         price: price,
         act: actId,
         is_active: is_active,
+        count: 0,
     });
 };
 
-const selectTicketByActivity = async (
+const selectTicketByActivityId = async (
     //活動ID
     actId
 ) => {
@@ -358,8 +359,10 @@ const updateTicket = async (
     endTime,
     //價錢
     price,
+    //已賣出數量
+    count,
     //活動ID 應該不能改
-    // actId,
+    actId,
     //開放狀態? true false
     is_active
 ) => {
@@ -369,6 +372,8 @@ const updateTicket = async (
         startTime: startTime,
         endTime: endTime,
         price: price,
+        count: count,
+        act: actId,
         is_active: is_active,
     });
 };
@@ -644,7 +649,7 @@ export {
 export {
     createTicket,
     selectTicket,
-    selectTicketByActivity,
+    selectTicketByActivityId,
     updateTicket,
     createTicketMember,
     updateTicketMember,
