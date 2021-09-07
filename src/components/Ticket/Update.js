@@ -3,11 +3,10 @@ import { useHistory, useLocation } from "react-router-dom";
 import { updateTicket } from "../agent";
 import Swal from "sweetalert2";
 
-const Add = () => {
+const Update = () => {
     const location = useLocation();
     const history = useHistory();
-    const [ticket, setTicket] = useState("");
-    const [actEndTime, setActEndTime] = useState("");
+    const [ticket, setTicket] = useState({});
     const {
         Id: ticketId,
         act: actId,
@@ -15,8 +14,9 @@ const Add = () => {
         startTime,
         endTime,
         peopleMaxium: maximum,
-        price,
+        price: ticketPrice,
         ticket_Name: ticketName,
+        actEndTime,
     } = ticket;
 
     const onNameChange = (e) => {
@@ -29,7 +29,7 @@ const Add = () => {
     };
     const onPriceChange = (e) => {
         const ticketPrice = e.target.value;
-        setTicket({ ...ticket, price: ticketPrice });
+        setTicket({ ...ticket, ticketPrice: ticketPrice });
     };
     const onStartTimeChange = (e) => {
         const startTime = e.target.value;
@@ -41,32 +41,31 @@ const Add = () => {
     };
     const submitHandler = async (e) => {
         e.preventDefault();
-        // if (
-        //     ticketName == "" ||
-        //     maximum == "" ||
-        //     ticketPrice == "" ||
-        //     startTime == "" ||
-        //     endTime == ""
-        // ) {
-        //     return;
-        // }
+        if (
+            ticketName === "" ||
+            maximum === "" ||
+            ticketPrice === "" ||
+            startTime === "" ||
+            endTime === ""
+        ) {
+            return;
+        }
         const response = await updateTicket(
             ticketId,
             ticketName,
             maximum,
             startTime,
             endTime,
-            price,
+            ticketPrice,
             count,
             actId,
             true
         );
-        console.log(response);
-        if (response.status == 200) {
+        if (response.status === 200) {
             switch (response.data.status) {
                 case 0:
                     Swal.fire({
-                        title: "新增成功",
+                        title: "更新成功",
                         confirmButtonText: "繼續",
                         confirmButtonColor: "#ffb559",
                         icon: "success",
@@ -76,7 +75,7 @@ const Add = () => {
                     break;
                 default:
                     Swal.fire({
-                        title: "新增失敗",
+                        title: "更新失敗",
                         text: JSON.stringify(response.data.results),
                         confirmButtonText: "知道了",
                         confirmButtonColor: "#ffb559",
@@ -90,16 +89,18 @@ const Add = () => {
     };
 
     useEffect(() => {
-        if (location.state != undefined) {
-            setTicket(location.state.tickets);
-            setActEndTime(location.state.endTime);
+        if (location.state !== undefined) {
+            setTicket({
+                ...location.state.tickets,
+                actEndTime: location.state.endTime,
+            });
         }
     }, []);
 
     return (
         <div className="ticket-box">
             <div className="ticket-box-title">
-                <p>新增票卷</p>
+                <p>修改票卷</p>
                 <hr />
             </div>
             <div className="container">
@@ -140,7 +141,7 @@ const Add = () => {
                             step="any"
                             name=""
                             id="email"
-                            value={price}
+                            value={ticketPrice}
                             onChange={(e) => onPriceChange(e)}
                         />
                     </div>
@@ -168,7 +169,7 @@ const Add = () => {
                     </div>
                     <div className="form-btn-group">
                         <button className="form-save" type="submit">
-                            儲存
+                            修改
                         </button>
                     </div>
                 </form>
@@ -177,4 +178,4 @@ const Add = () => {
     );
 };
 
-export default Add;
+export default Update;

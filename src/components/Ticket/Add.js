@@ -6,33 +6,36 @@ import Swal from "sweetalert2";
 const Add = () => {
     const location = useLocation();
     const history = useHistory();
-    const [actId, setActId] = useState("");
-    const [actEndTime, setActEndTime] = useState("");
-    const [ticketName, setTicketName] = useState("");
-    const [maximum, setMaximum] = useState("");
-    const [ticketPrice, setTicketPrice] = useState("");
-    const [startTime, setStartTime] = useState("");
-    const [endTime, setEndTime] = useState("");
+    const [ticket, setTicket] = useState({});
+    const {
+        actId,
+        startTime,
+        endTime,
+        maximum,
+        ticketPrice,
+        ticketName,
+        actEndTime,
+    } = ticket;
 
     const onNameChange = (e) => {
         const ticketName = e.target.value;
-        setTicketName(ticketName);
+        setTicket({ ...ticket, ticketName: ticketName });
     };
     const onMaximumChange = (e) => {
         const maximum = e.target.value;
-        setMaximum(maximum);
+        setTicket({ ...ticket, maximum: maximum });
     };
     const onPriceChange = (e) => {
         const ticketPrice = e.target.value;
-        setTicketPrice(ticketPrice);
+        setTicket({ ...ticket, ticketPrice: ticketPrice });
     };
     const onStartTimeChange = (e) => {
         const startTime = e.target.value;
-        setStartTime(startTime);
+        setTicket({ ...ticket, startTime: startTime });
     };
     const onEndTimeChange = (e) => {
         const endTime = e.target.value;
-        setEndTime(endTime);
+        setTicket({ ...ticket, endTime: endTime });
     };
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -54,7 +57,6 @@ const Add = () => {
             ticketPrice,
             true
         );
-        console.log(response);
         if (response.status == 200) {
             switch (response.data.status) {
                 case 0:
@@ -84,8 +86,11 @@ const Add = () => {
 
     useEffect(() => {
         if (location.state != undefined) {
-            setActId(location.state.actId);
-            setActEndTime(location.state.endTime);
+            setTicket({
+                ...ticket,
+                actId: location.state.actId,
+                actEndTime: location.state.endTime,
+            });
         }
     }, []);
 
@@ -161,7 +166,7 @@ const Add = () => {
                     </div>
                     <div className="form-btn-group">
                         <button className="form-save" type="submit">
-                            儲存
+                            新增
                         </button>
                     </div>
                 </form>
