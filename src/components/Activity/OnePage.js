@@ -13,13 +13,13 @@ import Organizer_icon from "../../images/Organizer_icon.svg";
 
 import Edit from "../Account/Edit";
 
-const OnePage = () => {
+const OnePage = ({ edit }) => {
     const { groupId } = useSelector((state) => state.Account);
     const location = useLocation();
     const history = useHistory();
     const [img, setImg] = useState("");
     const [imgState, setImgState] = useState(false);
-    const [editMode, setEditMode] = useState(true);
+    const [editMode, setEditMode] = useState(edit);
     const [saveMode, setSaveMode] = useState(false);
     const [activityData, setActivityData] = useState({
         title: "高科傳說對決生死賽",
@@ -212,7 +212,6 @@ const OnePage = () => {
     );
 };
 
-
 // const ACT_Title = ({ editMode }) => {
 //     const [actTitle, setActTitle] = useState("高科傳說對決生死賽");
 
@@ -249,7 +248,6 @@ const ACT_Title = ({ editMode, title, onTitleChange }) => {
     }
 };
 
-
 // const ACT_Info = ({ editMode }) => {
 //     const [actInfo, setActInfo] = useState({
 //         location: "高雄科技大學第一校區",
@@ -282,9 +280,9 @@ const ACT_Info = ({
                         <input
                             type="text"
                             id="location"
-//                             value={actInfo.location}
-//                             autoComplete="off"
-//                             onChange={handleActInfo}
+                            //                             value={actInfo.location}
+                            //                             autoComplete="off"
+                            //                             onChange={handleActInfo}
                             value={location}
                             autoComplete="off"
                             onChange={(e) => onLocationChange(e)}
@@ -293,10 +291,10 @@ const ACT_Info = ({
                     <div>
                         <img src={calendar_icon} alt="" />
                         <input
-//                             type="text"
-//                             id="starttime"
-//                             value={actInfo.starttime}
-//                             onChange={handleActInfo}
+                            //                             type="text"
+                            //                             id="starttime"
+                            //                             value={actInfo.starttime}
+                            //                             onChange={handleActInfo}
                             type="date"
                             id="starttime"
                             value={startTime}
@@ -422,11 +420,12 @@ const ACT_Show = ({
                                 onChange={(e) => onshowNoteChange(e)}
                             />
                         </font>
-                        <input
-                            type="button"
-                            value="新增"
+                        <button
+                            className="add-btn"
                             onClick={() => handleCreateShow()}
-                        />
+                        >
+                            +
+                        </button>
                     </div>
                 </li>
             </ul>

@@ -5,7 +5,7 @@ import { SelectActivityByGroupId, selectTicketByActivityId } from "../agent";
 import * as routes from "../Router";
 import Swal from "sweetalert2";
 // Img
-import editorIcon from "../../images/editorIcon.svg";
+import edit_Icon2 from "../../images/edit_Icon2.svg";
 
 const Management = () => {
     const { groupId } = useSelector((state) => state.Account);
@@ -121,14 +121,16 @@ const Management = () => {
                                 <h6 className="row-text">200/200人</h6>
                                 <h6 className="row-text success">達標</h6>
                             </div>
-
-                            <button
-                                onClick={(e) => {
-                                    ticketHandler(e, index);
-                                }}
-                            >
-                                票券
-                            </button>
+                            <div className="row-btn-group">
+                                <button
+                                    className="ticket-btn"
+                                    onClick={(e) => {
+                                        ticketHandler(e, index);
+                                    }}
+                                >
+                                    <img src={edit_Icon2} alt="" />
+                                </button>
+                            </div>
                         </Link>
                     );
                 })}

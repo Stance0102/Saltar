@@ -48,7 +48,7 @@ function BackendFeatures() {
             return <MemberList />;
 
         case routes.ONE_PAGE:
-            return <OnePage />;
+            return <OnePage edit={true} />;
 
         case routes.ADDCUSTOMER:
             return <AddCustomer />;

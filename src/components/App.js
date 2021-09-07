@@ -16,6 +16,7 @@ const Infomation = lazy(() => import("./Ticket/Infomation"));
 const ForgetPw = lazy(() => import("./Account/ForgetPw"));
 const ChangePw = lazy(() => import("./Account/ChangePw"));
 const EmailCheck = lazy(() => import("./Account/EmailCheck"));
+const OnePage = lazy(() => import("./Activity/OnePage"));
 
 const App = () => {
     const dispatch = useDispatch();
@@ -62,6 +63,9 @@ const App = () => {
                                     path={routes.EMAILCHECK}
                                     component={EmailCheck}
                                 />
+                                <Route path={routes.ONEPAGE_PREVIEW}>
+                                    <OnePage edit={false} />
+                                </Route>
 
                                 <Route component={ErrorPage} />
                             </Switch>
