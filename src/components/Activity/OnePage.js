@@ -31,6 +31,7 @@ const OnePage = ({ edit, activityId }) => {
         title: "高科傳說對決生死賽",
         location: "高雄科技大學第一校區",
         startTime: "2021-09-04",
+        endTime: "2021-09-04",
         currentTime: "2021-09-04 00:00:00",
         description:
             "=============================================================================================================",
@@ -111,6 +112,13 @@ const OnePage = ({ edit, activityId }) => {
             currentTime: e.target.value + " 00:00:00",
         });
     };
+    const onEndTimeChange = (e) => {
+        setActivityData({
+            ...activityData,
+            endTime: e.target.value,
+            currentTime: e.target.value + " 00:00:00",
+        });
+    };
     const onDescriptionChange = (e) => {
         setActivityData({
             ...activityData,
@@ -166,6 +174,7 @@ const OnePage = ({ edit, activityId }) => {
             activityData.title == "" ||
             activityData.location == "" ||
             activityData.startTime == "" ||
+            activityData.endTime == "" ||
             activityData.description == "" ||
             activityData.shows.length == 0
         ) {
@@ -222,7 +231,7 @@ const OnePage = ({ edit, activityId }) => {
                         confirmButtonText: "關閉",
                         confirmButtonColor: "#ffb559",
                         icon: "error",
-                        footer: '<a href="/signup">建立帳號?</a>',
+                        // footer: '<a href="/signup">建立帳號?</a>',
                     });
                     break;
             }
@@ -248,6 +257,7 @@ const OnePage = ({ edit, activityId }) => {
                     editMode={editMode}
                     onLocationChange={onLocationChange}
                     onStartTimeChange={onStartTimeChange}
+                    onEndTimeChange={onEndTimeChange}
                     {...activityData}
                 />
 
@@ -330,8 +340,10 @@ const ACT_Info = ({
     editMode,
     location,
     startTime,
+    endTime,
     onLocationChange,
     onStartTimeChange,
+    onEndTimeChange,
 }) => {
     if (editMode) {
         return (
@@ -357,14 +369,19 @@ const ACT_Info = ({
                     <div>
                         <img src={calendar_icon} alt="" />
                         <input
-                            //                             type="text"
-                            //                             id="starttime"
-                            //                             value={actInfo.starttime}
-                            //                             onChange={handleActInfo}
                             type="date"
                             id="starttime"
+                            className="datetime"
                             value={startTime}
                             onChange={(e) => onStartTimeChange(e)}
+                        />
+                        ～
+                        <input
+                            type="date"
+                            id="endtime"
+                            className="datetime"
+                            value={endTime}
+                            onChange={(e) => onEndTimeChange(e)}
                         />
                     </div>
                     {/* <Edit_Btn editMode={editMode} /> */}
