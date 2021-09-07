@@ -1,9 +1,63 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import garbage_can_Icon from "../../images/garbage_can_Icon.svg";
 import tick_Icon from "../../images/tick_Icon.svg";
+import { selectTicketMember, updateTicketMember } from "../agent";
 
 const MemberList = () => {
+    const { query } = useLocation();
+    const [buyers, setBuyers] = useState([]);
+    const [reload, setReload] = useState(true);
+
+    useEffect(() => {
+        const setupData = async () => {
+            const buyers = [];
+            for (let i = 0; i < query.tickets.length; i++) {
+                const ticket = query.tickets[i];
+                const response = await selectTicketMember(ticket.Id);
+                if (response.status === 200) {
+                    switch (response.data.status) {
+                        case 0:
+                            buyers.push({
+                                ...response.data.results[0],
+                                ticketName: ticket.ticket_Name,
+                            });
+                            break;
+                    }
+                }
+            }
+            setBuyers(buyers);
+        };
+
+        if (reload) {
+            setupData();
+            setReload(false);
+        }
+    }, [reload]);
+
+    const handelValidTicket = async (e) => {
+        e.preventDefault();
+    };
+    const handelDeleteTicket = async (e, buyer) => {
+        e.preventDefault();
+        const { Id, actualname, phone, mail, ticket: ticketId, sex } = buyer;
+        const response = await updateTicketMember(
+            Id,
+            actualname,
+            phone,
+            mail,
+            ticketId,
+            sex,
+            false
+        );
+        if (response.status === 200) {
+            switch (response.data.status) {
+                case 0:
+                    setReload(true);
+                    break;
+            }
+        }
+    };
     return (
         <>
             <div className="ticket-box">
@@ -18,7 +72,63 @@ const MemberList = () => {
                         <h6>票卷種類</h6>
                         <h6>票卷使用狀態</h6>
                     </div>
-                    <div className="row-container">
+                    {buyers
+                        .filter((buyer) => {
+                            return buyer.is_active;
+                        })
+                        .map((buyer, index) => {
+                            const { actualname, phone, ticketName, is_vaild } =
+                                buyer;
+                            return (
+                                <div className="row-container">
+                                    <h6 className="row-number">{index + 1}</h6>
+                                    <div className="row-textbox">
+                                        <h6 className="row-text act-name">
+                                            {actualname}
+                                        </h6>
+                                        <h6 className="row-text">{phone}</h6>
+                                        <h6 className="row-text">
+                                            {ticketName}
+                                        </h6>
+                                        {is_vaild ? (
+                                            <h6 className="row-text success">
+                                                已使用
+                                            </h6>
+                                        ) : (
+                                            <h6 className="row-text success">
+                                                未使用
+                                            </h6>
+                                        )}
+
+                                        <div className="row-btn-group">
+                                            <button
+                                                className="check"
+                                                onClick={(e) => {
+                                                    handelValidTicket(e);
+                                                }}
+                                            >
+                                                <img src={tick_Icon} alt="" />
+                                            </button>
+                                            <button
+                                                className="delete"
+                                                onClick={(e) => {
+                                                    handelDeleteTicket(
+                                                        e,
+                                                        buyer
+                                                    );
+                                                }}
+                                            >
+                                                <img
+                                                    src={garbage_can_Icon}
+                                                    alt=""
+                                                />
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    {/* <div className="row-container">
                         <h6 className="row-number">01</h6>
                         <div className="row-textbox">
                             <h6 className="row-text act-name">李慶毅</h6>
@@ -51,7 +161,7 @@ const MemberList = () => {
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </>

@@ -48,7 +48,6 @@ const Management = () => {
             denyButtonColor: "#4ca46f",
             cancelButtonText: "取消",
         }).then((result) => {
-            /* Read more about isConfirmed, isDenied below */
             if (result.isConfirmed) {
                 const { Id, endTime } = activities[index];
                 history.push({
@@ -109,8 +108,10 @@ const Management = () => {
                     return (
                         <Link
                             className="row-container"
-                            to={`/dashboard/${routes.TICKET_MEMBERLIST}`}
-                            params={{ activity: activity }}
+                            to={{
+                                pathname: `/dashboard/${routes.TICKET_MEMBERLIST}`,
+                                query: { tickets: activity.tickets },
+                            }}
                         >
                             <h6 className="row-number">{index + 1}</h6>
                             <div className="row-textbox">

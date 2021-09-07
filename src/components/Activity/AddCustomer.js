@@ -20,7 +20,6 @@ const AddCustomer = () => {
         cusTag,
         cusNote,
     } = customer;
-    console.log(customer);
 
     const onChangeCusName = (e) => {
         const cusName = e.target.value;
