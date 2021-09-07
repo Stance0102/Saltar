@@ -1797,8 +1797,9 @@ nav.subNav li img {
   font-family: "NotoSansCJKtc-Regular";
   color: #a5a5a5;
   margin-left: 10px;
+  margin-right: 10px;
   font-size: 1rem;
-  width: 30%;
+  width: 33%;
 }
 
 .one-page .one-page-content .act-info div img {
@@ -1830,6 +1831,10 @@ nav.subNav li img {
 
 .one-page .one-page-content .act-info div input:focus, .one-page .one-page-content .act-info div input:active, .one-page .one-page-content .act-info div input:hover, .one-page .one-page-content .act-info div input:checked {
   outline: none;
+}
+
+.one-page .one-page-content .act-info div input.datetime {
+  width: 42%;
 }
 
 .one-page .one-page-content .act-img {
