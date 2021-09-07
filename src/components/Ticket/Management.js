@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { SelectActivityByGroupId, selectTicketByActivityId } from "../agent";
+import { selectActivityByGroupId, selectTicketByActivityId } from "../agent";
 import * as routes from "../Router";
 import Swal from "sweetalert2";
 // Img
@@ -14,7 +14,7 @@ const Management = () => {
 
     useEffect(() => {
         const setupData = async () => {
-            const response = await SelectActivityByGroupId(groupId);
+            const response = await selectActivityByGroupId(groupId);
             if (response.status == 200) {
                 switch (response.data.status) {
                     case 0:

@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { createActivity, createShow } from "../agent";
+import {
+    selectActivity,
+    selectShowByActivity,
+    createActivity,
+    createShow,
+} from "../agent";
 import Swal from "sweetalert2";
 // Img
 import calendar_icon from "../../images/calendar_icon.svg";
@@ -13,7 +18,7 @@ import Organizer_icon from "../../images/Organizer_icon.svg";
 
 import Edit from "../Account/Edit";
 
-const OnePage = ({ edit }) => {
+const OnePage = ({ edit, activityId }) => {
     const { groupId } = useSelector((state) => state.Account);
     const location = useLocation();
     const history = useHistory();
@@ -35,8 +40,54 @@ const OnePage = ({ edit }) => {
     });
 
     useEffect(() => {
-        if (location.state != undefined) {
+        if (location.state !== undefined) {
             setEditMode(location.state.edit);
+        }
+        if (activityId !== undefined) {
+            const setupData = async () => {
+                let activity = {};
+                let shows = [];
+                const activityResponse = await selectActivity(activityId);
+                if (activityResponse.status === 200) {
+                    switch (activityResponse.data.status) {
+                        case 0:
+                            if (activityResponse.data.results.length !== 0) {
+                                const {
+                                    act_Name: title,
+                                    description,
+                                    startTime,
+                                    location,
+                                } = activityResponse.data.results[0];
+                                activity = {
+                                    title: title,
+                                    description: description,
+                                    startTime: startTime.split("T")[0],
+                                    location: location,
+                                };
+                            }
+                            break;
+                    }
+                } else {
+                    console.log(activityResponse);
+                }
+                const showsResponse = await selectShowByActivity(activityId);
+                if (showsResponse.status === 200) {
+                    switch (showsResponse.data.status) {
+                        case 0:
+                            shows = showsResponse.data.results;
+                            break;
+                    }
+                } else {
+                    console.log(showsResponse);
+                }
+
+                setActivityData({
+                    ...activityData,
+                    ...activity,
+                    shows: shows,
+                });
+            };
+            setupData();
         }
     }, []);
 
@@ -97,9 +148,9 @@ const OnePage = ({ edit }) => {
             shows: [
                 ...activityData.shows,
                 {
-                    time: activityData.showTime,
-                    showName: activityData.showName,
-                    note: activityData.showNote,
+                    showTime: activityData.showTime,
+                    show_Name: activityData.showName,
+                    detail: activityData.showNote,
                 },
             ],
             showTime: "",
@@ -132,12 +183,23 @@ const OnePage = ({ edit }) => {
             switch (response.data.status) {
                 case 0:
                     activityData.shows.forEach(async (show) => {
-                        await createShow(
+                        const showResponse = await createShow(
                             response.data.results.Id,
                             show.showName,
                             show.note,
                             show.time
                         );
+                        if (showResponse.status === 200) {
+                            switch (showResponse.data.status) {
+                                case 0:
+                                    break;
+                                default:
+                                    console.log(showResponse);
+                                    break;
+                            }
+                        } else {
+                            console.log(showResponse);
+                        }
                     });
                     Swal.fire({
                         title: "活動創建成功",
@@ -445,11 +507,11 @@ const ACT_Show = ({
     }
 };
 
-const ACT_Show_Detail = ({ time, showName, note }) => {
+const ACT_Show_Detail = ({ showTime, show_Name, detail }) => {
     return (
         <li>
             <div className="time">
-                {time} {showName} <font className="note">({note})</font>
+                {showTime} {show_Name} <font className="note">({detail})</font>
             </div>
         </li>
     );
