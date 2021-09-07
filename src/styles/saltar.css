@@ -161,6 +161,7 @@ nav.superNav .navBtnGroup {
       -ms-flex-pack: end;
           justify-content: flex-end;
   font-size: 24px;
+  margin-right: 20px;
 }
 
 nav.superNav .navBtnGroup .btn-login {
@@ -793,6 +794,7 @@ nav.subNav li img {
           align-items: center;
   width: 100%;
   padding-left: 5%;
+  padding-right: 14%;
   margin-bottom: 10px;
 }
 
@@ -836,7 +838,6 @@ nav.subNav li img {
       -ms-flex-align: center;
           align-items: center;
   width: 95%;
-  margin-left: 5%;
 }
 
 .management-row-box .row-container .row-text {
@@ -878,6 +879,22 @@ nav.subNav li img {
           align-items: center;
   width: 150px;
   margin-left: 80px;
+}
+
+.management-row-box .ticket-btn {
+  width: 45px;
+  height: 45px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
 }
 
 .ticket-form {
@@ -1039,6 +1056,7 @@ nav.subNav li img {
           align-items: center;
   width: 100%;
   padding-left: 5%;
+  padding-right: 14%;
   margin-bottom: 10px;
 }
 
@@ -1082,7 +1100,6 @@ nav.subNav li img {
       -ms-flex-align: center;
           align-items: center;
   width: 95%;
-  margin-left: 5%;
 }
 
 .member-row-box .row-container .row-text {
@@ -1979,6 +1996,16 @@ nav.subNav li img {
 
 .one-page .one-page-content .act-show .time input:focus, .one-page .one-page-content .act-show .time input:active, .one-page .one-page-content .act-show .time input:hover, .one-page .one-page-content .act-show .time input:checked {
   outline: none;
+}
+
+.one-page .one-page-content .act-show .add-btn {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background-color: #ffb559;
+  color: #fff;
+  border-radius: 30px;
+  font-size: 1.3rem;
 }
 
 .one-page .one-page-content .save-btn {

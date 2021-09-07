@@ -14,3 +14,5 @@ export const SIGNUP = "/signup";
 export const FORGETPW = "/forgetPassword";
 export const CHANGEPW = "/changePassword";
 export const EMAILCHECK = "/emailCheck";
+// Other
+export const ONEPAGE_PREVIEW = "/onePageEvnet";
