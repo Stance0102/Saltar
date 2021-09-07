@@ -12,6 +12,11 @@ const SignUp = lazy(() => import("./Account/Signup"));
 const Dashboard = lazy(() => import("./Home/Dashboard"));
 const ErrorPage = lazy(() => import("./Home/ErrorPage"));
 
+const Infomation = lazy(() => import("./Ticket/Infomation"));
+const ForgetPw = lazy(() => import("./Account/ForgetPw"));
+const ChangePw = lazy(() => import("./Account/ChangePw"));
+const EmailCheck = lazy(() => import("./Account/EmailCheck"));
+
 const App = () => {
     const dispatch = useDispatch();
 
@@ -28,20 +33,39 @@ const App = () => {
                         <div className="main">
                             <Switch>
                                 <Route
-                                    exact
-                                    path={routes.LOGIN}
-                                    component={LogIn}
-                                />
-                                <Route
-                                    path={routes.SIGNUP}
-                                    component={SignUp}
-                                />
-                                <ProtectedRoute
-                                    path={routes.DASHBOARD}
-                                    component={Dashboard}
-                                />
-                                <Route component={ErrorPage} />
+                                        exact
+                                        path={routes.LOGIN}
+                                        component={LogIn}
+                                    />
+                                    <Route
+                                        path={routes.SIGNUP}
+                                        component={SignUp}
+                                    />
+                                    <ProtectedRoute
+                                        path={routes.DASHBOARD}
+                                        component={Dashboard}
+                                    />
+                                    <Route
+                                        path={routes.TICKET_INFOMATION}
+                                        component={Infomation}
+                                    />
+                                    <Route
+                                        path={routes.FORGETPW}
+                                        component={ForgetPw}
+                                    />
+                                    <Route
+                                        path={routes.CHANGEPW}
+                                        component={ChangePw}
+                                    />
+
+                                    <Route
+                                        path={routes.EMAILCHECK}
+                                        component={EmailCheck}
+                                    />
+
+                                    <Route component={ErrorPage} />
                             </Switch>
+
                         </div>
                     </div>
                 </Router>

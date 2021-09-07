@@ -210,6 +210,15 @@ const OnePage = () => {
     );
 };
 
+
+// const ACT_Title = ({ editMode }) => {
+//     const [actTitle, setActTitle] = useState("高科傳說對決生死賽");
+
+//     function handleActTitle(e) {
+//         const act_Title = e.target.value;
+//         setActTitle(act_Title);
+//     }
+
 const ACT_Title = ({ editMode, title, onTitleChange }) => {
     if (editMode) {
         return (
@@ -220,6 +229,7 @@ const ACT_Title = ({ editMode, title, onTitleChange }) => {
                     value={title}
                     id="actName"
                     autoComplete="off"
+                    required
                     onChange={(e) => onTitleChange(e)}
                 />
                 {/* <Edit_Btn editMode={editMode} /> */}
@@ -236,6 +246,19 @@ const ACT_Title = ({ editMode, title, onTitleChange }) => {
         );
     }
 };
+
+
+// const ACT_Info = ({ editMode }) => {
+//     const [actInfo, setActInfo] = useState({
+//         location: "高雄科技大學第一校區",
+//         starttime: "2021-09-04",
+//     });
+
+//     function handleActInfo(e) {
+//         setActInfo({
+//             [e.target.id]: e.target.value,
+//         });
+//     }
 
 const ACT_Info = ({
     editMode,
@@ -257,6 +280,9 @@ const ACT_Info = ({
                         <input
                             type="text"
                             id="location"
+//                             value={actInfo.location}
+//                             autoComplete="off"
+//                             onChange={handleActInfo}
                             value={location}
                             autoComplete="off"
                             onChange={(e) => onLocationChange(e)}
@@ -265,6 +291,10 @@ const ACT_Info = ({
                     <div>
                         <img src={calendar_icon} alt="" />
                         <input
+//                             type="text"
+//                             id="starttime"
+//                             value={actInfo.starttime}
+//                             onChange={handleActInfo}
                             type="date"
                             id="starttime"
                             value={startTime}
