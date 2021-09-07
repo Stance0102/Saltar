@@ -13,7 +13,7 @@ const Management = () => {
     const history = useHistory();
 
     useEffect(() => {
-        const fetchData = async () => {
+        const setupData = async () => {
             const response = await SelectActivityByGroupId(groupId);
             if (response.status == 200) {
                 switch (response.data.status) {
@@ -33,7 +33,7 @@ const Management = () => {
             }
         };
 
-        fetchData();
+        setupData();
     }, []);
 
     const ticketHandler = (e, index) => {

@@ -3,7 +3,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { updateTicket } from "../agent";
 import Swal from "sweetalert2";
 
-const Add = () => {
+const Update = () => {
     const location = useLocation();
     const history = useHistory();
     const [ticket, setTicket] = useState({});
@@ -100,7 +100,7 @@ const Add = () => {
     return (
         <div className="ticket-box">
             <div className="ticket-box-title">
-                <p>新增票卷</p>
+                <p>修改票卷</p>
                 <hr />
             </div>
             <div className="container">
@@ -169,7 +169,7 @@ const Add = () => {
                     </div>
                     <div className="form-btn-group">
                         <button className="form-save" type="submit">
-                            儲存
+                            修改
                         </button>
                     </div>
                 </form>
@@ -178,4 +178,4 @@ const Add = () => {
     );
 };
 
-export default Add;
+export default Update;

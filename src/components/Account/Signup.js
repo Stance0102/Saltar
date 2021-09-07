@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { signup } from "../agent";
+import { signup, getSchool } from "../agent";
 import { FormInput } from "../Home/_Components";
 import Swal from "sweetalert2";
 // Img
@@ -9,14 +9,22 @@ import loginPage from "../../images/loginPage.svg";
 const SignUp = () => {
     const [email, setEmail] = useState("");
     const [userName, setUsername] = useState("");
+    const [school, setSchool] = useState("");
     const [telNumber, setTelnumber] = useState("");
     const [passWord, setPassword] = useState("");
     const [message, setMessage] = useState("");
+    const [schoolList, setSchoolList] = useState({});
     const history = useHistory();
 
     function onChangeEmail(e) {
         const email = e.target.value;
         setEmail(email);
+        const splitEmail = email.split(/\@(\w+)\./);
+        if (schoolList[`${splitEmail[1]}`] !== undefined) {
+            setSchool(schoolList[`${splitEmail[1]}`]);
+        } else {
+            setSchool("無法偵測");
+        }
     }
 
     function onChangeUsername(e) {
@@ -42,6 +50,23 @@ const SignUp = () => {
             setMessage("");
         }
     }
+
+    useEffect(() => {
+        const setupData = async () => {
+            const response = await getSchool();
+            if (response.status == 200) {
+                switch (response.data.status) {
+                    case 0:
+                        setSchoolList(response.data.results);
+                        break;
+                }
+            } else {
+                console.log(response);
+            }
+        };
+
+        setupData();
+    }, []);
 
     async function handleSignup(e) {
         e.preventDefault();
@@ -114,7 +139,7 @@ const SignUp = () => {
                         ClassName="auth-label"
                         Type="text"
                         Title="學校（系統依照輸入之學校信箱自動偵測校名）"
-                        value="國立高雄科技大學"
+                        value={school}
                         disabled={true}
                     />
 
