@@ -10,14 +10,14 @@ export const AccountSlice = createSlice({
         token: "",
     },
     reducers: {
-        SetAccount: (state, action) => {
+        setAccount: (state, action) => {
             state.isLogin = true;
             state.Id = action.payload.Id;
             state.name = action.payload.name;
             state.groupId = action.payload.groupId;
             state.token = action.payload.token;
         },
-        removeAccount: (state, action) => {
+        removeAccount: (state) => {
             state.isLogin = false;
             state.Id = "";
             state.name = "";
@@ -27,5 +27,5 @@ export const AccountSlice = createSlice({
     },
 });
 
-export const { SetAccount, RemoveAccount } = AccountSlice.actions;
+export const { setAccount, removeAccount } = AccountSlice.actions;
 export default AccountSlice.reducer;

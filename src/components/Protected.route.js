@@ -9,12 +9,10 @@ export const ProtectedRoute = ({
 }) => {
     //取出 Redux
     const { isLogin } = useSelector((state) => state.Account);
-    console.log(isLogin);
     return (
         <Route
             {...rest}
             render={(props) => {
-                console.log(props);
                 if (isLogin) {
                     return <Component {...props} />;
                 } else {
