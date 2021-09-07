@@ -495,7 +495,9 @@ nav.subNav li img {
   height: 100%;
 }
 
-.edit-form .input-group {
+.edit-form .input-label {
+  font-size: 1rem;
+  font-family: "NotoSansCJKtc-Bold";
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -509,19 +511,58 @@ nav.subNav li img {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   width: 100%;
+  color: #000000;
 }
 
-.edit-form .input-group .input-label {
+.edit-form input {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.edit-form p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
   font-size: 1rem;
   font-family: "NotoSansCJKtc-Bold";
-  color: #000000;
-  margin-bottom: 10px;
 }
 
-.edit-form .input-group input {
+.edit-form .input-radio-group {
+  font-size: 1rem;
+  font-family: "NotoSansCJKtc-Bold";
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 100%;
+  height: 50px;
+  margin-bottom: 10px;
+  color: #a5a5a5;
+}
+
+.edit-form .input-radio-group label {
+  height: 20px;
+}
+
+.edit-form .input-radio-group input[type="radio"] {
+  width: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 20px;
 }
 
 .edit-form .form-btn-group {
@@ -564,6 +605,114 @@ nav.subNav li img {
   font-size: 1.2rem;
   font-family: "NotoSansCJKtc-Bold";
   width: 138px;
+}
+
+.email-check {
+  width: 55vw;
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.email-check .letter {
+  width: 40%;
+  height: 40%;
+  color: #fff;
+  font-size: 1.1rem;
+  font-family: "NotoSansCJKTC-Medium";
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.email-check .letter img {
+  margin-bottom: 10px;
+}
+
+.email-check .letter .bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #ffb559;
+  width: 100%;
+  height: 15%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.email-check .letter .context {
+  width: 100%;
+  height: 85%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: rgba(255, 181, 89, 0.15);
+  color: #a5a5a5;
+}
+
+.email-check .letter .context .resent-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 60%;
+  height: 40px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ffb559;
+  color: #fff;
+  font-size: 1.1rem;
+  font-family: "NotoSansCJKTC-Medium";
+}
+
+.email-check .email {
+  color: #000000;
 }
 
 .ticket-box {
@@ -643,7 +792,7 @@ nav.subNav li img {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
-  padding-left: 10%;
+  padding-left: 5%;
   margin-bottom: 10px;
 }
 
@@ -749,7 +898,9 @@ nav.subNav li img {
   height: 100%;
 }
 
-.ticket-form .input-group {
+.ticket-form .input-label {
+  font-size: 1rem;
+  font-family: "NotoSansCJKtc-Bold";
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -763,19 +914,58 @@ nav.subNav li img {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   width: 100%;
+  color: #aeaeae;
 }
 
-.ticket-form .input-group .input-label {
+.ticket-form input {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.ticket-form p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
   font-size: 1rem;
   font-family: "NotoSansCJKtc-Bold";
-  color: #aeaeae;
-  margin-bottom: 10px;
 }
 
-.ticket-form .input-group input {
+.ticket-form .input-radio-group {
+  font-size: 1rem;
+  font-family: "NotoSansCJKtc-Bold";
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 100%;
+  height: 50px;
+  margin-bottom: 10px;
+  color: #a5a5a5;
+}
+
+.ticket-form .input-radio-group label {
+  height: 20px;
+}
+
+.ticket-form .input-radio-group input[type="radio"] {
+  width: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 20px;
 }
 
 .ticket-form .form-btn-group {
@@ -848,7 +1038,7 @@ nav.subNav li img {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
-  padding-left: 10%;
+  padding-left: 5%;
   margin-bottom: 10px;
 }
 
@@ -989,6 +1179,479 @@ nav.subNav li img {
 
 .member-row-box .delete:hover {
   border: 2.5px solid #ff3737;
+}
+
+.infomation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100vw;
+  min-height: 100vh;
+}
+
+.infomation .title {
+  width: 40%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 2rem;
+  font-family: "NotoSansCJKtc-Regular";
+  text-align: left;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.infomation .title img {
+  width: 50px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.infomation .ticket-type {
+  margin-left: 15px;
+  color: #4ca46f;
+  font-size: 1.4rem;
+}
+
+.infomation .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  width: 40%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: #fff;
+}
+
+.infomation .container .ticket-name {
+  width: 100%;
+  height: 60px;
+}
+
+.infomation .container .ticket-name .act-name {
+  font-family: "NotoSansCJKtc-Bold";
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+.infomation .container .ticket-name .group-name {
+  font-size: 1.1rem;
+  color: #a5a5a5;
+  line-height: normal;
+  height: 20px;
+}
+
+.infomation .container .ticket-name .group-name img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.infomation .container .buy-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 100%;
+  margin-top: 40px;
+}
+
+.infomation .container .buy-form .input-label {
+  font-size: 1rem;
+  font-family: "NotoSansCJKtc-Bold";
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  margin-bottom: 10px;
+  width: 100%;
+  color: #000000;
+}
+
+.infomation .container .buy-form input {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.infomation .container .buy-form p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  font-size: 1rem;
+  font-family: "NotoSansCJKtc-Bold";
+}
+
+.infomation .container .buy-form .input-radio-group {
+  font-size: 1rem;
+  font-family: "NotoSansCJKtc-Bold";
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 10px;
+  color: #a5a5a5;
+}
+
+.infomation .container .buy-form .input-radio-group label {
+  height: 20px;
+}
+
+.infomation .container .buy-form .input-radio-group input[type="radio"] {
+  width: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 20px;
+}
+
+.infomation .container .buy-form .form-btn-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  padding-right: 3px;
+  padding-top: 10px;
+  padding-bottom: 15px;
+}
+
+.infomation .container .buy-form .form-btn-group .form-save {
+  height: 56px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 16px 24px;
+  margin-top: 15px;
+  border-radius: 8px;
+  border: none;
+  background-color: #ffa83d;
+  color: #FFF;
+  font-size: 1.2rem;
+  font-family: "NotoSansCJKtc-Bold";
+  width: 138px;
+}
+
+.infomation .container .buy-form hr {
+  border: 1.2px solid #e0e0e0;
+  width: 100%;
+}
+
+.infomation .container .buy-form .total-price {
+  width: 100%;
+  margin-top: 15px;
+  font-size: 1.1rem;
+  font-family: "NotoSansCJKtc-Medium";
+}
+
+.infomation .container .buy-form .total-price p {
+  font-size: 1.7rem;
+  color: #4ca46f;
+  font-family: "NotoSansCJKtc-Bold";
+}
+
+.infomation .container .buy-form .buy-btn {
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ffa83d;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  color: #fff;
+  font-size: 1.2rem;
+  font-family: "NotoSansCJKtc-Medium";
+}
+
+.infomation .ticket-head {
+  width: 40%;
+  height: 8%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #fff;
+  border-radius: 14px;
+  -webkit-box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+          box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+  padding-left: 25px;
+  font-size: 1.4rem;
+  font-family: "NotoSansCJKtc-Medium";
+  margin-bottom: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.infomation .ticket-qrcode {
+  width: 40%;
+  height: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  border-radius: 14px;
+  -webkit-box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+          box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+  background-color: #fff;
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+.infomation .ticket-qrcode p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  width: 100%;
+  font-size: 1.4rem;
+  font-family: "NotoSansCJKtc-Medium";
+}
+
+.infomation .ticket-qrcode p img {
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+.infomation .ticket-qrcode .qrcode {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: 1.2rem;
+  color: #4ca46f;
+  font-family: "NotoSansCJKtc-Medium";
+}
+
+.infomation .ticket-qrcode .qrcode img {
+  width: 40%;
+  height: 80%;
+}
+
+.infomation .ticket-detail {
+  width: 40%;
+  height: 35%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -webkit-box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+          box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+  background-color: #fff;
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 14px;
+  margin-bottom: 60px;
+}
+
+.infomation .ticket-detail p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  width: 100%;
+  font-size: 1.4rem;
+  font-family: "NotoSansCJKtc-Medium";
+  margin-bottom: 15px;
+}
+
+.infomation .ticket-detail p img {
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+.infomation .ticket-detail .detail-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-left: 22px;
+  font-size: 1rem;
+  font-family: "NotoSansCJKtc-Regular";
+}
+
+.infomation .ticket-detail .line {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+.infomation .ticket-detail .line hr {
+  border: 1.2px solid #e0e0e0;
+  background-color: #e0e0e0;
+  width: 94%;
+}
+
+.infomation .ticket-detail .total-price {
+  width: 100%;
+  margin-top: 15px;
+  font-size: 1.1rem;
+  font-family: "NotoSansCJKtc-Medium";
+  padding-left: 22px;
+}
+
+.infomation .ticket-detail .total-price p {
+  font-size: 1.7rem;
+  color: #4ca46f;
+  font-family: "NotoSansCJKtc-Bold";
+}
+
+#success {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 20px;
+}
+
+#success p {
+  margin-top: 15px;
+  color: #ffb559;
+  font-size: 1.4rem;
+  font-family: "NotoSansCJKtc-Medium";
 }
 
 .activity-box {

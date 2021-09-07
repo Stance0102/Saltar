@@ -8,6 +8,7 @@ const Edit = lazy(() => import("../Account/Edit"));
 const Add = lazy(() => import("../Ticket/Add"));
 const Management = lazy(() => import("../Ticket/Management"));
 const MemberList = lazy(() => import("../Ticket/MemberList"));
+const AddCustomer = lazy(() => import("../Activity/AddCustomer"));
 const ErrorPage = lazy(() => import("../Home/ErrorPage"));
 
 const Dashboard = () => {
@@ -44,6 +45,9 @@ function BackendFeatures() {
 
         case routes.ONE_PAGE:
             return <OnePage />;
+
+        case routes.ADDCUSTOMER:
+            return <AddCustomer />;
 
         default:
             return <ErrorPage />;

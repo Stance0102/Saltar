@@ -29,12 +29,12 @@ const SubNav = ({ url }) => {
                     </li>
                 </Link>
 
-                {/* <Link to={`${url}/${routes.SHOW}`}> */}
-                <li>
-                    <img src={actControl} alt="" />
-                    活動控制
-                </li>
-                {/* </Link> */}
+                <Link to={`${url}/${routes.ADDCUSTOMER}`}>
+                    <li>
+                        <img src={actControl} alt="" />
+                        活動控制
+                    </li>
+                </Link>
 
                 <Link to={`${url}/${routes.EDIT}`}>
                     <li>

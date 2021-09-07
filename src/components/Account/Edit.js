@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router";
+import { FormInput } from "../Home/_Components";
 
 const Edit = () => {
     return (
@@ -10,56 +10,52 @@ const Edit = () => {
             </div>
             <div className="container">
                 <form className="edit-form" action="">
-                    <div className="input-group">
-                        <label className="input-label" for="email">
-                            帳號
-                            (社團/系學會行銷、公關負責人、主要聯絡人的“學校Email”)
-                        </label>
-                        <input type="email" name="" id="email" />
-                    </div>
+                    <FormInput
+                        Id="email"
+                        Type="email"
+                        ClassName="input-label"
+                        Title="帳號
+                            (社團/系學會行銷、公關負責人、主要聯絡人的“學校Email”)"
+                    />
 
-                    <div className="input-group">
-                        <label className="input-label" for="school">
-                            學校（系統依照輸入之學校信箱自動偵測校名）
-                        </label>
-                        <input
-                            type="text"
-                            name=""
-                            id="school"
-                            value="國立高雄科技大學"
-                            disabled="true"
-                        />
-                    </div>
+                    <FormInput
+                        Id="school"
+                        Type="text"
+                        ClassName="input-label"
+                        Title="學校（系統依照輸入之學校信箱自動偵測校名）"
+                        value="國立高雄科技大學"
+                        disabled="true"
+                    />
 
-                    <div className="input-group">
-                        <label className="input-label" for="userName">
-                            組織名稱
-                            (社團/系學會全名，Ex：嘻哈文化研究社、資訊管理系系學會)
-                        </label>
-                        <input type="text" name="" id="userName" />
-                    </div>
+                    <FormInput
+                        Id="userName"
+                        Type="text"
+                        ClassName="input-label"
+                        Title="組織名稱
+                        (社團/系學會全名，Ex：嘻哈文化研究社、資訊管理系系學會)"
+                    />
 
-                    <div className="input-group">
-                        <label className="input-label" for="telNumber">
-                            手機號碼
-                            (社團/系學會行銷、公關負責人、主要聯絡人的手機)
-                        </label>
-                        <input type="tel" name="" id="telNumber" />
-                    </div>
+                    <FormInput
+                        Id="telNumber"
+                        Type="tel"
+                        ClassName="input-label"
+                        Title="手機號碼
+                        (社團/系學會行銷、公關負責人、主要聯絡人的手機)"
+                    />
 
-                    <div className="input-group">
-                        <label className="input-label" for="pw">
-                            密碼
-                        </label>
-                        <input type="password" name="" id="pw" />
-                    </div>
+                    <FormInput
+                        Id="pw"
+                        Type="password"
+                        ClassName="input-label"
+                        Title="密碼"
+                    />
 
-                    <div className="input-group">
-                        <label className="input-label" for="repw">
-                            確認密碼
-                        </label>
-                        <input type="password" name="" id="repw" />
-                    </div>
+                    <FormInput
+                        Id="repw"
+                        Type="password"
+                        ClassName="input-label"
+                        Title="確認密碼"
+                    />
 
                     <div className="form-btn-group">
                         <button className="form-save" type="submit">

@@ -80,15 +80,24 @@ const OnePage = () => {
 };
 
 const ACT_Title = ({ editMode }) => {
+    const [actTitle, setActTitle] = useState("高科傳說對決生死賽");
+
+    function handleActTitle(e) {
+        const act_Title = e.target.value;
+        setActTitle(act_Title);
+    }
+
     if (editMode) {
         return (
             <>
                 <input
                     type="text"
                     className="act-name"
-                    value="高科傳說對決生死賽"
                     id="actName"
+                    value={actTitle}
                     autoComplete="off"
+                    required
+                    onChange={handleActTitle}
                 />
                 {/* <Edit_Btn editMode={editMode} /> */}
             </>
@@ -106,6 +115,17 @@ const ACT_Title = ({ editMode }) => {
 };
 
 const ACT_Info = ({ editMode }) => {
+    const [actInfo, setActInfo] = useState({
+        location: "高雄科技大學第一校區",
+        starttime: "2021-09-04",
+    });
+
+    function handleActInfo(e) {
+        setActInfo({
+            [e.target.id]: e.target.value,
+        });
+    }
+
     if (editMode) {
         return (
             <>
@@ -119,13 +139,19 @@ const ACT_Info = ({ editMode }) => {
                         <input
                             type="text"
                             id="location"
-                            value="高雄科技大學第一校區"
+                            value={actInfo.location}
                             autoComplete="off"
+                            onChange={handleActInfo}
                         />
                     </div>
                     <div>
                         <img src={calendar_icon} alt="" />
-                        <input type="text" id="starttime" value="2021/09/04" />
+                        <input
+                            type="text"
+                            id="starttime"
+                            value={actInfo.starttime}
+                            onChange={handleActInfo}
+                        />
                     </div>
                     {/* <Edit_Btn editMode={editMode} /> */}
                 </div>

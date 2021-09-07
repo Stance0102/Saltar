@@ -99,7 +99,7 @@ const Login = () => {
                         Title="密碼"
                     />
 
-                    <Link to="" className="link">
+                    <Link to="/forgetPassword" className="link">
                         <p style={{ textAlign: "right" }}>忘記密碼？</p>
                     </Link>
 

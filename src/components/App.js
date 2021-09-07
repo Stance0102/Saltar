@@ -12,6 +12,11 @@ const SignUp = lazy(() => import("./Account/Signup"));
 const Dashboard = lazy(() => import("./Home/Dashboard"));
 const ErrorPage = lazy(() => import("./Home/ErrorPage"));
 
+const Infomation = lazy(() => import("./Ticket/Infomation"));
+const ForgetPw = lazy(() => import("./Account/ForgetPw"));
+const ChangePw = lazy(() => import("./Account/ChangePw"));
+const EmailCheck = lazy(() => import("./Account/EmailCheck"));
+
 const App = () => {
     return (
         <>
@@ -35,6 +40,24 @@ const App = () => {
                                         path={routes.DASHBOARD}
                                         component={Dashboard}
                                     />
+                                    <Route
+                                        path={routes.TICKET_INFOMATION}
+                                        component={Infomation}
+                                    />
+                                    <Route
+                                        path={routes.FORGETPW}
+                                        component={ForgetPw}
+                                    />
+                                    <Route
+                                        path={routes.CHANGEPW}
+                                        component={ChangePw}
+                                    />
+
+                                    <Route
+                                        path={routes.EMAILCHECK}
+                                        component={EmailCheck}
+                                    />
+
                                     <Route component={ErrorPage} />
                                 </Switch>
                             </div>
