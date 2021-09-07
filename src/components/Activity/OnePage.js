@@ -10,8 +10,9 @@ import tick_Icon from "../../images/tick_Icon.svg";
 import cancel_Icon from "../../images/cancel_Icon.svg";
 import location_icon from "../../images/location_icon.svg";
 import Organizer_icon from "../../images/Organizer_icon.svg";
+import fiesta from "../../images/fiesta.PNG";
 
-import Edit from "../Account/Edit";
+// import Edit from "../Account/Edit";
 
 const OnePage = ({ edit }) => {
     const { groupId } = useSelector((state) => state.Account);
@@ -206,6 +207,9 @@ const OnePage = ({ edit }) => {
                     onshowNoteChange={onshowNoteChange}
                     {...activityData}
                 />
+
+                {!editMode && <ACT_Ticket />}
+
                 <Save_Btn editMode={editMode} />
             </form>
         </div>
@@ -452,6 +456,32 @@ const ACT_Show_Detail = ({ time, showName, note }) => {
                 {time} {showName} <font className="note">({note})</font>
             </div>
         </li>
+    );
+};
+
+const ACT_Ticket = () => {
+    return (
+        <div className="act-ticket">
+            <img src={fiesta} alt="" />
+            <div className="context">
+                <p className="title">高科傳說對決生死賽</p>
+                <p>
+                    <img src={location_icon} alt="" />
+                    2021-07-20 - 2021-07-21
+                </p>
+                <p>
+                    <img src={Organizer_icon} alt="" />
+                    主辦單位：高雄科大資管系
+                </p>
+                <p className="price">
+                    NT$ <font className="number">200</font>
+                </p>
+            </div>
+            <div className="buy-info">
+                <div className="ticket-type">學生票</div>
+                <button className="buy-btn">購票</button>
+            </div>
+        </div>
     );
 };
 
