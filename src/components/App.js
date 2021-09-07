@@ -1,6 +1,11 @@
 import React, { Suspense, lazy } from "react";
 import { useDispatch } from "react-redux";
-import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
+import {
+    Switch,
+    Route,
+    BrowserRouter as Router,
+    useParams,
+} from "react-router-dom";
 import * as routes from "./Router";
 import { verifyToken } from "./agent";
 import { ProtectedRoute } from "./Protected.route";
@@ -63,9 +68,17 @@ const App = () => {
                                     path={routes.EMAILCHECK}
                                     component={EmailCheck}
                                 />
-                                <Route path={routes.ONEPAGE_PREVIEW}>
-                                    <OnePage edit={false} />
-                                </Route>
+                                <Route
+                                    path={`${routes.ONEPAGE_PREVIEW}/:activityId`}
+                                    render={(props) => (
+                                        <OnePage
+                                            edit={false}
+                                            activityId={
+                                                props.match.params.activityId
+                                            }
+                                        />
+                                    )}
+                                />
 
                                 <Route component={ErrorPage} />
                             </Switch>

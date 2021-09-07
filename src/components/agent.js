@@ -232,7 +232,7 @@ const createActivity = async (
     );
 };
 
-const SelectActivity = async (
+const selectActivity = async (
     //活動Id
     actId
 ) => {
@@ -241,7 +241,7 @@ const SelectActivity = async (
     });
 };
 
-const SelectActivityByGroupId = async (
+const selectActivityByGroupId = async (
     //群組Id
     groupId
 ) => {
@@ -788,8 +788,8 @@ export {
 //活動
 export {
     createActivity,
-    SelectActivity,
-    SelectActivityByGroupId,
+    selectActivity,
+    selectActivityByGroupId,
     updateActivity,
     createActivityPhoto,
     selectActivityPhoto,
