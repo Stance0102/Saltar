@@ -21,7 +21,7 @@ import fiesta from "../../images/fiesta.PNG";
 // import Edit from "../Account/Edit";
 
 const OnePage = ({ edit, activityId }) => {
-    const { groupId } = useSelector((state) => state.Account);
+    const { groupId, name } = useSelector((state) => state.Account);
     const location = useLocation();
     const history = useHistory();
     const [img, setImg] = useState("");
@@ -35,11 +35,11 @@ const OnePage = ({ edit, activityId }) => {
         endTime: "2021-09-04",
         currentStartTime: "2021-09-04 00:00:00",
         currentEndTime: "2021-09-04 00:00:00",
-        description:
-            "=============================================================================================================",
+        description: "",
         showTime: "",
         showName: "",
         showNote: "",
+        org_Name: name,
         shows: [],
         tickets: [],
     });
@@ -62,12 +62,14 @@ const OnePage = ({ edit, activityId }) => {
                                     description,
                                     startTime,
                                     location,
+                                    org_Name,
                                 } = activityResponse.data.results[0];
                                 activity = {
                                     title: title,
                                     description: description,
                                     startTime: startTime.split("T")[0],
                                     location: location,
+                                    org_Name: org_Name,
                                 };
                             }
                             break;
@@ -97,7 +99,6 @@ const OnePage = ({ edit, activityId }) => {
                 } else {
                     console.log(ticketsResponse);
                 }
-
                 setActivityData({
                     ...activityData,
                     ...activity,
@@ -160,13 +161,8 @@ const OnePage = ({ edit, activityId }) => {
         });
     };
 
-    const handleCreateShow = (e) => {
-        e.preventDefault();
-        if (
-            activityData.showTime == "" ||
-            activityData.showName == "" ||
-            activityData.showNote == ""
-        ) {
+    const handleCreateShow = () => {
+        if (activityData.showTime == "" || activityData.showName == ""||activityData.showNote == "") {
             return;
         }
         setActivityData({
@@ -275,6 +271,7 @@ const OnePage = ({ edit, activityId }) => {
                     onLocationChange={onLocationChange}
                     onStartTimeChange={onStartTimeChange}
                     onEndTimeChange={onEndTimeChange}
+                    name={name}
                     {...activityData}
                 />
 
@@ -359,6 +356,7 @@ const ACT_Title = ({ editMode, title, onTitleChange }) => {
 
 const ACT_Info = ({
     editMode,
+    org_Name,
     location,
     startTime,
     endTime,
@@ -372,7 +370,7 @@ const ACT_Info = ({
                 <div className="act-info">
                     <div>
                         <img src={Organizer_icon} alt="" />
-                        高雄科大資管系
+                        {org_Name}
                     </div>
                     <div>
                         <img src={location_icon} alt="" />
@@ -414,7 +412,7 @@ const ACT_Info = ({
                 <div className="act-info">
                     <div>
                         <img src={Organizer_icon} alt="" />
-                        高雄科大資管系
+                        {org_Name}
                     </div>
                     <div>
                         <img src={location_icon} alt="" />
@@ -547,7 +545,7 @@ const ACT_Show_Detail = ({ showTime, show_Name, detail }) => {
     );
 };
 
-const ACT_Ticket = ({ tickets }) => {
+const ACT_Ticket = ({ tickets, org_Name }) => {
     return tickets.map((ticket) => {
         const { ticket_Name, startTime, endTime, price, Id: ticketId } = ticket;
         return (
@@ -561,7 +559,7 @@ const ACT_Ticket = ({ tickets }) => {
                     </p>
                     <p>
                         <img src={Organizer_icon} alt="" />
-                        主辦單位：高雄科大資管系
+                        主辦單位：{org_Name}
                     </p>
                     <p className="price">
                         NT$ <font className="number">{price}</font>

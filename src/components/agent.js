@@ -124,19 +124,19 @@ const updateGroup = async (
     //群組名稱
     groupName,
     //群組聯絡人
-    phone_number,
+    phone_number
     //群組聯絡地址
-    address,
+    // address,
     //是否還存在?
-    is_active
+    // is_active
 ) => {
     return axios.put(
         `/api/Groups/update/${groupId}`,
         {
             groupName: groupName,
             phone_number: phone_number,
-            address: address,
-            is_active: is_active,
+            address: "address",
+            // is_active: is_active,
         },
         { params: { t: new Date().getTime() } }
     );
