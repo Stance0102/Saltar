@@ -3,11 +3,11 @@ import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FormInput } from "../Home/_Components";
 import Swal from "sweetalert2";
-import { selectAccount, getSchool, updateAccount } from "../agent";
+import { selectAccount, getSchool, updateAccount, updateGroup } from "../agent";
 
 const Edit = () => {
     const history = useHistory();
-    const { Id: accountId } = useSelector((state) => state.Account);
+    const { Id: accountId, groupId } = useSelector((state) => state.Account);
     const [account, setAccount] = useState({});
     const [message, setMessage] = useState({});
     const [schoolList, setSchoolList] = useState({});
@@ -94,7 +94,7 @@ const Edit = () => {
                 icon: "info",
             });
         }
-        const response = await updateAccount(
+        const accountResponse = await updateAccount(
             accountId,
             username,
             actualname,
@@ -102,23 +102,48 @@ const Edit = () => {
             phone,
             school
         );
-        if (response.status == 200) {
-            switch (response.data.status) {
+        if (accountResponse.status == 200) {
+            switch (accountResponse.data.status) {
                 case 0:
-                    Swal.fire({
-                        title: "更新成功",
-                        confirmButtonText: "繼續",
-                        confirmButtonColor: "#ffb559",
-                        icon: "success",
-                    }).then(() => {
-                        history.push("/dashboard");
-                    });
+                    const groupResponse = await updateGroup(
+                        groupId,
+                        actualname,
+                        phone
+                    );
+                    if (groupResponse.status == 200) {
+                        switch (groupResponse.data.status) {
+                            case 0:
+                                Swal.fire({
+                                    title: "更新成功",
+                                    confirmButtonText: "繼續",
+                                    confirmButtonColor: "#ffb559",
+                                    icon: "success",
+                                }).then(() => {
+                                    history.push("/dashboard");
+                                });
+                                break;
+                            default:
+                                console.log(groupResponse.data);
+                                Swal.fire({
+                                    title: "更新失敗",
+                                    text: JSON.stringify(
+                                        groupResponse.data.results
+                                    ),
+                                    confirmButtonText: "知道了",
+                                    confirmButtonColor: "#ffb559",
+                                    icon: "error",
+                                });
+                                break;
+                        }
+                    } else {
+                        console.log(groupResponse);
+                    }
                     break;
                 default:
-                    console.log(response.data);
+                    console.log(accountResponse.data);
                     Swal.fire({
                         title: "更新失敗",
-                        text: JSON.stringify(response.data.results),
+                        text: JSON.stringify(accountResponse.data.results),
                         confirmButtonText: "知道了",
                         confirmButtonColor: "#ffb559",
                         icon: "error",
@@ -126,7 +151,7 @@ const Edit = () => {
                     break;
             }
         } else {
-            console.log(response);
+            console.log(accountResponse);
         }
     };
 
