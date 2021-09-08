@@ -31,6 +31,11 @@ const SuperNav = () => {
 
             <div className="navBtnGroup">
                 {isLogin && (
+                    <Link to={routes.DASHBOARD} className="btn-dashboard">
+                        Dashborad
+                    </Link>
+                )}
+                {isLogin && (
                     <button
                         className="btn-login"
                         onClick={(e) => handleLogout(e)}
