@@ -26,6 +26,7 @@ const AddCustomer = () => {
         setCustomer({ ...customer, cusName: cusName });
     };
     const onChangeCusSex = (e) => {
+        console.log(e);
         const cusSex = e.target.value;
         setCustomer({ ...customer, cusSex: cusSex });
     };
@@ -142,7 +143,6 @@ const AddCustomer = () => {
                             Title="男"
                             value="male"
                             name="sex"
-                            checked={cusSex === "male"}
                             onChange={(e) => onChangeCusSex(e)}
                         />
 
@@ -153,7 +153,6 @@ const AddCustomer = () => {
                             Title="女"
                             value="female"
                             name="sex"
-                            checked={cusSex === "female"}
                             onChange={(e) => onChangeCusSex(e)}
                         />
                     </div>
