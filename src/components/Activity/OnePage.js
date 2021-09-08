@@ -296,7 +296,11 @@ const OnePage = ({ edit, activityId }) => {
                     {...activityData}
                 />
 
-                {!editMode && <ACT_Ticket {...activityData} />}
+                {!editMode && (
+                    <div className="act-ticket-box">
+                        <ACT_Ticket {...activityData} />
+                    </div>
+                )}
 
                 <Save_Btn editMode={editMode} />
             </form>
@@ -400,7 +404,6 @@ const ACT_Info = ({
                             onChange={(e) => onEndTimeChange(e)}
                         />
                     </div>
-                    {/* <Edit_Btn editMode={editMode} /> */}
                 </div>
             </>
         );
@@ -418,13 +421,9 @@ const ACT_Info = ({
                     </div>
                     <div>
                         <img src={calendar_icon} alt="" />
-                        {startTime}
+                        {startTime} ～ {endTime}
                     </div>
-                    ～
-                    <div>
-                        <img src={calendar_icon} alt="" />
-                        {endTime}
-                    </div>
+
                     {/* <Edit_Btn editMode={editMode} /> */}
                 </div>
             </>
@@ -453,10 +452,7 @@ const ACT_Description = ({ editMode, description, onDescriptionChange }) => {
     if (editMode) {
         return (
             <div className="act-description">
-                <div className="title">
-                    活動簡介
-                    {/* <Edit_Btn editMode={editMode} /> */}
-                </div>
+                <div className="title">活動簡介</div>
                 <textarea
                     className="context"
                     id="act-desctiption"
@@ -472,10 +468,7 @@ const ACT_Description = ({ editMode, description, onDescriptionChange }) => {
     } else {
         return (
             <div className="act-description">
-                <div className="title">
-                    活動簡介
-                    {/* <Edit_Btn editMode={editMode} /> */}
-                </div>
+                <div className="title">活動簡介</div>
                 <div className="context">{description}</div>
             </div>
         );
@@ -496,10 +489,7 @@ const ACT_Show = ({
     if (editMode) {
         return (
             <ul className="act-show">
-                <div className="title">
-                    活動即時資訊
-                    {/* <Edit_Btn editMode={editMode} /> */}
-                </div>
+                <div className="title">活動即時資訊</div>
                 {shows.map((show, index) => {
                     return <ACT_Show_Detail key={show.id} {...show} />;
                 })}
@@ -509,7 +499,7 @@ const ACT_Show = ({
                             type="time"
                             value={showTime}
                             onChange={(e) => onShowTimeChange(e)}
-                        />{" "}
+                        />
                         <input
                             type="text"
                             placeholder="節目名稱"
@@ -537,10 +527,7 @@ const ACT_Show = ({
     } else {
         return (
             <ul className="act-show">
-                <div className="title">
-                    活動即時資訊
-                    {/* <Edit_Btn editMode={editMode} /> */}
-                </div>
+                <div className="title">活動即時資訊</div>
                 {shows.map((show, index) => {
                     return <ACT_Show_Detail key={show.id} {...show} />;
                 })}
@@ -580,7 +567,7 @@ const ACT_Ticket = ({ tickets }) => {
                     </p>
                 </div>
                 <div className="buy-info">
-                    <div className="ticket-type">學生票</div>
+                    <div className="ticket-type">{ticket_Name}</div>
                     <button
                         className="buy-btn"
                         onClick={(e) => {

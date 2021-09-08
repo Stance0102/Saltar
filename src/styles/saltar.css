@@ -2034,6 +2034,11 @@ nav.subNav li img {
   font-size: 1.3rem;
 }
 
+.one-page .one-page-content .act-ticket-box {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
 .one-page .one-page-content .act-ticket {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2050,8 +2055,7 @@ nav.subNav li img {
   border-radius: 14px;
   -webkit-box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);
           box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);
-  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-bottom: 25px;
   padding-left: 10px;
   overflow: hidden;
 }
