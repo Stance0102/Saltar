@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import {
     selectActivity,
     selectShowByActivity,
+    selectTicketByActivityId,
     createActivity,
     createShow,
 } from "../agent";
@@ -32,13 +33,15 @@ const OnePage = ({ edit, activityId }) => {
         location: "高雄科技大學第一校區",
         startTime: "2021-09-04",
         endTime: "2021-09-04",
-        currentTime: "2021-09-04 00:00:00",
+        currentStartTime: "2021-09-04 00:00:00",
+        currentEndTime: "2021-09-04 00:00:00",
         description:
             "=============================================================================================================",
         showTime: "",
         showName: "",
         showNote: "",
         shows: [],
+        tickets: [],
     });
 
     useEffect(() => {
@@ -48,7 +51,7 @@ const OnePage = ({ edit, activityId }) => {
         if (activityId !== undefined) {
             const setupData = async () => {
                 let activity = {};
-                let shows = [];
+                let { shows, tickets } = [];
                 const activityResponse = await selectActivity(activityId);
                 if (activityResponse.status === 200) {
                     switch (activityResponse.data.status) {
@@ -82,11 +85,24 @@ const OnePage = ({ edit, activityId }) => {
                 } else {
                     console.log(showsResponse);
                 }
+                const ticketsResponse = await selectTicketByActivityId(
+                    activityId
+                );
+                if (ticketsResponse.status === 200) {
+                    switch (ticketsResponse.data.status) {
+                        case 0:
+                            tickets = ticketsResponse.data.results;
+                            break;
+                    }
+                } else {
+                    console.log(ticketsResponse);
+                }
 
                 setActivityData({
                     ...activityData,
                     ...activity,
                     shows: shows,
+                    tickets: tickets,
                 });
             };
             setupData();
@@ -109,14 +125,14 @@ const OnePage = ({ edit, activityId }) => {
         setActivityData({
             ...activityData,
             startTime: e.target.value,
-            currentTime: e.target.value + " 00:00:00",
+            currentStartTime: e.target.value + " 00:00:00",
         });
     };
     const onEndTimeChange = (e) => {
         setActivityData({
             ...activityData,
             endTime: e.target.value,
-            currentTime: e.target.value + " 00:00:00",
+            currentEndTime: e.target.value + " 00:00:00",
         });
     };
     const onDescriptionChange = (e) => {
@@ -184,8 +200,8 @@ const OnePage = ({ edit, activityId }) => {
             activityData.title,
             activityData.description,
             activityData.location,
-            activityData.currentTime,
-            activityData.currentTime,
+            activityData.currentStartTime,
+            activityData.currentEndTime,
             groupId,
             true
         );
@@ -280,7 +296,7 @@ const OnePage = ({ edit, activityId }) => {
                     {...activityData}
                 />
 
-                {!editMode && <ACT_Ticket />}
+                {!editMode && <ACT_Ticket {...activityData} />}
 
                 <Save_Btn editMode={editMode} />
             </form>
@@ -403,6 +419,11 @@ const ACT_Info = ({
                     <div>
                         <img src={calendar_icon} alt="" />
                         {startTime}
+                    </div>
+                    ～
+                    <div>
+                        <img src={calendar_icon} alt="" />
+                        {endTime}
                     </div>
                     {/* <Edit_Btn editMode={editMode} /> */}
                 </div>
@@ -538,30 +559,40 @@ const ACT_Show_Detail = ({ showTime, show_Name, detail }) => {
     );
 };
 
-const ACT_Ticket = () => {
-    return (
-        <div className="act-ticket">
-            <img src={fiesta} alt="" />
-            <div className="context">
-                <p className="title">高科傳說對決生死賽</p>
-                <p>
-                    <img src={location_icon} alt="" />
-                    2021-07-20 - 2021-07-21
-                </p>
-                <p>
-                    <img src={Organizer_icon} alt="" />
-                    主辦單位：高雄科大資管系
-                </p>
-                <p className="price">
-                    NT$ <font className="number">200</font>
-                </p>
+const ACT_Ticket = ({ tickets }) => {
+    return tickets.map((ticket) => {
+        const { ticket_Name, startTime, endTime, price, Id: ticketId } = ticket;
+        return (
+            <div className="act-ticket">
+                <img src={fiesta} alt="" />
+                <div className="context">
+                    <p className="title">{ticket_Name}</p>
+                    <p>
+                        <img src={location_icon} alt="" />
+                        {startTime} - {endTime}
+                    </p>
+                    <p>
+                        <img src={Organizer_icon} alt="" />
+                        主辦單位：高雄科大資管系
+                    </p>
+                    <p className="price">
+                        NT$ <font className="number">{price}</font>
+                    </p>
+                </div>
+                <div className="buy-info">
+                    <div className="ticket-type">學生票</div>
+                    <button
+                        className="buy-btn"
+                        onClick={(e) => {
+                            e.preventDefault();
+                        }}
+                    >
+                        購票
+                    </button>
+                </div>
             </div>
-            <div className="buy-info">
-                <div className="ticket-type">學生票</div>
-                <button className="buy-btn">購票</button>
-            </div>
-        </div>
-    );
+        );
+    });
 };
 
 const Save_Btn = ({ editMode }) => {
