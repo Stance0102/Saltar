@@ -108,7 +108,7 @@ const OnePage = ({ edit, activityId }) => {
             };
             setupData();
         }
-    }, []);
+    }, [location]);
 
     const onTitleChange = (e) => {
         setActivityData({
@@ -162,7 +162,7 @@ const OnePage = ({ edit, activityId }) => {
     };
 
     const handleCreateShow = () => {
-        if (activityData.showTime == "" || activityData.showName == "") {
+        if (activityData.showTime == "" || activityData.showName == ""||activityData.showNote == "") {
             return;
         }
         setActivityData({
@@ -208,9 +208,9 @@ const OnePage = ({ edit, activityId }) => {
                     activityData.shows.forEach(async (show) => {
                         const showResponse = await createShow(
                             response.data.results.Id,
-                            show.showName,
-                            show.note,
-                            show.time
+                            show.show_Name,
+                            show.detail,
+                            `${activityData.startTime} ${show.showTime}`
                         );
                         if (showResponse.status === 200) {
                             switch (showResponse.data.status) {
@@ -515,7 +515,7 @@ const ACT_Show = ({
                         </font>
                         <button
                             className="add-btn"
-                            onClick={() => handleCreateShow()}
+                            onClick={(e) => handleCreateShow(e)}
                         >
                             +
                         </button>
