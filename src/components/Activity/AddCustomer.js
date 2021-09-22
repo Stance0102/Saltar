@@ -14,6 +14,7 @@ const AddCustomer = () => {
         cusSex,
         cusMail,
         cusTel,
+        cusNID,
         cusTicketsNum,
         cusTicketsPrice,
         cusType,
@@ -33,6 +34,10 @@ const AddCustomer = () => {
     const onChangeCusMail = (e) => {
         const cusMail = e.target.value;
         setCustomer({ ...customer, cusMail: cusMail });
+    };
+    const onChangeCusNID = (e) => {
+        const cusNID = e.target.value;
+        setCustomer({ ...customer, cusNID: cusNID });
     };
     const onChangeCusTel = (e) => {
         const cusTel = e.target.value;
@@ -64,6 +69,7 @@ const AddCustomer = () => {
             cusName === "" ||
             cusSex === "" ||
             cusMail === "" ||
+            cusNID === "" ||
             cusTel === "" ||
             cusTicketsNum === "" ||
             cusTicketsPrice === "" ||
@@ -83,6 +89,7 @@ const AddCustomer = () => {
             cusName,
             cusTel,
             cusMail,
+            cusNID,
             cusType,
             cusTag,
             cusNote,
@@ -164,12 +171,21 @@ const AddCustomer = () => {
                         Title="顧客信箱"
                         onChange={(e) => onChangeCusMail(e)}
                     />
+
+                    <FormInput
+                        Id="email"
+                        Type="text"
+                        ClassName="input-label"
+                        Title="顧客身分證字號"
+                        onChange={(e) => onChangeCusNID(e)}
+                    />
+
                     <FormInput
                         Id="telNumber"
                         Type="tel"
                         ClassName="input-label"
                         onChange={(e) => onChangeCusTel(e)}
-                        Title="手機號碼"
+                        Title="顧客手機號碼"
                     />
 
                     <FormInput
