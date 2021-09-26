@@ -147,6 +147,8 @@ const createGroupMember = async (
     userId,
     //群組ID
     roupId,
+    //身分證字號
+    NID,
     //管理員 True False
     isAdmin
     //是否還存在?
@@ -157,6 +159,7 @@ const createGroupMember = async (
         {
             Account: userId,
             Group: roupId,
+            NID: NID,
             isAdmin: isAdmin,
             is_active: true,
         },
@@ -283,12 +286,10 @@ const updateActivity = async (
     );
 };
 
-const createActivityPhoto = async () => {
-    return axios.post(
-        `/api/Photo/uploadActPhoto`,
-        {},
-        { params: { t: new Date().getTime() } }
-    );
+const createActivityPhoto = async (formData) => {
+    return axios.post(`/api/photo/uploadActPhoto`, formData, {
+        params: { t: new Date().getTime() },
+    });
 };
 
 const selectActivityPhoto = async (actId) => {
@@ -306,7 +307,7 @@ const updateActivityPhoto = async (actId) => {
 
 const getAllInOne = async (actId) => {
     return axios.post(
-        `/api/Activity/getAllinOne}`,
+        `/api/Activity/getAllinOne`,
         {
             act_Id: actId,
         },
@@ -325,6 +326,8 @@ const createShow = async (
     show_Name,
     //節目細節
     detail,
+    //備註
+    note,
     //節目開始時間
     showTime
 ) => {
@@ -335,6 +338,7 @@ const createShow = async (
             show_Name: show_Name,
             detail: detail,
             showTime: showTime,
+            note: note,
             is_active: true,
         },
         { params: { t: new Date().getTime() } }
@@ -582,6 +586,7 @@ const createCustomer = async (
     actualname,
     phone,
     mail,
+    NID,
     customer_type,
     customer_tag,
     customer_note,
@@ -592,10 +597,11 @@ const createCustomer = async (
     return axios.post(
         `/api/customer/create`,
         {
+            Group: groupID,
             actualname: actualname,
             phone: phone,
             mail: mail,
-            Group: groupID,
+            NID: NID,
             customer_type: customer_type,
             customer_tag: customer_tag,
             customer_note: customer_note,

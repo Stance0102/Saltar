@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
-    selectActivity,
-    selectShowByActivity,
-    selectTicketByActivityId,
     createActivity,
     createShow,
+    createActivityPhoto,
+    getAllInOne,
 } from "../agent";
 import Swal from "sweetalert2";
 // Img
@@ -24,8 +23,8 @@ const OnePage = ({ edit, activityId }) => {
     const { groupId, name } = useSelector((state) => state.Account);
     const location = useLocation();
     const history = useHistory();
+    const fileInput = useRef(null);
     const [img, setImg] = useState("");
-    const [imgState, setImgState] = useState(false);
     const [editMode, setEditMode] = useState(edit);
     const [saveMode, setSaveMode] = useState(false);
     const [activityData, setActivityData] = useState({
@@ -42,6 +41,8 @@ const OnePage = ({ edit, activityId }) => {
         org_Name: name,
         shows: [],
         tickets: [],
+        imageFiles: [],
+        imagePreview: [],
     });
 
     useEffect(() => {
@@ -51,60 +52,63 @@ const OnePage = ({ edit, activityId }) => {
         if (activityId !== undefined) {
             const setupData = async () => {
                 let activity = {};
-                let { shows, tickets } = [];
-                const activityResponse = await selectActivity(activityId);
-                if (activityResponse.status === 200) {
-                    switch (activityResponse.data.status) {
+                let shows = [];
+                let tickets = [];
+                let imagePreview = [];
+                const allInOneResponse = await getAllInOne(activityId);
+                if (allInOneResponse.status === 200) {
+                    switch (allInOneResponse.data.status) {
                         case 0:
-                            if (activityResponse.data.results.length !== 0) {
+                            if (allInOneResponse.data.results.length !== 0) {
                                 const {
                                     act_Name: title,
                                     description,
                                     startTime,
+                                    endTime,
                                     location,
-                                    org_Name,
-                                } = activityResponse.data.results[0];
+                                    organizer,
+                                } = allInOneResponse.data.results.act;
                                 activity = {
                                     title: title,
                                     description: description,
                                     startTime: startTime.split("T")[0],
+                                    endTime: endTime.split("T")[0],
                                     location: location,
-                                    org_Name: org_Name,
+                                    org_Name: organizer,
                                 };
+                                shows = allInOneResponse.data.results.show;
+                                tickets = allInOneResponse.data.results.tickets;
+                                allInOneResponse.data.results.photos.forEach(
+                                    (photo) => {
+                                        imagePreview.push(photo.url);
+                                    }
+                                );
                             }
                             break;
-                    }
-                } else {
-                    console.log(activityResponse);
-                }
-                const showsResponse = await selectShowByActivity(activityId);
-                if (showsResponse.status === 200) {
-                    switch (showsResponse.data.status) {
-                        case 0:
-                            shows = showsResponse.data.results;
+                        default:
+                            Swal.fire({
+                                title: "查無此活動",
+                                confirmButtonText: "離開",
+                                confirmButtonColor: "#ffb559",
+                                icon: "info",
+                            }).then(() => {
+                                history.push({
+                                    pathname: "/",
+                                });
+                            });
                             break;
                     }
                 } else {
-                    console.log(showsResponse);
-                }
-                const ticketsResponse = await selectTicketByActivityId(
-                    activityId
-                );
-                if (ticketsResponse.status === 200) {
-                    switch (ticketsResponse.data.status) {
-                        case 0:
-                            tickets = ticketsResponse.data.results;
-                            break;
-                    }
-                } else {
-                    console.log(ticketsResponse);
+                    console.log(allInOneResponse);
                 }
                 setActivityData({
                     ...activityData,
                     ...activity,
                     shows: shows,
                     tickets: tickets,
+                    imagePreview: imagePreview,
                 });
+                console.log(allInOneResponse);
             };
             setupData();
         }
@@ -161,12 +165,26 @@ const OnePage = ({ edit, activityId }) => {
         });
     };
 
-    const handleCreateShow = () => {
-        if (
-            activityData.showTime == "" ||
-            activityData.showName == "" ||
-            activityData.showNote == ""
-        ) {
+    const onImageAddClick = (e) => {
+        const tempImageFiles = [];
+        const tempImagePreview = [];
+        if (!e.target.files || e.target.files.length === 0) {
+            return;
+        }
+        Array.from(e.target.files).forEach((file) => {
+            tempImageFiles.push(file);
+            tempImagePreview.push(URL.createObjectURL(file));
+        });
+        setActivityData({
+            ...activityData,
+            imageFiles: [...activityData.imageFiles, tempImageFiles],
+            imagePreview: [...activityData.imagePreview, tempImagePreview],
+        });
+    };
+
+    const handleCreateShow = (e) => {
+        e.preventDefault();
+        if (activityData.showTime == "" || activityData.showName == "") {
             return;
         }
         setActivityData({
@@ -193,8 +211,16 @@ const OnePage = ({ edit, activityId }) => {
             activityData.startTime == "" ||
             activityData.endTime == "" ||
             activityData.description == "" ||
-            activityData.shows.length == 0
+            activityData.shows.length == 0 ||
+            activityData.imageFiles.length == 0
         ) {
+            Swal.fire({
+                title: "創建",
+                text: "請填寫完整訊息及圖片",
+                confirmButtonText: "知道了",
+                confirmButtonColor: "#ffb559",
+                icon: "info",
+            });
             return;
         }
         const response = await createActivity(
@@ -209,11 +235,13 @@ const OnePage = ({ edit, activityId }) => {
         if (response.status == 200) {
             switch (response.data.status) {
                 case 0:
+                    console.log("ACT_ID:" + response.data.results.Id);
                     activityData.shows.forEach(async (show) => {
                         const showResponse = await createShow(
                             response.data.results.Id,
                             show.show_Name,
                             show.detail,
+                            "備註",
                             `${activityData.startTime} ${show.showTime}`
                         );
                         if (showResponse.status === 200) {
@@ -226,6 +254,25 @@ const OnePage = ({ edit, activityId }) => {
                             }
                         } else {
                             console.log(showResponse);
+                        }
+                    });
+                    activityData.imageFiles.forEach(async (file) => {
+                        const formData = new FormData();
+                        formData.append("act_Photo", file[0]);
+                        formData.append("act_Id", response.data.results.Id);
+                        const imageResponse = await createActivityPhoto(
+                            formData
+                        );
+                        if (imageResponse.status === 200) {
+                            switch (imageResponse.data.status) {
+                                case 0:
+                                    break;
+                                default:
+                                    console.log(imageResponse);
+                                    break;
+                            }
+                        } else {
+                            console.log(imageResponse);
                         }
                     });
                     Swal.fire({
@@ -257,10 +304,6 @@ const OnePage = ({ edit, activityId }) => {
         }
     };
 
-    if (img != "") {
-        setImgState(true);
-    }
-
     return (
         <div className="one-page">
             <form className="one-page-content" onSubmit={submitHandler}>
@@ -279,9 +322,16 @@ const OnePage = ({ edit, activityId }) => {
                     {...activityData}
                 />
 
-                {imgState && <ACT_Img img="" />}
+                {activityData.imagePreview.map((image) => {
+                    return <ACT_Img img={image} />;
+                })}
 
-                {editMode && <ACT_Img_Add />}
+                {editMode && (
+                    <ACT_Img_Add
+                        onImageAddClick={onImageAddClick}
+                        fileInput={fileInput}
+                    />
+                )}
 
                 <ACT_Description
                     editMode={editMode}
@@ -442,9 +492,25 @@ const ACT_Img = ({ img, editMode }) => {
     }
 };
 
-const ACT_Img_Add = () => {
+const ACT_Img_Add = ({ onImageAddClick, fileInput }) => {
     return (
-        <div className="act-img-add">
+        <div
+            className="act-img-add"
+            onClick={() => {
+                fileInput.current.click();
+            }}
+        >
+            <input
+                type="file"
+                ref={fileInput}
+                accept="image/png, image/jpeg"
+                multiple
+                onChange={(e) => onImageAddClick(e)}
+                onClick={(e) => {
+                    e.target.value = null;
+                }}
+                hidden
+            />
             <img src={calendar_icon} alt="" />
             <p>新增一張圖片</p>
         </div>

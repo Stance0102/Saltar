@@ -29,7 +29,7 @@ const Update = () => {
     };
     const onPriceChange = (e) => {
         const ticketPrice = e.target.value;
-        setTicket({ ...ticket, ticketPrice: ticketPrice });
+        setTicket({ ...ticket, price: ticketPrice });
     };
     const onStartTimeChange = (e) => {
         const startTime = e.target.value;
@@ -137,10 +137,9 @@ const Update = () => {
                         </label>
                         <input
                             type="number"
-                            mix="0"
+                            min="0"
                             step="any"
                             name=""
-                            id="email"
                             value={ticketPrice}
                             onChange={(e) => onPriceChange(e)}
                         />
