@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { updateTicket } from "../agent";
 import Swal from "sweetalert2";
+import { FormInput } from "../Home/_Components";
 
 const Update = () => {
     const location = useLocation();
@@ -105,67 +106,54 @@ const Update = () => {
             </div>
             <div className="container">
                 <form className="ticket-form" onSubmit={submitHandler}>
-                    <div className="input-group">
-                        <label className="input-label" for="ticketName">
-                            票種名稱
-                        </label>
-                        <input
-                            type="text"
-                            name=""
-                            id="ticketName"
-                            value={ticketName}
-                            onChange={(e) => onNameChange(e)}
-                        />
-                    </div>
+                    <FormInput
+                        Id="ticketName"
+                        ClassName="input-label"
+                        Type="text"
+                        Handler={onNameChange}
+                        Title="票種名稱"
+                        value={ticketName}
+                    />
 
-                    <div className="input-group">
-                        <label className="input-label" for="peopleMaximum">
-                            人數上限
-                        </label>
-                        <input
-                            type="number"
-                            name=""
-                            id="peopleMaximum"
-                            value={maximum}
-                            onChange={(e) => onMaximumChange(e)}
-                        />
-                    </div>
+                    <FormInput
+                        Id="peopleMaximum"
+                        ClassName="input-label"
+                        Type="number"
+                        Handler={onMaximumChange}
+                        Title="人數上限"
+                        value={maximum}
+                    />
 
-                    <div className="input-group">
-                        <label className="input-label" for="price">
-                            票卷金額
-                        </label>
-                        <input
-                            type="number"
-                            min="0"
-                            step="any"
-                            name=""
-                            value={ticketPrice}
-                            onChange={(e) => onPriceChange(e)}
-                        />
-                    </div>
-                    <div className="input-group">
-                        <label className="input-label" for="price">
-                            開始時間
-                        </label>
-                        <input
-                            type="date"
-                            max={actEndTime}
-                            value={startTime}
-                            onChange={(e) => onStartTimeChange(e)}
-                        />
-                    </div>
-                    <div className="input-group">
-                        <label className="input-label" for="price">
-                            結束時間
-                        </label>
-                        <input
-                            type="date"
-                            max={actEndTime}
-                            value={endTime}
-                            onChange={(e) => onEndTimeChange(e)}
-                        />
-                    </div>
+                    <FormInput
+                        Id="price"
+                        ClassName="input-label"
+                        Type="number"
+                        mix="0"
+                        step="any"
+                        Handler={onPriceChange}
+                        Title="票卷金額"
+                        value={ticketPrice}
+                    />
+
+                    <FormInput
+                        Id="startDate"
+                        ClassName="input-label"
+                        Type="date"
+                        Handler={onStartTimeChange}
+                        Title="開始時間"
+                        max={actEndTime}
+                        value={startTime}
+                    />
+
+                    <FormInput
+                        Id="endDate"
+                        ClassName="input-label"
+                        Type="date"
+                        Handler={onEndTimeChange}
+                        Title="結束時間"
+                        max={actEndTime}
+                        value={endTime}
+                    />
                     <div className="form-btn-group">
                         <button className="form-save" type="submit">
                             修改
