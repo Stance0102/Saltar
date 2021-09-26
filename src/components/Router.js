@@ -8,6 +8,7 @@ export const TICKET_MEMBERLIST = "ticketManagementMemberList";
 export const TICKET_INFOMATION = "/ticketInfomation";
 export const ONE_PAGE = "onePage";
 export const ADDCUSTOMER = "addCustomer";
+export const ANALYZE = "analyze";
 // AUTH Routes
 export const LOGIN = "/";
 export const SIGNUP = "/signup";

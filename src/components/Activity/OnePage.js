@@ -162,7 +162,11 @@ const OnePage = ({ edit, activityId }) => {
     };
 
     const handleCreateShow = () => {
-        if (activityData.showTime == "" || activityData.showName == ""||activityData.showNote == "") {
+        if (
+            activityData.showTime == "" ||
+            activityData.showName == "" ||
+            activityData.showNote == ""
+        ) {
             return;
         }
         setActivityData({

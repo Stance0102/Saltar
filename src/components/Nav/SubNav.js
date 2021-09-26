@@ -17,22 +17,17 @@ const SubNav = ({ url }) => {
                     <img src={controlerIcon_02} alt="" />
                     活動主控台
                 </li>
-                <li>
-                    <img src={analysisIcon} alt="" />
-                    客戶分析
-                </li>
+                <Link to={`${url}/${routes.ANALYZE}`}>
+                    <li>
+                        <img src={analysisIcon} alt="" />
+                        客戶分析
+                    </li>
+                </Link>
 
                 <Link to={`${url}/${routes.TICKET_MANAGEMENT}`}>
                     <li>
                         <img src={vector_gray_Icon} alt="" />
                         票卷管理
-                    </li>
-                </Link>
-
-                <Link to={`${url}/${routes.ADDCUSTOMER}`}>
-                    <li>
-                        <img src={actControl} alt="" />
-                        活動控制
                     </li>
                 </Link>
 
