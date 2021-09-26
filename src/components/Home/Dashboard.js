@@ -1,6 +1,5 @@
 import React, { lazy } from "react";
 import { Switch, Route, useRouteMatch, useParams } from "react-router-dom";
-import OnePage from "../Activity/OnePage";
 import SubNav from "../Nav/SubNav";
 import * as routes from "../Router";
 
@@ -10,6 +9,8 @@ const Update = lazy(() => import("../Ticket/Update"));
 const Management = lazy(() => import("../Ticket/Management"));
 const MemberList = lazy(() => import("../Ticket/MemberList"));
 const AddCustomer = lazy(() => import("../Activity/AddCustomer"));
+const OnePage = lazy(() => import("../Activity/OnePage"));
+const Analyze = lazy(() => import("../Activity/Analyze"));
 const ErrorPage = lazy(() => import("../Home/ErrorPage"));
 
 const Dashboard = () => {
@@ -52,6 +53,9 @@ function BackendFeatures() {
 
         case routes.ADDCUSTOMER:
             return <AddCustomer />;
+
+        case routes.ANALYZE:
+            return <Analyze />;
 
         default:
             return <ErrorPage />;
