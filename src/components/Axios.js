@@ -1,6 +1,6 @@
 import _axios from "axios";
 
-const url = "http://163.18.42.222:8888";
+const url = "https://saltar.taipei/api/";
 
 const axios = () => {
     const instance = _axios.create({

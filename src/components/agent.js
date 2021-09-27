@@ -5,7 +5,7 @@ import axios from "./Axios";
 
 const login = (username, password) => {
     return axios.post(
-        `/api/Account/login`,
+        `/Account/login`,
         {
             username: username,
             password: password,
@@ -16,7 +16,7 @@ const login = (username, password) => {
 
 const signup = async (username, password, email, phone, school) => {
     return axios.post(
-        `/api/Account/create`,
+        `/Account/create`,
         {
             username: email,
             actualname: username,
@@ -32,7 +32,7 @@ const signup = async (username, password, email, phone, school) => {
 };
 
 const selectAccount = async (userId) => {
-    return axios.get(`/api/Account/get/${userId}`, {
+    return axios.get(`/Account/get/${userId}`, {
         params: { t: new Date().getTime() },
     });
 };
@@ -50,7 +50,7 @@ const updateAccount = async (
     // is_admin
 ) => {
     return axios.put(
-        `/api/Account/update/${userId}`,
+        `/Account/update/${userId}`,
         {
             username: email,
             actualname: username,
@@ -68,7 +68,7 @@ const updateAccount = async (
 //發驗證信
 const sendValidMail = async (account_Id) => {
     return axios.post(
-        `/api/Mail/sentAccountMail`,
+        `/Mail/sentAccountMail`,
         {
             account_Id: account_Id,
         },
@@ -79,7 +79,7 @@ const sendValidMail = async (account_Id) => {
 //確認認證訊息
 const verifyValidMail = async (token) => {
     return axios.post(
-        `/api/Mail/VaildMailToken`,
+        `/Mail/VaildMailToken`,
         {
             token: token,
         },
@@ -101,7 +101,7 @@ const createGroup = async (
     // is_active
 ) => {
     return axios.post(
-        `/api/Groups/create`,
+        `/Groups/create`,
         {
             groupName: groupName,
             phone_number: phone_number,
@@ -113,7 +113,7 @@ const createGroup = async (
 };
 
 const selectGroup = async (groupId) => {
-    return axios.get(`/api/Groups/get/${groupId}`, {
+    return axios.get(`/Groups/get/${groupId}`, {
         params: { t: new Date().getTime() },
     });
 };
@@ -131,7 +131,7 @@ const updateGroup = async (
     // is_active
 ) => {
     return axios.put(
-        `/api/Groups/update/${groupId}`,
+        `/Groups/update/${groupId}`,
         {
             groupName: groupName,
             phone_number: phone_number,
@@ -155,7 +155,7 @@ const createGroupMember = async (
     // is_active
 ) => {
     return axios.post(
-        `/api/Groups/member/create`,
+        `/Groups/member/create`,
         {
             Account: userId,
             Group: roupId,
@@ -168,13 +168,13 @@ const createGroupMember = async (
 };
 
 const selectGroupMemberByUserId = async (userId) => {
-    return axios.get(`/api/Groups/member/get/account/${userId}`, {
+    return axios.get(`/Groups/member/get/account/${userId}`, {
         params: { t: new Date().getTime() },
     });
 };
 
 const selectGroupMemberByGroupId = async (groupId) => {
-    return axios.get(`/api/Groups/member/get/group/${groupId}`, {
+    return axios.get(`/Groups/member/get/group/${groupId}`, {
         params: { t: new Date().getTime() },
     });
 };
@@ -189,7 +189,7 @@ const updateGroupMember = async (
     is_active
 ) => {
     return axios.put(
-        `/api/Groups/member/update/${userId}`,
+        `/Groups/member/update/${userId}`,
         {
             // Account: userId,
             // Group: groupId,
@@ -221,7 +221,7 @@ const createActivity = async (
     is_active
 ) => {
     return axios.post(
-        `/api/Activity/create`,
+        `/Activity/create`,
         {
             act_Name: act_Name,
             description: description,
@@ -239,7 +239,7 @@ const selectActivity = async (
     //活動Id
     actId
 ) => {
-    return axios.get(`/api/Activity/get/${actId}`, {
+    return axios.get(`/Activity/get/${actId}`, {
         params: { t: new Date().getTime() },
     });
 };
@@ -248,7 +248,7 @@ const selectActivityByGroupId = async (
     //群組Id
     groupId
 ) => {
-    return axios.get(`/api/Activity/get/group/${groupId}`, {
+    return axios.get(`/Activity/get/group/${groupId}`, {
         params: { t: new Date().getTime() },
     });
 };
@@ -272,7 +272,7 @@ const updateActivity = async (
     is_active
 ) => {
     return axios.put(
-        `/api/Activity/update/${actId}`,
+        `/Activity/update/${actId}`,
         {
             act_Name: act_Name,
             description: description,
@@ -287,19 +287,19 @@ const updateActivity = async (
 };
 
 const createActivityPhoto = async (formData) => {
-    return axios.post(`/api/photo/uploadActPhoto`, formData, {
+    return axios.post(`/photo/uploadActPhoto`, formData, {
         params: { t: new Date().getTime() },
     });
 };
 
 const selectActivityPhoto = async (actId) => {
-    return axios.get(`/api/Photo/get/act/${actId}`, {
+    return axios.get(`/Photo/get/act/${actId}`, {
         params: { t: new Date().getTime() },
     });
 };
 const updateActivityPhoto = async (actId) => {
     return axios.put(
-        `/api/Photo/update/${actId}`,
+        `/Photo/update/${actId}`,
         {},
         { params: { t: new Date().getTime() } }
     );
@@ -307,7 +307,7 @@ const updateActivityPhoto = async (actId) => {
 
 const getAllInOne = async (actId) => {
     return axios.post(
-        `/api/Activity/getAllinOne`,
+        `/Activity/getAllinOne`,
         {
             act_Id: actId,
         },
@@ -332,7 +332,7 @@ const createShow = async (
     showTime
 ) => {
     return axios.post(
-        `/api/Activity/show/create`,
+        `/Activity/show/create`,
         {
             act: actId,
             show_Name: show_Name,
@@ -349,7 +349,7 @@ const selectShowByActivity = async (
     //活動ID
     actId
 ) => {
-    return axios.get(`/api/Activity/show/getByAct/${actId}`, {
+    return axios.get(`/Activity/show/getByAct/${actId}`, {
         params: { t: new Date().getTime() },
     });
 };
@@ -369,7 +369,7 @@ const updateShow = async (
     is_active
 ) => {
     return axios.put(
-        `/api/Activity/show/update/${showId}`,
+        `/Activity/show/update/${showId}`,
         {
             show_Name: show_Name,
             detail: detail,
@@ -402,7 +402,7 @@ const createTicket = async (
     is_active
 ) => {
     return axios.post(
-        `/api/tickets/create`,
+        `/tickets/create`,
         {
             ticket_Name: ticket_Name,
             peopleMaxium: peopleMaximum,
@@ -421,7 +421,7 @@ const selectTicketByActivityId = async (
     //活動ID
     actId
 ) => {
-    return axios.get(`/api/tickets/get/actId/${actId}`, {
+    return axios.get(`/tickets/get/actId/${actId}`, {
         params: { t: new Date().getTime() },
     });
 };
@@ -430,7 +430,7 @@ const selectTicket = async (
     //票券ID
     ticketId
 ) => {
-    return axios.get(`/api/tickets/get/ticketId/${ticketId}`, {
+    return axios.get(`/tickets/get/ticketId/${ticketId}`, {
         params: { t: new Date().getTime() },
     });
 };
@@ -456,7 +456,7 @@ const updateTicket = async (
     is_active
 ) => {
     return axios.put(
-        `/api/tickets/update/${ticketId}`,
+        `/tickets/update/${ticketId}`,
         {
             ticket_Name: ticket_Name,
             peopleMaxium: peopleMaximum,
@@ -486,7 +486,7 @@ const createTicketMember = async (
     // is_active
 ) => {
     return axios.post(
-        `/api/tickets/member/create`,
+        `/tickets/member/create`,
         {
             actualname: actualname,
             phone: phone,
@@ -516,7 +516,7 @@ const updateTicketMember = async (
     is_active
 ) => {
     return axios.put(
-        `/api/tickets/member/update/${ticketMemberId}`,
+        `/tickets/member/update/${ticketMemberId}`,
         {
             actualname: actualname,
             phone: phone,
@@ -531,7 +531,7 @@ const updateTicketMember = async (
 
 const validTicket = async (token) => {
     return axios.post(
-        `/api/tickets/vaildticket`,
+        `/tickets/vaildticket`,
         {
             token: token,
         },
@@ -546,7 +546,7 @@ const createCustomerTicket = async (
     mail
 ) => {
     return axios.post(
-        `/api/tickets/member/get/customer`,
+        `/tickets/member/get/customer`,
         {
             actualname: actualname,
             mail: mail,
@@ -559,7 +559,7 @@ const selectTicketMember = async (
     //票券ID
     ticketId
 ) => {
-    return axios.get(`/api/tickets/member/get/ticket/${ticketId}`, {
+    return axios.get(`/tickets/member/get/ticket/${ticketId}`, {
         params: { t: new Date().getTime() },
     });
 };
@@ -569,7 +569,7 @@ const createMailFormate = async (
     joinedListId
 ) => {
     return axios.post(
-        `/api/tickets/member/get/customer`,
+        `/tickets/member/get/customer`,
         {
             joinedListId: joinedListId,
         },
@@ -595,7 +595,7 @@ const createCustomer = async (
     is_active
 ) => {
     return axios.post(
-        `/api/customer/create`,
+        `/customer/create`,
         {
             Group: groupID,
             actualname: actualname,
@@ -614,13 +614,13 @@ const createCustomer = async (
 };
 
 const selectCustomerByGroupId = async (groupId) => {
-    return axios.get(`/api/customer/get/group/${groupId}`, {
+    return axios.get(`/customer/get/group/${groupId}`, {
         params: { t: new Date().getTime() },
     });
 };
 
 const selectCustomerByName = async (actualname) => {
-    return axios.get(`/api/customer/get/name/${actualname}`, {
+    return axios.get(`/customer/get/name/${actualname}`, {
         params: { t: new Date().getTime() },
     });
 };
@@ -639,7 +639,7 @@ const updateCustomer = async (
     is_active
 ) => {
     return axios.put(
-        `/api/customer/update/${CustomerId}`,
+        `/customer/update/${CustomerId}`,
         {
             actualname: actualname,
             phone: phone,
@@ -658,7 +658,7 @@ const updateCustomer = async (
 
 const createCustomerFromExcel = async (excelData, groupId) => {
     return axios.post(
-        `/api/customer/createfromexcel`,
+        `/customer/createfromexcel`,
         {
             custom_file: excelData,
             groupId: groupId,
@@ -669,7 +669,7 @@ const createCustomerFromExcel = async (excelData, groupId) => {
 
 const uploadExcelToRFM = async (excelData) => {
     return axios.post(
-        `/api/customer/uploadAnalyze`,
+        `/customer/uploadAnalyze`,
         {
             custom_file: excelData,
         },
@@ -679,7 +679,7 @@ const uploadExcelToRFM = async (excelData) => {
 
 const downloadExcelToRFM = async (excelData) => {
     return axios.post(
-        `/api/customer/downloadAnalyze`,
+        `/customer/downloadAnalyze`,
         {
             custom_file: excelData,
         },
@@ -693,7 +693,7 @@ const downloadExcelToRFM = async (excelData) => {
 
 const createAnalyze = async (act, customerId, stayTime, is_active) => {
     return axios.post(
-        `/api/pageAnalyze/page/create`,
+        `/pageAnalyze/page/create`,
         {
             act: act,
             cus_Id: customerId,
@@ -705,20 +705,20 @@ const createAnalyze = async (act, customerId, stayTime, is_active) => {
 };
 
 const selectAnalyzeByActId = async (actId) => {
-    return axios.get(`/api/pageAnalyze/act/get/${actId}`, {
+    return axios.get(`/pageAnalyze/act/get/${actId}`, {
         params: { t: new Date().getTime() },
     });
 };
 
 const selectAnalyzeByPageId = async (pageId) => {
-    return axios.get(`/api/pageAnalyze/page/get/${pageId}`, {
+    return axios.get(`/pageAnalyze/page/get/${pageId}`, {
         params: { t: new Date().getTime() },
     });
 };
 
 const updateAnalyze = async (from, actId) => {
     return axios.post(
-        `/api/pageAnalyze/act/update`,
+        `/pageAnalyze/act/update`,
         {
             from: from,
             act_Id: actId,
@@ -733,7 +733,7 @@ const updateAnalyze = async (from, actId) => {
 
 const getToken = async (username, password) => {
     return axios.post(
-        `/api/token-auth`,
+        `/token-auth`,
         {
             username: username,
             password: password,
@@ -744,7 +744,7 @@ const getToken = async (username, password) => {
 
 const refreshToken = async (token) => {
     return axios.post(
-        `/api/token-refresh`,
+        `/token-refresh`,
         {
             token: token,
         },
@@ -754,7 +754,7 @@ const refreshToken = async (token) => {
 
 const verifyToken = async (token) => {
     return axios.post(
-        `/api/token-verify`,
+        `/token-verify`,
         {
             token: token,
         },
@@ -767,7 +767,7 @@ const verifyToken = async (token) => {
 *******************************************************/
 
 const getSchool = async () => {
-    return axios.get(`/api/Account/getSchool`, {
+    return axios.get(`/Account/getSchool`, {
         params: { t: new Date().getTime() },
     });
 };
