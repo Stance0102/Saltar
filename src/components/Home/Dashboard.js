@@ -11,6 +11,7 @@ const MemberList = lazy(() => import("../Ticket/MemberList"));
 const AddCustomer = lazy(() => import("../Activity/AddCustomer"));
 const OnePage = lazy(() => import("../Activity/OnePage"));
 const Analyze = lazy(() => import("../Activity/Analyze"));
+const ManagementActivity = lazy(() => import("../Activity/ManagementActivity"));
 const ErrorPage = lazy(() => import("../Home/ErrorPage"));
 
 const Dashboard = () => {
@@ -56,6 +57,9 @@ function BackendFeatures() {
 
         case routes.ANALYZE:
             return <Analyze />;
+
+        case routes.ACTIVITY_MANAGEMENT:
+            return <ManagementActivity />;
 
         default:
             return <ErrorPage />;
