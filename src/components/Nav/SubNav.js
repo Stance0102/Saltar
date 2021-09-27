@@ -37,7 +37,7 @@ const SubNav = ({ url }) => {
                         系學會/社團資料編輯
                     </li>
                 </Link>
-                <Link to={`${url}/${routes.ONE_PAGE}`}>
+                <Link to={`${url}/${routes.ACTIVITY_MANAGEMENT}`}>
                     <li>
                         <img src={web_Icon} alt="" />
                         一頁式活動網站設定
