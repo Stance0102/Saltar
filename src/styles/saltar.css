@@ -164,6 +164,12 @@ nav.superNav .navBtnGroup {
   margin-right: 20px;
 }
 
+@media (max-width: 768px) {
+  nav.superNav .navBtnGroup {
+    display: none;
+  }
+}
+
 nav.superNav .navBtnGroup .btn-login {
   width: 100px;
   height: 40px;
@@ -1763,6 +1769,12 @@ nav.subNav li img {
   width: 70%;
 }
 
+@media (max-width: 768px) {
+  .one-page .one-page-content {
+    width: 95%;
+  }
+}
+
 .one-page .one-page-content .act-name {
   font-family: "NotoSansCJKtc-Regular";
   font-size: 2.2rem;
@@ -1805,6 +1817,23 @@ nav.subNav li img {
   border-radius: 10px;
 }
 
+@media (max-width: 768px) {
+  .one-page .one-page-content .act-info {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+}
+
 .one-page .one-page-content .act-info div {
   font-family: "NotoSansCJKtc-Regular";
   color: #a5a5a5;
@@ -1812,6 +1841,13 @@ nav.subNav li img {
   margin-right: 10px;
   font-size: 1rem;
   width: 33%;
+}
+
+@media (max-width: 768px) {
+  .one-page .one-page-content .act-info div {
+    width: 100%;
+    font-size: 0.8rem;
+  }
 }
 
 .one-page .one-page-content .act-info div img {
@@ -1854,6 +1890,13 @@ nav.subNav li img {
   height: 100%;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .one-page .one-page-content .act-img {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
 }
 
 .one-page .one-page-content .act-img-add {
@@ -1902,6 +1945,12 @@ nav.subNav li img {
   background-color: #fff;
   padding: 25px;
   margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .one-page .one-page-content .act-description {
+    margin-top: 15px;
+  }
 }
 
 .one-page .one-page-content .act-description .title {
@@ -2030,6 +2079,12 @@ nav.subNav li img {
   margin-bottom: 30px;
 }
 
+@media (max-width: 768px) {
+  .one-page .one-page-content .act-ticket-box {
+    margin-top: 20px;
+  }
+}
+
 .one-page .one-page-content .act-ticket {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2051,9 +2106,44 @@ nav.subNav li img {
   overflow: hidden;
 }
 
-.one-page .one-page-content .act-ticket img {
+@media (max-width: 768px) {
+  .one-page .one-page-content .act-ticket {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    padding-left: 0;
+  }
+}
+
+.one-page .one-page-content .act-ticket .img-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   width: 15%;
   height: 60%;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .one-page .one-page-content .act-ticket .img-box {
+    width: 100%;
+    height: 120px;
+  }
+}
+
+.one-page .one-page-content .act-ticket .img-box img {
+  width: 100%;
 }
 
 .one-page .one-page-content .act-ticket .context {
@@ -2074,6 +2164,13 @@ nav.subNav li img {
   height: 90%;
   margin-left: 20px;
   padding-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .one-page .one-page-content .act-ticket .context {
+    width: 100%;
+    padding-top: 5px;
+  }
 }
 
 .one-page .one-page-content .act-ticket .context p {
@@ -2134,6 +2231,15 @@ nav.subNav li img {
   height: 90%;
 }
 
+@media (max-width: 768px) {
+  .one-page .one-page-content .act-ticket .buy-info {
+    width: 100%;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+
 .one-page .one-page-content .act-ticket .buy-info .ticket-type {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2152,6 +2258,12 @@ nav.subNav li img {
   background-color: rgba(255, 155, 30, 0.15);
   border-bottom-left-radius: 35px;
   padding-left: 10px;
+}
+
+@media (max-width: 768px) {
+  .one-page .one-page-content .act-ticket .buy-info .ticket-type {
+    display: none;
+  }
 }
 
 .one-page .one-page-content .act-ticket .buy-info .buy-btn {
@@ -2174,6 +2286,14 @@ nav.subNav li img {
   border: none;
   border-radius: 4px;
   background-color: #ffb559;
+}
+
+@media (max-width: 768px) {
+  .one-page .one-page-content .act-ticket .buy-info .buy-btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 0;
+  }
 }
 
 .one-page .one-page-content .save-btn {

@@ -597,7 +597,7 @@ const ACT_Show_Detail = ({ showTime, show_Name, detail }) => {
     return (
         <li>
             <div className="time">
-                {showTime.split("T")[1].split(":00")[0]} {show_Name}{" "}
+                {showTime.split(" ")[1]} {show_Name}{" "}
                 <font className="note">({detail})</font>
             </div>
         </li>
@@ -609,7 +609,9 @@ const ACT_Ticket = ({ tickets, org_Name }) => {
         const { ticket_Name, startTime, endTime, price, Id: ticketId } = ticket;
         return (
             <div className="act-ticket">
-                <img src={fiesta} alt="" />
+                <div className="img-box">
+                    <img src={fiesta} alt="" />
+                </div>
                 <div className="context">
                     <p className="title">{ticket_Name}</p>
                     <p>
