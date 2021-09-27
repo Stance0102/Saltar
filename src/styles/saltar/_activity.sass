@@ -15,6 +15,8 @@
         justify-content: flex-start
         align-items: center
         width: 70%
+        @media(max-width: 768px)
+            width: 95%
         .act-name
             font-family: "NotoSansCJKtc-Regular"
             font-size: 2.2rem
@@ -42,6 +44,12 @@
             box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25)
             background-color: #fff
             border-radius: 10px
+            @media (max-width: 768px)
+                flex-direction: column
+                height: fit-content
+                align-items: flex-start
+                padding-top: 5px
+                padding-bottom: 5px
             div
                 font-family: "NotoSansCJKtc-Regular"
                 color: $text-gray
@@ -49,6 +57,9 @@
                 margin-right: 10px
                 font-size: 1rem
                 width: 33%
+                @media (max-width: 768px)
+                    width: 100%
+                    font-size: 0.8rem
                 img
                     width: 1rem
                     height: 1rem
@@ -79,6 +90,10 @@
             height: 100%
             margin-top: 20px
             margin-bottom: 20px
+            @media (max-width: 768px)
+                margin-top: 5px
+                margin-bottom: 5px
+
         .act-img-add
             display: flex
             flex-direction: column
@@ -109,6 +124,8 @@
             background-color: #fff
             padding: 25px
             margin-bottom: 20px
+            @media (max-width: 768px)
+                margin-top: 15px
             .title
                 color: $text-orange
                 height: 20px
@@ -193,9 +210,12 @@
                 color: $text-white
                 border-radius: 30px
                 font-size: 1.3rem
+
         .act-ticket-box
             margin-top: 30px
             margin-bottom: 30px
+            @media (max-width: 768px)
+                margin-top: 20px
         .act-ticket
             display: flex
             justify-content: flex-start
@@ -208,9 +228,22 @@
             margin-bottom: 25px
             padding-left: 10px
             overflow: hidden
-            img
+            @media (max-width: 768px)
+                flex-direction: column
+                padding-left: 0
+            .img-box
+                display: flex
+                flex-direction: column
+                justify-content: center
+                align-items: center
                 width: 15%
                 height: 60%
+                overflow: hidden
+                @media (max-width: 768px)
+                    width: 100%
+                    height: 120px
+                img
+                    width: 100%
             .context
                 display: flex
                 flex-direction: column
@@ -220,6 +253,9 @@
                 height: 90%
                 margin-left: 20px
                 padding-top: 20px
+                @media (max-width: 768px)
+                    width: 100%
+                    padding-top: 5px
                 p
                     display: flex
                     justify-content: flex-start
@@ -251,6 +287,9 @@
                 align-items: flex-end
                 width: 15%
                 height: 90%
+                @media (max-width: 768px)
+                    width: 100%
+                    align-items: center
                 .ticket-type
                     display: flex
                     justify-content: center
@@ -263,6 +302,8 @@
                     background-color: rgba(255, 155, 30, 0.15)
                     border-bottom-left-radius: 35px
                     padding-left: 10px
+                    @media (max-width: 768px)
+                        display: none
                 .buy-btn
                     display: flex
                     justify-content: center
@@ -277,6 +318,10 @@
                     border: none
                     border-radius: 4px
                     background-color: $text-orange
+                    @media (max-width: 768px)
+                        margin-top: 10px
+                        margin-bottom: 10px
+                        margin-right: 0
 
         .save-btn
             display: flex
