@@ -13,10 +13,12 @@ const SubNav = ({ url }) => {
     return (
         <nav className="subNav">
             <ul>
-                <li>
-                    <img src={controlerIcon_02} alt="" />
-                    活動主控台
-                </li>
+                <Link to={routes.DASHBOARD}>
+                    <li>
+                        <img src={controlerIcon_02} alt="" />
+                        活動主控台
+                    </li>
+                </Link>
                 <Link to={`${url}/${routes.ANALYZE}`}>
                     <li>
                         <img src={analysisIcon} alt="" />
