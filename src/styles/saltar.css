@@ -340,7 +340,7 @@ nav.subNav li img {
 
 .account-box {
   width: 100%;
-  padding-top: 10px;
+  padding-top: 15px;
   padding-bottom: 20px;
   padding-left: 20px;
   padding-right: 20px;
@@ -378,11 +378,11 @@ nav.subNav li img {
   color: black;
   width: 100%;
   height: 10%;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .account-box .account-box-title hr {
-  margin-top: 5px;
+  margin-top: 8px;
   border: 1.2px solid #e0e0e0;
   width: 100%;
 }
@@ -742,7 +742,7 @@ nav.subNav li img {
 
 .ticket-box {
   width: 100%;
-  padding-top: 10px;
+  padding-top: 15px;
   padding-bottom: 20px;
   padding-left: 20px;
   padding-right: 20px;
@@ -780,11 +780,11 @@ nav.subNav li img {
   color: black;
   width: 100%;
   height: 10%;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .ticket-box-title hr {
-  margin-top: 5px;
+  margin-top: 8px;
   border: 1.2px solid #e0e0e0;
   width: 100%;
 }
@@ -1691,7 +1691,7 @@ nav.subNav li img {
 
 .activity-box {
   width: 100%;
-  padding-top: 10px;
+  padding-top: 15px;
   padding-bottom: 20px;
   padding-left: 20px;
   padding-right: 20px;
@@ -1729,11 +1729,11 @@ nav.subNav li img {
   color: black;
   width: 100%;
   height: 10%;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .activity-box-title hr {
-  margin-top: 5px;
+  margin-top: 8px;
   border: 1.2px solid #e0e0e0;
   width: 100%;
 }
