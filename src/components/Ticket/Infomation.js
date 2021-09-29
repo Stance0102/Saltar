@@ -10,7 +10,7 @@ import qrcode from "../../images/qrcode.png";
 import receip from "../../images/receip.svg";
 
 const Infomation = () => {
-    const [payStatus, setPayStatus] = useState(true);
+    const [payStatus, setPayStatus] = useState(false);
 
     if (payStatus) {
         return (
