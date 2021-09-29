@@ -68,6 +68,7 @@ const App = () => {
                                     path={routes.EMAILCHECK}
                                     component={EmailCheck}
                                 />
+
                                 <Route
                                     path={`${routes.ONEPAGE_PREVIEW}/:activityId`}
                                     render={(props) => (
