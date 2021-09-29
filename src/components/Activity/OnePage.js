@@ -28,10 +28,10 @@ const OnePage = ({ edit, activityId }) => {
     const [editMode, setEditMode] = useState(edit);
     const [saveMode, setSaveMode] = useState(false);
     const [activityData, setActivityData] = useState({
-        title: "高科傳說對決生死賽",
-        location: "高雄科技大學第一校區",
-        startTime: "2021-09-04",
-        endTime: "2021-09-04",
+        title: "",
+        location: "",
+        startTime: "",
+        endTime: "",
         currentStartTime: "2021-09-04 00:00:00",
         currentEndTime: "2021-09-04 00:00:00",
         description: "",
@@ -376,6 +376,7 @@ const ACT_Title = ({ editMode, title, onTitleChange }) => {
                     type="text"
                     className="act-name"
                     value={title}
+                    placeholder="輸入此活動名稱"
                     id="actName"
                     autoComplete="off"
                     required
@@ -395,18 +396,6 @@ const ACT_Title = ({ editMode, title, onTitleChange }) => {
         );
     }
 };
-
-// const ACT_Info = ({ editMode }) => {
-//     const [actInfo, setActInfo] = useState({
-//         location: "高雄科技大學第一校區",
-//         starttime: "2021-09-04",
-//     });
-
-//     function handleActInfo(e) {
-//         setActInfo({
-//             [e.target.id]: e.target.value,
-//         });
-//     }
 
 const ACT_Info = ({
     editMode,
@@ -431,9 +420,7 @@ const ACT_Info = ({
                         <input
                             type="text"
                             id="location"
-                            //                             value={actInfo.location}
-                            //                             autoComplete="off"
-                            //                             onChange={handleActInfo}
+                            placeholder="輸入此活動地點"
                             value={location}
                             autoComplete="off"
                             onChange={(e) => onLocationChange(e)}
@@ -530,6 +517,7 @@ const ACT_Description = ({ editMode, description, onDescriptionChange }) => {
                     maxLength="2000"
                     spellCheck="false"
                     value={description}
+                    placeholder="輸入此活動簡介（2000字內）"
                     onChange={(e) => onDescriptionChange(e)}
                 />
             </div>
@@ -609,7 +597,8 @@ const ACT_Show_Detail = ({ showTime, show_Name, detail }) => {
     return (
         <li>
             <div className="time">
-                {showTime} {show_Name} <font className="note">({detail})</font>
+                {showTime.split(" ")[1]} {show_Name}{" "}
+                <font className="note">({detail})</font>
             </div>
         </li>
     );
@@ -620,7 +609,9 @@ const ACT_Ticket = ({ tickets, org_Name }) => {
         const { ticket_Name, startTime, endTime, price, Id: ticketId } = ticket;
         return (
             <div className="act-ticket">
-                <img src={fiesta} alt="" />
+                <div className="img-box">
+                    <img src={fiesta} alt="" />
+                </div>
                 <div className="context">
                     <p className="title">{ticket_Name}</p>
                     <p>

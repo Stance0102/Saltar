@@ -9,6 +9,7 @@ export const TICKET_INFOMATION = "/ticketInfomation";
 export const ONE_PAGE = "onePage";
 export const ADDCUSTOMER = "addCustomer";
 export const ANALYZE = "analyze";
+export const ACTIVITY_MANAGEMENT = "managementActivity";
 // AUTH Routes
 export const LOGIN = "/";
 export const SIGNUP = "/signup";
