@@ -60,6 +60,7 @@ const ManagementActivity = () => {
                     msg += activity.uploadStatus.tickets
                         ? ""
                         : " *尚未新增票種";
+
                     return (
                         <div className="act-block">
                             <div className="img-box">

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
+import { sendForgetMail } from "../agent";
 import { FormInput } from "../Home/_Components";
 // Img
 import forget_password from "../../images/forget_password.svg";
@@ -9,8 +11,29 @@ const ForgetPw = () => {
     const onEmailChangeHandler = (e) => {
         setEmail(e.target.value);
     };
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
+        const response = await sendForgetMail(email);
+        if (response.status == 200) {
+            switch (response.data.status) {
+                case 0:
+                    Swal.fire({
+                        title: "發送成功",
+                        confirmButtonText: "確定",
+                        confirmButtonColor: "#ffb559",
+                        icon: "success",
+                    });
+                    break;
+                default:
+                    Swal.fire({
+                        title: response.data.msg,
+                        confirmButtonText: "確定",
+                        confirmButtonColor: "#ffb559",
+                        icon: "info",
+                    });
+                    break;
+            }
+        }
     };
     return (
         <>

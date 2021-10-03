@@ -103,8 +103,16 @@ const SignUp = () => {
                         history.push("/");
                     });
                     break;
+                case 17:
+                    Swal.fire({
+                        title: "帳號重複",
+                        text: JSON.stringify(response.data.results),
+                        confirmButtonText: "知道了",
+                        confirmButtonColor: "#ffb559",
+                        icon: "error",
+                    });
+                    break;
                 default:
-                    console.log(response.data);
                     Swal.fire({
                         title: "註冊失敗",
                         text: JSON.stringify(response.data.results),
