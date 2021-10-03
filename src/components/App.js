@@ -65,7 +65,12 @@ const App = () => {
                                 />
 
                                 <Route
-                                    path={routes.EMAILCHECK}
+                                    path={routes.ORGANIZER_EMAILCHECK}
+                                    component={EmailCheck}
+                                />
+
+                                <Route
+                                    path={routes.CUSTMER_EMAILCHECK}
                                     component={EmailCheck}
                                 />
 

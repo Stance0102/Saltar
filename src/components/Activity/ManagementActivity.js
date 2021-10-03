@@ -35,13 +35,7 @@ const ManagementActivity = () => {
             state: { activityId: activities[index].Id },
         });
     };
-    const previewHandler = (e, index) => {
-        e.preventDefault();
-        history.push({
-            pathname: "/dashboard/onePage",
-            state: { activityId: activities[index].Id },
-        });
-    };
+
     return (
         <div className="activity-box">
             <div className="activity-box-title">
@@ -59,9 +53,13 @@ const ManagementActivity = () => {
             <div className="onePageManagement">
                 {activities.map((activity, index) => {
                     console.log(activity);
-                    let msg = activity.uploadStauts.show ? "" : " 尚未新增節目";
-                    msg += activity.uploadStauts.photos ? "" : " 尚未新增照票";
-                    msg += activity.uploadStauts.tickets ? "" : " 尚未新增票種";
+                    let msg = activity.uploadStatus.show
+                        ? ""
+                        : " *尚未新增節目";
+                    msg += activity.uploadStatus.photos ? "" : " *尚未新增照片";
+                    msg += activity.uploadStatus.tickets
+                        ? ""
+                        : " *尚未新增票種";
                     return (
                         <div className="act-block">
                             <div className="img-box">
@@ -80,29 +78,25 @@ const ManagementActivity = () => {
                                 {activity.endTime.split(" ")[0]}
                             </font>
                             {/* 提示訊息 */}
-                            <font className="act-date">{msg}</font>
+                            <font className="message">{msg}</font>
                             {/* 按鈕 */}
-                            <button
-                                className="ticket-btn"
-                                onClick={(e) => {
-                                    editHandler(e, index);
-                                }}
-                            >
-                                編輯
-                            </button>
-                            <button
-                                className="ticket-btn"
-                                onClick={(e) => {
-                                    previewHandler(e, index);
-                                }}
-                            >
-                                預覽
-                            </button>
+                            <div className="btn-group">
+                                <Link
+                                    to={`${routes.ONEPAGE_PREVIEW}/${activity.Id}`}
+                                    className="view-btn"
+                                >
+                                    預覽
+                                </Link>
 
-                            {/* 網址 */}
-                            <a href={"/onePageEvent/" + activity.Id}>
-                                onePageEvent/{activity.Id}
-                            </a>
+                                <button
+                                    className="edit-btn"
+                                    onClick={(e) => {
+                                        editHandler(e, index);
+                                    }}
+                                >
+                                    編輯
+                                </button>
+                            </div>
                         </div>
                     );
                 })}
