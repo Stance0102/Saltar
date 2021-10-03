@@ -65,10 +65,33 @@ const updateAccount = async (
     );
 };
 
+//發忘記密碼信
+const sendForgetMail = async (email) => {
+    return axios.post(
+        `/mail/sendForgetMail`,
+        {
+            Email: email,
+        },
+        { params: { t: new Date().getTime() } }
+    );
+};
+
+//忘記密碼修改密碼
+const changePassword = async (account_Id, password) => {
+    return axios.post(
+        `/Account/changePasswd`,
+        {
+            account_Id: account_Id,
+            password: password,
+        },
+        { params: { t: new Date().getTime() } }
+    );
+};
+
 //發驗證信
 const sendValidMail = async (account_Id) => {
     return axios.post(
-        `/Mail/sentAccountMail`,
+        `/mail/sendAccountMail`,
         {
             account_Id: account_Id,
         },
@@ -79,7 +102,7 @@ const sendValidMail = async (account_Id) => {
 //確認認證訊息
 const verifyValidMail = async (token) => {
     return axios.post(
-        `/Mail/VaildMailToken`,
+        `/mail/VaildMailToken`,
         {
             token: token,
         },
@@ -447,18 +470,19 @@ const updateTicket = async (
 };
 
 const createTicketMember = async (
+    //票券ID
+    ticketId,
     //名稱
     actualname,
     //電話
     phone,
     //電子郵件
     mail,
-    //票券ID
-    ticketId,
+    NID,
     //性別
-    sex
+    sex,
     // ? true false
-    // is_active
+    is_active
 ) => {
     return axios.post(
         `/tickets/member/create`,
@@ -466,9 +490,10 @@ const createTicketMember = async (
             actualname: actualname,
             phone: phone,
             mail: mail,
-            ticketId: ticketId,
+            ticket: ticketId,
+            NID: NID,
             sex: sex,
-            is_active: true,
+            is_active: is_active,
         },
         { params: { t: new Date().getTime() } }
     );
@@ -753,8 +778,10 @@ export {
     signup,
     selectAccount,
     updateAccount,
+    sendForgetMail,
     sendValidMail,
     verifyValidMail,
+    changePassword,
 };
 //群組
 export {
