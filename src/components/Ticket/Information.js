@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { FormInput } from "../Home/_Components";
-import { selectTicket } from "../agent";
+import { createTicketMember, selectTicket } from "../agent";
 import Swal from "sweetalert2";
 // Img
 import cart_icon from "../../images/cart_icon.svg";
@@ -20,6 +20,7 @@ const Information = () => {
         email: "",
         name: "",
         phone: "",
+        NID: "",
         sex: "",
         payment: "",
     });
@@ -47,7 +48,6 @@ const Information = () => {
                 if (Response.status === 200) {
                     switch (Response.data.status) {
                         case 0:
-                            console.log(Response.data.results[0]);
                             setTicketData(Response.data.results[0]);
                             break;
                         default:
@@ -91,6 +91,12 @@ const Information = () => {
             phone: e.target.value,
         });
     };
+    const onNIDChangeHandler = (e) => {
+        setUserData({
+            ...userData,
+            NID: e.target.value,
+        });
+    };
 
     const onSexChangeHandler = (e) => {
         setUserData({
@@ -106,13 +112,14 @@ const Information = () => {
         });
     };
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
-        const { email, name, phone, sex, payment } = userData;
+        const { email, name, phone, NID, sex, payment } = userData;
         if (
             email === "" ||
             name === "" ||
             phone === "" ||
+            NID === "" ||
             sex === "" ||
             payment === ""
         ) {
@@ -124,15 +131,46 @@ const Information = () => {
             });
             return;
         }
-        history.push({
-            pathname: "/ticketInformation",
-            state: {
-                ticketId: ticketId,
-                activityData: activityData,
-                userData: userData,
-            },
-        });
-        window.location.reload();
+        const response = await createTicketMember(
+            ticketId,
+            name,
+            phone,
+            email,
+            NID,
+            sex == "male",
+            true
+        );
+        if (response.status == 200) {
+            switch (response.data.status) {
+                case 0:
+                    Swal.fire({
+                        title: "購票成功",
+                        confirmButtonText: "繼續",
+                        confirmButtonColor: "#ffb559",
+                        icon: "success",
+                    }).then(() => {
+                        history.push({
+                            pathname: "/ticketInformation",
+                            state: {
+                                ticketId: ticketId,
+                                activityData: activityData,
+                                userData: userData,
+                            },
+                        });
+                        window.location.reload();
+                    });
+
+                    break;
+                default:
+                    Swal.fire({
+                        title: "發生不明錯誤",
+                        confirmButtonText: "確定",
+                        confirmButtonColor: "#ffb559",
+                        icon: "info",
+                    });
+                    break;
+            }
+        }
     };
 
     if (payStatus) {
@@ -223,6 +261,14 @@ const Information = () => {
                             Handler={onEmailChangeHandler}
                         />
 
+                        <FormInput
+                            Id="NID"
+                            Type="text"
+                            ClassName="input-label"
+                            Title="身分證字號(必填)"
+                            value={activityData.NID}
+                            Handler={onNIDChangeHandler}
+                        />
                         <FormInput
                             Id="userName"
                             Type="text"

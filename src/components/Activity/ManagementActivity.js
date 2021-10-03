@@ -58,10 +58,9 @@ const ManagementActivity = () => {
             </div>
             <div className="onePageManagement">
                 {activities.map((activity, index) => {
-                    console.log(activity);
-                    let msg = activity.uploadStauts.show ? "" : " 尚未新增節目";
-                    msg += activity.uploadStauts.photos ? "" : " 尚未新增照票";
-                    msg += activity.uploadStauts.tickets ? "" : " 尚未新增票種";
+                    let msg = activity.uploadStatus.show ? "" : " 尚未新增節目";
+                    msg += activity.uploadStatus.photos ? "" : " 尚未新增照票";
+                    msg += activity.uploadStatus.tickets ? "" : " 尚未新增票種";
                     return (
                         <div className="act-block">
                             <div className="img-box">
