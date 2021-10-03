@@ -659,8 +659,13 @@ const ACT_Img = ({ editMode, img, index, onImageDelClick }) => {
     if (editMode) {
         return (
             <>
-                <img src={img} alt="" className="act-img" />{" "}
-                <button onClick={(e) => onImageDelClick(e, index)}>刪除</button>
+                <img src={img} alt="" className="act-img" />
+                <button
+                    onClick={(e) => onImageDelClick(e, index)}
+                    className="del-img-btn"
+                >
+                    -
+                </button>
             </>
         );
     } else {
@@ -810,8 +815,11 @@ const ACT_Show_Detail = ({
             <div className="time">
                 {showTime.split(" ")[1]} {show_Name}{" "}
                 <font className="note">({detail})</font>
-                <button onClick={(e) => handelDeleteShow(e, days, index)}>
-                    刪除
+                <button
+                    onClick={(e) => handelDeleteShow(e, days, index)}
+                    className="del-btn"
+                >
+                    -
                 </button>
             </div>
         </li>

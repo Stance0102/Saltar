@@ -16,7 +16,8 @@ export const LOGIN = "/";
 export const SIGNUP = "/signup";
 export const FORGETPW = "/forgetPassword";
 export const CHANGEPW = "/changePassword";
-export const EMAILCHECK = "/emailCheck";
+export const CUSTMER_EMAILCHECK = "/custmerEmailCheck";
+export const ORGANIZER_EMAILCHECK = "/organizerEmailCheck";
 // Other
 export const ONEPAGE_PREVIEW = "/onePageEvent";
 export const TICKET_INFORMATION = "/ticketInformation";

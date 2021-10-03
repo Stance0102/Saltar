@@ -1904,6 +1904,17 @@ nav.subNav li img {
   }
 }
 
+.one-page .one-page-content .del-img-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  background-color: #EE6C81;
+  color: #fff;
+  border: none;
+  font-size: 1.2rem;
+  z-index: 9999;
+}
+
 .one-page .one-page-content .act-img-add {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2095,6 +2106,17 @@ nav.subNav li img {
   color: #fff;
   border-radius: 30px;
   font-size: 1.3rem;
+}
+
+.one-page .one-page-content .act-show .del-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  background-color: #EE6C81;
+  color: #fff;
+  border: none;
+  font-size: 1.2rem;
+  margin-left: 10px;
 }
 
 .one-page .one-page-content .act-ticket-box {
@@ -2767,7 +2789,7 @@ nav.subNav li img {
       -ms-flex-align: start;
           align-items: flex-start;
   width: 23.5%;
-  height: 315px;
+  height: 350px;
   border-radius: 14px;
   -webkit-box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);
           box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);
@@ -2779,7 +2801,7 @@ nav.subNav li img {
 
 .onePageManagement .act-block .img-box {
   min-width: 100%;
-  min-height: 210px;
+  min-height: 190px;
   overflow: hidden;
 }
 
@@ -2810,7 +2832,7 @@ nav.subNav li img {
   font-family: "NotoSansCJKtc-Regular";
   font-size: .9rem;
   color: #a5a5a5;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   margin-left: 20px;
   margin-right: 15px;
 }
@@ -2819,6 +2841,64 @@ nav.subNav li img {
   width: 18px;
   height: 18px;
   margin-right: 10px;
+}
+
+.onePageManagement .act-block .message {
+  color: #ffb559;
+  font-size: 0.9rem;
+  margin-left: 20px;
+}
+
+.onePageManagement .act-block .btn-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  padding-right: 10px;
+}
+
+.onePageManagement .act-block .btn-group .view-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #4ca46f;
+  color: #fff;
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border: none;
+  font-size: 1rem;
+  font-family: "NotoSansCJKtc-Medium";
+  width: 60px;
+  height: 40px;
+  text-align: center;
+}
+
+.onePageManagement .act-block .btn-group .edit-btn {
+  background-color: #ffb559;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  color: #fff;
+  border: none;
+  font-size: 1rem;
+  font-family: "NotoSansCJKtc-Medium";
+  width: 60px;
+  height: 40px;
 }
 
 .btn-group {
