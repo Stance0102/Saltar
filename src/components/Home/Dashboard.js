@@ -11,6 +11,8 @@ const Management = lazy(() => import("../Ticket/Management"));
 const MemberList = lazy(() => import("../Ticket/MemberList"));
 const AddCustomer = lazy(() => import("../Activity/AddCustomer"));
 const OnePage = lazy(() => import("../Activity/OnePage"));
+const OnePageEdit = lazy(() => import("../Activity/OnePageEdit"));
+const OnePageCreate = lazy(() => import("../Activity/OnePageCreate"));
 const Analyze = lazy(() => import("../Activity/Analyze"));
 const ManagementActivity = lazy(() => import("../Activity/ManagementActivity"));
 const ErrorPage = lazy(() => import("../Home/ErrorPage"));
@@ -54,7 +56,13 @@ function BackendFeatures() {
             return <MemberList />;
 
         case routes.ONE_PAGE:
-            return <OnePage edit={true} />;
+            return <OnePage />;
+
+        case routes.ONE_PAGE_CREATE:
+            return <OnePageCreate />;
+
+        case routes.ONE_PAGE_EDIT:
+            return <OnePageEdit />;
 
         case routes.ADDCUSTOMER:
             return <AddCustomer />;

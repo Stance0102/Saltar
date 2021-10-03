@@ -35,10 +35,10 @@ const MemberList = () => {
         }
     }, [reload]);
 
-    const handelValidTicket = async (e) => {
+    const handleValidTicket = async (e) => {
         e.preventDefault();
     };
-    const handelDeleteTicket = async (e, buyer) => {
+    const handleDeleteTicket = async (e, buyer) => {
         e.preventDefault();
         const { Id, actualname, phone, mail, ticket: ticketId, sex } = buyer;
         const response = await updateTicketMember(
@@ -104,7 +104,7 @@ const MemberList = () => {
                                             <button
                                                 className="check"
                                                 onClick={(e) => {
-                                                    handelValidTicket(e);
+                                                    handleValidTicket(e);
                                                 }}
                                             >
                                                 <img src={tick_Icon} alt="" />
@@ -112,7 +112,7 @@ const MemberList = () => {
                                             <button
                                                 className="delete"
                                                 onClick={(e) => {
-                                                    handelDeleteTicket(
+                                                    handleDeleteTicket(
                                                         e,
                                                         buyer
                                                     );
