@@ -72,7 +72,7 @@ const OnePage = ({ activityId }) => {
                                 startTime,
                                 endTime,
                                 location,
-                                organizer,
+                                org_Name,
                             } = activityResponse.data.results[0];
                             activity = {
                                 activityId: activityId,
@@ -83,7 +83,7 @@ const OnePage = ({ activityId }) => {
                                 startTime: startTime.split(" ")[0],
                                 endTime: endTime.split(" ")[0],
                                 location: location,
-                                org_Name: organizer,
+                                org_Name: org_Name,
                             };
                             break;
                         default:

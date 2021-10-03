@@ -25,7 +25,7 @@ const OnePage = ({ edit, activityId }) => {
     const history = useHistory();
     const fileInput = useRef(null);
     const [img, setImg] = useState("");
-    const [editMode, setEditMode] = useState(edit);
+    const [editMode, setEditMode] = useState(true);
     const [saveMode, setSaveMode] = useState(false);
     const [activityData, setActivityData] = useState({
         title: "",

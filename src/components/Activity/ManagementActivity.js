@@ -64,7 +64,10 @@ const ManagementActivity = () => {
         <div className="activity-box">
             <div className="activity-box-title">
                 <div className="btn-group">
-                    <Link className="addOnePage" to={`${routes.ONE_PAGE}`}>
+                    <Link
+                        className="addOnePage"
+                        to={`${routes.ONE_PAGE_CREATE}`}
+                    >
                         新增一頁式活動
                     </Link>
                 </div>
