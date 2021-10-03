@@ -19,25 +19,7 @@ const ManagementActivity = () => {
             if (response.status == 200) {
                 switch (response.data.status) {
                     case 0:
-                        const Activities = [];
-                        console.log(response.data.results);
-                        for (let i = 0; i < response.data.results.length; i++) {
-                            const activity = response.data.results[i];
-                            const allInOneResponse = await getAllInOne(
-                                activity.Id
-                            );
-                            activity.msg = allInOneResponse.data.msg;
-                            if (allInOneResponse.data.status === 0) {
-                                activity.tickets =
-                                    allInOneResponse.data.results.tickets;
-                                activity.shows =
-                                    allInOneResponse.data.results.show;
-                                activity.photos =
-                                    allInOneResponse.data.results.photos;
-                            }
-                            Activities.push(activity);
-                        }
-                        setActivities(Activities);
+                        setActivities(response.data.results);
                         break;
                 }
             }
@@ -77,6 +59,9 @@ const ManagementActivity = () => {
             <div className="onePageManagement">
                 {activities.map((activity, index) => {
                     console.log(activity);
+                    let msg = activity.uploadStauts.show ? "" : " 尚未新增節目";
+                    msg += activity.uploadStauts.photos ? "" : " 尚未新增照票";
+                    msg += activity.uploadStauts.tickets ? "" : " 尚未新增票種";
                     return (
                         <div className="act-block">
                             <div className="img-box">
@@ -95,11 +80,7 @@ const ManagementActivity = () => {
                                 {activity.endTime.split(" ")[0]}
                             </font>
                             {/* 提示訊息 */}
-                            {activity.msg !== "ok" ? (
-                                <font className="act-date">{activity.msg}</font>
-                            ) : (
-                                <font />
-                            )}
+                            <font className="act-date">{msg}</font>
                             {/* 按鈕 */}
                             <button
                                 className="ticket-btn"
@@ -119,8 +100,8 @@ const ManagementActivity = () => {
                             </button>
 
                             {/* 網址 */}
-                            <a href={"/onePageEvnet/" + activity.Id}>
-                                onePageEvnet/{activity.Id}
+                            <a href={"/onePageEvent/" + activity.Id}>
+                                onePageEvent/{activity.Id}
                             </a>
                         </div>
                     );

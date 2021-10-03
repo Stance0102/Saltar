@@ -1,12 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import {
-    createActivity,
-    createShow,
-    createActivityPhoto,
-    getAllInOne,
-} from "../agent";
+import { getAllInOne } from "../agent";
 import Swal from "sweetalert2";
 // Img
 import calendar_icon from "../../images/calendar_icon.svg";
@@ -19,14 +14,11 @@ import fiesta from "../../images/fiesta.PNG";
 
 // import Edit from "../Account/Edit";
 
-const OnePage = ({ edit, activityId }) => {
+const OnePage = ({ activityId }) => {
     const { groupId, name } = useSelector((state) => state.Account);
     const location = useLocation();
     const history = useHistory();
-    const fileInput = useRef(null);
-    const [img, setImg] = useState("");
-    const [editMode, setEditMode] = useState(edit);
-    const [saveMode, setSaveMode] = useState(false);
+    const [editMode, setEditMode] = useState(false);
     const [activityData, setActivityData] = useState({
         title: "",
         location: "",
@@ -47,7 +39,6 @@ const OnePage = ({ edit, activityId }) => {
 
     useEffect(() => {
         if (location.state !== undefined) {
-            setEditMode(location.state.edit);
             activityId = location.state.activityId;
         }
         if (activityId !== undefined) {
@@ -111,265 +102,46 @@ const OnePage = ({ edit, activityId }) => {
                     tickets: tickets,
                     imagePreview: imagePreview,
                 });
-                console.log(allInOneResponse);
             };
             setupData();
         }
     }, [location]);
 
-    const onTitleChange = (e) => {
-        setActivityData({
-            ...activityData,
-            title: e.target.value,
-        });
-    };
-    const onLocationChange = (e) => {
-        setActivityData({
-            ...activityData,
-            location: e.target.value,
-        });
-    };
-    const onStartTimeChange = (e) => {
-        setActivityData({
-            ...activityData,
-            startTime: e.target.value,
-            currentStartTime: e.target.value + " 00:00:00",
-        });
-    };
-    const onEndTimeChange = (e) => {
-        setActivityData({
-            ...activityData,
-            endTime: e.target.value,
-            currentEndTime: e.target.value + " 00:00:00",
-        });
-    };
-    const onDescriptionChange = (e) => {
-        setActivityData({
-            ...activityData,
-            description: e.target.value,
-        });
-    };
-    const onShowTimeChange = (e) => {
-        setActivityData({
-            ...activityData,
-            showTime: e.target.value,
-        });
-    };
-    const onShowNameChange = (e) => {
-        setActivityData({
-            ...activityData,
-            showName: e.target.value,
-        });
-    };
-    const onshowNoteChange = (e) => {
-        setActivityData({
-            ...activityData,
-            showNote: e.target.value,
-        });
-    };
-
-    const onImageAddClick = (e) => {
-        const tempImageFiles = [];
-        const tempImagePreview = [];
-        if (!e.target.files || e.target.files.length === 0) {
-            return;
-        }
-        Array.from(e.target.files).forEach((file) => {
-            tempImageFiles.push(file);
-            tempImagePreview.push(URL.createObjectURL(file));
-        });
-        setActivityData({
-            ...activityData,
-            imageFiles: [...activityData.imageFiles, tempImageFiles],
-            imagePreview: [...activityData.imagePreview, tempImagePreview],
-        });
-    };
-
-    const handleCreateShow = (e) => {
+    const buyTicketHandler = (e, ticketId) => {
         e.preventDefault();
-        if (activityData.showTime == "" || activityData.showName == "") {
-            return;
-        }
-        setActivityData({
-            ...activityData,
-            shows: [
-                ...activityData.shows,
-                {
-                    showTime: activityData.showTime,
-                    show_Name: activityData.showName,
-                    detail: activityData.showNote,
-                },
-            ],
-            showTime: "",
-            showName: "",
-            showNote: "",
+        history.push({
+            pathname: "/ticketInformation",
+            state: { ticketId: ticketId, activityData: activityData },
         });
-    };
-
-    const submitHandler = async (e) => {
-        e.preventDefault();
-        if (
-            activityData.title == "" ||
-            activityData.location == "" ||
-            activityData.startTime == "" ||
-            activityData.endTime == "" ||
-            activityData.description == "" ||
-            activityData.shows.length == 0 ||
-            activityData.imageFiles.length == 0
-        ) {
-            Swal.fire({
-                title: "創建",
-                text: "請填寫完整訊息及圖片",
-                confirmButtonText: "知道了",
-                confirmButtonColor: "#ffb559",
-                icon: "info",
-            });
-            return;
-        }
-        const response = await createActivity(
-            activityData.title,
-            activityData.description,
-            activityData.location,
-            activityData.currentStartTime,
-            activityData.currentEndTime,
-            groupId,
-            true
-        );
-        if (response.status == 200) {
-            switch (response.data.status) {
-                case 0:
-                    console.log("ACT_ID:" + response.data.results.Id);
-                    activityData.shows.forEach(async (show) => {
-                        const showResponse = await createShow(
-                            response.data.results.Id,
-                            show.show_Name,
-                            show.detail,
-                            "備註",
-                            `${activityData.startTime} ${show.showTime}`
-                        );
-                        if (showResponse.status === 200) {
-                            switch (showResponse.data.status) {
-                                case 0:
-                                    break;
-                                default:
-                                    console.log(showResponse);
-                                    break;
-                            }
-                        } else {
-                            console.log(showResponse);
-                        }
-                    });
-                    activityData.imageFiles.forEach(async (file) => {
-                        const formData = new FormData();
-                        formData.append("act_Photo", file[0]);
-                        formData.append("act_Id", response.data.results.Id);
-                        const imageResponse = await createActivityPhoto(
-                            formData
-                        );
-                        if (imageResponse.status === 200) {
-                            switch (imageResponse.data.status) {
-                                case 0:
-                                    break;
-                                default:
-                                    console.log(imageResponse);
-                                    break;
-                            }
-                        } else {
-                            console.log(imageResponse);
-                        }
-                    });
-                    Swal.fire({
-                        title: "活動創建成功",
-                        confirmButtonText: "下一步",
-                        confirmButtonColor: "#ffb559",
-                        icon: "success",
-                    }).then(() => {
-                        history.push({
-                            pathname: "/dashboard/onePage",
-                            state: { edit: false },
-                        });
-                    });
-                    break;
-
-                default:
-                    Swal.fire({
-                        title: "活動創建失敗",
-                        text: JSON.stringify(response.data.results),
-                        confirmButtonText: "關閉",
-                        confirmButtonColor: "#ffb559",
-                        icon: "error",
-                        // footer: '<a href="/signup">建立帳號?</a>',
-                    });
-                    break;
-            }
-        } else {
-            console.log(response);
-        }
     };
 
     return (
         <div className="one-page">
-            <form className="one-page-content" onSubmit={submitHandler}>
-                <ACT_Title
-                    editMode={editMode}
-                    onTitleChange={onTitleChange}
-                    {...activityData}
-                />
+            <form className="one-page-content">
+                <ACT_Title editMode={editMode} {...activityData} />
 
-                <ACT_Info
-                    editMode={editMode}
-                    onLocationChange={onLocationChange}
-                    onStartTimeChange={onStartTimeChange}
-                    onEndTimeChange={onEndTimeChange}
-                    name={name}
-                    {...activityData}
-                />
+                <ACT_Info editMode={editMode} name={name} {...activityData} />
 
                 {activityData.imagePreview.map((image) => {
                     return <ACT_Img img={image} />;
                 })}
 
-                {editMode && (
-                    <ACT_Img_Add
-                        onImageAddClick={onImageAddClick}
-                        fileInput={fileInput}
+                <ACT_Description editMode={editMode} {...activityData} />
+
+                <ACT_Show editMode={editMode} {...activityData} />
+
+                <div className="act-ticket-box">
+                    <ACT_Ticket
+                        {...activityData}
+                        buyTicketHandler={buyTicketHandler}
                     />
-                )}
-
-                <ACT_Description
-                    editMode={editMode}
-                    onDescriptionChange={onDescriptionChange}
-                    {...activityData}
-                />
-
-                <ACT_Show
-                    editMode={editMode}
-                    handleCreateShow={handleCreateShow}
-                    onShowTimeChange={onShowTimeChange}
-                    onShowNameChange={onShowNameChange}
-                    onshowNoteChange={onshowNoteChange}
-                    {...activityData}
-                />
-
-                {!editMode && (
-                    <div className="act-ticket-box">
-                        <ACT_Ticket {...activityData} />
-                    </div>
-                )}
+                </div>
 
                 <Save_Btn editMode={editMode} />
             </form>
         </div>
     );
 };
-
-// const ACT_Title = ({ editMode }) => {
-//     const [actTitle, setActTitle] = useState("高科傳說對決生死賽");
-
-//     function handleActTitle(e) {
-//         const act_Title = e.target.value;
-//         setActTitle(act_Title);
-//     }
 
 const ACT_Title = ({ editMode, title, onTitleChange }) => {
     if (editMode) {
@@ -385,16 +157,12 @@ const ACT_Title = ({ editMode, title, onTitleChange }) => {
                     required
                     onChange={(e) => onTitleChange(e)}
                 />
-                {/* <Edit_Btn editMode={editMode} /> */}
             </>
         );
     } else {
         return (
             <>
-                <div className="act-name">
-                    {title}
-                    {/* <Edit_Btn editMode={editMode} /> */}
-                </div>
+                <div className="act-name">{title}</div>
             </>
         );
     }
@@ -607,7 +375,7 @@ const ACT_Show_Detail = ({ showTime, show_Name, detail }) => {
     );
 };
 
-const ACT_Ticket = ({ tickets, org_Name }) => {
+const ACT_Ticket = ({ tickets, org_Name, buyTicketHandler }) => {
     return tickets.map((ticket) => {
         const { ticket_Name, startTime, endTime, price, Id: ticketId } = ticket;
         return (
@@ -633,9 +401,7 @@ const ACT_Ticket = ({ tickets, org_Name }) => {
                     <div className="ticket-type">{ticket_Name}</div>
                     <button
                         className="buy-btn"
-                        onClick={(e) => {
-                            e.preventDefault();
-                        }}
+                        onClick={(e) => buyTicketHandler(e, ticketId)}
                     >
                         購票
                     </button>
