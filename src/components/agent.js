@@ -293,7 +293,7 @@ const createActivityPhoto = async (formData) => {
 };
 
 const selectActivityPhoto = async (actId) => {
-    return axios.get(`/Photo/get/act/${actId}`, {
+    return axios.get(`/photo/get/act/${actId}`, {
         params: { t: new Date().getTime() },
     });
 };
@@ -329,7 +329,8 @@ const createShow = async (
     //備註
     note,
     //節目開始時間
-    showTime
+    showTime,
+    is_active = true
 ) => {
     return axios.post(
         `/Activity/show/create`,
