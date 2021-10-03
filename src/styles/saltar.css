@@ -1769,14 +1769,20 @@ nav.subNav li img {
   width: 70%;
 }
 
+@media (max-width: 1680px) {
+  .one-page .one-page-content {
+    width: 88%;
+  }
+}
+
 @media (max-width: 768px) {
   .one-page .one-page-content {
-    width: 95%;
+    width: 98%;
   }
 }
 
 .one-page .one-page-content .act-name {
-  font-family: "NotoSansCJKtc-Regular";
+  font-family: "NotoSansCJKtc-Medium";
   font-size: 2.2rem;
   color: #000000;
   text-align: left;
@@ -1786,7 +1792,6 @@ nav.subNav li img {
   background-color: rgba(0, 0, 0, 0);
   border-radius: 0;
   width: 100%;
-  margin-bottom: 15px;
 }
 
 .one-page .one-page-content input.act-name {
@@ -2048,6 +2053,24 @@ nav.subNav li img {
   line-height: 1;
 }
 
+@media (max-width: 1680px) {
+  .one-page .one-page-content .act-show .time {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .one-page .one-page-content .act-show .time {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .one-page .one-page-content .act-show .time {
+    width: 100%;
+  }
+}
+
 .one-page .one-page-content .act-show .time .note {
   color: #a5a5a5;
   font-family: "NotoSansCJKtc-Medium";
@@ -2135,6 +2158,18 @@ nav.subNav li img {
   overflow: hidden;
 }
 
+@media (max-width: 1680px) {
+  .one-page .one-page-content .act-ticket .img-box {
+    width: 20%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .one-page .one-page-content .act-ticket .img-box {
+    width: 30%;
+  }
+}
+
 @media (max-width: 768px) {
   .one-page .one-page-content .act-ticket .img-box {
     width: 100%;
@@ -2164,6 +2199,18 @@ nav.subNav li img {
   height: 90%;
   margin-left: 20px;
   padding-top: 20px;
+}
+
+@media (max-width: 1680px) {
+  .one-page .one-page-content .act-ticket .context {
+    width: 60%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .one-page .one-page-content .act-ticket .context {
+    width: 40%;
+  }
 }
 
 @media (max-width: 768px) {
@@ -2231,6 +2278,18 @@ nav.subNav li img {
   height: 90%;
 }
 
+@media (max-width: 1680px) {
+  .one-page .one-page-content .act-ticket .buy-info {
+    width: 20%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .one-page .one-page-content .act-ticket .buy-info {
+    width: 30%;
+  }
+}
+
 @media (max-width: 768px) {
   .one-page .one-page-content .act-ticket .buy-info {
     width: 100%;
@@ -2286,6 +2345,12 @@ nav.subNav li img {
   border: none;
   border-radius: 4px;
   background-color: #ffb559;
+}
+
+@media (max-width: 1680px) {
+  .one-page .one-page-content .act-ticket .buy-info .buy-btn {
+    margin-bottom: 15px;
+  }
 }
 
 @media (max-width: 768px) {
