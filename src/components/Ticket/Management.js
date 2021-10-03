@@ -52,7 +52,7 @@ const Management = () => {
                 const { Id, endTime } = activities[index];
                 history.push({
                     pathname: "/dashboard/ticketManagemenAdd",
-                    state: { actId: Id, endTime: endTime.split("T")[0] },
+                    state: { actId: Id, endTime: endTime.split(" ")[0] },
                 });
             } else if (result.isDenied) {
                 const { endTime } = activities[index];
@@ -83,7 +83,7 @@ const Management = () => {
                             state: {
                                 tickets:
                                     activities[index].tickets[result.value],
-                                endTime: endTime.split("T")[0],
+                                endTime: endTime.split(" ")[0],
                             },
                         });
                     }
@@ -118,8 +118,15 @@ const Management = () => {
                                 <h6 className="row-text act-name">
                                     {activity.act_Name}
                                 </h6>
-                                <h6 className="row-text">200/200人</h6>
-                                <h6 className="row-text success">達標</h6>
+                                <h6 className="row-text">
+                                    {activity.joinCount}/{activity.peopleMax}人
+                                </h6>
+
+                                {activity.joinCount === activity.peopleMax ? (
+                                    <h6 className="row-text success">達標</h6>
+                                ) : (
+                                    <h6 className="row-text fail">未達標</h6>
+                                )}
                             </div>
                             <div className="row-btn-group">
                                 <button
@@ -134,33 +141,6 @@ const Management = () => {
                         </Link>
                     );
                 })}
-
-                {/* <Link
-                    className="row-container"
-                    to={`/dashboard/${routes.TICKET_MEMBERLIST}`}
-                >
-                    <h6 className="row-number">01</h6>
-                    <div className="row-textbox">
-                        <h6 className="row-text act-name">
-                            高科傳說對決生死賽
-                        </h6>
-                        <h6 className="row-text">200/200人</h6>
-                        <h6 className="row-text success">達標</h6>
-                    </div>
-                </Link>
-                <Link
-                    className="row-container"
-                    to={`/dashboard/${routes.TICKET_MEMBERLIST}`}
-                >
-                    <h6 className="row-number">02</h6>
-                    <div className="row-textbox">
-                        <h6 className="row-text act-name">
-                            高科傳說對決生死賽
-                        </h6>
-                        <h6 className="row-text">200/200人</h6>
-                        <h6 className="row-text fail">未達標</h6>
-                    </div>
-                </Link> */}
             </div>
         </div>
     );
