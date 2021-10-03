@@ -18,5 +18,5 @@ export const FORGETPW = "/forgetPassword";
 export const CHANGEPW = "/changePassword";
 export const EMAILCHECK = "/emailCheck";
 // Other
-export const ONEPAGE_PREVIEW = "/onePageEvnet";
-export const TICKET_INFOMATION = "/ticketInfomation";
+export const ONEPAGE_PREVIEW = "/onePageEvent";
+export const TICKET_INFORMATION = "/ticketInformation";

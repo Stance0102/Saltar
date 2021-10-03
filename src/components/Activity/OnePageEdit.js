@@ -8,6 +8,8 @@ import {
     selectActivity,
     selectShowByActivity,
     selectActivityPhoto,
+    updateShow,
+    updateActivityPhoto,
 } from "../agent";
 import Swal from "sweetalert2";
 // Img
@@ -18,21 +20,16 @@ import cancel_Icon from "../../images/cancel_Icon.svg";
 import location_icon from "../../images/location_icon.svg";
 import Organizer_icon from "../../images/Organizer_icon.svg";
 import fiesta from "../../images/fiesta.PNG";
+import moment from "moment";
 
 // import Edit from "../Account/Edit";
 
-const OnePage = ({ activityId }) => {
+const OnePageEdit = ({ activityId }) => {
     const { groupId, name } = useSelector((state) => state.Account);
     const location = useLocation();
     const history = useHistory();
     const fileInput = useRef(null);
     const [editMode, setEditMode] = useState(true);
-    const [editData, setEditData] = useState({
-        addShows: [],
-        delShows: [],
-        addImageFile: [],
-        delImageFile: [],
-    });
     const [activityData, setActivityData] = useState({
         activityId: "",
         title: "",
@@ -61,6 +58,7 @@ const OnePage = ({ activityId }) => {
                 let activity = {};
                 let shows = [];
                 let imagePreview = [];
+                let imageFiles = [];
                 const activityResponse = await selectActivity(activityId);
                 if (activityResponse.status === 200) {
                     switch (activityResponse.data.status) {
@@ -104,7 +102,6 @@ const OnePage = ({ activityId }) => {
                 }
                 // 節目列表
                 const showsResponse = await selectShowByActivity(activityId);
-                console.log(showsResponse);
                 if (showsResponse.status === 200) {
                     switch (showsResponse.data.status) {
                         case 0:
@@ -146,12 +143,20 @@ const OnePage = ({ activityId }) => {
                 }
                 // 圖片列表
                 const photosResponse = await selectActivityPhoto(activityId);
-                console.log("photosResponse", photosResponse.data.results);
                 if (photosResponse.status === 200) {
                     switch (photosResponse.data.status) {
                         case 0:
                             photosResponse.data.results.forEach((photo) => {
-                                imagePreview.push(photo.url);
+                                imageFiles.push({
+                                    id: photo.Id,
+                                    url: photo.url,
+                                    activityId: photo.act,
+                                    is_active: photo.is_active,
+                                });
+                                imagePreview.push({
+                                    url: photo.url,
+                                    is_active: photo.is_active,
+                                });
                             });
                             break;
                         default:
@@ -160,11 +165,12 @@ const OnePage = ({ activityId }) => {
                 } else {
                     console.log(photosResponse);
                 }
-
+                const sort = sortShows(shows);
                 setActivityData({
                     ...activityData,
                     ...activity,
-                    shows: shows,
+                    shows: sort,
+                    imageFiles: imageFiles,
                     imagePreview: imagePreview,
                 });
             };
@@ -204,10 +210,15 @@ const OnePage = ({ activityId }) => {
             description: e.target.value,
         });
     };
-    const onShowTimeChange = (e) => {
+    const onShowTimeChange = (e, day) => {
+        const showDateTime = new Date(
+            activityData.startTime + " " + e.target.value
+        );
+        showDateTime.setDate(showDateTime.getDate() + day);
         setActivityData({
             ...activityData,
             showTime: e.target.value,
+            showDateTime: moment(showDateTime).format("YYYY-MM-DD HH:mm"),
         });
     };
     const onShowNameChange = (e) => {
@@ -229,20 +240,75 @@ const OnePage = ({ activityId }) => {
         if (!e.target.files || e.target.files.length === 0) {
             return;
         }
+        if (
+            e.target.files.length +
+                activityData.imagePreview.filter(
+                    (file) => file.is_active === true
+                ).length >
+            5
+        ) {
+            Swal.fire({
+                title: "圖片限制",
+                text: "目前僅開放上傳五張圖片",
+                confirmButtonText: "知道了",
+                confirmButtonColor: "#ffb559",
+                icon: "info",
+            });
+            return;
+        }
         Array.from(e.target.files).forEach((file) => {
-            tempImageFiles.push(file);
-            tempImagePreview.push(URL.createObjectURL(file));
+            tempImageFiles.push({ file: file });
+            tempImagePreview.push({
+                url: URL.createObjectURL(file),
+                is_active: true,
+            });
         });
         setActivityData({
             ...activityData,
-            imageFiles: [...activityData.imageFiles, tempImageFiles],
-            imagePreview: [...activityData.imagePreview, tempImagePreview],
+            imageFiles: [...activityData.imageFiles, ...tempImageFiles],
+            imagePreview: [...activityData.imagePreview, ...tempImagePreview],
         });
+    };
+    const onImageDelClick = (e, index) => {
+        e.preventDefault();
+        const tempImageFiles = [];
+        const tempImagePreview = [];
+        activityData.imageFiles.forEach((file, i) => {
+            if (index === i) {
+                if ("file" in file) {
+                } else {
+                    tempImageFiles.push({ ...file, is_active: false });
+                    tempImagePreview.push({
+                        ...activityData.imagePreview[i],
+                        is_active: false,
+                    });
+                }
+            } else {
+                tempImageFiles.push({ ...file });
+                tempImagePreview.push({ ...activityData.imagePreview[i] });
+            }
+        });
+        setActivityData({
+            ...activityData,
+            imageFiles: tempImageFiles,
+            imagePreview: tempImagePreview,
+        });
+    };
+
+    const sortShows = (rawShows) => {
+        const shows = [];
+        rawShows.forEach((dayShows, i) => {
+            shows.push(
+                dayShows.sort(
+                    (a, b) => new Date(a.showTime) - new Date(b.showTime)
+                )
+            );
+        });
+        return shows;
     };
 
     const handleCreateShow = (e, day) => {
         e.preventDefault();
-        console.log(day);
         if (activityData.showTime == "" || activityData.showName == "") {
             return;
         }
@@ -252,7 +318,7 @@ const OnePage = ({ activityId }) => {
                 shows.push([
                     ...dayShows,
                     {
-                        showTime: activityData.showTime,
+                        showTime: activityData.showDateTime,
                         show_Name: activityData.showName,
                         detail: activityData.showNote,
                         is_active: true,
@@ -264,9 +330,10 @@ const OnePage = ({ activityId }) => {
             }
         });
 
+        const sort = sortShows(shows);
         setActivityData({
             ...activityData,
-            shows: shows,
+            shows: sort,
             showTime: "",
             showName: "",
             showNote: "",
@@ -275,8 +342,6 @@ const OnePage = ({ activityId }) => {
 
     const handelDeleteShow = (e, day, index) => {
         e.preventDefault();
-        console.log(day);
-        console.log(index);
         const shows = [];
         activityData.shows.forEach((dayShows, i) => {
             if (i === day) {
@@ -290,11 +355,11 @@ const OnePage = ({ activityId }) => {
                 shows.push(dayShows);
             }
         });
+        const sort = sortShows(shows);
         setActivityData({
             ...activityData,
-            shows: shows,
+            shows: sort,
         });
-        console.log(activityData.shows);
     };
 
     const submitHandler = async (e) => {
@@ -317,7 +382,9 @@ const OnePage = ({ activityId }) => {
             location == "" ||
             startTime == "" ||
             endTime == "" ||
-            description == ""
+            description == "" ||
+            shows.length == 0 ||
+            imageFiles.length == 0
         ) {
             Swal.fire({
                 title: "更新",
@@ -341,57 +408,75 @@ const OnePage = ({ activityId }) => {
         if (response.status == 200) {
             switch (response.data.status) {
                 case 0:
-                    console.log(response.data.results);
-                    activityData.shows.forEach(async (show) => {
-                        const showResponse = await createShow(
-                            response.data.results.Id,
-                            show.show_Name,
-                            show.detail,
-                            "備註",
-                            `${activityData.startTime} ${show.showTime}`
+                    activityData.shows.forEach(async (dayShows) => {
+                        let updateData = dayShows.filter(
+                            (show) => show.tag === "edit" && "Id" in show
                         );
-                        if (showResponse.status === 200) {
-                            switch (showResponse.data.status) {
-                                case 0:
-                                    break;
-                                default:
-                                    console.log(showResponse);
-                                    break;
+                        if (updateData.length !== 0) {
+                            const updateShowResponse = await updateShow(
+                                updateData
+                            );
+                            if (updateShowResponse.status === 200) {
+                                // 完成
+                            } else {
+                                console.log(updateShowResponse);
                             }
-                        } else {
-                            console.log(showResponse);
+                        }
+                        updateData = dayShows.filter(
+                            (show) => show.tag === "new"
+                        );
+                        if (updateData.length !== 0) {
+                            for (let i = 0; i < updateData.length; i++) {
+                                updateData[i].act = response.data.results.Id;
+                                updateData[i].note = "備註";
+                            }
+                            const createShowResponse = await createShow(
+                                updateData
+                            );
+                            if (createShowResponse.status === 201) {
+                                // 完成
+                            } else {
+                                console.log(createShowResponse);
+                            }
                         }
                     });
-                    // activityData.imageFiles.forEach(async (file) => {
-                    //     const formData = new FormData();
-                    //     formData.append("act_Photo", file[0]);
-                    //     formData.append("act_Id", response.data.results.Id);
-                    //     const imageResponse = await createActivityPhoto(
-                    //         formData
-                    //     );
-                    //     if (imageResponse.status === 200) {
-                    //         switch (imageResponse.data.status) {
-                    //             case 0:
-                    //                 break;
-                    //             default:
-                    //                 console.log(imageResponse);
-                    //                 break;
-                    //         }
-                    //     } else {
-                    //         console.log(imageResponse);
-                    //     }
-                    // });
-                    // Swal.fire({
-                    //     title: "活動創建成功",
-                    //     confirmButtonText: "下一步",
-                    //     confirmButtonColor: "#ffb559",
-                    //     icon: "success",
-                    // }).then(() => {
-                    //     history.push({
-                    //         pathname: "/dashboard/onePage",
-                    //         state: { edit: false },
-                    //     });
-                    // });
+                    activityData.imageFiles.forEach(async (file) => {
+                        if ("file" in file) {
+                            const formData = new FormData();
+                            formData.append("act_Photo", file.file);
+                            formData.append("act_Id", response.data.results.Id);
+                            const imageResponse = await createActivityPhoto(
+                                formData
+                            );
+                            if (imageResponse.status === 200) {
+                                switch (imageResponse.data.status) {
+                                    case 0:
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            } else {
+                                console.log(imageResponse);
+                            }
+                        } else if (file.is_active === false) {
+                            updateActivityPhoto(
+                                response.data.results.Id,
+                                file.id,
+                                file.url,
+                                file.is_active
+                            );
+                        }
+                    });
+                    Swal.fire({
+                        title: "活動更新成功",
+                        confirmButtonText: "下一步",
+                        confirmButtonColor: "#ffb559",
+                        icon: "success",
+                    }).then(() => {
+                        history.push({
+                            pathname: "/dashboard/managementActivity",
+                        });
+                    });
                     break;
 
                 default:
@@ -427,14 +512,29 @@ const OnePage = ({ activityId }) => {
                     {...activityData}
                 />
 
-                {activityData.imagePreview.map((image) => {
-                    return <ACT_Img img={image} />;
+                {activityData.imagePreview.map((image, index) => {
+                    if (image.is_active) {
+                        return (
+                            <ACT_Img
+                                editMode={editMode}
+                                img={image.url}
+                                index={index}
+                                onImageDelClick={onImageDelClick}
+                            />
+                        );
+                    }
                 })}
 
-                <ACT_Img_Add
-                    onImageAddClick={onImageAddClick}
-                    fileInput={fileInput}
-                />
+                {activityData.imagePreview.filter(
+                    (file) => file.is_active === true
+                ).length < 5 ? (
+                    <ACT_Img_Add
+                        onImageAddClick={onImageAddClick}
+                        fileInput={fileInput}
+                    />
+                ) : (
+                    <></>
+                )}
 
                 <ACT_Description
                     editMode={editMode}
@@ -555,9 +655,14 @@ const ACT_Info = ({
     }
 };
 
-const ACT_Img = ({ img, editMode }) => {
+const ACT_Img = ({ editMode, img, index, onImageDelClick }) => {
     if (editMode) {
-        return <img src={img} alt="" className="act-img" />;
+        return (
+            <>
+                <img src={img} alt="" className="act-img" />{" "}
+                <button onClick={(e) => onImageDelClick(e, index)}>刪除</button>
+            </>
+        );
     } else {
         return <img src={img} alt="" className="act-img" />;
     }
@@ -633,9 +738,8 @@ const ACT_Show = ({
             <ul className="act-show">
                 <div className="title">活動即時資訊</div>
                 {shows.map((dayShows, days) => {
-                    return dayShows
-                        .filter((show) => show.is_active === true)
-                        .map((show, index) => {
+                    return dayShows.map((show, index) => {
+                        if (show.is_active) {
                             return (
                                 <ACT_Show_Detail
                                     key={show.id}
@@ -645,14 +749,16 @@ const ACT_Show = ({
                                     {...show}
                                 />
                             );
-                        });
+                        }
+                    });
                 })}
                 <li>
                     <div className="time">
                         <input
                             type="time"
                             value={showTime}
-                            onChange={(e) => onShowTimeChange(e)}
+                            // 0 幫我改成變數 0為第一天 1為第二天
+                            onChange={(e) => onShowTimeChange(e, 0)}
                         />
                         <input
                             type="text"
@@ -724,4 +830,4 @@ const Save_Btn = ({ editMode }) => {
     }
 };
 
-export default OnePage;
+export default OnePageEdit;

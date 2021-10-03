@@ -297,10 +297,10 @@ const selectActivityPhoto = async (actId) => {
         params: { t: new Date().getTime() },
     });
 };
-const updateActivityPhoto = async (actId) => {
+const updateActivityPhoto = async (actId, photoId, url, is_active) => {
     return axios.put(
-        `/Photo/update/${actId}`,
-        {},
+        `/photo/update/${photoId}`,
+        { act: actId, url: url, is_active: is_active },
         { params: { t: new Date().getTime() } }
     );
 };
@@ -320,30 +320,17 @@ const getAllInOne = async (actId) => {
 *******************************************************/
 
 const createShow = async (
-    //活動ID
-    actId,
-    //節目名稱
-    show_Name,
-    //節目細節
-    detail,
-    //備註
-    note,
-    //節目開始時間
-    showTime,
-    is_active = true
+    // actId
+    // show_Name
+    // detail
+    // note
+    // showTime
+    // is_active
+    shows
 ) => {
-    return axios.post(
-        `/Activity/show/create`,
-        {
-            act: actId,
-            show_Name: show_Name,
-            detail: detail,
-            showTime: showTime,
-            note: note,
-            is_active: true,
-        },
-        { params: { t: new Date().getTime() } }
-    );
+    return axios.post(`Activity/show/create`, shows, {
+        params: { t: new Date().getTime() },
+    });
 };
 
 const selectShowByActivity = async (
@@ -356,30 +343,17 @@ const selectShowByActivity = async (
 };
 
 const updateShow = async (
-    //節目ID
-    showId,
-    //節目名稱
-    show_Name,
-    //節目細節
-    detail,
-    //節目開始時間
-    showTime,
-    //活動ID 這個應該不能改
-    // actId,
-    //狀態? true false
-    is_active
+    // show_Name
+    // detail
+    // showTime
+    // act
+    // note
+    // is_active
+    shows
 ) => {
-    return axios.put(
-        `/Activity/show/update/${showId}`,
-        {
-            show_Name: show_Name,
-            detail: detail,
-            showTime: showTime,
-            // act: actId,
-            is_active: is_active,
-        },
-        { params: { t: new Date().getTime() } }
-    );
+    return axios.put(`/Activity/show/update/`, shows, {
+        params: { t: new Date().getTime() },
+    });
 };
 
 /******************************************************

@@ -1,12 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import {
-    createActivity,
-    createShow,
-    createActivityPhoto,
-    getAllInOne,
-} from "../agent";
+import { createActivity, createShow, createActivityPhoto } from "../agent";
 import Swal from "sweetalert2";
 // Img
 import calendar_icon from "../../images/calendar_icon.svg";
@@ -16,24 +11,24 @@ import cancel_Icon from "../../images/cancel_Icon.svg";
 import location_icon from "../../images/location_icon.svg";
 import Organizer_icon from "../../images/Organizer_icon.svg";
 import fiesta from "../../images/fiesta.PNG";
+import moment from "moment";
 
 // import Edit from "../Account/Edit";
 
-const OnePage = ({ edit, activityId }) => {
+const OnePageCreate = ({ activityId }) => {
     const { groupId, name } = useSelector((state) => state.Account);
     const location = useLocation();
     const history = useHistory();
     const fileInput = useRef(null);
-    const [img, setImg] = useState("");
     const [editMode, setEditMode] = useState(true);
-    const [saveMode, setSaveMode] = useState(false);
     const [activityData, setActivityData] = useState({
+        activityId: "",
         title: "",
         location: "",
-        startTime: "",
-        endTime: "",
-        currentStartTime: "",
-        currentEndTime: "",
+        startTime: moment().format("YYYY-MM-DD"),
+        endTime: moment().format("YYYY-MM-DD"),
+        currentStartTime: moment().format("YYYY-MM-DD 00:00:00"),
+        currentEndTime: moment().format("YYYY-MM-DD 00:00:00"),
         description: "",
         showTime: "",
         showName: "",
@@ -44,79 +39,6 @@ const OnePage = ({ edit, activityId }) => {
         imageFiles: [],
         imagePreview: [],
     });
-
-    useEffect(() => {
-        if (location.state !== undefined) {
-            setEditMode(location.state.edit);
-            activityId = location.state.activityId;
-        }
-        if (activityId !== undefined) {
-            const setupData = async () => {
-                let activity = {};
-                let shows = [];
-                let tickets = [];
-                let imagePreview = [];
-                const allInOneResponse = await getAllInOne(activityId);
-                if (allInOneResponse.status === 200) {
-                    switch (allInOneResponse.data.status) {
-                        case 0:
-                            if (allInOneResponse.data.results.length !== 0) {
-                                const {
-                                    act_Name: title,
-                                    description,
-                                    startTime,
-                                    endTime,
-                                    location,
-                                    organizer,
-                                } = allInOneResponse.data.results.act;
-                                activity = {
-                                    title: title,
-                                    description: description,
-                                    currentStartTime: startTime,
-                                    currentEndTime: endTime,
-                                    startTime: startTime.split("T")[0],
-                                    endTime: endTime.split("T")[0],
-                                    location: location,
-                                    org_Name: organizer,
-                                };
-                                shows = allInOneResponse.data.results.show;
-                                tickets = allInOneResponse.data.results.tickets;
-                                allInOneResponse.data.results.photos.forEach(
-                                    (photo) => {
-                                        imagePreview.push(photo.url);
-                                    }
-                                );
-                            }
-                            break;
-                        default:
-                            Swal.fire({
-                                title: "查無此活動",
-                                confirmButtonText: "離開",
-                                confirmButtonColor: "#ffb559",
-                                icon: "info",
-                            }).then(() => {
-                                history.push({
-                                    pathname: "/",
-                                });
-                            });
-                            break;
-                    }
-                } else {
-                    console.log(allInOneResponse);
-                }
-                setActivityData({
-                    ...activityData,
-                    ...activity,
-                    shows: shows,
-                    tickets: tickets,
-                    imagePreview: imagePreview,
-                });
-                console.log(allInOneResponse);
-            };
-            setupData();
-        }
-    }, [location]);
-
     const onTitleChange = (e) => {
         setActivityData({
             ...activityData,
@@ -130,6 +52,18 @@ const OnePage = ({ edit, activityId }) => {
         });
     };
     const onStartTimeChange = (e) => {
+        const shows = activityData.shows;
+        const days =
+            moment(activityData.endTime).diff(e.target.value, "days") + 1;
+        if (shows.length < days) {
+            for (let i = 0; i < days - shows.length; i++) {
+                shows.push([]);
+            }
+        } else if (shows.length > days) {
+            for (let i = 0; i < shows.length - days; i++) {
+                shows.pop();
+            }
+        }
         setActivityData({
             ...activityData,
             startTime: e.target.value,
@@ -137,6 +71,18 @@ const OnePage = ({ edit, activityId }) => {
         });
     };
     const onEndTimeChange = (e) => {
+        const shows = activityData.shows;
+        const days =
+            moment(e.target.value).diff(activityData.startTime, "days") + 1;
+        if (shows.length < days) {
+            for (let i = 0; i < days - shows.length; i++) {
+                shows.push([]);
+            }
+        } else if (shows.length > days) {
+            for (let i = 0; i < shows.length - days; i++) {
+                shows.pop();
+            }
+        }
         setActivityData({
             ...activityData,
             endTime: e.target.value,
@@ -149,10 +95,15 @@ const OnePage = ({ edit, activityId }) => {
             description: e.target.value,
         });
     };
-    const onShowTimeChange = (e) => {
+    const onShowTimeChange = (e, day) => {
+        const showDateTime = new Date(
+            activityData.startTime + " " + e.target.value
+        );
+        showDateTime.setDate(showDateTime.getDate() + day);
         setActivityData({
             ...activityData,
             showTime: e.target.value,
+            showDateTime: moment(showDateTime).format("YYYY-MM-DD HH:mm"),
         });
     };
     const onShowNameChange = (e) => {
@@ -174,51 +125,154 @@ const OnePage = ({ edit, activityId }) => {
         if (!e.target.files || e.target.files.length === 0) {
             return;
         }
+        if (
+            e.target.files.length +
+                activityData.imagePreview.filter(
+                    (file) => file.is_active === true
+                ).length >
+            5
+        ) {
+            Swal.fire({
+                title: "圖片限制",
+                text: "目前僅開放上傳五張圖片",
+                confirmButtonText: "知道了",
+                confirmButtonColor: "#ffb559",
+                icon: "info",
+            });
+            return;
+        }
         Array.from(e.target.files).forEach((file) => {
-            tempImageFiles.push(file);
-            tempImagePreview.push(URL.createObjectURL(file));
+            tempImageFiles.push({ file: file });
+            tempImagePreview.push({
+                url: URL.createObjectURL(file),
+                is_active: true,
+            });
         });
         setActivityData({
             ...activityData,
-            imageFiles: [...activityData.imageFiles, tempImageFiles],
-            imagePreview: [...activityData.imagePreview, tempImagePreview],
+            imageFiles: [...activityData.imageFiles, ...tempImageFiles],
+            imagePreview: [...activityData.imagePreview, ...tempImagePreview],
+        });
+    };
+    const onImageDelClick = (e, index) => {
+        e.preventDefault();
+        const tempImageFiles = [];
+        const tempImagePreview = [];
+        activityData.imageFiles.forEach((file, i) => {
+            if (index === i) {
+                if ("file" in file) {
+                } else {
+                    tempImageFiles.push({ ...file, is_active: false });
+                    tempImagePreview.push({
+                        ...activityData.imagePreview[i],
+                        is_active: false,
+                    });
+                }
+            } else {
+                tempImageFiles.push({ ...file });
+                tempImagePreview.push({ ...activityData.imagePreview[i] });
+            }
+        });
+        setActivityData({
+            ...activityData,
+            imageFiles: tempImageFiles,
+            imagePreview: tempImagePreview,
         });
     };
 
-    const handleCreateShow = (e) => {
+    const sortShows = (rawShows) => {
+        const shows = [];
+        rawShows.forEach((dayShows, i) => {
+            shows.push(
+                dayShows.sort(
+                    (a, b) => new Date(a.showTime) - new Date(b.showTime)
+                )
+            );
+        });
+        return shows;
+    };
+
+    const handleCreateShow = (e, day) => {
         e.preventDefault();
         if (activityData.showTime == "" || activityData.showName == "") {
             return;
         }
+        const shows = [];
+        activityData.shows.forEach((dayShows, i) => {
+            if (i === day) {
+                shows.push([
+                    ...dayShows,
+                    {
+                        showTime: activityData.showDateTime,
+                        show_Name: activityData.showName,
+                        detail: activityData.showNote,
+                        is_active: true,
+                        tag: "new",
+                    },
+                ]);
+            } else {
+                shows.push(dayShows);
+            }
+        });
+
+        const sort = sortShows(shows);
         setActivityData({
             ...activityData,
-            shows: [
-                ...activityData.shows,
-                {
-                    showTime: activityData.showTime,
-                    show_Name: activityData.showName,
-                    detail: activityData.showNote,
-                },
-            ],
+            shows: sort,
             showTime: "",
             showName: "",
             showNote: "",
         });
     };
 
+    const handelDeleteShow = (e, day, index) => {
+        e.preventDefault();
+        const shows = [];
+        activityData.shows.forEach((dayShows, i) => {
+            if (i === day) {
+                dayShows[index] = {
+                    ...dayShows[index],
+                    is_active: false,
+                    tag: "edit",
+                };
+                shows.push(dayShows);
+            } else {
+                shows.push(dayShows);
+            }
+        });
+        const sort = sortShows(shows);
+        setActivityData({
+            ...activityData,
+            shows: sort,
+        });
+    };
+
     const submitHandler = async (e) => {
         e.preventDefault();
+
+        const {
+            activityId,
+            title,
+            description,
+            location,
+            startTime,
+            endTime,
+            currentStartTime,
+            currentEndTime,
+            shows,
+            imageFiles,
+        } = activityData;
         if (
-            activityData.title == "" ||
-            activityData.location == "" ||
-            activityData.startTime == "" ||
-            activityData.endTime == "" ||
-            activityData.description == "" ||
-            activityData.shows.length == 0 ||
-            activityData.imageFiles.length == 0
+            title == "" ||
+            location == "" ||
+            startTime == "" ||
+            endTime == "" ||
+            description == "" ||
+            shows.length == 0 ||
+            imageFiles.length == 0
         ) {
             Swal.fire({
-                title: "創建",
+                title: "更新",
                 text: "請填寫完整訊息及圖片",
                 confirmButtonText: "知道了",
                 confirmButtonColor: "#ffb559",
@@ -227,55 +281,54 @@ const OnePage = ({ edit, activityId }) => {
             return;
         }
         const response = await createActivity(
-            activityData.title,
-            activityData.description,
-            activityData.location,
-            activityData.currentStartTime,
-            activityData.currentEndTime,
+            title,
+            description,
+            location,
+            currentStartTime,
+            currentEndTime,
             groupId,
             true
         );
         if (response.status == 200) {
             switch (response.data.status) {
                 case 0:
-                    console.log("ACT_ID:" + response.data.results.Id);
-                    activityData.shows.forEach(async (show) => {
-                        const showResponse = await createShow(
-                            response.data.results.Id,
-                            show.show_Name,
-                            show.detail,
-                            "備註",
-                            `${activityData.startTime} ${show.showTime}`
+                    activityData.shows.forEach(async (dayShows) => {
+                        const updateData = dayShows.filter(
+                            (show) => show.tag === "new"
                         );
-                        if (showResponse.status === 200) {
-                            switch (showResponse.data.status) {
-                                case 0:
-                                    break;
-                                default:
-                                    console.log(showResponse);
-                                    break;
+                        if (updateData.length !== 0) {
+                            for (let i = 0; i < updateData.length; i++) {
+                                updateData[i].act = response.data.results.Id;
+                                updateData[i].note = "備註";
                             }
-                        } else {
-                            console.log(showResponse);
+                            const createShowResponse = await createShow(
+                                updateData
+                            );
+                            if (createShowResponse.status === 200) {
+                                // 完成
+                            } else {
+                                console.log(createShowResponse);
+                            }
                         }
                     });
                     activityData.imageFiles.forEach(async (file) => {
-                        const formData = new FormData();
-                        formData.append("act_Photo", file[0]);
-                        formData.append("act_Id", response.data.results.Id);
-                        const imageResponse = await createActivityPhoto(
-                            formData
-                        );
-                        if (imageResponse.status === 200) {
-                            switch (imageResponse.data.status) {
-                                case 0:
-                                    break;
-                                default:
-                                    console.log(imageResponse);
-                                    break;
+                        if ("file" in file) {
+                            const formData = new FormData();
+                            formData.append("act_Photo", file.file);
+                            formData.append("act_Id", response.data.results.Id);
+                            const imageResponse = await createActivityPhoto(
+                                formData
+                            );
+                            if (imageResponse.status === 200) {
+                                switch (imageResponse.data.status) {
+                                    case 0:
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            } else {
+                                console.log(imageResponse);
                             }
-                        } else {
-                            console.log(imageResponse);
                         }
                     });
                     Swal.fire({
@@ -285,8 +338,7 @@ const OnePage = ({ edit, activityId }) => {
                         icon: "success",
                     }).then(() => {
                         history.push({
-                            pathname: "/dashboard/onePage",
-                            state: { edit: false },
+                            pathname: "/dashboard/managementActivity",
                         });
                     });
                     break;
@@ -298,7 +350,6 @@ const OnePage = ({ edit, activityId }) => {
                         confirmButtonText: "關閉",
                         confirmButtonColor: "#ffb559",
                         icon: "error",
-                        // footer: '<a href="/signup">建立帳號?</a>',
                     });
                     break;
             }
@@ -325,15 +376,28 @@ const OnePage = ({ edit, activityId }) => {
                     {...activityData}
                 />
 
-                {activityData.imagePreview.map((image) => {
-                    return <ACT_Img img={image} />;
+                {activityData.imagePreview.map((image, index) => {
+                    if (image.is_active) {
+                        return (
+                            <ACT_Img
+                                editMode={editMode}
+                                img={image.url}
+                                index={index}
+                                onImageDelClick={onImageDelClick}
+                            />
+                        );
+                    }
                 })}
 
-                {editMode && (
+                {activityData.imagePreview.filter(
+                    (file) => file.is_active === true
+                ).length < 5 ? (
                     <ACT_Img_Add
                         onImageAddClick={onImageAddClick}
                         fileInput={fileInput}
                     />
+                ) : (
+                    <></>
                 )}
 
                 <ACT_Description
@@ -345,31 +409,18 @@ const OnePage = ({ edit, activityId }) => {
                 <ACT_Show
                     editMode={editMode}
                     handleCreateShow={handleCreateShow}
+                    handelDeleteShow={handelDeleteShow}
                     onShowTimeChange={onShowTimeChange}
                     onShowNameChange={onShowNameChange}
                     onshowNoteChange={onshowNoteChange}
                     {...activityData}
                 />
 
-                {!editMode && (
-                    <div className="act-ticket-box">
-                        <ACT_Ticket {...activityData} />
-                    </div>
-                )}
-
                 <Save_Btn editMode={editMode} />
             </form>
         </div>
     );
 };
-
-// const ACT_Title = ({ editMode }) => {
-//     const [actTitle, setActTitle] = useState("高科傳說對決生死賽");
-
-//     function handleActTitle(e) {
-//         const act_Title = e.target.value;
-//         setActTitle(act_Title);
-//     }
 
 const ACT_Title = ({ editMode, title, onTitleChange }) => {
     if (editMode) {
@@ -385,16 +436,12 @@ const ACT_Title = ({ editMode, title, onTitleChange }) => {
                     required
                     onChange={(e) => onTitleChange(e)}
                 />
-                {/* <Edit_Btn editMode={editMode} /> */}
             </>
         );
     } else {
         return (
             <>
-                <div className="act-name">
-                    {title}
-                    {/* <Edit_Btn editMode={editMode} /> */}
-                </div>
+                <div className="act-name">{title}</div>
             </>
         );
     }
@@ -466,17 +513,20 @@ const ACT_Info = ({
                         <img src={calendar_icon} alt="" />
                         {startTime} ～ {endTime}
                     </div>
-
-                    {/* <Edit_Btn editMode={editMode} /> */}
                 </div>
             </>
         );
     }
 };
 
-const ACT_Img = ({ img, editMode }) => {
+const ACT_Img = ({ editMode, img, index, onImageDelClick }) => {
     if (editMode) {
-        return <img src={img} alt="" className="act-img" />;
+        return (
+            <>
+                <img src={img} alt="" className="act-img" />{" "}
+                <button onClick={(e) => onImageDelClick(e, index)}>刪除</button>
+            </>
+        );
     } else {
         return <img src={img} alt="" className="act-img" />;
     }
@@ -538,6 +588,7 @@ const ACT_Description = ({ editMode, description, onDescriptionChange }) => {
 const ACT_Show = ({
     editMode,
     handleCreateShow,
+    handelDeleteShow,
     onShowTimeChange,
     onShowNameChange,
     onshowNoteChange,
@@ -550,15 +601,28 @@ const ACT_Show = ({
         return (
             <ul className="act-show">
                 <div className="title">活動即時資訊</div>
-                {shows.map((show, index) => {
-                    return <ACT_Show_Detail key={show.id} {...show} />;
+                {shows.map((dayShows, days) => {
+                    return dayShows.map((show, index) => {
+                        if (show.is_active) {
+                            return (
+                                <ACT_Show_Detail
+                                    key={show.id}
+                                    handelDeleteShow={handelDeleteShow}
+                                    days={days}
+                                    index={index}
+                                    {...show}
+                                />
+                            );
+                        }
+                    });
                 })}
                 <li>
                     <div className="time">
                         <input
                             type="time"
                             value={showTime}
-                            onChange={(e) => onShowTimeChange(e)}
+                            // 0 幫我改成變數 0為第一天 1為第二天
+                            onChange={(e) => onShowTimeChange(e, 0)}
                         />
                         <input
                             type="text"
@@ -576,7 +640,8 @@ const ACT_Show = ({
                         </font>
                         <button
                             className="add-btn"
-                            onClick={(e) => handleCreateShow(e)}
+                            // 0幫我改成變數  0為第一天 1為第二天
+                            onClick={(e) => handleCreateShow(e, 0)}
                         >
                             +
                         </button>
@@ -596,53 +661,25 @@ const ACT_Show = ({
     }
 };
 
-const ACT_Show_Detail = ({ showTime, show_Name, detail }) => {
+const ACT_Show_Detail = ({
+    showTime,
+    show_Name,
+    detail,
+    handelDeleteShow,
+    days,
+    index,
+}) => {
     return (
         <li>
             <div className="time">
                 {showTime.split(" ")[1]} {show_Name}{" "}
                 <font className="note">({detail})</font>
+                <button onClick={(e) => handelDeleteShow(e, days, index)}>
+                    刪除
+                </button>
             </div>
         </li>
     );
-};
-
-const ACT_Ticket = ({ tickets, org_Name }) => {
-    return tickets.map((ticket) => {
-        const { ticket_Name, startTime, endTime, price, Id: ticketId } = ticket;
-        return (
-            <div className="act-ticket">
-                <div className="img-box">
-                    <img src={fiesta} alt="" />
-                </div>
-                <div className="context">
-                    <p className="title">{ticket_Name}</p>
-                    <p>
-                        <img src={location_icon} alt="" />
-                        {startTime} - {endTime}
-                    </p>
-                    <p>
-                        <img src={Organizer_icon} alt="" />
-                        主辦單位：{org_Name}
-                    </p>
-                    <p className="price">
-                        NT$ <font className="number">{price}</font>
-                    </p>
-                </div>
-                <div className="buy-info">
-                    <div className="ticket-type">{ticket_Name}</div>
-                    <button
-                        className="buy-btn"
-                        onClick={(e) => {
-                            e.preventDefault();
-                        }}
-                    >
-                        購票
-                    </button>
-                </div>
-            </div>
-        );
-    });
 };
 
 const Save_Btn = ({ editMode }) => {
@@ -657,25 +694,4 @@ const Save_Btn = ({ editMode }) => {
     }
 };
 
-const Edit_Btn = ({ editMode }) => {
-    if (editMode) {
-        return (
-            <>
-                <button className="edit-btn">
-                    <img src={tick_Icon} alt="" />
-                </button>
-                <button className="edit-btn">
-                    <img src={cancel_Icon} alt="" />
-                </button>
-            </>
-        );
-    } else {
-        return (
-            <button className="edit-btn">
-                <img src={Group_icon} alt="" />
-            </button>
-        );
-    }
-};
-
-export default OnePage;
+export default OnePageCreate;
