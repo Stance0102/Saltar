@@ -209,7 +209,7 @@ const Information = () => {
                         </p>
                         <div className="detail-row">
                             購票人： {userData.name}{" "}
-                            {userData.sex === "男" ? "先生" : "小姐"}
+                            {userData.sex === "male" ? "先生" : "小姐"}
                         </div>
                         <div className="detail-row">
                             學校信箱： {userData.email}
@@ -218,7 +218,10 @@ const Information = () => {
                             聯絡電話： {userData.phone}
                         </div>
                         <div className="detail-row">
-                            付款方式： {userData.payment}
+                            付款方式：{" "}
+                            {userData.payment === "cash"
+                                ? "現金付款"
+                                : "線上付款"}
                         </div>
                         <div className="line">
                             <hr />
@@ -242,6 +245,7 @@ const Information = () => {
                     <div className="ticket-name">
                         <p className="act-name">
                             {activityData.title}
+                            <br />
                             <font className="ticket-type">
                                 {ticketData.ticket_Name}
                             </font>
@@ -256,7 +260,8 @@ const Information = () => {
                             Id="email"
                             Type="email"
                             ClassName="input-label"
-                            Title="學校信箱(必填)"
+                            Title="學校信箱或個人信箱(必填)"
+                            notice="*建議填寫學校信箱以享有學生專屬優惠！"
                             value={activityData.email}
                             Handler={onEmailChangeHandler}
                         />
@@ -266,6 +271,7 @@ const Information = () => {
                             Type="text"
                             ClassName="input-label"
                             Title="身分證字號(必填)"
+                            notice="*配合政府實聯制規定，填寫真實身份證字號，以利現場工作人員查驗身份"
                             value={activityData.NID}
                             Handler={onNIDChangeHandler}
                         />
@@ -274,6 +280,7 @@ const Information = () => {
                             Type="text"
                             ClassName="input-label"
                             Title="姓名(必填)"
+                            notice="*填寫真實姓名，以利現場工作人員查驗身份"
                             value={activityData.name}
                             Handler={onNameChangeHandler}
                         />
@@ -310,7 +317,10 @@ const Information = () => {
                             />
                         </div>
 
-                        <p>付款方式(目前暫未開放金流，近期會新增)</p>
+                        <p>付款方式</p>
+                        <font className="notice">
+                            目前暫未開放金流，近期將開放線上金流
+                        </font>
                         <div className="input-radio-group">
                             <FormInput
                                 Id="payment"

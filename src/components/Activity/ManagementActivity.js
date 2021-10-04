@@ -4,8 +4,7 @@ import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { selectActivityByGroupId, getAllInOne } from "../agent";
 // Img
-import mikey from "../../images/mikey.png";
-import mikey_v from "../../images/mikey_v.png";
+import fiesta from "../../images/fiesta.PNG";
 import calendar_icon from "../../images/calendar_icon.svg";
 
 const ManagementActivity = () => {
@@ -72,9 +71,10 @@ const ManagementActivity = () => {
                         <div className="act-block">
                             <div className="img-box">
                                 {activity.photos !== undefined ? (
-                                    <img src={activity.photos[0].url} />
+                                    <img src={activity.photos[0]} />
                                 ) : (
-                                    <img src={mikey} />
+                                    <img src={fiesta} alt="" />
+                                    // 不知道圖片為什麼顯示不了
                                 )}
                             </div>
                             <font className="act-title">
