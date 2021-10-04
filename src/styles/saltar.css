@@ -1255,6 +1255,15 @@ nav.subNav li img {
   margin-bottom: 20px;
 }
 
+@media (max-width: 768px) {
+  .infomation .title {
+    width: 100%;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+}
+
 .infomation .title img {
   width: 50px;
   height: 40px;
@@ -1262,7 +1271,6 @@ nav.subNav li img {
 }
 
 .infomation .ticket-type {
-  margin-left: 15px;
   color: #4ca46f;
   font-size: 1.4rem;
 }
@@ -1286,11 +1294,19 @@ nav.subNav li img {
   height: -moz-fit-content;
   height: fit-content;
   background-color: #fff;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+  .infomation .container {
+    width: 90%;
+  }
 }
 
 .infomation .container .ticket-name {
   width: 100%;
   height: 60px;
+  margin-bottom: 15px;
 }
 
 .infomation .container .ticket-name .act-name {
@@ -1445,6 +1461,12 @@ nav.subNav li img {
   width: 100%;
 }
 
+.infomation .container .buy-form .notice {
+  font-size: .9rem;
+  color: #a5a5a5;
+  font-family: "NotoSansCJKtc-Regular";
+}
+
 .infomation .container .buy-form .total-price {
   width: 100%;
   margin-top: 15px;
@@ -1497,6 +1519,16 @@ nav.subNav li img {
   padding-bottom: 30px;
 }
 
+@media (max-width: 768px) {
+  .infomation .ticket-head {
+    width: 90%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+}
+
 .infomation .ticket-qrcode {
   width: 40%;
   height: 50%;
@@ -1519,6 +1551,12 @@ nav.subNav li img {
   background-color: #fff;
   padding-top: 20px;
   padding-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+  .infomation .ticket-qrcode {
+    width: 90%;
+  }
 }
 
 .infomation .ticket-qrcode p {
@@ -1591,6 +1629,12 @@ nav.subNav li img {
   padding-bottom: 20px;
   border-radius: 14px;
   margin-bottom: 60px;
+}
+
+@media (max-width: 768px) {
+  .infomation .ticket-detail {
+    width: 90%;
+  }
 }
 
 .infomation .ticket-detail p {
@@ -2861,6 +2905,7 @@ nav.subNav li img {
           align-items: center;
   width: 100%;
   padding-right: 10px;
+  margin-bottom: 15px;
 }
 
 .onePageManagement .act-block .btn-group .view-btn {
