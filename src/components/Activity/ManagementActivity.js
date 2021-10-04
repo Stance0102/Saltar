@@ -70,11 +70,10 @@ const ManagementActivity = () => {
                     return (
                         <div className="act-block">
                             <div className="img-box">
-                                {activity.photos !== undefined ? (
+                                {activity.photos.length !== 0 ? (
                                     <img src={activity.photos[0]} />
                                 ) : (
                                     <img src={fiesta} alt="" />
-                                    // 不知道圖片為什麼顯示不了
                                 )}
                             </div>
                             <font className="act-title">

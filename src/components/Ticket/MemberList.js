@@ -15,17 +15,21 @@ const MemberList = () => {
             for (let i = 0; i < query.tickets.length; i++) {
                 const ticket = query.tickets[i];
                 const response = await selectTicketMember(ticket.Id);
+                console.log(response);
                 if (response.status === 200) {
                     switch (response.data.status) {
                         case 0:
-                            buyers.push({
-                                ...response.data.results[0],
-                                ticketName: ticket.ticket_Name,
+                            response.data.results.forEach((buyer) => {
+                                buyers.push({
+                                    ...buyer,
+                                    ticketName: ticket.ticket_Name,
+                                });
                             });
                             break;
                     }
                 }
             }
+            console.log(buyers);
             setBuyers(buyers);
         };
 

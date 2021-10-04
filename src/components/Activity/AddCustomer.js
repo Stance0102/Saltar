@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { FormInput } from "../Home/_Components";
-import { createCustomer } from "../agent";
+import { createCustomer, createGroupCustomerShip } from "../agent";
 import Swal from "sweetalert2";
 import { useSelector } from "react-redux";
 
@@ -93,24 +93,41 @@ const AddCustomer = () => {
             cusType,
             cusTag,
             cusNote,
-            cusSex === "male",
-            true,
-            true
+            cusSex === "male"
         );
         if (response.status == 200) {
             switch (response.data.status) {
                 case 0:
-                    Swal.fire({
-                        title: "新增成功",
-                        confirmButtonText: "繼續",
-                        confirmButtonColor: "#ffb559",
-                        icon: "success",
-                    }).then(() => {
-                        history.push("/dashboard");
-                    });
+                    const shipResponse = await createGroupCustomerShip(
+                        groupId,
+                        response.data.result.Id
+                    );
+                    if (shipResponse.status == 200) {
+                        switch (shipResponse.data.status) {
+                            case 0:
+                                Swal.fire({
+                                    title: "新增成功",
+                                    confirmButtonText: "繼續",
+                                    confirmButtonColor: "#ffb559",
+                                    icon: "success",
+                                }).then(() => {
+                                    history.push("/dashboard");
+                                });
+                                break;
+                            default:
+                                Swal.fire({
+                                    title: "新增失敗",
+                                    text: JSON.stringify(response.data.results),
+                                    confirmButtonText: "知道了",
+                                    confirmButtonColor: "#ffb559",
+                                    icon: "error",
+                                });
+                                break;
+                        }
+                    }
+
                     break;
                 default:
-                    console.log(response.data);
                     Swal.fire({
                         title: "新增失敗",
                         text: JSON.stringify(response.data.results),

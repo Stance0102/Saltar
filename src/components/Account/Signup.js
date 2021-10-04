@@ -84,6 +84,14 @@ const SignUp = () => {
                 icon: "info",
             });
         }
+        if (school === "" || school === "無法偵測") {
+            return Swal.fire({
+                title: "請填入學校信箱",
+                confirmButtonText: "知道了",
+                confirmButtonColor: "#ffb559",
+                icon: "info",
+            });
+        }
         const response = await signup(
             userName,
             passWord,
