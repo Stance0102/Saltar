@@ -159,9 +159,17 @@ const Information = () => {
                         });
                         window.location.reload();
                     });
-
+                    break;
+                case 17:
+                    Swal.fire({
+                        title: "你已經買過這張票囉",
+                        confirmButtonText: "確定",
+                        confirmButtonColor: "#ffb559",
+                        icon: "info",
+                    });
                     break;
                 default:
+                    console.log(response);
                     Swal.fire({
                         title: "發生不明錯誤",
                         confirmButtonText: "確定",

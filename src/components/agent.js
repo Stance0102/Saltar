@@ -165,6 +165,17 @@ const updateGroup = async (
     );
 };
 
+const createGroupCustomerShip = async (groupID, customerID) => {
+    return axios.post(
+        `/Groups/CustomerShip/create`,
+        {
+            Group: groupID,
+            Customer: customerID,
+        },
+        { params: { t: new Date().getTime() } }
+    );
+};
+
 const createGroupMember = async (
     //使用者ID
     userId,
@@ -590,9 +601,7 @@ const createCustomer = async (
     customer_type,
     customer_tag,
     customer_note,
-    sex,
-    is_inSaltar,
-    is_active
+    sex
 ) => {
     return axios.post(
         `/customer/create`,
@@ -606,8 +615,6 @@ const createCustomer = async (
             customer_tag: customer_tag,
             customer_note: customer_note,
             sex: sex,
-            is_inSaltar: is_inSaltar,
-            is_active: is_active,
         },
         { params: { t: new Date().getTime() } }
     );
@@ -788,6 +795,7 @@ export {
     createGroup,
     selectGroup,
     updateGroup,
+    createGroupCustomerShip,
     createGroupMember,
     selectGroupMemberByUserId,
     selectGroupMemberByGroupId,
