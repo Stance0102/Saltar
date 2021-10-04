@@ -1,12 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Bar, Doughnut } from "react-chartjs-2";
 import * as routes from "../Router";
 import { Link } from "react-router-dom";
+import { selectCustomerByGroupId } from "../agent";
 // Img
 import tick_Icon from "../../images/tick_Icon.svg";
 import Email_Icon from "../../images/Email_Icon.svg";
 
 const Analyze = () => {
+    const { groupId } = useSelector((state) => state.Account);
+    const [customers, setCustomers] = useState([]);
+    useEffect(() => {
+        const setupData = async () => {
+            const response = await selectCustomerByGroupId(groupId);
+            if (response.status === 200) {
+                switch (response.data.status) {
+                    case 0:
+                        setCustomers(response.data.results);
+                        break;
+                    default:
+                        break;
+                }
+            } else {
+                console.log(response);
+            }
+        };
+        setupData();
+    }, []);
+
     return (
         <div className="activity-box">
             <div className="activity-box-title">
@@ -51,30 +73,49 @@ const Analyze = () => {
                         <h6>成交訂單金額</h6>
                         <h6>等級</h6>
                         <h6>客戶類別</h6>
-                        <h6>標籤</h6>
+                        <h6>備註</h6>
                     </div>
-
-                    <div className="row-container">
-                        <h6 className="row-number">01</h6>
-                        <div className="row-textbox">
-                            <h6 className="row-text">李慶毅</h6>
-                            <h6 className="row-text">男</h6>
-                            <h6 className="row-text">0925420706</h6>
-                            <h6 className="row-text">10</h6>
-                            <h6 className="row-text">10200</h6>
-                            <h6 className="row-text success">一般會員</h6>
-                            <h6 className="row-text fail">重點客群</h6>
-                            <h6 className="row-text">#動漫</h6>
-                            <div className="row-btn-group">
-                                <button className="delete">
-                                    <img src={Email_Icon} alt="" />
-                                </button>
-                                <button className="check">
-                                    <img src={tick_Icon} alt="" />
-                                </button>
+                    {customers.map((customer, index) => {
+                        return (
+                            <div className="row-container">
+                                <h6 className="row-number">{index}</h6>
+                                <div className="row-textbox">
+                                    <h6 className="row-text">
+                                        {customer.actualname}
+                                    </h6>
+                                    <h6 className="row-text">
+                                        {customer.sex === true ? "男" : "女"}
+                                    </h6>
+                                    <h6 className="row-text">
+                                        {customer.phone}
+                                    </h6>
+                                    <h6 className="row-text">
+                                        {customer.customer_orders_count}
+                                    </h6>
+                                    <h6 className="row-text">
+                                        {customer.customer_orders_totalcharge}
+                                    </h6>
+                                    <h6 className="row-text success">
+                                        {customer.customer_type}
+                                    </h6>
+                                    <h6 className="row-text fail">
+                                        {customer.customer_tag}
+                                    </h6>
+                                    <h6 className="row-text">
+                                        {customer.customer_note}
+                                    </h6>
+                                    <div className="row-btn-group">
+                                        <button className="delete">
+                                            <img src={Email_Icon} alt="" />
+                                        </button>
+                                        <button className="check">
+                                            <img src={tick_Icon} alt="" />
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        );
+                    })}
                 </div>
             </div>
         </div>
