@@ -75,10 +75,10 @@ const Analyze = () => {
                         <h6>客戶類別</h6>
                         <h6>備註</h6>
                     </div>
-                    {customers.map((customer) => {
+                    {customers.map((customer, index) => {
                         return (
                             <div className="row-container">
-                                <h6 className="row-number">01</h6>
+                                <h6 className="row-number">{index}</h6>
                                 <div className="row-textbox">
                                     <h6 className="row-text">
                                         {customer.actualname}
