@@ -2887,6 +2887,11 @@ nav.subNav li img {
   text-align: center;
 }
 
+.onePageManagement .act-block .btn-group .disable-btn {
+  cursor: not-allowed;
+  background-color: #a5a5a5;
+}
+
 .onePageManagement .act-block .btn-group .edit-btn {
   background-color: #ffb559;
   border-top-right-radius: 10px;
