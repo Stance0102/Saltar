@@ -52,7 +52,6 @@ const ManagementActivity = () => {
             </div>
             <div className="onePageManagement">
                 {activities.map((activity, index) => {
-                    console.log(activity);
                     let msg = activity.uploadStatus.show
                         ? ""
                         : " *尚未新增節目";
@@ -60,6 +59,14 @@ const ManagementActivity = () => {
                     msg += activity.uploadStatus.tickets
                         ? ""
                         : " *尚未新增票種";
+
+                    let msgStatus = false;
+
+                    if (msg != "") {
+                        msgStatus = true;
+                    } else {
+                        msgStatus = false;
+                    }
 
                     return (
                         <div className="act-block">
@@ -82,12 +89,23 @@ const ManagementActivity = () => {
                             <font className="message">{msg}</font>
                             {/* 按鈕 */}
                             <div className="btn-group">
-                                <Link
-                                    to={`${routes.ONEPAGE_PREVIEW}/${activity.Id}`}
-                                    className="view-btn"
-                                >
-                                    預覽
-                                </Link>
+                                {!msgStatus && (
+                                    <Link
+                                        to={`${routes.ONEPAGE_PREVIEW}/${activity.Id}`}
+                                        className="view-btn"
+                                    >
+                                        預覽
+                                    </Link>
+                                )}
+
+                                {msgStatus && (
+                                    <Link
+                                        to=""
+                                        className="view-btn disable-btn"
+                                    >
+                                        預覽
+                                    </Link>
+                                )}
 
                                 <button
                                     className="edit-btn"
