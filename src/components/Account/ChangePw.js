@@ -56,7 +56,6 @@ const ChangePw = () => {
                 }
             } else {
                 // console.log(response);
-                break
             }
         } else {
             Swal.fire({
