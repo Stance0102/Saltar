@@ -67,12 +67,10 @@ const Information = () => {
                             });
                             break;
                         default:
-                            // console.log(mailResponse);
-                            break;
+                        // console.log(mailResponse);
                     }
                 } else {
                     // console.log(mailResponse);
-                    break
                 }
             };
             sendEmail();
