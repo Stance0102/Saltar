@@ -1407,6 +1407,7 @@ nav.subNav li img {
 .infomation .ticket-type {
   color: #4ca46f;
   font-size: 1.4rem;
+  margin-left: 10px;
 }
 
 .infomation .container {
@@ -1440,7 +1441,6 @@ nav.subNav li img {
 .infomation .container .ticket-name {
   width: 100%;
   height: 60px;
-  margin-bottom: 15px;
 }
 
 .infomation .container .ticket-name .act-name {
@@ -1656,10 +1656,9 @@ nav.subNav li img {
 @media (max-width: 768px) {
   .infomation .ticket-head {
     width: 90%;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
   }
 }
 
@@ -1737,6 +1736,12 @@ nav.subNav li img {
 .infomation .ticket-qrcode .qrcode img {
   width: 40%;
   height: 80%;
+}
+
+@media (max-width: 768px) {
+  .infomation .ticket-qrcode .qrcode img {
+    width: 100%;
+  }
 }
 
 .infomation .ticket-detail {

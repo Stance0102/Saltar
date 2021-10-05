@@ -100,7 +100,7 @@ const Information = () => {
             <div className="infomation">
                 <div id="success">
                     <img src={checked_icon} alt="" />
-                    <p>驗證成功！</p>
+                    <p>酷小子你的信箱驗證成功了！</p>
                 </div>
                 <div className="title">
                     <img src={vector_gray_Icon} alt="" />
