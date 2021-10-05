@@ -232,7 +232,7 @@ const Information = () => {
                             {ticketData.ticket_Name}
                         </font>
                     </div>
-                    <div className="ticket-qrcode">
+                    {/* <div className="ticket-qrcode">
                         <p>
                             <img src={check_Ticket} alt="" />
                             驗票 QR Code
@@ -241,7 +241,7 @@ const Information = () => {
                             <img src={qrcode} alt="" />
                             請使用此QR Code進場！
                         </div>
-                    </div>
+                    </div> */}
                     <div className="ticket-detail">
                         <p>
                             <img src={receip} alt="" />

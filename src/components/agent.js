@@ -523,8 +523,9 @@ const updateTicketMember = async (
     ticketId,
     //性別
     sex,
-    // ? true false
-    is_active
+    NID,
+    is_active,
+    is_valid
 ) => {
     return axios.put(
         `/tickets/member/update/${ticketMemberId}`,
@@ -533,8 +534,10 @@ const updateTicketMember = async (
             phone: phone,
             mail: mail,
             ticket: ticketId,
+            NID: NID,
             sex: sex,
             is_active: is_active,
+            is_vaild: is_valid,
         },
         { params: { t: new Date().getTime() } }
     );
@@ -610,14 +613,23 @@ const selectTicketMember = async (
     });
 };
 
-const createMailFormate = async (
-    //買票ID
-    joinedListId
-) => {
+//拿取買票資料
+const selectMailFormate = async (joinedListId) => {
     return axios.post(
-        `/tickets/member/get/customer`,
+        `/tickets/member/getMailFormat/`,
         {
             joinedListId: joinedListId,
+        },
+        { params: { t: new Date().getTime() } }
+    );
+};
+
+//解密Token
+const decodeToken = async (token) => {
+    return axios.post(
+        `/mail/releaseToken`,
+        {
+            token: token,
         },
         { params: { t: new Date().getTime() } }
     );
@@ -867,11 +879,11 @@ export {
     updateTicketMember,
     sendCusValidMail,
     sendTicketMail,
-    selectCustomerTicket,
     validTicket,
     createCustomerTicket,
     selectTicketMember,
-    createMailFormate,
+    selectMailFormate,
+    decodeToken,
 };
 //顧客
 export { createCustomer, selectCustomerByGroupId, selectCustomerByName };
