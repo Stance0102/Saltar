@@ -39,12 +39,18 @@ const MemberList = () => {
         }
     }, [reload]);
 
-    const handleValidTicket = async (e) => {
+    const handleValidTicket = async (e, buyer) => {
         e.preventDefault();
-    };
-    const handleDeleteTicket = async (e, buyer) => {
-        e.preventDefault();
-        const { Id, actualname, phone, mail, ticket: ticketId, sex } = buyer;
+        const {
+            Id,
+            actualname,
+            phone,
+            mail,
+            ticket: ticketId,
+            sex,
+            NID,
+            is_active,
+        } = buyer;
         const response = await updateTicketMember(
             Id,
             actualname,
@@ -52,7 +58,42 @@ const MemberList = () => {
             mail,
             ticketId,
             sex,
-            false
+            NID,
+            is_active,
+            true
+        );
+        if (response.status === 200) {
+            switch (response.data.status) {
+                case 0:
+                    setReload(true);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+    const handleDeleteTicket = async (e, buyer) => {
+        e.preventDefault();
+        const {
+            Id,
+            actualname,
+            phone,
+            mail,
+            ticket: ticketId,
+            sex,
+            NID,
+            is_vaild,
+        } = buyer;
+        const response = await updateTicketMember(
+            Id,
+            actualname,
+            phone,
+            mail,
+            ticketId,
+            sex,
+            NID,
+            false,
+            is_vaild
         );
         if (response.status === 200) {
             switch (response.data.status) {
@@ -108,7 +149,7 @@ const MemberList = () => {
                                             <button
                                                 className="check"
                                                 onClick={(e) => {
-                                                    handleValidTicket(e);
+                                                    handleValidTicket(e, buyer);
                                                 }}
                                             >
                                                 <img src={tick_Icon} alt="" />

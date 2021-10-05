@@ -14,19 +14,20 @@ const EmailCheck = () => {
     const history = useHistory();
 
     useEffect(() => {
-        const { id, token } = qs.parse(location.search, {
+        const { token } = qs.parse(location.search, {
             ignoreQueryPrefix: true,
         });
         if (location.pathname === "/custmerEmailCheck") {
             const setupData = async () => {
-                if (id !== undefined && token !== undefined) {
+                if (token !== undefined) {
                     const response = await verifyValidMail(token);
-                    console.log(response);
                     if (response.status === 200) {
                         switch (response.data.status) {
                             case 0:
                                 setCheckStatus(true);
-                                const response = await sendTicketMail(id);
+                                const sendResponse = await sendTicketMail(
+                                    response.data.results.joinedList_Id
+                                );
                                 break;
                             case 9:
                                 Swal.fire({

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import qs from "qs";
-import { selectCustomerTicket } from "../agent";
+import { decodeToken, selectMailFormate } from "../agent";
 import Swal from "sweetalert2";
 // Img
 import cart_icon from "../../images/cart_icon.svg";
@@ -33,15 +33,46 @@ const Information = () => {
         });
         if (id !== undefined) {
             const setupData = async () => {
-                const response = await selectCustomerTicket(id);
-                console.log(response);
-                if (response.status === 200) {
-                    switch (response.data.status) {
+                const tokenResponse = await decodeToken(id);
+                console.log(tokenResponse);
+                if (tokenResponse.status === 200) {
+                    switch (tokenResponse.data.status) {
                         case 0:
-                            setActivityData(response.data.results.act);
-                            setTicketData(response.data.results.ticket);
-                            setUserData(response.data.results.joined);
-                            setQRcode(response.data.results.QRcode);
+                            const mailResponse = await selectMailFormate(
+                                tokenResponse.data.results.joinedList_Id
+                            );
+                            if (mailResponse.status === 200) {
+                                switch (mailResponse.data.status) {
+                                    case 0:
+                                        setActivityData(
+                                            mailResponse.data.results.act
+                                        );
+                                        setTicketData(
+                                            mailResponse.data.results.ticket
+                                        );
+                                        setUserData(
+                                            mailResponse.data.results.joined
+                                        );
+                                        setQRcode(
+                                            mailResponse.data.results.QRcode
+                                        );
+                                        break;
+                                    default:
+                                        Swal.fire({
+                                            title: "發生意外錯誤",
+                                            confirmButtonText: "離開",
+                                            confirmButtonColor: "#ffb559",
+                                            icon: "info",
+                                        }).then(() => {
+                                            history.push({
+                                                pathname: "/",
+                                            });
+                                        });
+                                        break;
+                                }
+                            } else {
+                                console.log(mailResponse);
+                            }
                             break;
                         default:
                             Swal.fire({
@@ -57,7 +88,7 @@ const Information = () => {
                             break;
                     }
                 } else {
-                    console.log(response);
+                    console.log(tokenResponse);
                 }
             };
             setupData();

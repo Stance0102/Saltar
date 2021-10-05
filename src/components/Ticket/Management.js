@@ -15,19 +15,11 @@ const Management = () => {
     useEffect(() => {
         const setupData = async () => {
             const response = await selectActivityByGroupId(groupId);
+            console.log(response.data.results);
             if (response.status == 200) {
                 switch (response.data.status) {
                     case 0:
-                        const Activities = [];
-                        for (let i = 0; i < response.data.results.length; i++) {
-                            const activity = response.data.results[i];
-                            const res = await selectTicketByActivityId(
-                                activity.Id
-                            );
-                            activity.tickets = res.data.results;
-                            Activities.push(activity);
-                        }
-                        setActivities(Activities);
+                        setActivities(response.data.results);
                         break;
                 }
             }
