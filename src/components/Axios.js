@@ -5,7 +5,7 @@ const url = "https://saltar.taipei/test/api/";
 const axios = () => {
     const instance = _axios.create({
         baseURL: url,
-        timeout: 3000,
+        timeout: 10000,
         // params: {
         //     t: timeStamp,
         // },

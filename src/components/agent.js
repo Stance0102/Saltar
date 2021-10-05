@@ -540,6 +540,18 @@ const updateTicketMember = async (
     );
 };
 
+//確認買票信箱
+const sendCusValidMail = async (mail, joinedListId) => {
+    return axios.post(
+        `/mail/sendCusVaildMail`,
+        {
+            mail: mail,
+            joinedList_Id: joinedListId,
+        },
+        { params: { t: new Date().getTime() } }
+    );
+};
+
 const validTicket = async (token) => {
     return axios.post(
         `/tickets/vaildticket`,
@@ -576,7 +588,7 @@ const selectTicketMember = async (
 };
 
 const createMailFormate = async (
-    //窩ㄅ知道是什麼
+    //買票ID
     joinedListId
 ) => {
     return axios.post(
@@ -830,6 +842,7 @@ export {
     updateTicket,
     createTicketMember,
     updateTicketMember,
+    sendCusValidMail,
     validTicket,
     createCustomerTicket,
     selectTicketMember,

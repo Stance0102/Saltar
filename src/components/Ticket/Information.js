@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { FormInput } from "../Home/_Components";
-import { createTicketMember, selectTicket } from "../agent";
+import { createTicketMember, selectTicket, sendCusValidMail } from "../agent";
 import Swal from "sweetalert2";
 // Img
 import cart_icon from "../../images/cart_icon.svg";
@@ -143,22 +143,38 @@ const Information = () => {
         if (response.status == 200) {
             switch (response.data.status) {
                 case 0:
-                    Swal.fire({
-                        title: "購票成功",
-                        confirmButtonText: "繼續",
-                        confirmButtonColor: "#ffb559",
-                        icon: "success",
-                    }).then(() => {
-                        history.push({
-                            pathname: "/ticketInformation",
-                            state: {
-                                ticketId: ticketId,
-                                activityData: activityData,
-                                userData: userData,
-                            },
-                        });
-                        window.location.reload();
-                    });
+                    const mailResponse = await sendCusValidMail(
+                        response.data.results.mail,
+                        response.data.results.Id
+                    );
+                    if (mailResponse.status == 200) {
+                        switch (mailResponse.data.status) {
+                            case 0:
+                                Swal.fire({
+                                    title: "購票成功",
+                                    text: "請去信箱點選驗證",
+                                    confirmButtonText: "繼續",
+                                    confirmButtonColor: "#ffb559",
+                                    icon: "success",
+                                }).then(() => {
+                                    history.push({
+                                        pathname: "/ticketInformation",
+                                        state: {
+                                            ticketId: ticketId,
+                                            activityData: activityData,
+                                            userData: userData,
+                                        },
+                                    });
+                                    window.location.reload();
+                                });
+                                break;
+                            default:
+                                console.log(mailResponse);
+                                break;
+                        }
+                    } else {
+                        console.log(mailResponse);
+                    }
                     break;
                 case 17:
                     Swal.fire({
