@@ -250,6 +250,14 @@ nav.subNav {
   background-color: #fff;
 }
 
+@media (max-width: 768px) {
+  nav.subNav {
+    -webkit-transform: translateX(15%);
+            transform: translateX(15%);
+    overflow: hidden;
+  }
+}
+
 nav.subNav li {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -402,6 +410,12 @@ nav.subNav li img {
   background-color: rgba(255, 168, 61, 0.15);
 }
 
+@media (max-width: 768px) {
+  .index-img {
+    display: none;
+  }
+}
+
 .auth {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -418,7 +432,13 @@ nav.subNav li img {
           align-items: center;
   width: 55vw;
   min-height: 100%;
-  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .auth {
+    width: 100vw;
+  }
 }
 
 .auth .auth-title {
@@ -446,6 +466,12 @@ nav.subNav li img {
   height: 100%;
 }
 
+@media (max-width: 768px) {
+  .auth .auth-form {
+    width: 95%;
+  }
+}
+
 .auth .auth-form .auth-label {
   font-size: 1rem;
   font-family: "NotoSansCJKtc-Bold";
@@ -453,6 +479,18 @@ nav.subNav li img {
   margin-top: 10px;
   margin-bottom: 10px;
   width: 550px;
+}
+
+@media (max-width: 768px) {
+  .auth .auth-form .auth-label {
+    width: 100%;
+  }
+}
+
+.auth .auth-form .auth-label .notice {
+  font-size: .9rem;
+  color: #a5a5a5;
+  font-family: "NotoSansCJKtc-Regular";
 }
 
 .auth .auth-form .notice {
@@ -847,6 +885,12 @@ nav.subNav li img {
   margin-bottom: 25px;
 }
 
+@media (max-width: 768px) {
+  .management-row-box .row-container {
+    overflow-x: auto;
+  }
+}
+
 .management-row-box .row-container:hover {
   border: solid 2px #ffb559;
 }
@@ -872,12 +916,28 @@ nav.subNav li img {
   width: 33.33333%;
 }
 
+@media (max-width: 768px) {
+  .management-row-box .row-container .row-text {
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+    margin-right: 15px;
+  }
+}
+
 .management-row-box .row-container .row-number {
   font-family: "NotoSansCJKtc-Bold";
   color: #ffb559;
   font-size: 1rem;
   width: 3%;
   margin-left: 30px;
+}
+
+@media (max-width: 768px) {
+  .management-row-box .row-container .row-number {
+    margin-right: 10px;
+    margin-left: 15px;
+  }
 }
 
 .management-row-box .row-container .success {
@@ -1085,7 +1145,7 @@ nav.subNav li img {
   font-family: "NotoSansCJKtc-Regular";
   font-size: 0.9rem;
   color: #a5a5a5;
-  width: 20%;
+  width: 25%;
 }
 
 .member-row-box .row-container {
@@ -1104,6 +1164,12 @@ nav.subNav li img {
   border: solid 2px #bdbdbd;
   background-color: #fff;
   margin-bottom: 25px;
+}
+
+@media (max-width: 768px) {
+  .member-row-box .row-container {
+    overflow-x: auto;
+  }
 }
 
 .member-row-box .row-container:hover {
@@ -1128,7 +1194,16 @@ nav.subNav li img {
   font-size: 1rem;
   font-weight: 500;
   color: #000000;
-  width: 20%;
+  width: 25%;
+}
+
+@media (max-width: 768px) {
+  .member-row-box .row-container .row-text {
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+    margin-right: 15px;
+  }
 }
 
 .member-row-box .row-container .row-number {
@@ -1137,6 +1212,13 @@ nav.subNav li img {
   font-size: 1rem;
   width: 3%;
   margin-left: 30px;
+}
+
+@media (max-width: 768px) {
+  .member-row-box .row-container .row-number {
+    margin-right: 10px;
+    margin-left: 15px;
+  }
 }
 
 .member-row-box .row-container .success {
@@ -2692,6 +2774,12 @@ nav.subNav li img {
   margin-bottom: 25px;
 }
 
+@media (max-width: 768px) {
+  .custmerList .custmer-row-box .row-container {
+    overflow-x: auto;
+  }
+}
+
 .custmerList .custmer-row-box .row-container:hover {
   border: solid 2px #ffb559;
 }
@@ -2717,12 +2805,28 @@ nav.subNav li img {
   width: 12.5%;
 }
 
+@media (max-width: 768px) {
+  .custmerList .custmer-row-box .row-container .row-text {
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
+    margin-right: 15px;
+  }
+}
+
 .custmerList .custmer-row-box .row-container .row-number {
   font-family: "NotoSansCJKtc-Bold";
   color: #ffb559;
   font-size: 1rem;
   width: 3%;
   margin-left: 30px;
+}
+
+@media (max-width: 768px) {
+  .custmerList .custmer-row-box .row-container .row-number {
+    margin-right: 10px;
+    margin-left: 15px;
+  }
 }
 
 .custmerList .custmer-row-box .row-container .success {
@@ -2833,7 +2937,7 @@ nav.subNav li img {
       -ms-flex-align: start;
           align-items: flex-start;
   width: 23.5%;
-  height: 350px;
+  height: 370px;
   border-radius: 14px;
   -webkit-box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);
           box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);
@@ -2845,7 +2949,7 @@ nav.subNav li img {
 
 .onePageManagement .act-block .img-box {
   min-width: 100%;
-  min-height: 190px;
+  min-height: 210px;
   overflow: hidden;
 }
 

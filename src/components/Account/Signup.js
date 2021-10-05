@@ -154,14 +154,16 @@ const SignUp = () => {
                         ClassName="auth-label"
                         Type="email"
                         Handler={onChangeEmail}
-                        Title="帳號 (社團/系學會行銷、公關負責人、主要聯絡人的“學校Email”)"
+                        Title="帳號"
+                        notice="(社團/系學會行銷、公關負責人、主要聯絡人的“學校Email”)"
                     />
 
                     <FormInput
                         Id="school"
                         ClassName="auth-label"
                         Type="text"
-                        Title="學校（系統依照輸入之學校信箱自動偵測校名）"
+                        Title="學校"
+                        notice="(系統依照輸入之學校信箱自動偵測校名)"
                         value={school}
                         disabled={true}
                     />
@@ -171,7 +173,8 @@ const SignUp = () => {
                         Type="text"
                         ClassName="auth-label"
                         Handler={onChangeUsername}
-                        Title="組織名稱(社團/系學會全名，Ex：嘻哈文化研究社、資訊管理系系學會)"
+                        Title="組織名稱"
+                        notice="(社團/系學會全名，Ex：嘻哈文化研究社、資訊管理系系學會)"
                     />
 
                     <FormInput
@@ -179,7 +182,8 @@ const SignUp = () => {
                         Type="tel"
                         ClassName="auth-label"
                         Handler={onChangeTelnumber}
-                        Title="手機號碼 (社團/系學會行銷、公關負責人、主要聯絡人的手機)"
+                        Title="手機號碼"
+                        notice="(社團/系學會行銷、公關負責人、主要聯絡人的手機)"
                     />
 
                     <FormInput

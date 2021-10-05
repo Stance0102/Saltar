@@ -73,7 +73,7 @@ const ManagementActivity = () => {
                                 {activity.photos.length !== 0 ? (
                                     <img src={activity.photos[0]} />
                                 ) : (
-                                    <img src={fiesta} alt="" />
+                                    <img src={fiesta} />
                                 )}
                             </div>
                             <font className="act-title">
