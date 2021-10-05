@@ -48,7 +48,7 @@ const Information = () => {
                 setPayStatus(true);
             }
         }
-        console.log(location.state);
+        // console.log(location.state);
         if (location.state.sendEmail) {
             const sendEmail = async () => {
                 const mailResponse = await sendCusValidMail(
@@ -67,11 +67,12 @@ const Information = () => {
                             });
                             break;
                         default:
-                            console.log(mailResponse);
+                            // console.log(mailResponse);
                             break;
                     }
                 } else {
-                    console.log(mailResponse);
+                    // console.log(mailResponse);
+                    break
                 }
             };
             sendEmail();
@@ -98,7 +99,7 @@ const Information = () => {
                             break;
                     }
                 } else {
-                    console.log(response);
+                    // console.log(response);
                 }
             };
             setupData();
@@ -206,7 +207,7 @@ const Information = () => {
                     });
                     break;
                 default:
-                    console.log(response);
+                    // console.log(response);
                     Swal.fire({
                         title: "發生不明錯誤",
                         confirmButtonText: "確定",

@@ -32,7 +32,7 @@ const ChangePw = () => {
         if (password === passwordCheck) {
             const response = await changePassword(id, password);
             if (response.status == 200) {
-                console.log(response.data);
+                // console.log(response.data);
                 switch (response.data.status) {
                     case 0:
                         Swal.fire({
@@ -55,7 +55,8 @@ const ChangePw = () => {
                         break;
                 }
             } else {
-                console.log(response);
+                // console.log(response);
+                break
             }
         } else {
             Swal.fire({

@@ -26,7 +26,7 @@ const SignUp = () => {
                         break;
                 }
             } else {
-                console.log(response);
+                // console.log(response);
             }
         };
 
@@ -131,7 +131,7 @@ const SignUp = () => {
                     break;
             }
         } else {
-            console.log(response);
+            // console.log(response);
         }
     }
 

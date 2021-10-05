@@ -23,7 +23,7 @@ const Analyze = () => {
                         break;
                 }
             } else {
-                console.log(response);
+                // console.log(response);
             }
         };
         setupData();

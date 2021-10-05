@@ -93,7 +93,7 @@ const OnePage = ({ activityId }) => {
                             break;
                     }
                 } else {
-                    console.log(allInOneResponse);
+                    // console.log(allInOneResponse);
                 }
                 setActivityData({
                     ...activityData,

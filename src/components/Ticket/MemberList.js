@@ -17,7 +17,7 @@ const MemberList = () => {
             for (let i = 0; i < query.tickets.length; i++) {
                 const ticket = query.tickets[i];
                 const response = await selectTicketMember(ticket.Id);
-                console.log(response);
+                // console.log(response);
                 if (response.status === 200) {
                     switch (response.data.status) {
                         case 0:
@@ -31,7 +31,7 @@ const MemberList = () => {
                     }
                 }
             }
-            console.log(buyers);
+            // console.log(buyers);
             setBuyers(buyers);
         };
 

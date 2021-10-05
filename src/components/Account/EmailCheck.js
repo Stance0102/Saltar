@@ -55,7 +55,7 @@ const EmailCheck = () => {
                                 break;
                         }
                     } else {
-                        console.log(response);
+                        // console.log(response);
                     }
                 }
             };

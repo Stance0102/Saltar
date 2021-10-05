@@ -34,7 +34,7 @@ const Information = () => {
         if (id !== undefined) {
             const setupData = async () => {
                 const tokenResponse = await decodeToken(id);
-                console.log(tokenResponse);
+                // console.log(tokenResponse);
                 if (tokenResponse.status === 200) {
                     switch (tokenResponse.data.status) {
                         case 0:
@@ -71,7 +71,7 @@ const Information = () => {
                                         break;
                                 }
                             } else {
-                                console.log(mailResponse);
+                                // console.log(mailResponse);
                             }
                             break;
                         default:
@@ -88,7 +88,7 @@ const Information = () => {
                             break;
                     }
                 } else {
-                    console.log(tokenResponse);
+                    // console.log(tokenResponse);
                 }
             };
             setupData();
