@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import garbage_can_Icon from "../../images/garbage_can_Icon.svg";
 import tick_Icon from "../../images/tick_Icon.svg";
-import { selectTicketMember, updateTicketMember } from "../agent";
+import { selectTicketMember, updateTicketMember, validTicket } from "../agent";
+import { useSelector } from "react-redux";
 
 const MemberList = () => {
     const { query } = useLocation();
     const [buyers, setBuyers] = useState([]);
     const [reload, setReload] = useState(true);
+    const { groupId } = useSelector((state) => state.Account);
 
     useEffect(() => {
         const setupData = async () => {
@@ -99,6 +101,8 @@ const MemberList = () => {
             switch (response.data.status) {
                 case 0:
                     setReload(true);
+                    break;
+                default:
                     break;
             }
         }

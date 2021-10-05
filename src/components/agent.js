@@ -566,10 +566,22 @@ const sendTicketMail = async (joinedListId) => {
     );
 };
 
-const validTicket = async (token) => {
+//拿取買票資料
+const selectCustomerTicket = async (joinedListId) => {
+    return axios.post(
+        `/tickets/member/getMailFormat`,
+        {
+            joinedListId: joinedListId,
+        },
+        { params: { t: new Date().getTime() } }
+    );
+};
+
+const validTicket = async (token, groupId) => {
     return axios.post(
         `/tickets/vaildticket`,
         {
+            groupId: groupId,
             token: token,
         },
         { params: { t: new Date().getTime() } }
