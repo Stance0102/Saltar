@@ -14,6 +14,7 @@ import receip from "../../images/receip.svg";
 
 const Information = () => {
     const [ticketId, setTicketId] = useState("");
+    const [buyTicketId, setBuyTicketId] = useState("");
     const [ticketData, setTicketData] = useState("");
     const [activityData, setActivityData] = useState("");
     const [userData, setUserData] = useState({
@@ -30,11 +31,14 @@ const Information = () => {
 
     useEffect(() => {
         let ticketId = "";
+        let buyTicketId = "";
         let activityData = {};
         if (location.state !== undefined) {
             ticketId = location.state.ticketId;
+            buyTicketId = location.state.buyTicketId;
             activityData = location.state.activityData;
             setTicketId(ticketId);
+            setBuyTicketId(buyTicketId);
             setActivityData(activityData);
 
             if ("userData" in location.state) {
@@ -44,11 +48,11 @@ const Information = () => {
         }
         if (ticketId !== "") {
             const setupData = async () => {
-                const Response = await selectTicket(ticketId);
-                if (Response.status === 200) {
-                    switch (Response.data.status) {
+                const response = await selectTicket(ticketId);
+                if (response.status === 200) {
+                    switch (response.data.status) {
                         case 0:
-                            setTicketData(Response.data.results[0]);
+                            setTicketData(response.data.results[0]);
                             break;
                         default:
                             Swal.fire({
@@ -64,7 +68,7 @@ const Information = () => {
                             break;
                     }
                 } else {
-                    console.log(Response);
+                    console.log(response);
                 }
             };
             setupData();
@@ -143,38 +147,24 @@ const Information = () => {
         if (response.status == 200) {
             switch (response.data.status) {
                 case 0:
-                    const mailResponse = await sendCusValidMail(
-                        response.data.results.mail,
-                        response.data.results.Id
-                    );
-                    if (mailResponse.status == 200) {
-                        switch (mailResponse.data.status) {
-                            case 0:
-                                Swal.fire({
-                                    title: "購票成功",
-                                    text: "請去信箱點選驗證",
-                                    confirmButtonText: "繼續",
-                                    confirmButtonColor: "#ffb559",
-                                    icon: "success",
-                                }).then(() => {
-                                    history.push({
-                                        pathname: "/ticketInformation",
-                                        state: {
-                                            ticketId: ticketId,
-                                            activityData: activityData,
-                                            userData: userData,
-                                        },
-                                    });
-                                    window.location.reload();
-                                });
-                                break;
-                            default:
-                                console.log(mailResponse);
-                                break;
-                        }
-                    } else {
-                        console.log(mailResponse);
-                    }
+                    Swal.fire({
+                        title: "驗證信箱",
+                        text: "前往驗證信箱",
+                        confirmButtonText: "繼續",
+                        confirmButtonColor: "#ffb559",
+                        icon: "success",
+                    }).then(() => {
+                        history.push({
+                            pathname: "/ticketInformation",
+                            state: {
+                                ticketId: ticketId,
+                                buyTicketId: response.data.results.Id,
+                                activityData: activityData,
+                                userData: userData,
+                            },
+                        });
+                        window.location.reload();
+                    });
                     break;
                 case 17:
                     Swal.fire({
@@ -197,13 +187,39 @@ const Information = () => {
         }
     };
 
+    const sendEmail = async (e) => {
+        e.preventDefault();
+        const mailResponse = await sendCusValidMail(
+            userData.email,
+            buyTicketId
+        );
+        if (mailResponse.status == 200) {
+            switch (mailResponse.data.status) {
+                case 0:
+                    Swal.fire({
+                        title: "發信成功",
+                        text: "請去信箱點選驗證",
+                        confirmButtonText: "繼續",
+                        confirmButtonColor: "#ffb559",
+                        icon: "success",
+                    });
+                    break;
+                default:
+                    console.log(mailResponse);
+                    break;
+            }
+        } else {
+            console.log(mailResponse);
+        }
+    };
+
     if (payStatus) {
         return (
             <>
                 <div className="infomation">
                     <div id="success">
                         <img src={checked_icon} alt="" />
-                        <p>購買完成！</p>
+                        <p>驗證信箱！</p>
                     </div>
                     <div className="title">
                         <img src={vector_gray_Icon} alt="" />
@@ -254,6 +270,9 @@ const Information = () => {
                             總計金額
                             <p>{ticketData.price}元</p>
                         </div>
+                        <button className="buy-btn" onClick={sendEmail}>
+                            發送信件
+                        </button>
                     </div>
                 </div>
             </>

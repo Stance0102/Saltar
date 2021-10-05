@@ -6,12 +6,6 @@ const axios = () => {
     const instance = _axios.create({
         baseURL: url,
         timeout: 10000,
-        // params: {
-        //     t: timeStamp,
-        // },
-        // headers: {
-        //     "Cache-Control": "no-cache",
-        // },
     });
     return instance;
 };

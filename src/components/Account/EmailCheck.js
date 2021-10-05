@@ -1,11 +1,66 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useLocation, useHistory } from "react-router-dom";
+import qs from "qs";
 import { FormInput } from "../Home/_Components";
+import { sendTicketMail, verifyValidMail } from "../agent";
+import Swal from "sweetalert2";
 // Img
 import email from "../../images/email.svg";
 import checked_icon from "../../images/checked_icon.svg";
 
 const EmailCheck = () => {
-    const [checkStatus, setCheckStaus] = useState(false);
+    const [checkStatus, setCheckStatus] = useState(false);
+    const location = useLocation();
+    const history = useHistory();
+
+    useEffect(() => {
+        const { id, token } = qs.parse(location.search, {
+            ignoreQueryPrefix: true,
+        });
+        if (location.pathname === "/custmerEmailCheck") {
+            const setupData = async () => {
+                if (id !== undefined && token !== undefined) {
+                    const response = await verifyValidMail(token);
+                    console.log(response);
+                    if (response.status === 200) {
+                        switch (response.data.status) {
+                            case 0:
+                                setCheckStatus(true);
+                                const response = await sendTicketMail(id);
+                                break;
+                            case 9:
+                                Swal.fire({
+                                    title: "驗證失敗",
+                                    confirmButtonText: "離開",
+                                    confirmButtonColor: "#ffb559",
+                                    icon: "error",
+                                }).then(() => {
+                                    history.push({
+                                        pathname: "/",
+                                    });
+                                });
+                                break;
+                            default:
+                                Swal.fire({
+                                    title: "發生意外錯誤",
+                                    confirmButtonText: "離開",
+                                    confirmButtonColor: "#ffb559",
+                                    icon: "info",
+                                }).then(() => {
+                                    history.push({
+                                        pathname: "/",
+                                    });
+                                });
+                                break;
+                        }
+                    } else {
+                        console.log(response);
+                    }
+                }
+            };
+            setupData();
+        }
+    }, []);
 
     if (checkStatus) {
         return (
@@ -25,7 +80,7 @@ const EmailCheck = () => {
     } else {
         return (
             <>
-                <div className="index-img">
+                {/* <div className="index-img">
                     <img src={email} alt="" />
                 </div>
                 <div className="email-check">
@@ -42,7 +97,7 @@ const EmailCheck = () => {
                         </div>
                     </div>
                 </div>
-                ;
+                ; */}
             </>
         );
     }

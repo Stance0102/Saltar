@@ -552,6 +552,28 @@ const sendCusValidMail = async (mail, joinedListId) => {
     );
 };
 
+//發送票卷信件至顧客信箱
+const sendTicketMail = async (joinedListId) => {
+    return axios.post(
+        `/mail/sendTicketMail`,
+        {
+            joinedListId: joinedListId,
+        },
+        { params: { t: new Date().getTime() } }
+    );
+};
+
+//拿取買票資料
+const selectCustomerTicket = async (joinedListId) => {
+    return axios.post(
+        `/tickets/member/getMailFormat`,
+        {
+            joinedListId: joinedListId,
+        },
+        { params: { t: new Date().getTime() } }
+    );
+};
+
 const validTicket = async (token) => {
     return axios.post(
         `/tickets/vaildticket`,
@@ -843,6 +865,8 @@ export {
     createTicketMember,
     updateTicketMember,
     sendCusValidMail,
+    sendTicketMail,
+    selectCustomerTicket,
     validTicket,
     createCustomerTicket,
     selectTicketMember,

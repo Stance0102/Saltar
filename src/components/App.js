@@ -18,6 +18,7 @@ const Dashboard = lazy(() => import("./Home/Dashboard"));
 const ErrorPage = lazy(() => import("./Home/ErrorPage"));
 
 const Information = lazy(() => import("./Ticket/Information"));
+const CustomerTicket = lazy(() => import("./Ticket/CustomerTicket"));
 const ForgetPw = lazy(() => import("./Account/ForgetPw"));
 const ChangePw = lazy(() => import("./Account/ChangePw"));
 const EmailCheck = lazy(() => import("./Account/EmailCheck"));
@@ -73,7 +74,10 @@ const App = () => {
                                     path={routes.CUSTMER_EMAILCHECK}
                                     component={EmailCheck}
                                 />
-
+                                <Route
+                                    path={routes.TICKET_CUSTOMER}
+                                    component={CustomerTicket}
+                                />
                                 <Route
                                     path={`${routes.ONEPAGE_PREVIEW}/:activityId`}
                                     render={(props) => (

@@ -21,3 +21,4 @@ export const ORGANIZER_EMAILCHECK = "/organizerEmailCheck";
 // Other
 export const ONEPAGE_PREVIEW = "/onePageEvent";
 export const TICKET_INFORMATION = "/ticketInformation";
+export const TICKET_CUSTOMER = "/ticketCustomer";
