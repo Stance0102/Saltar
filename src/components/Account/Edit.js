@@ -24,7 +24,7 @@ const Edit = () => {
                         break;
                 }
             } else {
-                console.log(accountResponse);
+                // console.log(accountResponse);
             }
             const schoolResponse = await getSchool();
             if (schoolResponse.status == 200) {
@@ -34,7 +34,7 @@ const Edit = () => {
                         break;
                 }
             } else {
-                console.log(schoolResponse);
+                // console.log(schoolResponse);
             }
         };
         setupData();
@@ -123,7 +123,7 @@ const Edit = () => {
                                 });
                                 break;
                             default:
-                                console.log(groupResponse.data);
+                                // console.log(groupResponse.data);
                                 Swal.fire({
                                     title: "更新失敗",
                                     text: JSON.stringify(
@@ -136,11 +136,11 @@ const Edit = () => {
                                 break;
                         }
                     } else {
-                        console.log(groupResponse);
+                        // console.log(groupResponse);
                     }
                     break;
                 default:
-                    console.log(accountResponse.data);
+                    // console.log(accountResponse.data);
                     Swal.fire({
                         title: "更新失敗",
                         text: JSON.stringify(accountResponse.data.results),
@@ -151,7 +151,7 @@ const Edit = () => {
                     break;
             }
         } else {
-            console.log(accountResponse);
+            // console.log(accountResponse);
         }
     };
 

@@ -48,7 +48,7 @@ const Information = () => {
                 setPayStatus(true);
             }
         }
-        console.log(location.state);
+        // console.log(location.state);
         if (location.state.sendEmail) {
             const sendEmail = async () => {
                 const mailResponse = await sendCusValidMail(
@@ -67,11 +67,12 @@ const Information = () => {
                             });
                             break;
                         default:
-                            console.log(mailResponse);
+                            // console.log(mailResponse);
                             break;
                     }
                 } else {
-                    console.log(mailResponse);
+                    // console.log(mailResponse);
+                    break
                 }
             };
             sendEmail();
@@ -98,7 +99,7 @@ const Information = () => {
                             break;
                     }
                 } else {
-                    console.log(response);
+                    // console.log(response);
                 }
             };
             setupData();
@@ -179,7 +180,7 @@ const Information = () => {
                 case 0:
                     Swal.fire({
                         title: "驗證信箱",
-                        text: "前往驗證信箱",
+                        text: "飛奔前往驗證信箱！",
                         confirmButtonText: "繼續",
                         confirmButtonColor: "#ffb559",
                         icon: "success",
@@ -199,14 +200,14 @@ const Information = () => {
                     break;
                 case 17:
                     Swal.fire({
-                        title: "你已經買過這張票囉",
+                        title: "酷喔～你已經買過這張票囉",
                         confirmButtonText: "確定",
                         confirmButtonColor: "#ffb559",
                         icon: "info",
                     });
                     break;
                 default:
-                    console.log(response);
+                    // console.log(response);
                     Swal.fire({
                         title: "發生不明錯誤",
                         confirmButtonText: "確定",
@@ -218,13 +219,39 @@ const Information = () => {
         }
     };
 
+    //     const sendEmail = async (e) => {
+    //         e.preventDefault();
+    //         const mailResponse = await sendCusValidMail(
+    //             userData.email,
+    //             buyTicketId
+    //         );
+    //         if (mailResponse.status == 200) {
+    //             switch (mailResponse.data.status) {
+    //                 case 0:
+    //                     Swal.fire({
+    //                         title: "發信成功",
+    //                         text: "趕緊去信箱點選驗證！",
+    //                         confirmButtonText: "繼續",
+    //                         confirmButtonColor: "#ffb559",
+    //                         icon: "success",
+    //                     });
+    //                     break;
+    //                 default:
+    //                     console.log(mailResponse);
+    //                     break;
+    //             }
+    //         } else {
+    //             console.log(mailResponse);
+    //         }
+    //     };
+
     if (payStatus) {
         return (
             <>
                 <div className="infomation">
                     <div id="success">
                         <img src={checked_icon} alt="" />
-                        <p>驗證信箱！</p>
+                        <p>趕緊去驗證信箱！</p>
                     </div>
                     <div className="title">
                         <img src={vector_gray_Icon} alt="" />
@@ -237,16 +264,6 @@ const Information = () => {
                             {ticketData.ticket_Name}
                         </font>
                     </div>
-                    {/* <div className="ticket-qrcode">
-                        <p>
-                            <img src={check_Ticket} alt="" />
-                            驗票 QR Code
-                        </p>
-                        <div className="qrcode">
-                            <img src={qrcode} alt="" />
-                            請使用此QR Code進場！
-                        </div>
-                    </div> */}
                     <div className="ticket-detail">
                         <p>
                             <img src={receip} alt="" />
@@ -290,7 +307,6 @@ const Information = () => {
                     <div className="ticket-name">
                         <p className="act-name">
                             {activityData.title}
-                            <br />
                             <font className="ticket-type">
                                 {ticketData.ticket_Name}
                             </font>

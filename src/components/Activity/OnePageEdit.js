@@ -98,7 +98,7 @@ const OnePageEdit = ({ activityId }) => {
                             break;
                     }
                 } else {
-                    console.log(activityResponse);
+                    // console.log(activityResponse);
                 }
                 // 節目列表
                 const showsResponse = await selectShowByActivity(activityId);
@@ -139,7 +139,7 @@ const OnePageEdit = ({ activityId }) => {
                             break;
                     }
                 } else {
-                    console.log(showsResponse);
+                    // console.log(showsResponse);
                 }
                 // 圖片列表
                 const photosResponse = await selectActivityPhoto(activityId);
@@ -163,7 +163,7 @@ const OnePageEdit = ({ activityId }) => {
                             break;
                     }
                 } else {
-                    console.log(photosResponse);
+                    // console.log(photosResponse);
                 }
                 const sort = sortShows(shows);
                 setActivityData({
@@ -419,7 +419,7 @@ const OnePageEdit = ({ activityId }) => {
                             if (updateShowResponse.status === 200) {
                                 // 完成
                             } else {
-                                console.log(updateShowResponse);
+                                // console.log(updateShowResponse);
                             }
                         }
                         updateData = dayShows.filter(
@@ -436,7 +436,7 @@ const OnePageEdit = ({ activityId }) => {
                             if (createShowResponse.status === 201) {
                                 // 完成
                             } else {
-                                console.log(createShowResponse);
+                                // console.log(createShowResponse);
                             }
                         }
                     });
@@ -456,7 +456,7 @@ const OnePageEdit = ({ activityId }) => {
                                         break;
                                 }
                             } else {
-                                console.log(imageResponse);
+                                // console.log(imageResponse);
                             }
                         } else if (file.is_active === false) {
                             updateActivityPhoto(
@@ -490,7 +490,7 @@ const OnePageEdit = ({ activityId }) => {
                     break;
             }
         } else {
-            console.log(response);
+            // console.log(response);
         }
     };
 

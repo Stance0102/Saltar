@@ -307,7 +307,7 @@ const OnePageCreate = ({ activityId }) => {
                             if (createShowResponse.status === 200) {
                                 // 完成
                             } else {
-                                console.log(createShowResponse);
+                                // console.log(createShowResponse);
                             }
                         }
                     });
@@ -327,7 +327,7 @@ const OnePageCreate = ({ activityId }) => {
                                         break;
                                 }
                             } else {
-                                console.log(imageResponse);
+                                // console.log(imageResponse);
                             }
                         }
                     });
@@ -354,7 +354,7 @@ const OnePageCreate = ({ activityId }) => {
                     break;
             }
         } else {
-            console.log(response);
+            // console.log(response);
         }
     };
 

@@ -27,7 +27,7 @@ const AddCustomer = () => {
         setCustomer({ ...customer, cusName: cusName });
     };
     const onChangeCusSex = (e) => {
-        console.log(e);
+        // console.log(e);
         const cusSex = e.target.value;
         setCustomer({ ...customer, cusSex: cusSex });
     };
@@ -138,7 +138,7 @@ const AddCustomer = () => {
                     break;
             }
         } else {
-            console.log(response);
+            // console.log(response);
         }
     };
 

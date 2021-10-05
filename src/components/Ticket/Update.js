@@ -85,7 +85,7 @@ const Update = () => {
                     break;
             }
         } else {
-            console.log(response);
+            // console.log(response);
         }
     };
 

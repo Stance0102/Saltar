@@ -34,7 +34,7 @@ const Information = () => {
         if (id !== undefined) {
             const setupData = async () => {
                 const tokenResponse = await decodeToken(id);
-                console.log(tokenResponse);
+                // console.log(tokenResponse);
                 if (tokenResponse.status === 200) {
                     switch (tokenResponse.data.status) {
                         case 0:
@@ -71,7 +71,7 @@ const Information = () => {
                                         break;
                                 }
                             } else {
-                                console.log(mailResponse);
+                                // console.log(mailResponse);
                             }
                             break;
                         default:
@@ -88,7 +88,7 @@ const Information = () => {
                             break;
                     }
                 } else {
-                    console.log(tokenResponse);
+                    // console.log(tokenResponse);
                 }
             };
             setupData();
@@ -100,7 +100,7 @@ const Information = () => {
             <div className="infomation">
                 <div id="success">
                     <img src={checked_icon} alt="" />
-                    <p>驗證成功！</p>
+                    <p>酷小子你的信箱驗證成功了！</p>
                 </div>
                 <div className="title">
                     <img src={vector_gray_Icon} alt="" />
