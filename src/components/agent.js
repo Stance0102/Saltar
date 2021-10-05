@@ -574,10 +574,11 @@ const selectCustomerTicket = async (joinedListId) => {
     );
 };
 
-const validTicket = async (token) => {
+const validTicket = async (token, groupId) => {
     return axios.post(
         `/tickets/vaildticket`,
         {
+            groupId: groupId,
             token: token,
         },
         { params: { t: new Date().getTime() } }
