@@ -33,6 +33,7 @@ const Information = () => {
         let ticketId = "";
         let buyTicketId = "";
         let activityData = {};
+        let userData = {};
         if (location.state !== undefined) {
             ticketId = location.state.ticketId;
             buyTicketId = location.state.buyTicketId;
@@ -42,9 +43,38 @@ const Information = () => {
             setActivityData(activityData);
 
             if ("userData" in location.state) {
-                setUserData(location.state.userData);
+                userData = location.state.userData;
+                setUserData(userData);
                 setPayStatus(true);
             }
+        }
+        console.log(location.state);
+        if (location.state.sendEmail) {
+            const sendEmail = async () => {
+                const mailResponse = await sendCusValidMail(
+                    userData.email,
+                    buyTicketId
+                );
+                if (mailResponse.status == 200) {
+                    switch (mailResponse.data.status) {
+                        case 0:
+                            Swal.fire({
+                                title: "發信成功",
+                                text: "請去信箱點選驗證",
+                                confirmButtonText: "繼續",
+                                confirmButtonColor: "#ffb559",
+                                icon: "success",
+                            });
+                            break;
+                        default:
+                            console.log(mailResponse);
+                            break;
+                    }
+                } else {
+                    console.log(mailResponse);
+                }
+            };
+            sendEmail();
         }
         if (ticketId !== "") {
             const setupData = async () => {
@@ -161,6 +191,7 @@ const Information = () => {
                                 buyTicketId: response.data.results.Id,
                                 activityData: activityData,
                                 userData: userData,
+                                sendEmail: true,
                             },
                         });
                         window.location.reload();
@@ -184,32 +215,6 @@ const Information = () => {
                     });
                     break;
             }
-        }
-    };
-
-    const sendEmail = async (e) => {
-        e.preventDefault();
-        const mailResponse = await sendCusValidMail(
-            userData.email,
-            buyTicketId
-        );
-        if (mailResponse.status == 200) {
-            switch (mailResponse.data.status) {
-                case 0:
-                    Swal.fire({
-                        title: "發信成功",
-                        text: "請去信箱點選驗證",
-                        confirmButtonText: "繼續",
-                        confirmButtonColor: "#ffb559",
-                        icon: "success",
-                    });
-                    break;
-                default:
-                    console.log(mailResponse);
-                    break;
-            }
-        } else {
-            console.log(mailResponse);
         }
     };
 
@@ -270,9 +275,6 @@ const Information = () => {
                             總計金額
                             <p>{ticketData.price}元</p>
                         </div>
-                        <button className="buy-btn" onClick={sendEmail}>
-                            發送信件
-                        </button>
                     </div>
                 </div>
             </>
