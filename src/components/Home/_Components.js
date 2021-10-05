@@ -12,7 +12,7 @@ const FormInput = ({
     return (
         <>
             <label className={ClassName} htmlFor={Id}>
-                {Title} <br />
+                {Title}
                 <font className="notice">{notice}</font>
             </label>
             <input type={Type} id={Id} onChange={Handler} {...props} />

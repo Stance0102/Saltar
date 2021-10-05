@@ -126,6 +126,8 @@
         border: solid 2px #bdbdbd
         background-color: #fff
         margin-bottom: 25px
+        @media (max-width: 768px)
+            overflow-x: auto
         &:hover
             border: solid 2px $text-orange
         .row-textbox
@@ -134,18 +136,28 @@
             align-items: center
             width: 95%
             // margin-left: 5%
+
         .row-text
             font-family: "NotoSansCJKtc-Medium"
             font-size: 1rem
             font-weight: 500
             color: $text-black
             width: 100%/$title-count
+            @media (max-width: 768px)
+                overflow-x: auto
+                white-space: nowrap
+                width: 100%
+                margin-right: 15px
         .row-number
             font-family: "NotoSansCJKtc-Bold"
             color: $text-orange
             font-size: 1rem
             width: 3%
             margin-left: 30px
+            @media (max-width: 768px)
+                margin-right: 10px
+                margin-left: 15px
+
         .success
             color: $success-color
             font-family: "NotoSansCJKtc-Bold"

@@ -10,6 +10,8 @@
     width: 45vw
     height: 100%
     background-color: rgba(255, 168, 61, 0.15)
+    @media (max-width: 768px)
+        display: none
 
 // Signin.js & Login.js
 .auth
@@ -19,7 +21,9 @@
     align-items: center
     width: 55vw
     min-height: 100%
-    margin-bottom: 10px
+    padding-bottom: 10px
+    @media (max-width: 768px)
+        width: 100vw
     .auth-title
         font-family: "NotoSansCJKtc-Bold"
         font-size: 24px
@@ -34,12 +38,20 @@
         flex-direction: column
         width: 55%
         height: 100%
+        @media (max-width: 768px)
+            width: 95%
         .auth-label
             +label-text
             color: $text-black
             margin-top: 10px
             margin-bottom: 10px
             width: 550px
+            @media (max-width: 768px)
+                width: 100%
+            .notice
+                font-size: .9rem
+                color: $text-gray
+                font-family: "NotoSansCJKtc-Regular"
         .notice
             height: 22px
             font-family: "NotoSansCJKtc-Bold"
