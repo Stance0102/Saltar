@@ -4,6 +4,31 @@
 .ticket-box-title
     +title
 
+.btn-group
+    display: flex
+    justify-content: flex-end
+    align-items: center
+    width: 100%
+    padding-right: 30px
+    .scanner-btn
+        width: 3%
+        height: 50px
+        display: flex
+        justify-content: center
+        align-items: center
+        background-color: rgba(0,0,0,0)
+        border: none
+        img
+            width: 100%
+            height: 100%
+.scanner-box
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 100%
+    .scanner
+        width: 20%
+
 // Management.js
 .management-row-box
     +row-box(3, $text-green, $text-red)
