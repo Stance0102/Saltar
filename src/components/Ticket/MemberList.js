@@ -112,6 +112,17 @@ const MemberList = () => {
         }
     };
 
+    const [CameraOpen, setCameraOpen] = useState(false);
+    let i = 0;
+    const handlerCameraOpen = () => {
+        i++;
+        if (i % 2 === 0) {
+            setCameraOpen(false);
+        } else {
+            setCameraOpen(true);
+        }
+    };
+
     const [scanning, setScanning] = useState(false);
     const delay = 500;
 
@@ -186,18 +197,23 @@ const MemberList = () => {
             <div className="ticket-box">
                 <div className="ticket-box-title">
                     <div className="btn-group">
-                        <button className="scanner-btn">
+                        <button
+                            className="scanner-btn"
+                            onClick={handlerCameraOpen}
+                        >
                             <img src={check_Ticket} alt="" />
                         </button>
                     </div>
-                    <div className="scanner-box">
-                        <QrReader
-                            delay={delay}
-                            onError={handleError}
-                            onScan={handleScan}
-                            className="scanner"
-                        />
-                    </div>
+                    {CameraOpen && (
+                        <div className="scanner-box">
+                            <QrReader
+                                delay={delay}
+                                onError={handleError}
+                                onScan={handleScan}
+                                className="scanner"
+                            />
+                        </div>
+                    )}
                     <p>活動參加狀況</p>
                     <hr />
                 </div>
