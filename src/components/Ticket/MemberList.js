@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { selectTicketMember, updateTicketMember, validTicket } from "../agent";
 import { useSelector } from "react-redux";
 import QrReader from "react-qr-reader";
+import Swal from "sweetalert2";
 // Img
 import garbage_can_Icon from "../../images/garbage_can_Icon.svg";
 import tick_Icon from "../../images/tick_Icon.svg";
@@ -111,13 +112,68 @@ const MemberList = () => {
         }
     };
 
-    const [QRresult, setResult] = useState("No result");
+    const [scanning, setScanning] = useState(false);
     const delay = 500;
 
-    const handleScan = (QRresult) => {
-        if (QRresult) {
-            setResult(QRresult);
-            console.log(QRresult);
+    const handleScan = async (QRresult) => {
+        if (!scanning) {
+            if (QRresult) {
+                setScanning(true);
+                const response = await validTicket(QRresult, groupId);
+                if (response.status === 200) {
+                    switch (response.data.status) {
+                        case 0:
+                            const { actualname, is_active, mail, phone, sex } =
+                                response.data.results.joined;
+                            const { act_Name } = response.data.results.act;
+                            const { ticket_Name, price } =
+                                response.data.results.ticket;
+                            Swal.fire({
+                                title: "驗證成功",
+                                text: `${act_Name} ${ticket_Name} ${actualname}${
+                                    sex === true ? "先生" : "小姐"
+                                }驗證成功`,
+                                confirmButtonText: "繼續",
+                                confirmButtonColor: "#ffb559",
+                                icon: "success",
+                            }).then(() => {
+                                setReload(true);
+                                setScanning(false);
+                            });
+                            break;
+                        case 19:
+                            Swal.fire({
+                                title: "查無票卷",
+                                confirmButtonText: "繼續",
+                                confirmButtonColor: "#ffb559",
+                                icon: "info",
+                            }).then(() => {
+                                setScanning(false);
+                            });
+                            break;
+                        case 20:
+                            Swal.fire({
+                                title: "此票券已驗證過了",
+                                confirmButtonText: "繼續",
+                                confirmButtonColor: "#ffb559",
+                                icon: "info",
+                            }).then(() => {
+                                setScanning(false);
+                            });
+                            break;
+                        default:
+                            Swal.fire({
+                                title: "發生意外錯誤",
+                                confirmButtonText: "繼續",
+                                confirmButtonColor: "#ffb559",
+                                icon: "info",
+                            }).then(() => {
+                                setScanning(false);
+                            });
+                            break;
+                    }
+                }
+            }
         }
     };
 

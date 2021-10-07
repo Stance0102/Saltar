@@ -568,7 +568,7 @@ const sendTicketMail = async (joinedListId) => {
 
 const validTicket = async (token, groupId) => {
     return axios.post(
-        `/tickets/vaildticket`,
+        `/tickets/vaildticket/`,
         {
             groupId: groupId,
             token: token,
