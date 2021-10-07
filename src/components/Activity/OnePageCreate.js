@@ -280,12 +280,9 @@ const OnePageCreate = ({ activityId }) => {
             });
             return;
         }
-        let tempDescription = "";
-        tempDescription = description.replace(/  /g, "  ");
-        tempDescription = tempDescription.replace(/\n/g, "<br>");
         const response = await createActivity(
             title,
-            tempDescription,
+            description,
             location,
             currentStartTime,
             currentEndTime,
