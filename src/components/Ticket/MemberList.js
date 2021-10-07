@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import garbage_can_Icon from "../../images/garbage_can_Icon.svg";
-import tick_Icon from "../../images/tick_Icon.svg";
 import { selectTicketMember, updateTicketMember, validTicket } from "../agent";
 import { useSelector } from "react-redux";
+import QrReader from "react-qr-reader";
+// Img
+import garbage_can_Icon from "../../images/garbage_can_Icon.svg";
+import tick_Icon from "../../images/tick_Icon.svg";
+import check_Ticket from "../../images/check_Ticket.svg";
 
 const MemberList = () => {
     const { query } = useLocation();
@@ -107,10 +110,38 @@ const MemberList = () => {
             }
         }
     };
+
+    const [QRresult, setResult] = useState("No result");
+    const delay = 500;
+
+    const handleScan = (QRresult) => {
+        if (QRresult) {
+            setResult(QRresult);
+            console.log(QRresult);
+        }
+    };
+
+    const handleError = (error) => {
+        console.log(error);
+    };
+
     return (
         <>
             <div className="ticket-box">
                 <div className="ticket-box-title">
+                    <div className="btn-group">
+                        <button className="scanner-btn">
+                            <img src={check_Ticket} alt="" />
+                        </button>
+                    </div>
+                    <div className="scanner-box">
+                        <QrReader
+                            delay={delay}
+                            onError={handleError}
+                            onScan={handleScan}
+                            className="scanner"
+                        />
+                    </div>
                     <p>活動參加狀況</p>
                     <hr />
                 </div>
