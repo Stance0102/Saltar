@@ -297,7 +297,7 @@ const ACT_Description = ({ editMode, description, onDescriptionChange }) => {
         return (
             <div className="act-description">
                 <div className="title">活動簡介</div>
-                <div className="context">{description}</div>
+                <pre className="context">{description}</pre>
             </div>
         );
     }
