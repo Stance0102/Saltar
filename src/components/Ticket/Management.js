@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectActivityByGroupId, selectTicketByActivityId } from "../agent";
+import { selectActivityByGroupId } from "../agent";
 import * as routes from "../Router";
 import Swal from "sweetalert2";
-import QrReader from "react-qr-reader";
 // Img
 import edit_Icon2 from "../../images/edit_Icon2.svg";
-import check_Ticket from "../../images/check_Ticket.svg";
 
 const Management = () => {
     const { groupId } = useSelector((state) => state.Account);
@@ -86,37 +84,9 @@ const Management = () => {
         });
     };
 
-    // state = {
-    //     result: "No result",
-    // };
-
-    // handleScan = (data) => {
-    //     if (data) {
-    //         this.setState({
-    //             result: data,
-    //         });
-    //     }
-    // };
-    // handleError = (err) => {
-    //     console.error(err);
-    // };
-
     return (
         <div className="ticket-box">
             <div className="ticket-box-title">
-                <div className="btn-group">
-                    <button className="scanner-btn">
-                        <img src={check_Ticket} alt="" />
-                    </button>
-                </div>
-                {/* <div className="scanner-box">
-                    <QrReader
-                        delay={300}
-                        onError={this.handleError}
-                        onScan={this.handleScan}
-                        className="scanner"
-                    />
-                </div> */}
                 <p>票卷管理</p>
                 <hr />
             </div>
