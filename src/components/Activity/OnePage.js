@@ -405,6 +405,7 @@ const ACT_Ticket = ({ tickets, org_Name, buyTicketHandler }) => {
                     >
                         購票
                     </button>
+                    {/* <button className="soldout-btn">已售完</button> */}
                 </div>
             </div>
         );
