@@ -18,11 +18,22 @@ const SuperNav = () => {
         history.push("/");
     }
 
+    const [menuOpen, setMenuOpen] = useState(true);
+    let i = 1;
+    const handleMenuSwitch = () => {
+        i++;
+        if (i % 2 === 0) {
+            setMenuOpen(false);
+        } else {
+            setMenuOpen(true);
+        }
+    };
+
     return (
         <nav className="superNav">
             <ul>
                 <li>
-                    <img src={menu_Icon} alt="" />
+                    <img src={menu_Icon} onClick={handleMenuSwitch} />
                 </li>
                 <li className="navLogoTxt">
                     <Link to="/">Saltar</Link>

@@ -113,7 +113,7 @@ const MemberList = () => {
     };
 
     const [CameraOpen, setCameraOpen] = useState(false);
-    let i = 0;
+    let i = 1;
     const handlerCameraOpen = () => {
         i++;
         if (i % 2 === 0) {
