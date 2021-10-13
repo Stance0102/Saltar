@@ -47,6 +47,12 @@ const Add = () => {
             startTime == "" ||
             endTime == ""
         ) {
+            Swal.fire({
+                title: "資料完整填寫",
+                confirmButtonText: "繼續",
+                confirmButtonColor: "#ffb559",
+                icon: "info",
+            });
             return;
         }
         const response = await createTicket(
