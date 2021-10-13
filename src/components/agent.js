@@ -323,6 +323,7 @@ const updateActivity = async (
 const createActivityPhoto = async (formData) => {
     return axios.post(`/photo/uploadActPhoto`, formData, {
         params: { t: new Date().getTime() },
+        timeout: 50000,
     });
 };
 
