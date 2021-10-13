@@ -5,12 +5,15 @@ import { removeAccount } from "../../store/slice/AccountSlice";
 import * as routes from "../Router";
 // Img
 import menu_Icon from "../../images/menuIcon.svg";
+import { closeMenu, openMenu } from "../../store/slice/MenuSlice";
 
 const SuperNav = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const { isLogin } = useSelector((state) => state.Account);
+    const { isOpen } = useSelector((state) => state.Menu);
 
+    console.log(isOpen);
     function handleLogout(e) {
         e.preventDefault();
         dispatch(removeAccount());
@@ -18,14 +21,13 @@ const SuperNav = () => {
         history.push("/");
     }
 
-    const [menuOpen, setMenuOpen] = useState(true);
     let i = 1;
     const handleMenuSwitch = () => {
         i++;
         if (i % 2 === 0) {
-            setMenuOpen(false);
+            dispatch(closeMenu());
         } else {
-            setMenuOpen(true);
+            dispatch(openMenu());
         }
     };
 
