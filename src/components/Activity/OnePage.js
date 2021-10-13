@@ -376,10 +376,9 @@ const ACT_Show_Detail = ({ showTime, show_Name, detail }) => {
 };
 
 const ACT_Ticket = ({ tickets, org_Name, buyTicketHandler }) => {
-<<<<<<< HEAD
-    console.log(tickets);
     return tickets
         .filter((ticket) => {
+            console.log(ticket);
             return (
                 new Date() > new Date(ticket.startTime) &&
                 new Date() < new Date(ticket.endTime)
@@ -391,6 +390,8 @@ const ACT_Ticket = ({ tickets, org_Name, buyTicketHandler }) => {
                 startTime,
                 endTime,
                 price,
+                peopleMaxium,
+                count,
                 Id: ticketId,
             } = ticket;
             return (
@@ -414,45 +415,17 @@ const ACT_Ticket = ({ tickets, org_Name, buyTicketHandler }) => {
                     </div>
                     <div className="buy-info">
                         <div className="ticket-type">{ticket_Name}</div>
-                        <button
-                            className="buy-btn"
-                            onClick={(e) => buyTicketHandler(e, ticketId)}
-                        >
-                            購票
-                        </button>
+                        {count < peopleMaxium ? (
+                            <button
+                                className="buy-btn"
+                                onClick={(e) => buyTicketHandler(e, ticketId)}
+                            >
+                                購票
+                            </button>
+                        ) : (
+                            <button className="soldout-btn">已售完</button>
+                        )}
                     </div>
-=======
-    return tickets.map((ticket) => {
-        const { ticket_Name, startTime, endTime, price, Id: ticketId } = ticket;
-        return (
-            <div className="act-ticket">
-                <div className="img-box">
-                    <img src={fiesta} alt="" />
-                </div>
-                <div className="context">
-                    <p className="title">{ticket_Name}</p>
-                    <p>
-                        <img src={location_icon} alt="" />
-                        {startTime} - {endTime}
-                    </p>
-                    <p>
-                        <img src={Organizer_icon} alt="" />
-                        主辦單位：{org_Name}
-                    </p>
-                    <p className="price">
-                        NT$ <font className="number">{price}</font>
-                    </p>
-                </div>
-                <div className="buy-info">
-                    <div className="ticket-type">{ticket_Name}</div>
-                    <button
-                        className="buy-btn"
-                        onClick={(e) => buyTicketHandler(e, ticketId)}
-                    >
-                        購票
-                    </button>
-                    {/* <button className="soldout-btn">已售完</button> */}
->>>>>>> d4fd524d61e09717cd6e6a6e21faa4835352bb0a
                 </div>
             );
         });
