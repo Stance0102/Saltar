@@ -65,8 +65,8 @@ const OnePage = ({ activityId }) => {
                                     description: description,
                                     currentStartTime: startTime,
                                     currentEndTime: endTime,
-                                    startTime: startTime.split("T")[0],
-                                    endTime: endTime.split("T")[0],
+                                    startTime: startTime.split(" ")[0],
+                                    endTime: endTime.split(" ")[0],
                                     location: location,
                                     org_Name: organizer,
                                 };
@@ -376,59 +376,55 @@ const ACT_Show_Detail = ({ showTime, show_Name, detail }) => {
 };
 
 const ACT_Ticket = ({ tickets, org_Name, buyTicketHandler }) => {
-    return tickets
-        .filter((ticket) => {
-            console.log(ticket);
-            return (
-                new Date() > new Date(ticket.startTime) &&
-                new Date() < new Date(ticket.endTime)
-            );
-        })
-        .map((ticket) => {
-            const {
-                ticket_Name,
-                startTime,
-                endTime,
-                price,
-                peopleMaxium,
-                count,
-                Id: ticketId,
-            } = ticket;
-            return (
-                <div className="act-ticket">
-                    <div className="img-box">
-                        <img src={fiesta} alt="" />
-                    </div>
-                    <div className="context">
-                        <p className="title">{ticket_Name}</p>
-                        <p>
-                            <img src={location_icon} alt="" />
-                            {startTime} - {endTime}
-                        </p>
-                        <p>
-                            <img src={Organizer_icon} alt="" />
-                            主辦單位：{org_Name}
-                        </p>
-                        <p className="price">
-                            NT$ <font className="number">{price}</font>
-                        </p>
-                    </div>
-                    <div className="buy-info">
-                        <div className="ticket-type">{ticket_Name}</div>
-                        {count < peopleMaxium ? (
-                            <button
-                                className="buy-btn"
-                                onClick={(e) => buyTicketHandler(e, ticketId)}
-                            >
-                                購票
-                            </button>
-                        ) : (
-                            <button className="soldout-btn">已售完</button>
-                        )}
-                    </div>
+    return tickets.map((ticket) => {
+        const {
+            ticket_Name,
+            startTime,
+            endTime,
+            price,
+            peopleMaxium,
+            count,
+            Id: ticketId,
+        } = ticket;
+        return (
+            <div className="act-ticket">
+                <div className="img-box">
+                    <img src={fiesta} alt="" />
                 </div>
-            );
-        });
+                <div className="context">
+                    <p className="title">{ticket_Name}</p>
+                    <p>
+                        <img src={location_icon} alt="" />
+                        {startTime} - {endTime}
+                    </p>
+                    <p>
+                        <img src={Organizer_icon} alt="" />
+                        主辦單位：{org_Name}
+                    </p>
+                    <p className="price">
+                        NT$ <font className="number">{price}</font>
+                    </p>
+                </div>
+                <div className="buy-info">
+                    <div className="ticket-type">{ticket_Name}</div>
+                    {new Date() < new Date(ticket.startTime) ? (
+                        <button className="soldout-btn">尚未開始售票</button>
+                    ) : new Date() > new Date(ticket.endTime) ? (
+                        <button className="soldout-btn">已結束售票</button>
+                    ) : count >= peopleMaxium ? (
+                        <button className="soldout-btn">已售完</button>
+                    ) : (
+                        <button
+                            className="buy-btn"
+                            onClick={(e) => buyTicketHandler(e, ticketId)}
+                        >
+                            購票
+                        </button>
+                    )}
+                </div>
+            </div>
+        );
+    });
 };
 
 const Save_Btn = ({ editMode }) => {
