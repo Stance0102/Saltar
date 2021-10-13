@@ -2572,6 +2572,43 @@ nav.subNav li img {
   }
 }
 
+.one-page .one-page-content .act-ticket .buy-info .soldout-btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 140px;
+  height: 50px;
+  bottom: 0;
+  margin-top: 50%;
+  margin-right: 20px;
+  color: #fff;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #a5a5a5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1680px) {
+  .one-page .one-page-content .act-ticket .buy-info .soldout-btn {
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .one-page .one-page-content .act-ticket .buy-info .soldout-btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 0;
+  }
+}
+
 .one-page .one-page-content .save-btn {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2999,7 +3036,7 @@ nav.subNav li img {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  width: 23.5%;
+  width: 25%;
   height: 370px;
   border-radius: 14px;
   -webkit-box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);
@@ -3008,6 +3045,7 @@ nav.subNav li img {
   overflow: hidden;
   margin-right: 20px;
   margin-bottom: 25px;
+  padding-bottom: 10px;
 }
 
 .onePageManagement .act-block .img-box {
@@ -3073,6 +3111,7 @@ nav.subNav li img {
   width: 100%;
   padding-right: 10px;
   margin-bottom: 15px;
+  padding-bottom: 10px;
 }
 
 .onePageManagement .act-block .btn-group .view-btn {
@@ -3129,7 +3168,6 @@ nav.subNav li img {
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
-  margin-top: 10px;
 }
 
 .btn-group .addOnePage {
