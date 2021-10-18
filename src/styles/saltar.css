@@ -147,6 +147,7 @@ nav.superNav ul li img {
 nav.superNav .navLogoTxt {
   font-size: 24px;
   font-weight: bold;
+  color: #fff;
 }
 
 nav.superNav .navLogoTxt a {
@@ -154,7 +155,7 @@ nav.superNav .navLogoTxt a {
 }
 
 nav.superNav .navLogoTxt a:visited {
-  color: white;
+  color: #fff;
 }
 
 nav.superNav .navBtnGroup {
