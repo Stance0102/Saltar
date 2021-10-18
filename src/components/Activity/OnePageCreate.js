@@ -34,7 +34,7 @@ const OnePageCreate = ({ activityId }) => {
         showName: "",
         showNote: "",
         org_Name: name,
-        shows: [],
+        shows: [[]],
         tickets: [],
         imageFiles: [],
         imagePreview: [],
@@ -60,7 +60,7 @@ const OnePageCreate = ({ activityId }) => {
                 currentStartTime: e.target.value + " 00:00:00",
                 endTime: e.target.value,
                 currentEndTime: e.target.value + " 00:00:00",
-                shows: [],
+                shows: [activityData.shows[0]],
             });
         } else {
             const days =

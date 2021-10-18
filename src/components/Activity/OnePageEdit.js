@@ -43,7 +43,7 @@ const OnePageEdit = ({ activityId }) => {
         showName: "",
         showNote: "",
         org_Name: name,
-        shows: [],
+        shows: [[]],
         tickets: [],
         imageFiles: [],
         imagePreview: [],
@@ -191,13 +191,48 @@ const OnePageEdit = ({ activityId }) => {
         });
     };
     const onStartTimeChange = (e) => {
-        setActivityData({
-            ...activityData,
-            startTime: e.target.value,
-            currentStartTime: e.target.value + " 00:00:00",
-        });
+        const shows = activityData.shows;
+        if (moment(e.target.value) > moment(activityData.endTime)) {
+            setActivityData({
+                ...activityData,
+                startTime: e.target.value,
+                currentStartTime: e.target.value + " 00:00:00",
+                endTime: e.target.value,
+                currentEndTime: e.target.value + " 00:00:00",
+                shows: [activityData.shows[0]],
+            });
+        } else {
+            const days =
+                moment(activityData.endTime).diff(e.target.value, "days") + 1;
+            if (shows.length < days) {
+                for (let i = 0; i < days - shows.length; i++) {
+                    shows.push([]);
+                }
+            } else if (shows.length > days) {
+                for (let i = 0; i < shows.length - days; i++) {
+                    shows.pop();
+                }
+            }
+            setActivityData({
+                ...activityData,
+                startTime: e.target.value,
+                currentStartTime: e.target.value + " 00:00:00",
+            });
+        }
     };
     const onEndTimeChange = (e) => {
+        const shows = activityData.shows;
+        const days =
+            moment(e.target.value).diff(activityData.startTime, "days") + 1;
+        if (shows.length < days) {
+            for (let i = 0; i < days - shows.length; i++) {
+                shows.push([]);
+            }
+        } else if (shows.length > days) {
+            for (let i = 0; i < shows.length - days; i++) {
+                shows.pop();
+            }
+        }
         setActivityData({
             ...activityData,
             endTime: e.target.value,
@@ -626,6 +661,7 @@ const ACT_Info = ({
                             type="date"
                             id="endtime"
                             className="datetime"
+                            min={startTime}
                             value={endTime}
                             onChange={(e) => onEndTimeChange(e)}
                         />
