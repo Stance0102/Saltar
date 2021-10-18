@@ -71,6 +71,11 @@
 
 body {
   background-color: #f8f8f8;
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 a {
@@ -868,8 +873,8 @@ nav.closeNav {
 }
 
 .scanner-group .scanner-btn-group .scanner-btn {
-  width: 40%;
-  height: 60px;
+  width: 55%;
+  height: 70px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
