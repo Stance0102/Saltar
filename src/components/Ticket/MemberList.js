@@ -214,21 +214,53 @@ const MemberList = () => {
         <>
             <div className="ticket-box">
                 <div className="ticket-box-title">
-                    <div className="btn-group">
-                        <button
-                            className="scanner-btn"
-                            onClick={cameraOpenHandler}
-                        >
-                            <img src={check_Ticket} alt="" />
-                        </button>
-                        <button
-                            className="scanner-btn"
-                            id="questionIcon"
-                            onClick={cameraQuestionHandler}
-                        >
-                            <img src={question} alt="" />
-                        </button>
+                    <div className="scanner-group">
+                        <div className="scanner-btn-group">
+                            <button
+                                className="scanner-btn"
+                                id="scanner-ticket"
+                                onClick={cameraOpenHandler}
+                            >
+                                <img src={check_Ticket} alt="" />
+                            </button>
+                            <button
+                                className="scanner-btn"
+                                id="questionIcon"
+                                onClick={cameraQuestionHandler}
+                            >
+                                <img src={question} alt="" />
+                            </button>
+                        </div>
+
+                        <div className="timer-row">
+                            <label className="Timer-Setting">
+                                在
+                                <input
+                                    type="number"
+                                    id="inputTimer"
+                                    value={inputTimer}
+                                    onChange={inputTimerHandler}
+                                />
+                                毫秒後確認視窗將自動關閉
+                            </label>
+                            <font className="Timer-tips">(1000毫秒=1秒)</font>
+                        </div>
+
+                        <div className="check-row">
+                            <label className="Timer-CheckBox">
+                                <input
+                                    type="checkbox"
+                                    value={checkboxTimer}
+                                    onChange={checkboxTimerHandler}
+                                />
+                                驗票成功自動關閉確認視窗
+                            </label>
+                            <span className="Timer-tips">
+                                (打勾才會在設定的時間後自動關閉喔！)
+                            </span>
+                        </div>
                     </div>
+
                     {CameraOpen && (
                         <div className="scanner-box">
                             <QrReader
@@ -239,35 +271,7 @@ const MemberList = () => {
                             />
                         </div>
                     )}
-                    <div className="cameraRow">
-                        <label>
-                            <input
-                                type="number"
-                                id="inputTimer"
-                                value={inputTimer}
-                                onChange={inputTimerHandler}
-                            />
-                            <br />
-                            毫秒(1000毫秒=1秒)
-                        </label>
 
-                        {/* <FormInput
-                            Id="inputTimer"
-                            Type="number"
-                            value={inputTimer}
-                            Handler={inputTimerHandler}
-                            Title="驗票成功自動關閉提醒"
-                        /> */}
-
-                        <label>
-                            <input
-                                type="checkbox"
-                                value={checkboxTimer}
-                                onChange={checkboxTimerHandler}
-                            />
-                            驗票成功自動關閉提醒
-                        </label>
-                    </div>
                     <p>活動參加狀況</p>
                     <hr />
                 </div>
