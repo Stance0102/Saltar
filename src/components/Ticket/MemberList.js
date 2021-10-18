@@ -8,11 +8,14 @@ import Swal from "sweetalert2";
 import garbage_can_Icon from "../../images/garbage_can_Icon.svg";
 import tick_Icon from "../../images/tick_Icon.svg";
 import check_Ticket from "../../images/check_Ticket.svg";
+import web_icon from "../../images/check_Ticket.svg";
 
 const MemberList = () => {
     const { query } = useLocation();
     const [buyers, setBuyers] = useState([]);
     const [reload, setReload] = useState(true);
+    const [inputTimer, setInputTimer] = useState(1000);
+    const [checkboxTimer, setCheckboxTimer] = useState(false);
     const { groupId } = useSelector((state) => state.Account);
 
     useEffect(() => {
@@ -45,7 +48,7 @@ const MemberList = () => {
         }
     }, [reload]);
 
-    const handleValidTicket = async (e, buyer) => {
+    const validTicketHandle = async (e, buyer) => {
         e.preventDefault();
         const {
             Id,
@@ -78,7 +81,7 @@ const MemberList = () => {
             }
         }
     };
-    const handleDeleteTicket = async (e, buyer) => {
+    const DeleteTicketHandler = async (e, buyer) => {
         e.preventDefault();
         const {
             Id,
@@ -112,21 +115,34 @@ const MemberList = () => {
         }
     };
 
+    const inputTimerHandler = (e) => {
+        setInputTimer(e.target.value);
+    };
+    const checkboxTimerHandler = (e) => {
+        setCheckboxTimer(e.target.value);
+    };
+
     const [CameraOpen, setCameraOpen] = useState(false);
-    let i = 1;
-    const handlerCameraOpen = () => {
-        i++;
-        if (i % 2 === 0) {
+    const cameraOpenHandler = () => {
+        if (CameraOpen) {
             setCameraOpen(false);
         } else {
             setCameraOpen(true);
         }
     };
+    const cameraQuestionHandler = () => {
+        Swal.fire({
+            title: "鏡頭打不開?",
+            text: "Windows10需要透過：設定>隱私權>(左側)相機>(下滑)允許傳統型應用程式存取",
+            confirmButtonText: "繼續",
+            confirmButtonColor: "#ffb559",
+        });
+    };
 
     const [scanning, setScanning] = useState(false);
     const delay = 500;
 
-    const handleScan = async (QRresult) => {
+    const scanHandler = async (QRresult) => {
         if (!scanning) {
             if (QRresult) {
                 setScanning(true);
@@ -147,6 +163,7 @@ const MemberList = () => {
                                 confirmButtonText: "繼續",
                                 confirmButtonColor: "#ffb559",
                                 icon: "success",
+                                timer: checkboxTimer ? inputTimer : null,
                             }).then(() => {
                                 setReload(true);
                                 setScanning(false);
@@ -188,7 +205,7 @@ const MemberList = () => {
         }
     };
 
-    const handleError = (error) => {
+    const errorHandler = (error) => {
         console.log(error);
     };
 
@@ -199,22 +216,45 @@ const MemberList = () => {
                     <div className="btn-group">
                         <button
                             className="scanner-btn"
-                            onClick={handlerCameraOpen}
+                            onClick={cameraOpenHandler}
                         >
                             <img src={check_Ticket} alt="" />
+                        </button>
+                        <button
+                            className="scanner-btn"
+                            onClick={cameraQuestionHandler}
+                        >
+                            <img src={tick_Icon} alt="" />
                         </button>
                     </div>
                     {CameraOpen && (
                         <div className="scanner-box">
                             <QrReader
                                 delay={delay}
-                                onError={handleError}
-                                onScan={handleScan}
+                                onError={errorHandler}
+                                onScan={scanHandler}
                                 className="scanner"
                             />
                         </div>
                     )}
                     <p>活動參加狀況</p>
+                    <label>
+                        <input
+                            type="number"
+                            id="inputTimer"
+                            value={inputTimer}
+                            onChange={inputTimerHandler}
+                        />
+                        毫秒(1000毫秒=1秒)
+                    </label>
+                    <label>
+                        <input
+                            type="checkbox"
+                            value={checkboxTimer}
+                            onChange={checkboxTimerHandler}
+                        />
+                        驗票成功自動關閉提醒
+                    </label>
                     <hr />
                 </div>
                 <div className="member-row-box">
@@ -247,7 +287,7 @@ const MemberList = () => {
                                                 已使用
                                             </h6>
                                         ) : (
-                                            <h6 className="row-text success">
+                                            <h6 className="row-text fail">
                                                 未使用
                                             </h6>
                                         )}
@@ -256,7 +296,7 @@ const MemberList = () => {
                                             <button
                                                 className="check"
                                                 onClick={(e) => {
-                                                    handleValidTicket(e, buyer);
+                                                    validTicketHandle(e, buyer);
                                                 }}
                                             >
                                                 <img src={tick_Icon} alt="" />
@@ -264,7 +304,7 @@ const MemberList = () => {
                                             <button
                                                 className="delete"
                                                 onClick={(e) => {
-                                                    handleDeleteTicket(
+                                                    DeleteTicketHandler(
                                                         e,
                                                         buyer
                                                     );
