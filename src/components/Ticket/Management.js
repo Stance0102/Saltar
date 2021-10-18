@@ -25,7 +25,7 @@ const Management = () => {
                             const res = await selectTicketByActivityId(
                                 activity.Id
                             );
-                            console.log(res.data.results);
+                            // console.log(res.data.results);
                             activity.tickets = res.data.results;
                             Activities.push(activity);
                         }
