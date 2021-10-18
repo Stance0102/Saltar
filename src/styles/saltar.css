@@ -840,23 +840,36 @@ nav.closeNav {
   width: 100%;
 }
 
-.btn-group {
+.scanner-group {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   width: 100%;
-  padding-right: 30px;
+  margin-bottom: 10px;
 }
 
-.btn-group .scanner-btn {
-  width: 3%;
-  height: 50px;
+.scanner-group .scanner-btn-group {
+  width: 8%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.scanner-group .scanner-btn-group .scanner-btn {
+  width: 40%;
+  height: 60px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -868,17 +881,69 @@ nav.closeNav {
           align-items: center;
   background-color: rgba(0, 0, 0, 0);
   border: none;
-  margin-right: 10px;
+  margin-right: 15px;
 }
 
-.btn-group .scanner-btn img {
+.scanner-group .scanner-btn-group .scanner-btn img {
   width: 100%;
   height: 100%;
 }
 
-.btn-group #questionIcon {
-  width: 1.5%;
+.scanner-group .scanner-btn-group #scanner-ticket:hover:before {
+  content: "點我驗票";
+}
+
+.scanner-group #questionIcon {
+  width: 20%;
   height: 25px;
+}
+
+.scanner-group .timer-row .Timer-Setting {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-right: 10px;
+}
+
+.scanner-group .timer-row .Timer-Setting input {
+  min-height: 35px;
+  max-height: 45px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.scanner-group .timer-row .Timer-tips {
+  font-size: 1rem;
+  color: #a5a5a5;
+}
+
+.scanner-group .check-row .Timer-CheckBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.scanner-group .check-row .Timer-CheckBox input[type="checkbox"] {
+  width: 25px;
+  height: 25px;
+  margin-right: 10px;
+}
+
+.scanner-group .check-row .Timer-tips {
+  font-size: 1rem;
+  color: #ffb559;
 }
 
 .scanner-box {
@@ -902,24 +967,6 @@ nav.closeNav {
   .scanner-box .scanner {
     width: 100%;
   }
-}
-
-.cameraRow {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
-  width: 100%;
-  margin-top: 10px;
 }
 
 .management-row-box {
@@ -3153,6 +3200,7 @@ nav.closeNav {
           align-items: center;
   width: 100%;
   padding-right: 10px;
+  margin-top: 10px;
   margin-bottom: 15px;
   padding-bottom: 10px;
 }
