@@ -4,11 +4,12 @@ import { selectTicketMember, updateTicketMember, validTicket } from "../agent";
 import { useSelector } from "react-redux";
 import QrReader from "react-qr-reader";
 import Swal from "sweetalert2";
+import { FormInput } from "../Home/_Components";
 // Img
 import garbage_can_Icon from "../../images/garbage_can_Icon.svg";
 import tick_Icon from "../../images/tick_Icon.svg";
 import check_Ticket from "../../images/check_Ticket.svg";
-import web_icon from "../../images/check_Ticket.svg";
+import question from "../../images/question.png";
 
 const MemberList = () => {
     const { query } = useLocation();
@@ -222,9 +223,10 @@ const MemberList = () => {
                         </button>
                         <button
                             className="scanner-btn"
+                            id="questionIcon"
                             onClick={cameraQuestionHandler}
                         >
-                            <img src={tick_Icon} alt="" />
+                            <img src={question} alt="" />
                         </button>
                     </div>
                     {CameraOpen && (
@@ -237,24 +239,36 @@ const MemberList = () => {
                             />
                         </div>
                     )}
-                    <p>活動參加狀況</p>
-                    <label>
-                        <input
-                            type="number"
-                            id="inputTimer"
+                    <div className="cameraRow">
+                        <label>
+                            <input
+                                type="number"
+                                id="inputTimer"
+                                value={inputTimer}
+                                onChange={inputTimerHandler}
+                            />
+                            <br />
+                            毫秒(1000毫秒=1秒)
+                        </label>
+
+                        {/* <FormInput
+                            Id="inputTimer"
+                            Type="number"
                             value={inputTimer}
-                            onChange={inputTimerHandler}
-                        />
-                        毫秒(1000毫秒=1秒)
-                    </label>
-                    <label>
-                        <input
-                            type="checkbox"
-                            value={checkboxTimer}
-                            onChange={checkboxTimerHandler}
-                        />
-                        驗票成功自動關閉提醒
-                    </label>
+                            Handler={inputTimerHandler}
+                            Title="驗票成功自動關閉提醒"
+                        /> */}
+
+                        <label>
+                            <input
+                                type="checkbox"
+                                value={checkboxTimer}
+                                onChange={checkboxTimerHandler}
+                            />
+                            驗票成功自動關閉提醒
+                        </label>
+                    </div>
+                    <p>活動參加狀況</p>
                     <hr />
                 </div>
                 <div className="member-row-box">
