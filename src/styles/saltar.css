@@ -247,7 +247,6 @@ nav.subNav {
       -ms-flex-align: start;
           align-items: flex-start;
   width: 15%;
-  max-width: 15%;
   height: 100vmax;
   padding-top: 20px;
   color: #a5a5a5;
@@ -278,6 +277,11 @@ nav.subNav li img {
   margin-right: 18px;
   width: 24px;
   height: 24px;
+}
+
+nav.closeNav {
+  display: none;
+  width: 0%;
 }
 
 .content {
