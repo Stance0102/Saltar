@@ -53,22 +53,33 @@ const OnePageCreate = ({ activityId }) => {
     };
     const onStartTimeChange = (e) => {
         const shows = activityData.shows;
-        const days =
-            moment(activityData.endTime).diff(e.target.value, "days") + 1;
-        if (shows.length < days) {
-            for (let i = 0; i < days - shows.length; i++) {
-                shows.push([]);
+        if (moment(e.target.value) > moment(activityData.endTime)) {
+            setActivityData({
+                ...activityData,
+                startTime: e.target.value,
+                currentStartTime: e.target.value + " 00:00:00",
+                endTime: e.target.value,
+                currentEndTime: e.target.value + " 00:00:00",
+                shows: [],
+            });
+        } else {
+            const days =
+                moment(activityData.endTime).diff(e.target.value, "days") + 1;
+            if (shows.length < days) {
+                for (let i = 0; i < days - shows.length; i++) {
+                    shows.push([]);
+                }
+            } else if (shows.length > days) {
+                for (let i = 0; i < shows.length - days; i++) {
+                    shows.pop();
+                }
             }
-        } else if (shows.length > days) {
-            for (let i = 0; i < shows.length - days; i++) {
-                shows.pop();
-            }
+            setActivityData({
+                ...activityData,
+                startTime: e.target.value,
+                currentStartTime: e.target.value + " 00:00:00",
+            });
         }
-        setActivityData({
-            ...activityData,
-            startTime: e.target.value,
-            currentStartTime: e.target.value + " 00:00:00",
-        });
     };
     const onEndTimeChange = (e) => {
         const shows = activityData.shows;
@@ -490,6 +501,7 @@ const ACT_Info = ({
                             type="date"
                             id="endtime"
                             className="datetime"
+                            min={startTime}
                             value={endTime}
                             onChange={(e) => onEndTimeChange(e)}
                         />
