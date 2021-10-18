@@ -868,11 +868,17 @@ nav.closeNav {
           align-items: center;
   background-color: rgba(0, 0, 0, 0);
   border: none;
+  margin-right: 10px;
 }
 
 .btn-group .scanner-btn img {
   width: 100%;
   height: 100%;
+}
+
+.btn-group #questionIcon {
+  width: 1.5%;
+  height: 25px;
 }
 
 .scanner-box {
@@ -889,13 +895,31 @@ nav.closeNav {
 }
 
 .scanner-box .scanner {
-  width: 20%;
+  width: 40%;
 }
 
 @media (max-width: 768px) {
   .scanner-box .scanner {
     width: 100%;
   }
+}
+
+.cameraRow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+  width: 100%;
+  margin-top: 10px;
 }
 
 .management-row-box {
