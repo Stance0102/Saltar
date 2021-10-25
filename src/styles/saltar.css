@@ -861,7 +861,7 @@ nav.closeNav {
 }
 
 .scanner-group .scanner-btn-group {
-  width: 8%;
+  width: 10%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -900,8 +900,8 @@ nav.closeNav {
 }
 
 .scanner-group #questionIcon {
-  width: 20%;
-  height: 25px;
+  width: 40px;
+  height: 35px;
 }
 
 .scanner-group .timer-row .Timer-Setting {
