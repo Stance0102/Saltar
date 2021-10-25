@@ -71,8 +71,10 @@ const Management = () => {
                         history.push({
                             pathname: "/dashboard/ticketManagemenUpdate",
                             state: {
-                                tickets:
-                                    activities[index].tickets[result.value],
+                                tickets: {
+                                    ...activities[index].tickets[result.value],
+                                    act: activities[index].Id,
+                                },
                                 endTime: endTime.split(" ")[0],
                             },
                         });

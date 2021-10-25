@@ -459,7 +459,7 @@ const updateTicket = async (
     //價錢
     price,
     //已賣出數量
-    count,
+    // count,
     //活動ID 應該不能改
     actId,
     //開放狀態? true false
@@ -473,7 +473,7 @@ const updateTicket = async (
             startTime: startTime,
             endTime: endTime,
             price: price,
-            count: count,
+            // count: count,
             act: actId,
             is_active: is_active,
         },
