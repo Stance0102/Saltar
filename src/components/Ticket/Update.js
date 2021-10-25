@@ -58,7 +58,6 @@ const Update = () => {
             startTime,
             endTime,
             ticketPrice,
-            count,
             actId,
             true
         );
