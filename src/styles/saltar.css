@@ -148,14 +148,17 @@ nav.superNav .navLogoTxt {
   font-size: 24px;
   font-weight: bold;
   color: #fff;
+  font-family: "NotoSansCJKtc-Medium";
 }
 
 nav.superNav .navLogoTxt a {
   text-decoration: none;
+  font-family: "NotoSansCJKtc-Medium";
 }
 
 nav.superNav .navLogoTxt a:visited {
   color: #fff;
+  font-family: "NotoSansCJKtc-Medium";
 }
 
 nav.superNav .navBtnGroup {
@@ -382,6 +385,8 @@ nav.closeNav {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  padding: 0;
+  margin: 0;
 }
 
 .account-box .account-box-title {
@@ -412,6 +417,22 @@ nav.closeNav {
   width: 100%;
 }
 
+.signin-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  min-height: -webkit-fit-content;
+  min-height: -moz-fit-content;
+  min-height: fit-content;
+}
+
 .index-img {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -423,7 +444,7 @@ nav.closeNav {
       -ms-flex-align: center;
           align-items: center;
   width: 45vw;
-  height: 100%;
+  min-height: 120vh;
   background-color: rgba(255, 168, 61, 0.15);
 }
 

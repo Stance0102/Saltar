@@ -1,14 +1,23 @@
 .account-box
     +box
+    padding: 0
+    margin: 0
     .account-box-title
         +title
+
+.signin-box
+    display: flex
+    justify-content: flex-start
+    align-items: center
+    width: 100%
+    min-height: fit-content
 
 .index-img
     display: flex
     justify-content: center
     align-items: center
     width: 45vw
-    height: 100%
+    min-height: 120vh
     background-color: rgba(255, 168, 61, 0.15)
     @media (max-width: 768px)
         display: none

@@ -17,7 +17,7 @@ const SignUp = lazy(() => import("./Account/Signup"));
 const Dashboard = lazy(() => import("./Home/Dashboard"));
 const ErrorPage = lazy(() => import("./Home/ErrorPage"));
 
-const Information = lazy(() => import("./Ticket/Information"));
+const Information = lazy(() => import("./Ticket/BuyTicket"));
 const CustomerTicket = lazy(() => import("./Ticket/CustomerTicket"));
 const ForgetPw = lazy(() => import("./Account/ForgetPw"));
 const ChangePw = lazy(() => import("./Account/ChangePw"));
