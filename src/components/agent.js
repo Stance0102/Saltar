@@ -14,7 +14,14 @@ const login = (username, password) => {
     );
 };
 
-const signup = async (username, password, email, phone, school) => {
+const signup = async (
+    username,
+    password,
+    email,
+    phone,
+    school = "",
+    isSociety
+) => {
     return axios.post(
         `/Account/create`,
         {
@@ -26,6 +33,7 @@ const signup = async (username, password, email, phone, school) => {
             school: school,
             devicetoken: "string",
             is_admin: true,
+            is_society: isSociety,
         },
         { params: { t: new Date().getTime() } }
     );

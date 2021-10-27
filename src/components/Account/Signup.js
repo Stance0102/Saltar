@@ -15,7 +15,7 @@ const SignUp = () => {
     const [message, setMessage] = useState("");
     const [schoolList, setSchoolList] = useState({});
     const history = useHistory();
-    const [isStudent, setIsStudent] = useState(false);
+    const [isStudent, setIsStudent] = useState(true);
 
     useEffect(() => {
         const setupData = async () => {
@@ -34,71 +34,97 @@ const SignUp = () => {
         setupData();
     }, []);
 
-    function onChangeEmail(e) {
+    const onChangeStudent = (e) => {
+        setIsStudent(!isStudent);
+    };
+
+    const onChangeEmail = (e) => {
         const email = e.target.value;
         setEmail(email);
-        const splitEmail = email.split(/\@(\w+)\./);
-        if (schoolList[`${splitEmail[1]}`] !== undefined) {
-            setSchool(schoolList[`${splitEmail[1]}`]);
+        if (isStudent) {
+            const splitEmail = email.split(/\@(\w+)\./);
+            if (schoolList[`${splitEmail[1]}`] !== undefined) {
+                setSchool(schoolList[`${splitEmail[1]}`]);
+            } else {
+                setSchool("無法偵測");
+            }
         } else {
-            setSchool("無法偵測");
+            setSchool("");
         }
-    }
+    };
 
-    function onChangeUsername(e) {
+    const onChangeUsername = (e) => {
         const username = e.target.value;
         setUsername(username);
-    }
+    };
 
-    function onChangeTelnumber(e) {
+    const onChangeTelnumber = (e) => {
         const telnumber = e.target.value;
         setTelnumber(telnumber);
-    }
+    };
 
-    function onChangePassword(e) {
+    const onChangePassword = (e) => {
         const password = e.target.value;
         setPassword(password);
-    }
+    };
 
-    function onChangeRepw(e) {
+    const onChangeRepw = (e) => {
         const repw = e.target.value;
         if (repw !== passWord) {
             setMessage("請確認密碼一致！");
         } else {
             setMessage("");
         }
-    }
+    };
 
-    async function handleSignup(e) {
+    const handleSignup = async (e) => {
         e.preventDefault();
-        if (
-            userName === "" ||
-            passWord === "" ||
-            email === "" ||
-            telNumber === "" ||
-            message !== ""
-        ) {
-            return Swal.fire({
-                title: "請完整填寫欄位",
-                confirmButtonText: "知道了",
-                confirmButtonColor: "#ffb559",
-                icon: "info",
-            });
+        if (isStudent) {
+            if (
+                userName === "" ||
+                passWord === "" ||
+                email === "" ||
+                telNumber === "" ||
+                message !== ""
+            ) {
+                return Swal.fire({
+                    title: "請完整填寫欄位",
+                    confirmButtonText: "知道了",
+                    confirmButtonColor: "#ffb559",
+                    icon: "info",
+                });
+            }
+            if (school === "" || school === "無法偵測") {
+                return Swal.fire({
+                    title: "請填入學校信箱",
+                    confirmButtonText: "知道了",
+                    confirmButtonColor: "#ffb559",
+                    icon: "info",
+                });
+            }
+        } else {
+            if (
+                userName === "" ||
+                passWord === "" ||
+                telNumber === "" ||
+                message !== ""
+            ) {
+                return Swal.fire({
+                    title: "請完整填寫欄位",
+                    confirmButtonText: "知道了",
+                    confirmButtonColor: "#ffb559",
+                    icon: "info",
+                });
+            }
         }
-        if (school === "" || school === "無法偵測") {
-            return Swal.fire({
-                title: "請填入學校信箱",
-                confirmButtonText: "知道了",
-                confirmButtonColor: "#ffb559",
-                icon: "info",
-            });
-        }
+
         const response = await signup(
             userName,
             passWord,
             email,
             telNumber,
-            school
+            school,
+            !isStudent
         );
         if (response.status == 200) {
             switch (response.data.status) {
@@ -134,7 +160,7 @@ const SignUp = () => {
         } else {
             // console.log(response);
         }
-    }
+    };
 
     if (isStudent) {
         return (
@@ -146,8 +172,8 @@ const SignUp = () => {
                     <p className="auth-title">
                         註冊以免費使用 Saltar
                         <br />
-                        <font className="tips">
-                            目前僅開放 大學社群(社團/系學會)
+                        <font className="tips" onClick={onChangeStudent}>
+                            點此切換非校園活動註冊頁面
                         </font>
                     </p>
                     <form className="auth-form" onSubmit={handleSignup}>
@@ -243,6 +269,10 @@ const SignUp = () => {
                             <br />
                             <font className="tips">
                                 中小型活動方註冊頁（非校園活動方）
+                            </font>
+                            <br />
+                            <font className="tips" onClick={onChangeStudent}>
+                                點此切換校園活動註冊頁面
                             </font>
                         </p>
                         <form className="auth-form" onSubmit={handleSignup}>

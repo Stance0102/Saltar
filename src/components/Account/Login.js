@@ -13,12 +13,6 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const history = useHistory();
 
-    //取出 Redux
-    // const { isLogin, Id, name, groupId, token } = useSelector(
-    //     (state) => state.Account
-    // );
-    // console.log(isLogin, Id, name, groupId, token);
-
     function onChangeEmail(e) {
         const email = e.target.value;
         setEmail(email);
