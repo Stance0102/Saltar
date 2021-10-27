@@ -17,6 +17,7 @@ const Information = () => {
     const [buyTicketId, setBuyTicketId] = useState("");
     const [ticketData, setTicketData] = useState("");
     const [activityData, setActivityData] = useState("");
+    const [imagePreview, setImagePreview] = useState("");
     const [userData, setUserData] = useState({
         email: "",
         name: "",
@@ -38,6 +39,7 @@ const Information = () => {
             ticketId = location.state.ticketId;
             buyTicketId = location.state.buyTicketId;
             activityData = location.state.activityData;
+            setImagePreview(activityData.imagePreview[0]);
             setTicketId(ticketId);
             setBuyTicketId(buyTicketId);
             setActivityData(activityData);
@@ -304,6 +306,10 @@ const Information = () => {
                 <div className="container">
                     <div className="ticket-name">
                         <p className="act-name">
+                            <img
+                                src={imagePreview}
+                                style={{ width: "200px" }}
+                            />
                             {activityData.title}
                             <font className="ticket-type">
                                 {ticketData.ticket_Name}
