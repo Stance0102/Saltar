@@ -72,13 +72,7 @@ const Login = () => {
                 <img src={loginPage} alt="" />
             </div>
             <div className="auth">
-                <p className="auth-title">
-                    登入以免費使用 Saltar
-                    <br />
-                    <font className="tips">
-                        目前僅開放 大學社群(社團/系學會)
-                    </font>
-                </p>
+                <p className="auth-title">登入以免費使用 Saltar</p>
                 <form className="auth-form" onSubmit={handleLogin}>
                     <FormInput
                         Id="email"
