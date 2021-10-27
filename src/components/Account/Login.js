@@ -66,7 +66,6 @@ const Login = () => {
             // console.log(response);
         }
     }
-
     return (
         <>
             <div className="index-img">
