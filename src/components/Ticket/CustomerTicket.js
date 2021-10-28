@@ -97,7 +97,7 @@ const Information = () => {
 
     return (
         <>
-            <div className="infomation">
+            <div className="buy-ticket">
                 <div id="success">
                     <img src={checked_icon} alt="" />
                     <p>酷小子你的信箱驗證成功了！</p>
@@ -110,6 +110,7 @@ const Information = () => {
                 <div className="ticket-head">
                     {activityData.act_Name}
                     <font className="ticket-type">
+                        <font id="black-dot">●</font>
                         {ticketData.ticket_Name}
                     </font>
                 </div>

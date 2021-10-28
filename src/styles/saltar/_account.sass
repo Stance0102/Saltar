@@ -37,11 +37,30 @@
         font-family: "NotoSansCJKtc-Bold"
         font-size: 24px
         color: $text-black
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
     .tips
         font-family: "NotoSansCJKtc-Medium"
-        font-size: 14px
-        font-weight: 500px
+        font-size: 1rem
         color: $text-gray
+    .tips-btn
+        font-family: "NotoSansCJKtc-Medium"
+        font-size: 1rem
+        font-weight: 500px
+        line-height: 2rem
+        color: $text-orange
+        border: 1px solid $text-orange
+        background-color: rgba(0,0 ,0 ,0 )
+        border-radius: 10px
+        padding: 3px
+        transition: 0.3s
+        margin-top: 10px
+        margin-left: 10px
+        &:hover
+            color: $text-white
+            background-color: $text-orange
     .auth-form
         display: flex
         flex-direction: column

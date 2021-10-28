@@ -119,7 +119,7 @@
         &:hover
             border: 2.5px solid rgba(255, 55, 55, 1)
 
-.infomation
+.buy-ticket
     display: flex
     flex-direction: column
     justify-content: flex-start
@@ -146,7 +146,11 @@
     .ticket-type
         color: $text-green
         font-size: 1.4rem
-        margin-left: 10px
+        #black-dot
+            font-size: 0.5rem
+            color: black
+            margin-left: 5px
+            margin-right: 5px
     .container
         display: flex
         flex-direction: column
@@ -158,22 +162,29 @@
         margin-bottom: 15px
         @media (max-width: 768px)
             width: 90%
-        .ticket-name
+        .ticket-title-box
+            display: flex
+            justify-content: center
+            align-items: center
             width: 100%
-            height: 60px
-            .act-name
-                font-family: "NotoSansCJKtc-Bold"
-                font-size: 1.5rem
-                margin-bottom: 5px
-            .group-name
-                font-size: 1.1rem
-                color: $text-gray
-                line-height: normal
-                height: 20px
-                img
-                    width: 20px
+            img
+                width: 100px
+            .ticket-name
+                width: 100%
+                margin-left: 10px
+                .act-name
+                    font-family: "NotoSansCJKtc-Bold"
+                    font-size: 1.5rem
+                    margin-bottom: 5px
+                .group-name
+                    font-size: 1.1rem
+                    color: $text-gray
+                    line-height: normal
                     height: 20px
-                    margin-right: 10px
+                    img
+                        width: 20px
+                        height: 20px
+                        margin-right: 10px
         .buy-form
             +in-container-form($text-black)
             margin-top: 40px

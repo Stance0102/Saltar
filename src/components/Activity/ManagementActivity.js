@@ -51,13 +51,9 @@ const ManagementActivity = () => {
             </div>
             <div className="onePageManagement">
                 {activities.map((activity, index) => {
-                    let msg = activity.uploadStatus.show
-                        ? ""
-                        : " *尚未新增節目";
-                    msg += activity.uploadStatus.photos ? "" : " *尚未新增照片";
-                    msg += activity.uploadStatus.tickets
-                        ? ""
-                        : " *尚未新增票種";
+                    let msg = activity.uploadStatus.show ? "" : "尚未新增節目";
+                    msg += activity.uploadStatus.photos ? "" : " 尚未新增照片";
+                    msg += activity.uploadStatus.tickets ? "" : " 尚未新增票種";
 
                     let msgStatus = false;
 

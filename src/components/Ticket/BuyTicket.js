@@ -8,11 +8,9 @@ import cart_icon from "../../images/cart_icon.svg";
 import Organizer_icon from "../../images/Organizer_icon.svg";
 import checked_icon from "../../images/checked_icon.svg";
 import vector_gray_Icon from "../../images/vector_gray_Icon.svg";
-import check_Ticket from "../../images/check_Ticket.svg";
-import qrcode from "../../images/qrcode.png";
 import receip from "../../images/receip.svg";
 
-const Information = () => {
+const BuyTicket = () => {
     const [ticketId, setTicketId] = useState("");
     const [buyTicketId, setBuyTicketId] = useState("");
     const [ticketData, setTicketData] = useState("");
@@ -248,7 +246,7 @@ const Information = () => {
     if (payStatus) {
         return (
             <>
-                <div className="infomation">
+                <div className="buy-ticket">
                     <div id="success">
                         <img src={checked_icon} alt="" />
                         <p>趕緊去驗證信箱！</p>
@@ -257,10 +255,10 @@ const Information = () => {
                         <img src={vector_gray_Icon} alt="" />
                         我的票卷
                     </div>
-
                     <div className="ticket-head">
                         {activityData.title}
                         <font className="ticket-type">
+                            <font id="black-dot">●</font>
                             {ticketData.ticket_Name}
                         </font>
                     </div>
@@ -298,27 +296,28 @@ const Information = () => {
         );
     } else {
         return (
-            <div className="infomation">
+            <div className="buy-ticket">
                 <div className="title">
                     <img src={cart_icon} alt="" />
                     購票資訊
                 </div>
                 <div className="container">
-                    <div className="ticket-name">
-                        <p className="act-name">
-                            <img
-                                src={imagePreview}
-                                style={{ width: "200px" }}
-                            />
-                            {activityData.title}
-                            <font className="ticket-type">
-                                {ticketData.ticket_Name}
-                            </font>
-                        </p>
-                        <p className="group-name">
-                            <img src={Organizer_icon} alt="" />
-                            主辦單位：{activityData.org_Name}
-                        </p>
+                    <div className="ticket-title-box">
+                        <img src={imagePreview} />
+
+                        <div className="ticket-name">
+                            <p className="act-name">
+                                {activityData.title}
+                                <font className="ticket-type">
+                                    <font id="black-dot">●</font>
+                                    {ticketData.ticket_Name}
+                                </font>
+                            </p>
+                            <p className="group-name">
+                                <img src={Organizer_icon} alt="" />
+                                主辦單位：{activityData.org_Name}
+                            </p>
+                        </div>
                     </div>
                     <form className="buy-form" onSubmit={submitHandler}>
                         <FormInput
@@ -336,7 +335,7 @@ const Information = () => {
                             Type="text"
                             ClassName="input-label"
                             Title="身分證字號(必填)"
-                            notice="*配合政府實聯制規定，填寫真實身份證字號，以利現場工作人員查驗身份"
+                            notice="*配合政府實名制規定，填寫真實身份證字號，以利現場工作人員查驗身份"
                             value={activityData.NID}
                             Handler={onNIDChangeHandler}
                         />
@@ -413,4 +412,4 @@ const Information = () => {
     }
 };
 
-export default Information;
+export default BuyTicket;
