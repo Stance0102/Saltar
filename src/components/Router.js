@@ -12,7 +12,7 @@ export const ADDCUSTOMER = "addCustomer";
 export const ANALYZE = "analyze";
 export const ACTIVITY_MANAGEMENT = "managementActivity";
 // AUTH Routes
-export const LOGIN = "/";
+export const LOGIN = "/login";
 export const SIGNUP = "/signup";
 export const FORGETPW = "/forgetPassword";
 export const CHANGEPW = "/changePassword";
@@ -22,3 +22,4 @@ export const ORGANIZER_EMAILCHECK = "/organizerEmailCheck";
 export const ONEPAGE_PREVIEW = "/onePageEvent";
 export const TICKET_INFORMATION = "/ticketInformation";
 export const TICKET_CUSTOMER = "/ticketCustomer";
+export const INDEX = "/";

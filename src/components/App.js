@@ -12,6 +12,7 @@ import { ProtectedRoute } from "./Protected.route";
 import "../styles/saltar.css";
 import SuperNav from "./Nav/SuperNav";
 
+const Index = lazy(() => import("./Home/Index"));
 const LogIn = lazy(() => import("./Account/Login"));
 const SignUp = lazy(() => import("./Account/Signup"));
 const Dashboard = lazy(() => import("./Home/Dashboard"));
@@ -39,6 +40,11 @@ const App = () => {
                         <SuperNav />
                         <div className="main">
                             <Switch>
+                                <Route
+                                    exact
+                                    path={routes.INDEX}
+                                    component={Index}
+                                />
                                 <Route
                                     exact
                                     path={routes.LOGIN}
