@@ -98,7 +98,7 @@ nav.superNav
     align-items: flex-start
     width: 100vw
     max-width: 100vw
-    height: 100vh
+    height: 100%
 
 nav.subNav
     display: flex
@@ -175,3 +175,106 @@ nav.closeNav
     color: $text-gray
     font-size: 1rem
     font-family: "NotoSansCJKtc-Medium"
+
+.official
+    display: flex
+    flex-direction: column
+    justify-content: flex-start
+    align-items: center
+    width: 100vw
+    height: 100%
+    .banner
+        width: 100%
+        height: 80%
+        overflow: hidden
+        background-color: #f9eadd
+        display: flex
+        justify-content: flex-end
+        align-items: flex-start
+        img
+            width: 40%
+            height: 100%
+    .head-text
+        width: 50%
+        font-size: 2.5rem
+        font-weight: 500
+        color: $text-black
+        font-family: "NotoSansCJKtc-Medium"
+        margin-top: 130px
+        margin-right: 2.5%
+        p
+            font-size: 1.1rem
+            color: #777
+            font-family: "NotoSansCJKtc-Regular"
+            margin-top: 8px
+
+    .spilt-part
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 100%
+        height: 20vh
+        margin-top: 30px
+        #left-hr
+            background-color: $text-orange
+            border: 2.5px solid $text-orange
+            width: 130px
+            transform: rotate(60deg)
+            border-radius: 15px
+        #right-hr
+            background-color: $text-orange
+            border: 2.5px solid $text-orange
+            width: 130px
+            transform: rotate(-60deg)
+            border-radius: 15px
+        p
+            color: #000
+            font-size: 2.7rem
+            font-family: "GenYoGothic-M"
+            line-height: 3.2rem
+            text-align: center
+
+    .feature-box
+        display: flex
+        justify-content: center
+        align-items: center
+        width: 100%
+        height: 100%
+        .left-box
+            display: flex
+            justify-content: flex-end
+            align-items: center
+            width: 50%
+            height: 100%
+            padding-top: 25px
+            margin-right: 20px
+            img
+                width: 50%
+                height: 50%
+        .right-box
+            display: flex
+            justify-content: flex-start
+            align-items: center
+            width: 50%
+            height: 100%
+            margin-left: 20px
+            img
+                width: 50%
+                height: 50%
+        .text-box
+            display: flex
+            flex-direction: column
+            justify-content: flex-start
+            align-items: flex-start
+            width: fit-content
+            font-size: 2.2rem
+            line-height: 3rem
+            font-weight: 500
+            color: $text-black
+            font-family: "GenYoGothic-M"
+            p
+                font-size: 1.1rem
+                line-height: 1.8rem
+                color: $text-gray
+                font-family: "GenYoGothic-R"
+                margin-top: 10px
