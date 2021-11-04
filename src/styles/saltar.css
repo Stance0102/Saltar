@@ -383,23 +383,6 @@ nav.closeNav {
   color: #ffb559;
 }
 
-#copyright {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 100%;
-  height: 100px;
-  color: #a5a5a5;
-  font-size: 1rem;
-  font-family: "NotoSansCJKtc-Medium";
-}
-
 .official {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -429,9 +412,29 @@ nav.closeNav {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media (max-width: 768px) {
+  .official .banner {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    background-image: url("../images/Fiesta_Banner.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
 }
 
 .official .banner img {
@@ -439,21 +442,74 @@ nav.closeNav {
   height: 100%;
 }
 
-.official .head-text {
+@media (max-width: 768px) {
+  .official .banner img {
+    display: none;
+  }
+}
+
+.official .banner .head-text {
   width: 50%;
   font-size: 2.5rem;
   font-weight: 500;
   color: #000000;
   font-family: "NotoSansCJKtc-Medium";
-  margin-top: 130px;
   margin-right: 2.5%;
 }
 
-.official .head-text p {
+@media (max-width: 1200px) {
+  .official .banner .head-text {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .official .banner .head-text {
+    font-size: 1.1rem;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 10px;
+  }
+}
+
+.official .banner .head-text p {
   font-size: 1.1rem;
   color: #777;
   font-family: "NotoSansCJKtc-Regular";
   margin-top: 8px;
+}
+
+@media (max-width: 1200px) {
+  .official .banner .head-text p {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .official .banner .head-text p {
+    font-size: 0.3rem;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 10px;
+    color: #333;
+  }
 }
 
 .official .spilt-part {
@@ -497,6 +553,19 @@ nav.closeNav {
   text-align: center;
 }
 
+@media (max-width: 1200px) {
+  .official .spilt-part p {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .official .spilt-part p {
+    font-size: 1.45rem;
+    line-height: 1.85rem;
+  }
+}
+
 .official .feature-box {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -509,6 +578,19 @@ nav.closeNav {
           align-items: center;
   width: 100%;
   height: 100%;
+}
+
+@media (max-width: 768px) {
+  .official .feature-box {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
 }
 
 .official .feature-box .left-box {
@@ -527,9 +609,26 @@ nav.closeNav {
   margin-right: 20px;
 }
 
+@media (max-width: 768px) {
+  .official .feature-box .left-box {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    margin-right: 0;
+    width: 100%;
+  }
+}
+
 .official .feature-box .left-box img {
   width: 50%;
   height: 50%;
+}
+
+@media (max-width: 768px) {
+  .official .feature-box .left-box img {
+    width: 80%;
+    height: 80%;
+  }
 }
 
 .official .feature-box .right-box {
@@ -547,9 +646,26 @@ nav.closeNav {
   margin-left: 20px;
 }
 
+@media (max-width: 768px) {
+  .official .feature-box .right-box {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
 .official .feature-box .right-box img {
   width: 50%;
   height: 50%;
+}
+
+@media (max-width: 768px) {
+  .official .feature-box .right-box img {
+    width: 80%;
+    height: 80%;
+  }
 }
 
 .official .feature-box .text-box {
@@ -576,12 +692,176 @@ nav.closeNav {
   font-family: "GenYoGothic-M";
 }
 
+@media (max-width: 768px) {
+  .official .feature-box .text-box {
+    font-size: 1.4rem;
+    line-height: 2rem;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+
 .official .feature-box .text-box p {
   font-size: 1.1rem;
   line-height: 1.8rem;
-  color: #a5a5a5;
+  color: #555;
   font-family: "GenYoGothic-R";
   margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .official .feature-box .text-box p {
+    font-size: 0.8rem;
+    line-height: 1.3rem;
+    padding-left: 8px;
+    padding-right: 5px;
+  }
+}
+
+@media (max-width: 768px) {
+  .official .right-img-rwd {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+  }
+}
+
+.official #call-to-action {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 60vh;
+  color: black;
+  font-family: "GenYoGothic-M";
+  font-size: 2rem;
+  padding: 15px;
+  background-image: url("../images/Fiesta_Banner.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+@media (max-width: 768px) {
+  .official #call-to-action {
+    font-size: 1.2rem;
+  }
+}
+
+.official #call-to-action p {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.official #call-to-action .footer-btn-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 1.2rem;
+  margin-top: 15px;
+}
+
+.official #call-to-action .footer-btn-group .CTABtn {
+  border: 2px solid #FFF;
+  border-radius: 8px;
+  background-color: #fff;
+  -webkit-box-shadow: 1.5px 1.5px 1.5px 1.5px rgba(255, 181, 89, 0.4);
+          box-shadow: 1.5px 1.5px 1.5px 1.5px rgba(255, 181, 89, 0.4);
+  padding: 10px;
+  color: #000;
+  font-family: "GenYoGothic-R";
+  margin-left: 10px;
+  margin-right: 10px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.official #call-to-action .footer-btn-group .CTABtn:hover {
+  -webkit-box-shadow: 0px 0px 0px 0px #a5a5a5;
+          box-shadow: 0px 0px 0px 0px #a5a5a5;
+}
+
+.official footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  padding: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
+  background-color: #f9eadd;
+}
+
+.official footer #contact {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  width: 100%;
+  font-size: 1rem;
+  color: black;
+}
+
+.official footer #contact a {
+  color: #ffb559;
+}
+
+.official footer span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  margin-top: 20px;
+  font-size: 0.8rem;
+  color: #111;
+  font-family: "GenYoGothic-R";
 }
 
 .account-box {
