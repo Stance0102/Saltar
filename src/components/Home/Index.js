@@ -1,9 +1,12 @@
 import React from "react";
+import * as routes from "../Router";
+import { Link } from "react-router-dom";
 // Img
 import Fiesta_Banner from "../../images/Fiesta_Banner.jpg";
 import CMS from "../../images/Official/CMS.png";
 import OnePage from "../../images/Official/OnePage.png";
 import Analyze from "../../images/Official/Analyze.png";
+import GetKOL from "../../images/Official/GetKOL.png";
 
 const Index = () => {
     return (
@@ -31,7 +34,7 @@ const Index = () => {
                 <p>
                     Saltar
                     <br />
-                    屬於這個世代的活動解決方案！
+                    屬於這個世代的活動行銷解決方案！
                 </p>
                 <hr id="right-hr" />
             </div>
@@ -44,7 +47,7 @@ const Index = () => {
                     <div className="text-box">
                         3分鐘、2步驟搞定你的
                         <br />
-                        全通路活動售票頁！
+                        全通路活動售票頁
                         <p>
                             只需操作2個頁面，就能搞定全通路一頁式活動頁！
                             <br />
@@ -56,12 +59,12 @@ const Index = () => {
                 </div>
             </div>
 
-            <div className="feature-box">
+            <div className="feature-box right-img-rwd">
                 <div className="left-box">
-                    <div className="text-box left-text">
-                        打造對話式商務！
+                    <div className="text-box">
+                        為你打造對話式商務
                         <br />
-                        售票、取票、驗票超輕鬆！
+                        售票、取票、驗票超輕鬆
                         <br />
                         One Line 搞定！
                         <p>
@@ -70,7 +73,7 @@ const Index = () => {
                             <br />
                             顧客可以只用 Line 就完成購票、取票、驗票！
                             <br />
-                            讓你能沒有壓力的選擇「最好的售票管道」！
+                            讓你能沒有壓力的選擇「最好的行銷/售票管道」！
                             <br />
                         </p>
                     </div>
@@ -82,10 +85,91 @@ const Index = () => {
 
             <div className="feature-box">
                 <div className="left-box">
+                    <img src={GetKOL} />
+                </div>
+                <div className="right-box">
+                    <div className="text-box">
+                        個人化專屬活動推薦
+                        <br />
+                        輕鬆打造精準行銷！
+                        <p>
+                            依照不同客戶投放個人化活動推薦
+                            <br />
+                            大幅提升轉換率及行銷效益
+                            <br />
+                            讓你的每一筆行銷預算都花的扎實！
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div className="feature-box right-img-rwd">
+                <div className="left-box">
+                    <div className="text-box">
+                        自動化分析/預測活動趨勢
+                        <br />
+                        輕鬆打造熱門活動！
+                        <p>
+                            Saltar提供完整的自動化客戶分析、流量分析
+                            <br />
+                            讓你賣出去的每張票、顧客操作的每個行為
+                            <br />
+                            都能夠成為下場活動的養分！
+                        </p>
+                    </div>
+                </div>
+                <div className="right-box">
                     <img src={Analyze} />
                 </div>
-                <div className="right-box"></div>
             </div>
+
+            <div className="feature-box">
+                <div className="left-box">
+                    <img src={GetKOL} />
+                </div>
+                <div className="right-box">
+                    <div className="text-box">
+                        一站管理多個渠道訊息
+                        <br />
+                        打造流暢的溝通管道！
+                        <p>
+                            Saltar整合Line、Message、Instagram
+                            <br />
+                            不需切換多種平台就能與客戶聯繫
+                            <br />
+                            讓你一站搞定各種客服管道！
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="call-to-action">
+                <p>Saltar</p>
+                <p>屬於這個世代的活動行銷解決方案</p>
+                <div className="footer-btn-group">
+                    <Link to={routes.SIGNUP} className="CTABtn">
+                        註冊以開始免費使用
+                    </Link>
+                    <Link to={routes.LOGIN} className="CTABtn">
+                        有帳號了？點我登入
+                    </Link>
+                </div>
+            </div>
+
+            <footer>
+                <p id="contact">
+                    聯絡我們：
+                    <br />
+                    Email：
+                    <a href="mailto:fiesta.network.taiwan@gmail.com">
+                        fiesta.network.taiwan@gmail.com
+                    </a>
+                    <br />
+                    Instagram：
+                    <a href="https://www.instagram.com/saltar.tw/">saltar.tw</a>
+                </p>
+                <span>&copy; 2021 Fiesta. All Rights Reserved.</span>
+            </footer>
         </div>
     );
 };
