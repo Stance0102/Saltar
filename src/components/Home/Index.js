@@ -7,6 +7,7 @@ import CMS from "../../images/Official/CMS.png";
 import OnePage from "../../images/Official/OnePage.png";
 import Analyze from "../../images/Official/Analyze.png";
 import GetKOL from "../../images/Official/GetKOL.png";
+import GroupKOL from "../../images/Official/GroupKOL.png";
 
 const Index = () => {
     return (
@@ -125,7 +126,7 @@ const Index = () => {
 
             <div className="feature-box">
                 <div className="left-box">
-                    <img src={GetKOL} />
+                    <img src={GroupKOL} />
                 </div>
                 <div className="right-box">
                     <div className="text-box">
@@ -168,7 +169,7 @@ const Index = () => {
                     Instagram：
                     <a href="https://www.instagram.com/saltar.tw/">saltar.tw</a>
                 </p>
-                <span>&copy; 2021 Fiesta. All Rights Reserved.</span>
+                <span>&copy; 2021 Fiesta 斯塔科技. All Rights Reserved.</span>
             </footer>
         </div>
     );
