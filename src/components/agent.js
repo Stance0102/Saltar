@@ -14,6 +14,16 @@ const login = (username, password) => {
     );
 };
 
+const linelogin = (token) => {
+    return axios.post(
+        `/Account/linelogin`,
+        {
+            token: token,
+        },
+        { params: { t: new Date().getTime() } }
+    );
+};
+
 const signup = async (
     username,
     password,

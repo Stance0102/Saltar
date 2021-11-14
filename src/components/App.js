@@ -14,6 +14,7 @@ import SuperNav from "./Nav/SuperNav";
 
 const Index = lazy(() => import("./Home/Index"));
 const LogIn = lazy(() => import("./Account/Login"));
+const LineLogIn = lazy(() => import("./Account/LineLogin"));
 const SignUp = lazy(() => import("./Account/Signup"));
 const Dashboard = lazy(() => import("./Home/Dashboard"));
 const ErrorPage = lazy(() => import("./Home/ErrorPage"));
@@ -49,6 +50,10 @@ const App = () => {
                                     exact
                                     path={routes.LOGIN}
                                     component={LogIn}
+                                />
+                                <Route
+                                    path={routes.LINELOGIN}
+                                    component={LineLogIn}
                                 />
                                 <Route
                                     path={routes.SIGNUP}

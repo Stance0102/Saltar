@@ -6,6 +6,7 @@ import { login } from "../agent";
 import { FormInput } from "../Home/_Components";
 import loginPage from "../../images/loginPage.svg";
 import Swal from "sweetalert2";
+import LineButton from "./LineButton";
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -97,6 +98,14 @@ const Login = () => {
                             回到註冊頁面
                         </Link>
                     </p>
+                    <LineButton
+                        clientID="1656627554"
+                        state="5566"
+                        nonce="7788"
+                        redirectURI="http://localhost:3000/linelogin"
+                        scope="profile openid"
+                        maxAge="120"
+                    />
                 </form>
             </div>
         </>
