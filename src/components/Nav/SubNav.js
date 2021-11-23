@@ -17,6 +17,18 @@ const SubNav = ({ url }) => {
         <>
             <nav className={classNameText}>
                 <ul>
+                    <Link to={`${url}/${routes.ACTIVITY_MANAGEMENT}`}>
+                        <li>
+                            <img src={web_Icon} alt="" />
+                            建立一頁式活動網站
+                        </li>
+                    </Link>
+                    <Link to={`${url}/${routes.TICKET_MANAGEMENT}`}>
+                        <li>
+                            <img src={vector_gray_Icon} alt="" />
+                            票卷管理
+                        </li>
+                    </Link>
                     <Link to={routes.DASHBOARD}>
                         <li>
                             <img src={controlerIcon_02} alt="" />
@@ -29,24 +41,10 @@ const SubNav = ({ url }) => {
                             客戶分析
                         </li>
                     </Link>
-
-                    <Link to={`${url}/${routes.TICKET_MANAGEMENT}`}>
-                        <li>
-                            <img src={vector_gray_Icon} alt="" />
-                            票卷管理
-                        </li>
-                    </Link>
-
                     <Link to={`${url}/${routes.EDIT}`}>
                         <li>
                             <img src={editorIcon} alt="" />
-                            系學會/社團資料編輯
-                        </li>
-                    </Link>
-                    <Link to={`${url}/${routes.ACTIVITY_MANAGEMENT}`}>
-                        <li>
-                            <img src={web_Icon} alt="" />
-                            一頁式活動網站設定
+                            編輯主辦方資料
                         </li>
                     </Link>
                 </ul>

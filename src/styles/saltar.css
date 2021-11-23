@@ -206,13 +206,13 @@ nav.superNav .navBtnGroup {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
-  font-size: 24px;
+  font-size: 1.5rem;
   margin-right: 20px;
 }
 
 @media (max-width: 768px) {
   nav.superNav .navBtnGroup {
-    display: none;
+    margin-right: 0;
   }
 }
 
@@ -227,6 +227,14 @@ nav.superNav .navBtnGroup .btn-login {
   font-size: 1rem;
 }
 
+@media (max-width: 768px) {
+  nav.superNav .navBtnGroup .btn-login {
+    font-size: 0.9rem;
+    width: 60px;
+    height: 35px;
+  }
+}
+
 nav.superNav .navBtnGroup .btn-signin {
   width: 100px;
   height: 40px;
@@ -238,6 +246,16 @@ nav.superNav .navBtnGroup .btn-signin {
   color: #ffa83d;
   font-family: "NotoSansCJKtc-Medium";
   font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  nav.superNav .navBtnGroup .btn-signin {
+    font-size: 0.9rem;
+    width: 60px;
+    height: 35px;
+    margin-left: 10px;
+    margin-right: 15px;
+  }
 }
 
 nav.superNav .navBtnGroup .btn-dashboard {
@@ -259,6 +277,15 @@ nav.superNav .navBtnGroup .btn-dashboard {
   color: #ffb559;
   font-family: "NotoSansCJKtc-Medium";
   font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  nav.superNav .navBtnGroup .btn-dashboard {
+    font-size: 0.9rem;
+    width: 60px;
+    height: 35px;
+    margin-right: 5px;
+  }
 }
 
 .main {
@@ -299,8 +326,8 @@ nav.subNav {
 
 @media (max-width: 768px) {
   nav.subNav {
-    -webkit-transform: translateX(-15%);
-            transform: translateX(-15%);
+    -webkit-transform: translateY(-15%);
+            transform: translateY(-15%);
     overflow: hidden;
   }
 }
