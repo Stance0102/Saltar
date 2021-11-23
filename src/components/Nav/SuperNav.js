@@ -13,7 +13,6 @@ const SuperNav = () => {
     const { isLogin } = useSelector((state) => state.Account);
     const { isOpen } = useSelector((state) => state.Menu);
 
-    console.log(isOpen);
     function handleLogout(e) {
         e.preventDefault();
         dispatch(removeAccount());
@@ -21,10 +20,8 @@ const SuperNav = () => {
         history.push("/");
     }
 
-    let i = 1;
     const handleMenuSwitch = () => {
-        i++;
-        if (i % 2 === 0) {
+        if (isOpen) {
             dispatch(closeMenu());
         } else {
             dispatch(openMenu());

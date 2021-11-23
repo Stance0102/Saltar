@@ -13,6 +13,7 @@ export const ANALYZE = "analyze";
 export const ACTIVITY_MANAGEMENT = "managementActivity";
 // AUTH Routes
 export const LOGIN = "/login";
+export const LINELOGIN = "/lineLogin";
 export const SIGNUP = "/signup";
 export const FORGETPW = "/forgetPassword";
 export const CHANGEPW = "/changePassword";

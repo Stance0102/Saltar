@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getAllInOne } from "../agent";
+import LineLogin from "../Account/LineLogin";
 import Swal from "sweetalert2";
 // Img
 import calendar_icon from "../../images/calendar_icon.svg";
@@ -109,10 +110,15 @@ const OnePage = ({ activityId }) => {
 
     const buyTicketHandler = (e, ticketId) => {
         e.preventDefault();
-        history.push({
-            pathname: "/ticketInformation",
-            state: { ticketId: ticketId, activityData: activityData },
-        });
+        if (localStorage.getItem("lineData") == undefined) {
+            localStorage.setItem("lineReDirectId", activityId);
+            LineLogin();
+        } else {
+            history.push({
+                pathname: "/ticketInformation",
+                state: { ticketId: ticketId, activityData: activityData },
+            });
+        }
     };
 
     return (
@@ -436,27 +442,6 @@ const Save_Btn = ({ editMode }) => {
         );
     } else {
         return <div></div>;
-    }
-};
-
-const Edit_Btn = ({ editMode }) => {
-    if (editMode) {
-        return (
-            <>
-                <button className="edit-btn">
-                    <img src={tick_Icon} alt="" />
-                </button>
-                <button className="edit-btn">
-                    <img src={cancel_Icon} alt="" />
-                </button>
-            </>
-        );
-    } else {
-        return (
-            <button className="edit-btn">
-                <img src={Group_icon} alt="" />
-            </button>
-        );
     }
 };
 

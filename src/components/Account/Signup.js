@@ -135,7 +135,7 @@ const SignUp = () => {
                         confirmButtonColor: "#ffb559",
                         icon: "success",
                     }).then(() => {
-                        history.push("/");
+                        history.push("/login");
                     });
                     break;
                 case 17:
@@ -252,7 +252,7 @@ const SignUp = () => {
                             </button>
                             <p id="no-color">
                                 已經有帳號了嗎？
-                                <Link to="/" className="link">
+                                <Link to="/login" className="link">
                                     回到登入頁面
                                 </Link>
                             </p>
@@ -344,7 +344,7 @@ const SignUp = () => {
                             </button>
                             <p id="no-color">
                                 已經有帳號了嗎？
-                                <Link to="/" className="link">
+                                <Link to="/login" className="link">
                                     回到登入頁面
                                 </Link>
                             </p>

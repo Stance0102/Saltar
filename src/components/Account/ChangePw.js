@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { FormInput } from "../Home/_Components";
 import { changePassword } from "../agent";
+import qs from "qs";
 import Swal from "sweetalert2";
 // Img
 import passwordimg from "../../images/password.svg";
@@ -14,10 +15,10 @@ const ChangePw = () => {
     const history = useHistory();
 
     useEffect(() => {
-        if (location.search !== "") {
-            const id = location.search.split("=")[1];
-            setId(id);
-        }
+        const { Id } = qs.parse(location.search, {
+            ignoreQueryPrefix: true,
+        });
+        setId(Id);
     }, []);
 
     const onPasswordChangeHandler = (e) => {
