@@ -16,10 +16,12 @@ const BuyTicket = () => {
     const [ticketData, setTicketData] = useState("");
     const [activityData, setActivityData] = useState("");
     const [imagePreview, setImagePreview] = useState("");
+    const [lineData, setLineData] = useState({});
     const [userData, setUserData] = useState({
         email: "",
         name: "",
         phone: "",
+        UID: "",
         NID: "",
         sex: "",
         payment: "",
@@ -46,10 +48,25 @@ const BuyTicket = () => {
                 userData = location.state.userData;
                 setUserData(userData);
                 setPayStatus(true);
+            } else {
+                console.log(JSON.parse(localStorage.getItem("lineData")));
+                const {
+                    Customer_Id,
+                    uid: UID,
+                    displayName,
+                    mail,
+                    phone,
+                } = JSON.parse(localStorage.getItem("lineData"));
+                userData.Customer_Id = Customer_Id || "";
+                userData.name = displayName || "";
+                userData.UID = UID || "";
+                userData.email = mail || "";
+                userData.phone = phone || "";
+                setUserData(userData);
             }
         }
         // console.log(location.state);
-        if (location.state.sendEmail) {
+        if (location.state.newCus || !location.state.newCus) {
             const sendEmail = async () => {
                 const mailResponse = await sendCusValidMail(
                     userData.email,
@@ -74,6 +91,24 @@ const BuyTicket = () => {
                 }
             };
             sendEmail();
+        } else {
+            // 這裡沒joinedList_Id不能發Ticket
+            // const sendEmail = async () => {
+            //     const mailResponse = await sendTicketMail(
+            //         response.data.results.joinedList_Id
+            //     );
+            //     if (mailResponse.status == 200) {
+            //         switch (mailResponse.data.status) {
+            //             case 0:
+            //                 break;
+            //             default:
+            //             // console.log(mailResponse);
+            //         }
+            //     } else {
+            //         // console.log(mailResponse);
+            //     }
+            // };
+            // sendEmail();
         }
         if (ticketId !== "") {
             const setupData = async () => {
@@ -147,14 +182,14 @@ const BuyTicket = () => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        const { email, name, phone, NID, sex, payment } = userData;
+        const { email, name, phone, UID, NID, sex, payment } = userData;
         if (
             email === "" ||
             name === "" ||
             phone === "" ||
             NID === "" ||
-            sex === "" ||
-            payment === ""
+            sex === undefined ||
+            payment === undefined
         ) {
             Swal.fire({
                 title: "資料請完整填寫",
@@ -169,6 +204,7 @@ const BuyTicket = () => {
             name,
             phone,
             email,
+            UID,
             NID,
             sex == "male",
             true
@@ -183,6 +219,10 @@ const BuyTicket = () => {
                         confirmButtonColor: "#ffb559",
                         icon: "success",
                     }).then(() => {
+                        let newCus = true;
+                        if (userData.Customer_Id !== "") {
+                            newCus = false;
+                        }
                         history.push({
                             pathname: "/ticketInformation",
                             state: {
@@ -190,7 +230,7 @@ const BuyTicket = () => {
                                 buyTicketId: response.data.results.Id,
                                 activityData: activityData,
                                 userData: userData,
-                                sendEmail: true,
+                                newCus: newCus,
                             },
                         });
                         window.location.reload();
@@ -216,32 +256,6 @@ const BuyTicket = () => {
             }
         }
     };
-
-    //     const sendEmail = async (e) => {
-    //         e.preventDefault();
-    //         const mailResponse = await sendCusValidMail(
-    //             userData.email,
-    //             buyTicketId
-    //         );
-    //         if (mailResponse.status == 200) {
-    //             switch (mailResponse.data.status) {
-    //                 case 0:
-    //                     Swal.fire({
-    //                         title: "發信成功",
-    //                         text: "趕緊去信箱點選驗證！",
-    //                         confirmButtonText: "繼續",
-    //                         confirmButtonColor: "#ffb559",
-    //                         icon: "success",
-    //                     });
-    //                     break;
-    //                 default:
-    //                     console.log(mailResponse);
-    //                     break;
-    //             }
-    //         } else {
-    //             console.log(mailResponse);
-    //         }
-    //     };
 
     if (payStatus) {
         return (
@@ -326,17 +340,17 @@ const BuyTicket = () => {
                             ClassName="input-label"
                             Title="學校信箱或個人信箱(必填)"
                             notice="*建議填寫學校信箱以享有學生專屬優惠！"
-                            value={activityData.email}
+                            value={userData.email}
                             Handler={onEmailChangeHandler}
+                            disabled={userData.Customer_Id || false || true}
                         />
-
                         <FormInput
                             Id="NID"
                             Type="text"
                             ClassName="input-label"
                             Title="身分證字號(必填)"
                             notice="*配合政府實名制規定，填寫真實身份證字號，以利現場工作人員查驗身份"
-                            value={activityData.NID}
+                            value={userData.NID}
                             Handler={onNIDChangeHandler}
                         />
                         <FormInput
@@ -345,19 +359,17 @@ const BuyTicket = () => {
                             ClassName="input-label"
                             Title="姓名(必填)"
                             notice="*填寫真實姓名，以利現場工作人員查驗身份"
-                            value={activityData.name}
+                            value={userData.name}
                             Handler={onNameChangeHandler}
                         />
-
                         <FormInput
                             Id="telNumber"
                             Type="tel"
                             ClassName="input-label"
                             Title="聯絡電話(必填)"
-                            value={activityData.phone}
+                            value={userData.phone}
                             Handler={onPhoneChangeHandler}
                         />
-
                         <p>性別</p>
                         <div className="input-radio-group">
                             <FormInput
@@ -380,7 +392,6 @@ const BuyTicket = () => {
                                 Handler={onSexChangeHandler}
                             />
                         </div>
-
                         <p>付款方式</p>
                         <font className="notice">
                             目前暫未開放金流，近期將開放線上金流
@@ -396,14 +407,11 @@ const BuyTicket = () => {
                                 Handler={onPaymentChangeHandler}
                             />
                         </div>
-
                         <hr />
-
                         <div className="total-price">
                             總計金額
                             <p>{ticketData.price} 元</p>
                         </div>
-
                         <button className="buy-btn">確認購買</button>
                     </form>
                 </div>

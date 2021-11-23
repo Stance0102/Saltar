@@ -14,7 +14,7 @@ import SuperNav from "./Nav/SuperNav";
 
 const Index = lazy(() => import("./Home/Index"));
 const LogIn = lazy(() => import("./Account/Login"));
-const LineLogIn = lazy(() => import("./Account/LineLogin"));
+const LineLogIn = lazy(() => import("./Account/LineLoginCallback"));
 const SignUp = lazy(() => import("./Account/Signup"));
 const Dashboard = lazy(() => import("./Home/Dashboard"));
 const ErrorPage = lazy(() => import("./Home/ErrorPage"));
