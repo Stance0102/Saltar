@@ -44,7 +44,6 @@ const LineLoginCallback = () => {
         localStorage.removeItem("lineState");
         const setupData = async () => {
             const response = await lineLogin(code);
-            console.log(response);
             if (response.status == 200) {
                 switch (response.data.status) {
                     case 0:

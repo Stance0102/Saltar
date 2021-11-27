@@ -377,9 +377,7 @@ const updateTicket = async (
     endTime,
     //價錢
     price,
-    //已賣出數量
-    // count,
-    //活動ID 應該不能改
+    //活動ID
     actId,
     //開放狀態? true false
     is_active
@@ -390,37 +388,16 @@ const updateTicket = async (
         startTime: startTime,
         endTime: endTime,
         price: price,
-        // count: count,
         act: actId,
         is_active: is_active,
     });
 };
 
-const createTicketMember = async (
-    //票券ID
-    ticketId,
-    //名稱
-    actualname,
-    //電話
-    phone,
-    //電子郵件
-    mail,
-    UID,
-    NID,
-    //性別
-    sex,
-    // ? true false
-    is_active
-) => {
+const createTicketMember = async (customerId, ticketId) => {
     return axios.post(`/tickets/member/create`, {
-        actualname: actualname,
-        phone: phone,
-        mail: mail,
+        customerInfo: customerId,
         ticket: ticketId,
-        UID: UID,
-        NID: NID,
-        sex: sex,
-        is_active: is_active,
+        is_active: true,
     });
 };
 
@@ -454,10 +431,10 @@ const updateTicketMember = async (
 };
 
 //確認買票信箱
-const sendCusValidMail = async (mail, joinedListId) => {
+const sendCusValidMail = async (ticket_Id, customerId) => {
     return axios.post(`/mail/sendCusVaildMail`, {
-        mail: mail,
-        joinedList_Id: joinedListId,
+        ticket_Id: ticket_Id,
+        Customer_Id: customerId,
     });
 };
 
@@ -542,6 +519,24 @@ const createCustomer = async (
     });
 };
 
+const createCustomerWithBuyTicket = async (
+    actualname,
+    phone,
+    mail,
+    UID,
+    NID,
+    sex
+) => {
+    return axios.post(`/customer/create`, {
+        actualname: actualname,
+        phone: phone,
+        mail: mail,
+        UID: UID,
+        NID: NID,
+        sex: sex,
+    });
+};
+
 const selectCustomerByGroupId = async (groupId) => {
     return axios.get(`/customer/get/group/${groupId}`);
 };
@@ -555,25 +550,23 @@ const updateCustomer = async (
     actualname,
     phone,
     mail,
-    groupID,
     customer_type,
     customer_tag,
     customer_note,
-    sex,
-    is_inSaltar,
-    is_active
+    NID,
+    UID,
+    sex
 ) => {
     return axios.put(`/customer/update/${CustomerId}`, {
         actualname: actualname,
         phone: phone,
         mail: mail,
-        Group: groupID,
         customer_type: customer_type,
         customer_tag: customer_tag,
         customer_note: customer_note,
+        NID: NID,
+        UID: UID,
         sex: sex,
-        is_inSaltar: is_inSaltar,
-        is_active: is_active,
     });
 };
 
@@ -693,7 +686,6 @@ export {
     createShow,
     selectShowByActivity,
     updateShow,
-    updateCustomer,
     createCustomerFromExcel,
     uploadExcelToRFM,
     downloadExcelToRFM,
@@ -718,6 +710,8 @@ export {
 export {
     lineLogin,
     createCustomer,
+    createCustomerWithBuyTicket,
+    updateCustomer,
     selectCustomerByGroupId,
     selectCustomerByName,
 };
