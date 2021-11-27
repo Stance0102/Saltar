@@ -21,41 +21,76 @@ const EmailCheck = () => {
             const setupData = async () => {
                 if (token !== undefined) {
                     const response = await verifyValidMail(token);
-                    if (response.status === 200) {
-                        switch (response.data.status) {
-                            case 0:
-                                setCheckStatus(true);
-                                const sendResponse = await sendTicketMail(
-                                    response.data.results.joinedList_Id
-                                );
-                                break;
-                            case 9:
-                                Swal.fire({
-                                    title: "驗證失敗",
-                                    confirmButtonText: "離開",
-                                    confirmButtonColor: "#ffb559",
-                                    icon: "error",
-                                }).then(() => {
-                                    history.push({
-                                        pathname: "/",
+                    switch (response.data.status) {
+                        case 0:
+                            setCheckStatus(true);
+                            const sendResponse = await sendTicketMail(
+                                response.data.results.joinedList_Id
+                            );
+                            switch (sendResponse.data.status) {
+                                case 0:
+                                    Swal.fire({
+                                        title: "票券資料已經送至信箱!",
+                                        confirmButtonText: "確認",
+                                        confirmButtonColor: "#ffb559",
+                                        icon: "success",
                                     });
-                                });
-                                break;
-                            default:
-                                Swal.fire({
-                                    title: "發生意外錯誤",
-                                    confirmButtonText: "離開",
-                                    confirmButtonColor: "#ffb559",
-                                    icon: "info",
-                                }).then(() => {
-                                    history.push({
-                                        pathname: "/",
+                                    break;
+
+                                default:
+                                    Swal.fire({
+                                        title: "發生意外錯誤",
+                                        confirmButtonText: "離開",
+                                        confirmButtonColor: "#ffb559",
+                                        icon: "info",
+                                    }).then(() => {
+                                        history.push({
+                                            pathname: "/",
+                                        });
                                     });
+                                    break;
+                            }
+                            break;
+                        case 9:
+                            Swal.fire({
+                                title: "驗證失敗",
+                                confirmButtonText: "離開",
+                                confirmButtonColor: "#ffb559",
+                                icon: "error",
+                            }).then(() => {
+                                history.push({
+                                    pathname: "/",
                                 });
-                                break;
-                        }
-                    } else {
-                        // console.log(response);
+                            });
+                            break;
+                        case 17:
+                            Swal.fire({
+                                title: "你已經買過票囉！",
+                                confirmButtonText: "確認",
+                                confirmButtonColor: "#ffb559",
+                                icon: "info",
+                            });
+                            break;
+                        case 18:
+                            Swal.fire({
+                                title: "非常抱歉！你所購買的票券已經售完！",
+                                confirmButtonText: "確認",
+                                confirmButtonColor: "#ffb559",
+                                icon: "info",
+                            });
+                            break;
+                        default:
+                            Swal.fire({
+                                title: "發生意外錯誤",
+                                confirmButtonText: "離開",
+                                confirmButtonColor: "#ffb559",
+                                icon: "info",
+                            }).then(() => {
+                                history.push({
+                                    pathname: "/",
+                                });
+                            });
+                            break;
                     }
                 }
             };

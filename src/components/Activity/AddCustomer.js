@@ -93,14 +93,18 @@ const AddCustomer = () => {
             cusType,
             cusTag,
             cusNote,
-            cusSex === "male"
+            cusSex === "male",
+            null
         );
         if (response.status == 200) {
             switch (response.data.status) {
                 case 0:
                     const shipResponse = await createGroupCustomerShip(
                         groupId,
-                        response.data.result.Id
+                        response.data.results.Id,
+                        null,
+                        null,
+                        null
                     );
                     if (shipResponse.status == 200) {
                         switch (shipResponse.data.status) {

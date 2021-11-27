@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { FormInput } from "../Home/_Components";
-import { createTicketMember, selectTicket, sendCusValidMail } from "../agent";
+import {
+    createTicketMember,
+    selectTicket,
+    sendCusValidMail,
+    sendTicketMail,
+    createCustomerWithBuyTicket,
+    updateCustomer,
+} from "../agent";
 import Swal from "sweetalert2";
 // Img
 import cart_icon from "../../images/cart_icon.svg";
@@ -49,66 +56,30 @@ const BuyTicket = () => {
                 setUserData(userData);
                 setPayStatus(true);
             } else {
-                console.log(JSON.parse(localStorage.getItem("lineData")));
                 const {
                     Customer_Id,
                     uid: UID,
+                    NID,
                     displayName,
+                    customer_note,
+                    customer_tag,
+                    customer_type,
                     mail,
                     phone,
+                    is_active,
                 } = JSON.parse(localStorage.getItem("lineData"));
                 userData.Customer_Id = Customer_Id || "";
                 userData.name = displayName || "";
                 userData.UID = UID || "";
+                userData.NID = NID || "";
                 userData.email = mail || "";
                 userData.phone = phone || "";
+                userData.customer_note = customer_note || "";
+                userData.customer_tag = customer_tag || "";
+                userData.customer_type = customer_type || "";
+                userData.is_active = is_active || false;
                 setUserData(userData);
             }
-        }
-        // console.log(location.state);
-        if (location.state.newCus || !location.state.newCus) {
-            const sendEmail = async () => {
-                const mailResponse = await sendCusValidMail(
-                    userData.email,
-                    buyTicketId
-                );
-                if (mailResponse.status == 200) {
-                    switch (mailResponse.data.status) {
-                        case 0:
-                            Swal.fire({
-                                title: "發信成功",
-                                text: "請去信箱點選驗證",
-                                confirmButtonText: "繼續",
-                                confirmButtonColor: "#ffb559",
-                                icon: "success",
-                            });
-                            break;
-                        default:
-                        // console.log(mailResponse);
-                    }
-                } else {
-                    // console.log(mailResponse);
-                }
-            };
-            sendEmail();
-        } else {
-            // 這裡沒joinedList_Id不能發Ticket
-            // const sendEmail = async () => {
-            //     const mailResponse = await sendTicketMail(
-            //         response.data.results.joinedList_Id
-            //     );
-            //     if (mailResponse.status == 200) {
-            //         switch (mailResponse.data.status) {
-            //             case 0:
-            //                 break;
-            //             default:
-            //             // console.log(mailResponse);
-            //         }
-            //     } else {
-            //         // console.log(mailResponse);
-            //     }
-            // };
-            // sendEmail();
         }
         if (ticketId !== "") {
             const setupData = async () => {
@@ -180,9 +151,42 @@ const BuyTicket = () => {
         });
     };
 
+    const sendValid = async (Customer_Id) => {
+        const mailResponse = await sendCusValidMail(ticketId, Customer_Id);
+        switch (mailResponse.data.status) {
+            case 0:
+                Swal.fire({
+                    title: "驗證帳號",
+                    text: "請去信箱點選驗證，完成購買",
+                    confirmButtonText: "繼續",
+                    confirmButtonColor: "#ffb559",
+                    icon: "success",
+                }).then(() => {
+                    history.push({
+                        pathname: "/",
+                    });
+                });
+                break;
+            default:
+            // console.log(mailResponse);
+        }
+    };
+
     const submitHandler = async (e) => {
         e.preventDefault();
-        const { email, name, phone, UID, NID, sex, payment } = userData;
+        const {
+            Customer_Id,
+            email,
+            name,
+            phone,
+            UID,
+            NID,
+            customer_type,
+            customer_tag,
+            customer_note,
+            sex,
+            payment,
+        } = userData;
         if (
             email === "" ||
             name === "" ||
@@ -199,60 +203,117 @@ const BuyTicket = () => {
             });
             return;
         }
-        const response = await createTicketMember(
-            ticketId,
-            name,
-            phone,
-            email,
-            UID,
-            NID,
-            sex == "male",
-            true
-        );
-        if (response.status == 200) {
+
+        let newCus = true;
+        let needValidMail = true;
+        if (userData.Customer_Id !== "") {
+            newCus = false;
+            if (userData.is_active === true) {
+                needValidMail = false;
+            }
+        }
+        if (newCus) {
+            const response = await createCustomerWithBuyTicket(
+                name,
+                phone,
+                email,
+                UID,
+                NID,
+                sex
+            );
             switch (response.data.status) {
                 case 0:
-                    Swal.fire({
-                        title: "驗證信箱",
-                        text: "飛奔前往驗證信箱！",
-                        confirmButtonText: "繼續",
-                        confirmButtonColor: "#ffb559",
-                        icon: "success",
-                    }).then(() => {
-                        let newCus = true;
-                        if (userData.Customer_Id !== "") {
-                            newCus = false;
-                        }
-                        history.push({
-                            pathname: "/ticketInformation",
-                            state: {
-                                ticketId: ticketId,
-                                buyTicketId: response.data.results.Id,
-                                activityData: activityData,
-                                userData: userData,
-                                newCus: newCus,
-                            },
-                        });
-                        window.location.reload();
-                    });
-                    break;
-                case 17:
-                    Swal.fire({
-                        title: "酷喔～你已經買過這張票囉",
-                        confirmButtonText: "確定",
-                        confirmButtonColor: "#ffb559",
-                        icon: "info",
-                    });
+                    sendValid(response.data.Id);
                     break;
                 default:
-                    // console.log(response);
-                    Swal.fire({
-                        title: "發生不明錯誤",
-                        confirmButtonText: "確定",
-                        confirmButtonColor: "#ffb559",
-                        icon: "info",
-                    });
                     break;
+            }
+        } else {
+            const updateResponse = await updateCustomer(
+                Customer_Id,
+                name,
+                phone,
+                email,
+                customer_type,
+                customer_tag,
+                customer_note,
+                NID,
+                UID,
+                sex == "male"
+            );
+            switch (updateResponse.data.status) {
+                case 0:
+                    if (needValidMail) {
+                        sendValid(Customer_Id);
+                    } else {
+                        const CreateResponse = await createTicketMember(
+                            Customer_Id,
+                            ticketId
+                        );
+                        switch (CreateResponse.data.status) {
+                            case 0:
+                                const mailResponse = await sendTicketMail(
+                                    CreateResponse.data.results.Id
+                                );
+                                switch (mailResponse.data.status) {
+                                    case 0:
+                                        Swal.fire({
+                                            title: "購票成功",
+                                            text: "飛奔前往信箱！",
+                                            confirmButtonText: "繼續",
+                                            confirmButtonColor: "#ffb559",
+                                            icon: "success",
+                                        }).then(() => {
+                                            history.push({
+                                                pathname: "/ticketInformation",
+                                                state: {
+                                                    ticketId: ticketId,
+                                                    buyTicketId:
+                                                        CreateResponse.data
+                                                            .results.Id,
+                                                    activityData: activityData,
+                                                    userData: userData,
+                                                },
+                                            });
+                                            window.location.reload();
+                                        });
+                                        break;
+                                }
+                                break;
+                            case 17:
+                                Swal.fire({
+                                    title: "酷喔～你已經買過這張票囉",
+                                    confirmButtonText: "確定",
+                                    confirmButtonColor: "#ffb559",
+                                    icon: "info",
+                                });
+                                break;
+                            case 18:
+                                Swal.fire({
+                                    title: "非常抱歉！這張票已經售完囉",
+                                    confirmButtonText: "確定",
+                                    confirmButtonColor: "#ffb559",
+                                    icon: "info",
+                                });
+                                break;
+                            default:
+                                Swal.fire({
+                                    title: "發生不明錯誤",
+                                    confirmButtonText: "確定",
+                                    confirmButtonColor: "#ffb559",
+                                    icon: "info",
+                                });
+                                break;
+                        }
+                        break;
+                    }
+
+                default:
+                    break;
+            }
+        }
+        if (needValidMail) {
+            if (newCus) {
             }
         }
     };
@@ -261,10 +322,6 @@ const BuyTicket = () => {
         return (
             <>
                 <div className="buy-ticket">
-                    <div id="success">
-                        <img src={checked_icon} alt="" />
-                        <p>趕緊去驗證信箱！</p>
-                    </div>
                     <div className="title">
                         <img src={vector_gray_Icon} alt="" />
                         我的票卷
