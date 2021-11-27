@@ -133,10 +133,19 @@ const updateGroup = async (
     });
 };
 
-const createGroupCustomerShip = async (groupID, customerID) => {
+const createGroupCustomerShip = async (
+    groupID,
+    customerID,
+    pay_MerchantID,
+    pay_HashKey,
+    pay_HashIV
+) => {
     return axios.post(`/Groups/CustomerShip/create`, {
         Group: groupID,
         Customer: customerID,
+        pay_MerchantID: pay_MerchantID,
+        pay_HashKey: pay_HashKey,
+        pay_HashIV: pay_HashIV,
     });
 };
 
@@ -504,7 +513,8 @@ const createCustomer = async (
     customer_type,
     customer_tag,
     customer_note,
-    sex
+    sex,
+    UID
 ) => {
     return axios.post(`/customer/create`, {
         Group: groupID,
@@ -516,6 +526,7 @@ const createCustomer = async (
         customer_tag: customer_tag,
         customer_note: customer_note,
         sex: sex,
+        UID: UID,
     });
 };
 
