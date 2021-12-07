@@ -544,6 +544,9 @@ const createCustomerWithBuyTicket = async (
         mail: mail,
         UID: UID,
         NID: NID,
+        customer_type: "新顧客",
+        customer_tag: "一般",
+        customer_note: "註記",
         sex: sex,
     });
 };
