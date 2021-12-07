@@ -219,11 +219,11 @@ const BuyTicket = () => {
                 email,
                 UID,
                 NID,
-                sex
+                sex == "male"
             );
             switch (response.data.status) {
                 case 0:
-                    sendValid(response.data.Id);
+                    sendValid(response.data.results.Id);
                     break;
                 default:
                     break;
