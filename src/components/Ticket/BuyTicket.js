@@ -206,7 +206,7 @@ const BuyTicket = () => {
 
         let newCus = true;
         let needValidMail = true;
-        if (userData.Customer_Id !== "") {
+        if (userData.Customer_Id !== "NULL") {
             newCus = false;
             if (userData.is_active === true) {
                 needValidMail = false;
@@ -241,6 +241,7 @@ const BuyTicket = () => {
                 UID,
                 sex == "male"
             );
+            console.log(updateResponse.data.status);
             switch (updateResponse.data.status) {
                 case 0:
                     if (needValidMail) {
@@ -399,7 +400,7 @@ const BuyTicket = () => {
                             notice="*建議填寫學校信箱以享有學生專屬優惠！"
                             value={userData.email}
                             Handler={onEmailChangeHandler}
-                            disabled={userData.Customer_Id || false || true}
+                            // disabled={userData.Customer_Id || false || true}
                         />
                         <FormInput
                             Id="NID"

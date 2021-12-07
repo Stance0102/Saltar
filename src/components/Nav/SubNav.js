@@ -20,7 +20,7 @@ const SubNav = ({ url }) => {
                     <Link to={`${url}/${routes.ACTIVITY_MANAGEMENT}`}>
                         <li>
                             <img src={web_Icon} alt="" />
-                            建立一頁式活動網站
+                            建立/管理一頁式活動頁
                         </li>
                     </Link>
                     <Link to={`${url}/${routes.TICKET_MANAGEMENT}`}>
