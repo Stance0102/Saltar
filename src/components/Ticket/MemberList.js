@@ -32,7 +32,6 @@ const MemberList = () => {
                             response.data.results.forEach((buyer) => {
                                 buyers.push({
                                     ...buyer,
-                                    ticketName: ticket.ticket_Name,
                                 });
                             });
                             break;
@@ -51,24 +50,11 @@ const MemberList = () => {
 
     const validTicketHandle = async (e, buyer) => {
         e.preventDefault();
-        const {
-            Id,
-            actualname,
-            phone,
-            mail,
-            ticket: ticketId,
-            sex,
-            NID,
-            is_active,
-        } = buyer;
+        const { Id, ticketId, customerInfo: customerId, is_active } = buyer;
         const response = await updateTicketMember(
             Id,
-            actualname,
-            phone,
-            mail,
             ticketId,
-            sex,
-            NID,
+            customerId,
             is_active,
             true
         );
@@ -84,24 +70,11 @@ const MemberList = () => {
     };
     const DeleteTicketHandler = async (e, buyer) => {
         e.preventDefault();
-        const {
-            Id,
-            actualname,
-            phone,
-            mail,
-            ticket: ticketId,
-            sex,
-            NID,
-            is_vaild,
-        } = buyer;
+        const { Id, ticketId, customerInfo: customerId, is_vaild } = buyer;
         const response = await updateTicketMember(
             Id,
-            actualname,
-            phone,
-            mail,
             ticketId,
-            sex,
-            NID,
+            customerId,
             false,
             is_vaild
         );
