@@ -412,28 +412,15 @@ const createTicketMember = async (customerId, ticketId) => {
 
 const updateTicketMember = async (
     //顧客ID
-    ticketMemberId,
-    //名稱
-    actualname,
-    //電話
-    phone,
-    //電子郵件
-    mail,
-    //票券ID
+    joinedListId,
     ticketId,
-    //性別
-    sex,
-    NID,
+    customerId,
     is_active,
     is_valid
 ) => {
-    return axios.put(`/tickets/member/update/${ticketMemberId}`, {
-        actualname: actualname,
-        phone: phone,
-        mail: mail,
+    return axios.put(`/tickets/member/update/${joinedListId}`, {
         ticket: ticketId,
-        NID: NID,
-        sex: sex,
+        customerInfo: customerId,
         is_active: is_active,
         is_vaild: is_valid,
     });
@@ -477,7 +464,9 @@ const selectTicketMember = async (
     //票券ID
     ticketId
 ) => {
-    return axios.get(`/tickets/member/get/ticket/${ticketId}`);
+    return axios.post(`/tickets/member/get/ticket/`, {
+        ticketId: ticketId,
+    });
 };
 
 //拿取買票資料
