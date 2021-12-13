@@ -400,7 +400,7 @@ const BuyTicket = () => {
                             notice="*建議填寫學校信箱以享有學生專屬優惠！"
                             value={userData.email}
                             Handler={onEmailChangeHandler}
-                            // disabled={userData.Customer_Id || false || true}
+                            disabled={userData.Customer_Id || false || true}
                         />
                         <FormInput
                             Id="NID"
@@ -410,6 +410,7 @@ const BuyTicket = () => {
                             notice="*配合政府實名制規定，填寫真實身份證字號，以利現場工作人員查驗身份"
                             value={userData.NID}
                             Handler={onNIDChangeHandler}
+                            disabled={userData.NID || false || true}
                         />
                         <FormInput
                             Id="userName"
@@ -419,6 +420,7 @@ const BuyTicket = () => {
                             notice="*填寫真實姓名，以利現場工作人員查驗身份"
                             value={userData.name}
                             Handler={onNameChangeHandler}
+                            disabled={userData.name || false || true}
                         />
                         <FormInput
                             Id="telNumber"
@@ -427,6 +429,7 @@ const BuyTicket = () => {
                             Title="聯絡電話(必填)"
                             value={userData.phone}
                             Handler={onPhoneChangeHandler}
+                            disabled={userData.phone || false || true}
                         />
                         <p>性別</p>
                         <div className="input-radio-group">
@@ -451,9 +454,6 @@ const BuyTicket = () => {
                             />
                         </div>
                         <p>付款方式</p>
-                        <font className="notice">
-                            目前暫未開放金流，近期將開放線上金流
-                        </font>
                         <div className="input-radio-group">
                             <FormInput
                                 Id="payment"
@@ -461,6 +461,16 @@ const BuyTicket = () => {
                                 ClassName=""
                                 Title="現金付款"
                                 value="cash"
+                                name="payment"
+                                Handler={onPaymentChangeHandler}
+                            />
+
+                            <FormInput
+                                Id="payment"
+                                Type="radio"
+                                ClassName=""
+                                Title="線上付款(目前僅提供信用卡、金融卡付款)"
+                                value="online"
                                 name="payment"
                                 Handler={onPaymentChangeHandler}
                             />

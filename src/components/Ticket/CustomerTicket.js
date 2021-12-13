@@ -131,7 +131,7 @@ const Information = () => {
                     </p>
                     <div className="detail-row">
                         購票人： {userData.actualname}{" "}
-                        {userData.sex === "male" ? "先生" : "小姐"}
+                        {userData.sex === true ? "先生" : "小姐"}
                     </div>
                     <div className="detail-row">學校信箱： {userData.mail}</div>
                     <div className="detail-row">
