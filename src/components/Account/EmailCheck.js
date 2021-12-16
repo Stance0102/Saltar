@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import qs from "qs";
-import { FormInput } from "../Home/_Components";
 import { sendTicketMail, verifyValidMail } from "../agent";
 import Swal from "sweetalert2";
 // Img
