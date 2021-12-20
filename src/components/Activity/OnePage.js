@@ -6,9 +6,6 @@ import LineLogin from "../Account/LineLogin";
 import Swal from "sweetalert2";
 // Img
 import calendar_icon from "../../images/calendar_icon.svg";
-import Group_icon from "../../images/Group_icon.svg";
-import tick_Icon from "../../images/tick_Icon.svg";
-import cancel_Icon from "../../images/cancel_Icon.svg";
 import location_icon from "../../images/location_icon.svg";
 import Organizer_icon from "../../images/Organizer_icon.svg";
 import fiesta from "../../images/fiesta.PNG";

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setAccount } from "../../store/slice/AccountSlice";
+import { setCustomer } from "../../store/slice/CustomerSlice";
 import { lineLogin } from "../agent";
-import axios from "axios";
 import qs from "qs";
 import Swal from "sweetalert2";
 import LineLogin from "./LineLogin";
@@ -49,10 +48,13 @@ const LineLoginCallback = () => {
                     case 0:
                         const lineData = response.data.result;
                         if (lineData.friendship === true) {
-                            localStorage.setItem(
-                                "lineData",
-                                JSON.stringify(lineData)
-                            );
+                            // localStorage.setItem(
+                            //     "lineData",
+                            //     JSON.stringify(lineData)
+                            // );
+
+                            dispatch(setCustomer(lineData));
+
                             Swal.fire({
                                 title: "登入成功",
                                 confirmButtonText: "立即開始使用",
