@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { FormInput } from "../Home/_Components";
 import {
     createTicketMember,
     selectTicket,
@@ -12,10 +10,11 @@ import {
 } from "../agent";
 import Swal from "sweetalert2";
 // Img
-import cart_icon from "../../images/cart_icon.svg";
-import Organizer_icon from "../../images/Organizer_icon.svg";
+import vector_gray_Icon from "../../images/vector_gray_Icon.svg";
+import receip from "../../images/receip.svg";
+import { useSelector } from "react-redux";
 
-const BuyTicket = () => {
+const TicketInfo = () => {
     const [ticketId, setTicketId] = useState("");
     const [buyTicketId, setBuyTicketId] = useState("");
     const [ticketData, setTicketData] = useState("");
@@ -32,32 +31,7 @@ const BuyTicket = () => {
     });
     const location = useLocation();
     const history = useHistory();
-
-    if (UID != "") {
-        const { email, name, phone, UID, NID, sex, payment } = useSelector(
-            (state) => state.Customer
-        );
-
-        userData.email = email;
-        userData.name = name;
-        userData.phone = phone;
-        userData.UID = UID;
-        userData.NID = NID;
-        userData.sex = sex;
-        userData.payment = payment;
-
-        setUserData(userData);
-    } else {
-        userData.email = "";
-        userData.name = "";
-        userData.phone = "";
-        userData.UID = "";
-        userData.NID = "";
-        userData.sex = "";
-        userData.payment = "";
-
-        setUserData(userData);
-    }
+    const customerData = useSelector((state) => state.Customer);
 
     useEffect(() => {
         let ticketId = "";
@@ -72,8 +46,17 @@ const BuyTicket = () => {
             setTicketId(ticketId);
             setBuyTicketId(buyTicketId);
             setActivityData(activityData);
-        }
 
+            if ("userData" in location.state) {
+                userData = location.state.userData;
+                setUserData(userData);
+            } else {
+                userData = customerData;
+                setUserData(userData);
+            }
+
+            console.log(userData);
+        }
         if (ticketId !== "") {
             const setupData = async () => {
                 const response = await selectTicket(ticketId);
@@ -309,123 +292,49 @@ const BuyTicket = () => {
     };
 
     return (
-        <div className="buy-ticket">
-            <div className="title">
-                <img src={cart_icon} alt="" />
-                購票資訊
-            </div>
-            <div className="container">
-                <div className="ticket-title-box">
-                    <img src={imagePreview} />
-
-                    <div className="ticket-name">
-                        <p className="act-name">
-                            {activityData.title}
-                            <font className="ticket-type">
-                                <font id="black-dot">●</font>
-                                {ticketData.ticket_Name}
-                            </font>
-                        </p>
-                        <p className="group-name">
-                            <img src={Organizer_icon} alt="" />
-                            主辦單位：{activityData.org_Name}
-                        </p>
-                    </div>
+        <>
+            <div className="buy-ticket">
+                <div className="title">
+                    <img src={vector_gray_Icon} alt="" />
+                    我的票卷
                 </div>
-                <form className="buy-form" onSubmit={submitHandler}>
-                    <FormInput
-                        Id="email"
-                        Type="email"
-                        ClassName="input-label"
-                        Title="學校信箱或個人信箱(必填)"
-                        notice="*建議填寫學校信箱以享有學生專屬優惠！"
-                        value={userData.email}
-                        Handler={onEmailChangeHandler}
-                        disabled={userData.Customer_Id || false || true}
-                    />
-                    <FormInput
-                        Id="NID"
-                        Type="text"
-                        ClassName="input-label"
-                        Title="身分證字號(必填)"
-                        notice="*配合政府實名制規定，填寫真實身份證字號，以利現場工作人員查驗身份"
-                        value={userData.NID}
-                        Handler={onNIDChangeHandler}
-                        disabled={userData.NID || false || true}
-                    />
-                    <FormInput
-                        Id="userName"
-                        Type="text"
-                        ClassName="input-label"
-                        Title="姓名(必填)"
-                        notice="*填寫真實姓名，以利現場工作人員查驗身份"
-                        value={userData.name}
-                        Handler={onNameChangeHandler}
-                        disabled={userData.name || false || true}
-                    />
-                    <FormInput
-                        Id="telNumber"
-                        Type="tel"
-                        ClassName="input-label"
-                        Title="聯絡電話(必填)"
-                        value={userData.phone}
-                        Handler={onPhoneChangeHandler}
-                        disabled={userData.phone || false || true}
-                    />
-                    <p>性別</p>
-                    <div className="input-radio-group">
-                        <FormInput
-                            Id="sex"
-                            Type="radio"
-                            ClassName=""
-                            Title="男"
-                            value="male"
-                            name="sex"
-                            Handler={onSexChangeHandler}
-                        />
-
-                        <FormInput
-                            Id="sex"
-                            Type="radio"
-                            ClassName=""
-                            Title="女"
-                            value="female"
-                            name="sex"
-                            Handler={onSexChangeHandler}
-                        />
+                <div className="ticket-head">
+                    {activityData.title}
+                    <font className="ticket-type">
+                        <font id="black-dot">●</font>
+                        {ticketData.ticket_Name}
+                    </font>
+                </div>
+                <div className="ticket-detail">
+                    <p>
+                        <img src={receip} alt="" />
+                        票卷明細
+                    </p>
+                    <div className="detail-row">
+                        購票人： {userData.name}{" "}
+                        {userData.sex === "male" ? "先生" : "小姐"}
                     </div>
-                    <p>付款方式</p>
-                    <div className="input-radio-group">
-                        <FormInput
-                            Id="payment"
-                            Type="radio"
-                            ClassName=""
-                            Title="現金付款"
-                            value="cash"
-                            name="payment"
-                            Handler={onPaymentChangeHandler}
-                        />
-
-                        <FormInput
-                            Id="payment"
-                            Type="radio"
-                            ClassName=""
-                            Title="線上付款(目前僅提供信用卡、金融卡付款)"
-                            value="online"
-                            name="payment"
-                            Handler={onPaymentChangeHandler}
-                        />
+                    <div className="detail-row">
+                        學校信箱： {userData.email}
                     </div>
-                    <hr />
+                    <div className="detail-row">
+                        聯絡電話： {userData.phone}
+                    </div>
+                    <div className="detail-row">
+                        付款方式：{" "}
+                        {userData.payment === "cash" ? "現金付款" : "線上付款"}
+                    </div>
+                    <div className="line">
+                        <hr />
+                    </div>
                     <div className="total-price">
                         總計金額
-                        <p>{ticketData.price} 元</p>
+                        <p>{ticketData.price}元</p>
                     </div>
-                    <button className="buy-btn">確認購買</button>
-                </form>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 
-export default BuyTicket;
+export default TicketInfo;
