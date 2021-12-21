@@ -105,9 +105,11 @@ const OnePage = ({ activityId }) => {
         }
     }, [location]);
 
+    const { uid } = useSelector((state) => state.Customer);
+
     const buyTicketHandler = (e, ticketId) => {
         e.preventDefault();
-        if (localStorage.getItem("lineData") == undefined) {
+        if (uid == "") {
             localStorage.setItem("lineReDirectId", activityId);
             LineLogin();
         } else {
