@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import {
     createTicketMember,
     selectTicket,
@@ -14,7 +15,24 @@ import vector_gray_Icon from "../../images/vector_gray_Icon.svg";
 import receip from "../../images/receip.svg";
 import { useSelector } from "react-redux";
 
+// 這是 payment 為 true 的 view
+
 const TicketInfo = () => {
+    const {
+        Customer_Id,
+        mail,
+        actualname,
+        phone,
+        uid,
+        NID,
+        sex,
+        payment,
+        customer_note,
+        customer_tag,
+        customer_type,
+        is_active,
+    } = useSelector((state) => state.Customer);
+
     const [ticketId, setTicketId] = useState("");
     const [buyTicketId, setBuyTicketId] = useState("");
     const [ticketData, setTicketData] = useState("");
@@ -312,7 +330,7 @@ const TicketInfo = () => {
                     </p>
                     <div className="detail-row">
                         購票人： {userData.name}{" "}
-                        {userData.sex === "male" ? "先生" : "小姐"}
+                        {userData.sex === ture ? "先生" : "小姐"}
                     </div>
                     <div className="detail-row">
                         學校信箱： {userData.email}

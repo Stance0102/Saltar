@@ -16,12 +16,27 @@ import cart_icon from "../../images/cart_icon.svg";
 import Organizer_icon from "../../images/Organizer_icon.svg";
 
 const BuyTicket = () => {
+    const {
+        Customer_Id,
+        mail,
+        actualname,
+        phone,
+        uid,
+        NID,
+        sex,
+        payment,
+        customer_note,
+        customer_tag,
+        customer_type,
+        is_active,
+    } = useSelector((state) => state.Customer);
     const [ticketId, setTicketId] = useState("");
     const [buyTicketId, setBuyTicketId] = useState("");
     const [ticketData, setTicketData] = useState("");
     const [activityData, setActivityData] = useState("");
     const [imagePreview, setImagePreview] = useState("");
     const [userData, setUserData] = useState({
+        customer_Id: "",
         email: "",
         name: "",
         phone: "",
@@ -29,35 +44,13 @@ const BuyTicket = () => {
         NID: "",
         sex: "",
         payment: "",
+        customer_note: "",
+        customer_tag: "",
+        customer_type: "",
+        is_active: false,
     });
     const location = useLocation();
     const history = useHistory();
-
-    if (UID != "") {
-        const { email, name, phone, UID, NID, sex, payment } = useSelector(
-            (state) => state.Customer
-        );
-
-        userData.email = email;
-        userData.name = name;
-        userData.phone = phone;
-        userData.UID = UID;
-        userData.NID = NID;
-        userData.sex = sex;
-        userData.payment = payment;
-
-        setUserData(userData);
-    } else {
-        userData.email = "";
-        userData.name = "";
-        userData.phone = "";
-        userData.UID = "";
-        userData.NID = "";
-        userData.sex = "";
-        userData.payment = "";
-
-        setUserData(userData);
-    }
 
     useEffect(() => {
         let ticketId = "";
@@ -72,6 +65,40 @@ const BuyTicket = () => {
             setTicketId(ticketId);
             setBuyTicketId(buyTicketId);
             setActivityData(activityData);
+
+            if (uid !== "") {
+                userData.Customer_Id = Customer_Id;
+                userData.email = mail;
+                userData.name = actualname;
+                userData.phone = phone;
+                userData.UID = uid;
+                userData.NID = NID;
+                userData.sex = sex;
+                userData.payment = payment;
+                userData.customer_note = customer_note;
+                userData.customer_tag = customer_tag;
+                userData.customer_type = customer_type;
+                userData.is_active = is_active;
+
+                setUserData(userData);
+                console.log(userData);
+            } else {
+                userData.Customer_Id = "";
+                userData.email = "";
+                userData.name = "";
+                userData.phone = "";
+                userData.UID = "";
+                userData.NID = "";
+                userData.sex = "";
+                userData.payment = "";
+                userData.customer_note = "";
+                userData.customer_tag = "";
+                userData.customer_type = "";
+                userData.is_active = false;
+
+                setUserData(userData);
+                console.log(userData);
+            }
         }
 
         if (ticketId !== "") {

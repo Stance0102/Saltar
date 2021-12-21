@@ -4,12 +4,9 @@ import qs from "qs";
 import { decodeToken, selectMailFormate } from "../agent";
 import Swal from "sweetalert2";
 // Img
-import cart_icon from "../../images/cart_icon.svg";
-import Organizer_icon from "../../images/Organizer_icon.svg";
 import checked_icon from "../../images/checked_icon.svg";
 import vector_gray_Icon from "../../images/vector_gray_Icon.svg";
 import check_Ticket from "../../images/check_Ticket.svg";
-import qrcode from "../../images/qrcode.png";
 import receip from "../../images/receip.svg";
 
 const Information = () => {
