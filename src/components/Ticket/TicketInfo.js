@@ -156,7 +156,9 @@ const TicketInfo = () => {
                     </div>
                     <div className="detail-row">
                         付款方式：{" "}
-                        {userData.payment === "cash" ? "現金付款" : "線上付款"}
+                        {userData.payment === "cash"
+                            ? "現金付款(未付款)"
+                            : "線上付款"}
                     </div>
                     <div className="line">
                         <hr />

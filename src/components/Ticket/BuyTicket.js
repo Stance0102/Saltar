@@ -296,7 +296,7 @@ const BuyTicket = () => {
                                                     userData: userData,
                                                 },
                                             });
-                                            window.location.reload();
+                                            // window.location.reload();
                                         });
                                         break;
                                 }
