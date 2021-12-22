@@ -19,7 +19,8 @@ const SignUp = lazy(() => import("./Account/Signup"));
 const Dashboard = lazy(() => import("./Home/Dashboard"));
 const ErrorPage = lazy(() => import("./Home/ErrorPage"));
 
-const Information = lazy(() => import("./Ticket/BuyTicket"));
+const BuyTicket = lazy(() => import("./Ticket/BuyTicket"));
+const TicketInfo = lazy(() => import("./Ticket/TicketInfo"));
 const CustomerTicket = lazy(() => import("./Ticket/CustomerTicket"));
 const ForgetPw = lazy(() => import("./Account/ForgetPw"));
 const ChangePw = lazy(() => import("./Account/ChangePw"));
@@ -64,8 +65,12 @@ const App = () => {
                                     component={Dashboard}
                                 />
                                 <Route
+                                    path={routes.TICKET_BUYTICKET}
+                                    component={BuyTicket}
+                                />
+                                <Route
                                     path={routes.TICKET_INFORMATION}
-                                    component={Information}
+                                    component={TicketInfo}
                                 />
                                 <Route
                                     path={routes.FORGETPW}

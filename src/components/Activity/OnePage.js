@@ -114,7 +114,7 @@ const OnePage = ({ activityId }) => {
             LineLogin();
         } else {
             history.push({
-                pathname: "/ticketInformation",
+                pathname: "/buyTicket",
                 state: { ticketId: ticketId, activityData: activityData },
             });
         }
