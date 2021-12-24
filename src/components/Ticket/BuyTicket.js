@@ -108,6 +108,7 @@ const BuyTicket = () => {
                     switch (response.data.status) {
                         case 0:
                             setTicketData(response.data.results[0]);
+                            console.log(response.data.results);
                             break;
                         default:
                             Swal.fire({
@@ -162,6 +163,7 @@ const BuyTicket = () => {
             ...userData,
             sex: e.target.value,
         });
+        console.log(e.target.value);
     };
 
     const onPaymentChangeHandler = (e) => {
@@ -169,6 +171,7 @@ const BuyTicket = () => {
             ...userData,
             payment: e.target.value,
         });
+        console.log(e.target.value);
     };
 
     const sendValid = async (Customer_Id) => {
@@ -259,9 +262,10 @@ const BuyTicket = () => {
                 customer_note,
                 NID,
                 UID,
-                sex == "male"
+                sex == "male",
+                payment
             );
-            console.log(updateResponse.data.status);
+
             switch (updateResponse.data.status) {
                 case 0:
                     if (needValidMail) {
@@ -276,6 +280,7 @@ const BuyTicket = () => {
                                 const mailResponse = await sendTicketMail(
                                     CreateResponse.data.results.Id
                                 );
+
                                 switch (mailResponse.data.status) {
                                     case 0:
                                         Swal.fire({
