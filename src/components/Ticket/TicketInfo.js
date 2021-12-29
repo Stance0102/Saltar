@@ -92,8 +92,6 @@ const TicketInfo = () => {
 
                 setUserData(userData);
             }
-
-            console.log(userData);
         }
 
         if (ticketId !== "") {
