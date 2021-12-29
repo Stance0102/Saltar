@@ -592,6 +592,12 @@ const downloadExcelToRFM = async (excelData) => {
     });
 };
 
+const genECPayOrder = async (joinedListId) => {
+    return axios.post(`customer/genEcpayOrder`, {
+        joinedListId: joinedListId,
+    });
+};
+
 /******************************************************
                         分析
 *******************************************************/
@@ -717,6 +723,7 @@ export {
     updateCustomer,
     selectCustomerByGroupId,
     selectCustomerByName,
+    genECPayOrder,
 };
 //分析
 export {

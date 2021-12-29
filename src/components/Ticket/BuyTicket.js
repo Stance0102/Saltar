@@ -9,8 +9,10 @@ import {
     sendTicketMail,
     createCustomerWithBuyTicket,
     updateCustomer,
+    genECPayOrder,
 } from "../agent";
 import Swal from "sweetalert2";
+import parse from "html-react-parser";
 // Img
 import cart_icon from "../../images/cart_icon.svg";
 import Organizer_icon from "../../images/Organizer_icon.svg";
@@ -35,6 +37,7 @@ const BuyTicket = () => {
     const [ticketData, setTicketData] = useState("");
     const [activityData, setActivityData] = useState("");
     const [imagePreview, setImagePreview] = useState("");
+    const [ecPayForm, setECPayForm] = useState("");
     const [userData, setUserData] = useState({
         customer_Id: "",
         email: "",
@@ -81,7 +84,6 @@ const BuyTicket = () => {
                 userData.is_active = is_active;
 
                 setUserData(userData);
-                console.log(userData);
             } else {
                 userData.Customer_Id = "";
                 userData.email = "";
@@ -97,7 +99,6 @@ const BuyTicket = () => {
                 userData.is_active = false;
 
                 setUserData(userData);
-                console.log(userData);
             }
         }
 
@@ -108,7 +109,6 @@ const BuyTicket = () => {
                     switch (response.data.status) {
                         case 0:
                             setTicketData(response.data.results[0]);
-                            console.log(response.data.results);
                             break;
                         default:
                             Swal.fire({
@@ -123,11 +123,14 @@ const BuyTicket = () => {
                             });
                             break;
                     }
-                } else {
-                    // console.log(response);
                 }
             };
             setupData();
+        }
+
+        const ECPayFormEle = document.getElementById("data_set");
+        if (ECPayFormEle) {
+            ECPayFormEle.submit();
         }
     }, []);
 
@@ -163,7 +166,6 @@ const BuyTicket = () => {
             ...userData,
             sex: e.target.value,
         });
-        console.log(e.target.value);
     };
 
     const onPaymentChangeHandler = (e) => {
@@ -171,7 +173,6 @@ const BuyTicket = () => {
             ...userData,
             payment: e.target.value,
         });
-        console.log(e.target.value);
     };
 
     const sendValid = async (Customer_Id) => {
@@ -191,7 +192,6 @@ const BuyTicket = () => {
                 });
                 break;
             default:
-            // console.log(mailResponse);
         }
     };
 
@@ -277,9 +277,52 @@ const BuyTicket = () => {
                         );
                         switch (CreateResponse.data.status) {
                             case 0:
+                                // console.log(CreateResponse.data); // Joined List Id
                                 const mailResponse = await sendTicketMail(
                                     CreateResponse.data.results.Id
                                 );
+
+                                // if (payment == "online") {
+                                const ecpayResponse = await genECPayOrder(
+                                    CreateResponse.data.results.Id
+                                );
+                                // }
+
+                                console.log(ecpayResponse.data.msg);
+
+                                switch (ecpayResponse.data.status) {
+                                    case 0:
+                                        // const scripts =
+                                        //     document.createElement("script");
+                                        // scripts.async = true;
+                                        // const autoSubmit =
+                                        //     document.data_set.submit();
+
+                                        // document.body.appendChild(scripts);
+                                        // document.scripts.appendChild(
+                                        //     autoSubmit
+                                        // );
+                                        const AutoSubmit = () => {
+                                            document.forms["data_set"].submit();
+                                        };
+
+                                        AutoSubmit();
+
+                                        // 不能用 hosting
+                                        break;
+
+                                    case 19:
+                                        Swal.fire({
+                                            title: "查無訂單",
+                                            text: "請聯絡Saltar客服或活動主辦方！",
+                                            confirmButtonText: "繼續",
+                                            confirmButtonColor: "#ffb559",
+                                            icon: "success",
+                                        });
+                                        break;
+                                }
+
+                                setECPayForm(ecpayResponse.data.msg);
 
                                 switch (mailResponse.data.status) {
                                     case 0:
@@ -289,19 +332,6 @@ const BuyTicket = () => {
                                             confirmButtonText: "繼續",
                                             confirmButtonColor: "#ffb559",
                                             icon: "success",
-                                        }).then(() => {
-                                            history.push({
-                                                pathname: "/ticketInformation",
-                                                state: {
-                                                    ticketId: ticketId,
-                                                    buyTicketId:
-                                                        CreateResponse.data
-                                                            .results.Id,
-                                                    activityData: activityData,
-                                                    userData: userData,
-                                                },
-                                            });
-                                            // window.location.reload();
                                         });
                                         break;
                                 }
@@ -456,6 +486,7 @@ const BuyTicket = () => {
                     <button className="buy-btn">確認購買</button>
                 </form>
             </div>
+            <div id="ecForm">{parse(ecPayForm)}</div>
         </div>
     );
 };
