@@ -12,7 +12,6 @@ import {
     genECPayOrder,
 } from "../agent";
 import Swal from "sweetalert2";
-import parse from "html-react-parser";
 // Img
 import cart_icon from "../../images/cart_icon.svg";
 import Organizer_icon from "../../images/Organizer_icon.svg";
@@ -292,25 +291,9 @@ const BuyTicket = () => {
 
                                 switch (ecpayResponse.data.status) {
                                     case 0:
-                                        // const scripts =
-                                        //     document.createElement("script");
-                                        // scripts.async = true;
-                                        // const autoSubmit =
-                                        //     document.data_set.submit();
-
-                                        // document.body.appendChild(scripts);
-                                        // document.scripts.appendChild(
-                                        //     autoSubmit
-                                        // );
-                                        const AutoSubmit = () => {
-                                            document.forms["data_set"].submit();
-                                        };
-
-                                        AutoSubmit();
-
-                                        // 不能用 hosting
+                                        setECPayForm(ecpayResponse.data.msg);
+                                        document.forms["data_set"].submit();
                                         break;
-
                                     case 19:
                                         Swal.fire({
                                             title: "查無訂單",
@@ -485,8 +468,8 @@ const BuyTicket = () => {
                     </div>
                     <button className="buy-btn">確認購買</button>
                 </form>
+                <div dangerouslySetInnerHTML={{ __html: ecPayForm }}></div>
             </div>
-            <div id="ecForm">{parse(ecPayForm)}</div>
         </div>
     );
 };
