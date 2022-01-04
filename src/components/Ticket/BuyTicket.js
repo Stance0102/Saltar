@@ -281,31 +281,31 @@ const BuyTicket = () => {
                                     CreateResponse.data.results.Id
                                 );
 
-                                // if (payment == "online") {
-                                const ecpayResponse = await genECPayOrder(
-                                    CreateResponse.data.results.Id
-                                );
-                                // }
+                                if (payment == "online") {
+                                    const ecpayResponse = await genECPayOrder(
+                                        CreateResponse.data.results.Id
+                                    );
 
-                                console.log(ecpayResponse.data.msg);
+                                    switch (ecpayResponse.data.status) {
+                                        case 0:
+                                            setECPayForm(
+                                                ecpayResponse.data.msg
+                                            );
+                                            document.forms["data_set"].submit();
+                                            break;
+                                        case 19:
+                                            Swal.fire({
+                                                title: "查無訂單",
+                                                text: "請聯絡Saltar客服或活動主辦方！",
+                                                confirmButtonText: "繼續",
+                                                confirmButtonColor: "#ffb559",
+                                                icon: "success",
+                                            });
+                                            break;
+                                    }
 
-                                switch (ecpayResponse.data.status) {
-                                    case 0:
-                                        setECPayForm(ecpayResponse.data.msg);
-                                        document.forms["data_set"].submit();
-                                        break;
-                                    case 19:
-                                        Swal.fire({
-                                            title: "查無訂單",
-                                            text: "請聯絡Saltar客服或活動主辦方！",
-                                            confirmButtonText: "繼續",
-                                            confirmButtonColor: "#ffb559",
-                                            icon: "success",
-                                        });
-                                        break;
+                                    setECPayForm(ecpayResponse.data.msg);
                                 }
-
-                                setECPayForm(ecpayResponse.data.msg);
 
                                 switch (mailResponse.data.status) {
                                     case 0:
@@ -315,7 +315,21 @@ const BuyTicket = () => {
                                             confirmButtonText: "繼續",
                                             confirmButtonColor: "#ffb559",
                                             icon: "success",
+                                        }).then(() => {
+                                            history.push({
+                                                pathname: "/ticketInformation",
+                                                state: {
+                                                    ticketId: ticketId,
+                                                    buyTicketId:
+                                                        CreateResponse.data
+                                                            .results.Id,
+                                                    activityData: activityData,
+                                                    userData: userData,
+                                                    sendEmail: true,
+                                                },
+                                            });
                                         });
+                                        console.log(mailResponse.data.results);
                                         break;
                                 }
                                 break;
