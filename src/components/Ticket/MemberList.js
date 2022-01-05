@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { selectTicketMember, updateTicketMember, validTicket } from "../agent";
+import {
+    selectTicketMember,
+    updateTicketMember,
+    deleteTicketMember,
+    validTicket,
+} from "../agent";
 import { useSelector } from "react-redux";
 import QrReader from "react-qr-reader";
 import Swal from "sweetalert2";
-import { FormInput } from "../Home/_Components";
 // Img
 import garbage_can_Icon from "../../images/garbage_can_Icon.svg";
 import tick_Icon from "../../images/tick_Icon.svg";
@@ -70,14 +74,9 @@ const MemberList = () => {
     };
     const DeleteTicketHandler = async (e, buyer) => {
         e.preventDefault();
-        const { Id, ticketId, customerInfo: customerId, is_vaild } = buyer;
-        const response = await updateTicketMember(
-            Id,
-            ticketId,
-            customerId,
-            false,
-            is_vaild
-        );
+        const { Id } = buyer;
+        const response = await deleteTicketMember(Id);
+        console.log(response);
         if (response.status === 200) {
             switch (response.data.status) {
                 case 0:
