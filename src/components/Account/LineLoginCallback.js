@@ -52,8 +52,7 @@ const LineLoginCallback = () => {
                             //     "lineData",
                             //     JSON.stringify(lineData)
                             // );
-
-                            dispatch(setCustomer(lineData));
+                            dispatch(setCustomer(lineData)); // Token 已經在裡面
 
                             Swal.fire({
                                 title: "登入成功",

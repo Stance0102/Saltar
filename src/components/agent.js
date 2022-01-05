@@ -426,6 +426,12 @@ const updateTicketMember = async (
     });
 };
 
+const deleteTicketMember = async (joinedListId) => {
+    return axios.post(`/tickets/member/delete/`, {
+        joinedListId: joinedListId,
+    });
+};
+
 //確認買票信箱
 const sendCusValidMail = async (ticket_Id, customerId) => {
     return axios.post(`/mail/sendCusVaildMail`, {
@@ -707,6 +713,7 @@ export {
     updateTicket,
     createTicketMember,
     updateTicketMember,
+    deleteTicketMember,
     sendCusValidMail,
     sendTicketMail,
     validTicket,

@@ -1,5 +1,3 @@
-import React from "react";
-
 const LineLogin = () => {
     const clientID = "1656570244";
     const nonce = "7788";
