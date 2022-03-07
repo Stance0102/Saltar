@@ -1,4 +1,9 @@
 import axios from "./Axios";
+import store from "../store/store";
+import { injectStore } from "./Axios";
+
+injectStore(store);
+
 /******************************************************
                         帳號
 *******************************************************/
@@ -649,11 +654,11 @@ const refreshToken = async (token) => {
     });
 };
 
-const verifyToken = async (token) => {
-    return axios.post(`/token-verify`, {
-        token: token,
-    });
-};
+// const verifyToken = async (token) => {
+//     return axios.post(`/token-verify`, {
+//         token: token,
+//     });
+// };
 
 /******************************************************
                         其他
@@ -740,6 +745,6 @@ export {
     updateAnalyze,
 };
 //Token
-export { getToken, refreshToken, verifyToken };
+export { getToken, refreshToken };
 //其他
 export { getSchool };

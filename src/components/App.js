@@ -1,16 +1,11 @@
 import React, { Suspense, lazy } from "react";
 import { useDispatch } from "react-redux";
-import {
-    Switch,
-    Route,
-    BrowserRouter as Router,
-    useParams,
-} from "react-router-dom";
+import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import * as routes from "./Router";
-import { verifyToken } from "./agent";
 import { ProtectedRoute } from "./Protected.route";
-import "../styles/saltar.css";
 import SuperNav from "./Nav/SuperNav";
+import { setCustomer } from "../store/slice/CustomerSlice";
+import "../styles/saltar.css";
 
 const Index = lazy(() => import("./Home/Index"));
 const LogIn = lazy(() => import("./Account/Login"));
@@ -28,12 +23,6 @@ const EmailCheck = lazy(() => import("./Account/EmailCheck"));
 const OnePage = lazy(() => import("./Activity/OnePage"));
 
 const App = () => {
-    const dispatch = useDispatch();
-
-    const token = localStorage.getItem("token");
-    if (token != null) {
-        // const response = verifyToken(token);
-    }
     return (
         <>
             <Suspense fallback={<p>Loading...</p>}>
@@ -117,7 +106,3 @@ const App = () => {
 };
 
 export default App;
-
-{
-    /*  */
-}

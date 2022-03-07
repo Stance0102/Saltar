@@ -4,6 +4,11 @@ import _axios from "axios";
 const url = "https://saltar.taipei/test/api/";
 
 let pendingRequests = new Map();
+let store;
+
+export const injectStore = (_store) => {
+    store = _store;
+};
 
 const axios = () => {
     const instance = _axios.create({
@@ -25,7 +30,16 @@ const axios = () => {
                 pendingRequests.set(requestKey, config);
                 config.requestKey = requestKey;
             }
-            config.params = { ...config.params, t: new Date().getTime() };
+
+            config.headers = {
+                ...config.headers,
+                // authorization: `JWT ${store.getState().Customer.token}`,
+            };
+
+            config.params = {
+                ...config.params,
+                t: new Date().getTime(),
+            };
             return config;
         },
         (error) => {

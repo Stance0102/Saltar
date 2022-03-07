@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setCustomer } from "../../store/slice/CustomerSlice";
 import { lineLogin } from "../agent";
 import qs from "qs";
@@ -48,11 +48,8 @@ const LineLoginCallback = () => {
                     case 0:
                         const lineData = response.data.result;
                         if (lineData.friendship === true) {
-                            // localStorage.setItem(
-                            //     "lineData",
-                            //     JSON.stringify(lineData)
-                            // );
                             dispatch(setCustomer(lineData)); // Token 已經在裡面
+                            localStorage.setItem("token", lineData.token);
 
                             Swal.fire({
                                 title: "登入成功",

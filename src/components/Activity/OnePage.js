@@ -111,6 +111,12 @@ const OnePage = ({ activityId }) => {
         e.preventDefault();
         if (uid == "") {
             localStorage.setItem("lineReDirectId", activityId);
+            // const dispatch = useDispatch();
+            // let localStorageToken = localStorage.getItem("token");
+
+            // if (localStorageToken !== "" || localStorageToken !== null) {
+            //     dispatch(setCustomer(localStorageToken));
+            // }
             LineLogin();
         } else {
             history.push({

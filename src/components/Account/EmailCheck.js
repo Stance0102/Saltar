@@ -109,7 +109,6 @@ const EmailCheck = () => {
                         <p className="email">信箱驗證成功！</p>
                     </div>
                 </div>
-                ;
             </>
         );
     } else {

@@ -51,6 +51,8 @@ const BuyTicket = () => {
         customer_type: "",
         is_active: false,
     });
+
+    const [userDataView, setUserDataView] = useState(true);
     const location = useLocation();
     const history = useHistory();
 
@@ -82,19 +84,23 @@ const BuyTicket = () => {
                 userData.customer_type = customer_type;
                 userData.is_active = is_active;
 
+                if (userData.Customer_Id == null) {
+                    setUserDataView(false);
+                }
+
                 setUserData(userData);
             } else {
-                userData.Customer_Id = "";
-                userData.email = "";
-                userData.name = "";
-                userData.phone = "";
-                userData.UID = "";
-                userData.NID = "";
-                userData.sex = "";
-                userData.payment = "";
-                userData.customer_note = "";
-                userData.customer_tag = "";
-                userData.customer_type = "";
+                userData.Customer_Id = null;
+                userData.email = null;
+                userData.name = null;
+                userData.phone = null;
+                userData.UID = null;
+                userData.NID = null;
+                userData.sex = null;
+                userData.payment = null;
+                userData.customer_note = null;
+                userData.customer_tag = null;
+                userData.customer_type = null;
                 userData.is_active = false;
 
                 setUserData(userData);
@@ -228,7 +234,7 @@ const BuyTicket = () => {
 
         let newCus = true;
         let needValidMail = true;
-        if (userData.Customer_Id !== "NULL") {
+        if (userData.Customer_Id !== null) {
             newCus = false;
             if (userData.is_active === true) {
                 needValidMail = false;
@@ -400,7 +406,7 @@ const BuyTicket = () => {
                         notice="*建議填寫學校信箱以享有學生專屬優惠！"
                         value={userData.email}
                         Handler={onEmailChangeHandler}
-                        disabled={userData.Customer_Id || false || true}
+                        disabled={userDataView}
                     />
                     <FormInput
                         Id="NID"
@@ -410,7 +416,7 @@ const BuyTicket = () => {
                         notice="*配合政府實名制規定，填寫真實身份證字號，以利現場工作人員查驗身份"
                         value={userData.NID}
                         Handler={onNIDChangeHandler}
-                        disabled={userData.NID || false || true}
+                        disabled={userDataView}
                     />
                     <FormInput
                         Id="userName"
@@ -420,7 +426,7 @@ const BuyTicket = () => {
                         notice="*填寫真實姓名，以利現場工作人員查驗身份"
                         value={userData.name}
                         Handler={onNameChangeHandler}
-                        disabled={userData.name || false || true}
+                        disabled={userDataView}
                     />
                     <FormInput
                         Id="telNumber"
@@ -429,7 +435,7 @@ const BuyTicket = () => {
                         Title="聯絡電話(必填)"
                         value={userData.phone}
                         Handler={onPhoneChangeHandler}
-                        disabled={userData.phone || false || true}
+                        disabled={userDataView.is_old}
                     />
                     <p>性別</p>
                     <div className="input-radio-group">

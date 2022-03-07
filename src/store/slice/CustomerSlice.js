@@ -15,6 +15,7 @@ export const CustomerSlice = createSlice({
         phone: "",
         pictureUrl: "",
         sex: true,
+        token: "",
         uid: "",
     },
     reducers: {
@@ -32,6 +33,7 @@ export const CustomerSlice = createSlice({
             state.phone = action.payload.phone;
             state.pictureUrl = action.payload.pictureUrl;
             state.sex = action.payload.sex;
+            state.token = action.payload.token;
             state.uid = action.payload.uid;
         },
     },

@@ -33,7 +33,7 @@ const Login = () => {
                     //放入 Redux
                     dispatch(setAccount(account));
                     //放入 localStorage
-                    localStorage.setItem("token", account.token);
+                    localStorage.setItem("AccountToken", account.token);
 
                     Swal.fire({
                         title: "登入成功",
