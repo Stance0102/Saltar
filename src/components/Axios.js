@@ -1,10 +1,15 @@
 import _axios from "axios";
-import { useSelector } from "react-redux";
 
 // const url = "https://saltar.taipei/api/";
 const url = "https://saltar.taipei/test/api/";
 
 let pendingRequests = new Map();
+let store;
+
+export const injectStore = (_store) => {
+    store = _store;
+};
+
 const axios = () => {
     const instance = _axios.create({
         baseURL: url,
@@ -26,16 +31,13 @@ const axios = () => {
                 config.requestKey = requestKey;
             }
 
-            const { token } = useSelector((state) => state.Customer);
-
-            // config.headers = {
-            //     Authorization: `JWT ${token}`,
-            // };
-            config.headers.Authorization = `JWT ${token}`;
+            config.headers = {
+                ...config.headers,
+                // authorization: `JWT ${store.getState().Customer.token}`,
+            };
 
             config.params = {
                 ...config.params,
-                ...config.headers,
                 t: new Date().getTime(),
             };
             return config;
