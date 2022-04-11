@@ -129,12 +129,18 @@ const updateGroup = async (
     // address,
     //是否還存在?
     // is_active
+    // pay_MerchantID,
+    // pay_HashKey,
+    // pay_HashIV
 ) => {
     return axios.put(`/Groups/update/${groupId}`, {
         groupName: groupName,
         phone_number: phone_number,
         address: "address",
         // is_active: is_active,
+        // pay_MerchantID: pay_MerchantID,
+        // pay_HashKey: pay_HashKey,
+        // pay_HashIV: pay_HashIV,
     });
 };
 
@@ -394,7 +400,9 @@ const updateTicket = async (
     //活動ID
     actId,
     //開放狀態? true false
-    is_active
+    is_active,
+    // 開放進入時間
+    entryTime
 ) => {
     return axios.put(`/tickets/update/${ticketId}`, {
         ticket_Name: ticket_Name,
@@ -404,6 +412,7 @@ const updateTicket = async (
         price: price,
         act: actId,
         is_active: is_active,
+        entryTime: startTime + " 00:00:00",
     });
 };
 
@@ -421,13 +430,15 @@ const updateTicketMember = async (
     ticketId,
     customerId,
     is_active,
-    is_valid
+    is_valid,
+    is_pay
 ) => {
     return axios.put(`/tickets/member/update/${joinedListId}`, {
         ticket: ticketId,
         customerInfo: customerId,
         is_active: is_active,
         is_vaild: is_valid,
+        is_pay: is_pay,
     });
 };
 

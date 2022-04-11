@@ -18,6 +18,7 @@ const Update = () => {
         price: ticketPrice,
         ticket_Name: ticketName,
         actEndTime,
+        entrytime,
     } = ticket;
 
     const onNameChange = (e) => {
@@ -83,8 +84,9 @@ const Update = () => {
                     });
                     break;
             }
+            console.log(response.data);
         } else {
-            // console.log(response);
+            console.log(response);
         }
     };
 

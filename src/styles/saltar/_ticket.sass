@@ -90,7 +90,7 @@
 // MemberList.js
 .member-row-box
     +row-box(4, $text-orange, $text-gray)
-    .check
+    .pay
         width: 45px
         height: 40px
         display: flex
@@ -105,6 +105,25 @@
             background-color: rgba(255, 168, 61, 0.3)
         &:hover
             border: 2.5px solid rgba(165, 165, 165, 1)
+        img
+            width: 30px
+            height: 30px
+
+    .check
+        width: 45px
+        height: 40px
+        display: flex
+        flex-direction: row
+        justify-content: center
+        align-items: center
+        border: none
+        border-radius: 8px
+        background-color: rgba(165, 165, 165, 0.3)
+        cursor: pointer
+        &:checked
+            background-color: rgba(255, 168, 61, 0.3)
+        &:hover
+            border: 2.5px solid rgba(0, 128, 0, 1)
 
     .delete
         width: 45px

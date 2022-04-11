@@ -14,6 +14,7 @@ import garbage_can_Icon from "../../images/garbage_can_Icon.svg";
 import tick_Icon from "../../images/tick_Icon.svg";
 import check_Ticket from "../../images/check_Ticket.svg";
 import question from "../../images/question.png";
+import money from "../../images/money.png";
 
 const MemberList = () => {
     const { query } = useLocation();
@@ -42,7 +43,7 @@ const MemberList = () => {
                     }
                 }
             }
-            // console.log(buyers);
+            console.log(buyers);
             setBuyers(buyers);
         };
 
@@ -52,15 +53,50 @@ const MemberList = () => {
         }
     }, [reload]);
 
-    const validTicketHandle = async (e, buyer) => {
+    const payTicketHandle = async (e, buyer) => {
         e.preventDefault();
-        const { Id, ticketId, customerInfo: customerId, is_active } = buyer;
+        const {
+            Id,
+            ticketId,
+            customerInfo: customerId,
+            is_active,
+            is_vaild,
+        } = buyer;
         const response = await updateTicketMember(
             Id,
             ticketId,
             customerId,
             is_active,
+            is_vaild,
             true
+        );
+        if (response.status === 200) {
+            switch (response.data.status) {
+                case 0:
+                    setReload(true);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const validTicketHandle = async (e, buyer) => {
+        e.preventDefault();
+        const {
+            Id,
+            ticketId,
+            customerInfo: customerId,
+            is_active,
+            is_pay,
+        } = buyer;
+        const response = await updateTicketMember(
+            Id,
+            ticketId,
+            customerId,
+            is_active,
+            true,
+            is_pay
         );
         if (response.status === 200) {
             switch (response.data.status) {
@@ -162,6 +198,16 @@ const MemberList = () => {
                                 setScanning(false);
                             });
                             break;
+                        case 21:
+                            Swal.fire({
+                                title: "票券未結帳",
+                                confirmButtonText: "繼續",
+                                confirmButtonColor: "#ffb559",
+                                icon: "info",
+                            }).then(() => {
+                                setScanning(false);
+                            });
+                            break;
                         default:
                             Swal.fire({
                                 title: "發生意外錯誤",
@@ -253,14 +299,20 @@ const MemberList = () => {
                         <h6>手機號碼</h6>
                         <h6>票卷種類</h6>
                         <h6>票卷使用狀態</h6>
+                        <h6>票卷付款狀態</h6>
                     </div>
                     {buyers
                         .filter((buyer) => {
                             return buyer.is_active;
                         })
                         .map((buyer, index) => {
-                            const { actualname, phone, ticketName, is_vaild } =
-                                buyer;
+                            const {
+                                actualname,
+                                phone,
+                                ticketName,
+                                is_vaild,
+                                is_pay,
+                            } = buyer;
                             return (
                                 <div className="row-container">
                                     <h6 className="row-number">{index + 1}</h6>
@@ -282,7 +334,25 @@ const MemberList = () => {
                                             </h6>
                                         )}
 
+                                        {is_pay ? (
+                                            <h6 className="row-text success">
+                                                已付款
+                                            </h6>
+                                        ) : (
+                                            <h6 className="row-text fail">
+                                                未付款
+                                            </h6>
+                                        )}
+
                                         <div className="row-btn-group">
+                                            <button
+                                                className="pay"
+                                                onClick={(e) => {
+                                                    payTicketHandle(e, buyer);
+                                                }}
+                                            >
+                                                <img src={money} alt="" />
+                                            </button>
                                             <button
                                                 className="check"
                                                 onClick={(e) => {
@@ -310,40 +380,6 @@ const MemberList = () => {
                                 </div>
                             );
                         })}
-                    {/* <div className="row-container">
-                        <h6 className="row-number">01</h6>
-                        <div className="row-textbox">
-                            <h6 className="row-text act-name">李慶毅</h6>
-                            <h6 className="row-text">0925420706</h6>
-                            <h6 className="row-text">外系票</h6>
-                            <h6 className="row-text success">已使用</h6>
-                            <div className="row-btn-group">
-                                <button className="check">
-                                    <img src={tick_Icon} alt="" />
-                                </button>
-                                <button className="delete">
-                                    <img src={garbage_can_Icon} alt="" />
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row-container">
-                        <h6 className="row-number">02</h6>
-                        <div className="row-textbox">
-                            <h6 className="row-text">李慶毅</h6>
-                            <h6 className="row-text">0925420706</h6>
-                            <h6 className="row-text">非外系票</h6>
-                            <h6 className="row-text fail">未使用</h6>
-                            <div className="row-btn-group">
-                                <button className="check">
-                                    <img src={tick_Icon} alt="" />
-                                </button>
-                                <button className="delete">
-                                    <img src={garbage_can_Icon} alt="" />
-                                </button>
-                            </div>
-                        </div>
-                    </div> */}
                 </div>
             </div>
         </>
