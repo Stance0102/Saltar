@@ -69,6 +69,7 @@ const BuyTicket = () => {
             setTicketId(ticketId);
             setBuyTicketId(buyTicketId);
             setActivityData(activityData);
+            console.log(userData);
 
             if (uid !== "") {
                 userData.Customer_Id = Customer_Id;

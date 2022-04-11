@@ -11,8 +11,17 @@ const Edit = () => {
     const [account, setAccount] = useState({});
     const [message, setMessage] = useState({});
     const [schoolList, setSchoolList] = useState({});
-    const { actualname, phone, school, username, newPassword, reNewPassword } =
-        account;
+    const {
+        actualname,
+        phone,
+        school,
+        username,
+        newPassword,
+        reNewPassword,
+        // pay_MerchantID,
+        // pay_HashKey,
+        // pay_HashIV,
+    } = account;
 
     useEffect(() => {
         const setupData = async () => {
@@ -78,6 +87,24 @@ const Edit = () => {
             setMessage("");
         }
     };
+
+    // 測試中
+    /*
+    const onChangePayID = (e) => {
+        const payId = e.target.value;
+        setAccount({ ...account, pay_MerchantID: payId });
+    };
+
+    const onChangePayKey = (e) => {
+        const payHashKey = e.target.value;
+        setAccount({ ...account, pay_HashKey: payHashKey });
+    };
+    const onChangePayIV = (e) => {
+        const payHashIV = e.target.value;
+        setAccount({ ...account, pay_HashIV: payHashIV });
+    };
+    */
+    //
     const handleUpdate = async (e) => {
         e.preventDefault();
         if (
@@ -101,6 +128,9 @@ const Edit = () => {
             newPassword,
             phone,
             school
+            // pay_MerchantID,
+            // pay_HashKey,
+            // pay_HashIV
         );
         if (accountResponse.status == 200) {
             switch (accountResponse.data.status) {
@@ -219,6 +249,33 @@ const Edit = () => {
                         value={reNewPassword}
                         onChange={(e) => onChangeRepw(e)}
                     />
+
+                    {/* <FormInput
+                        Id="pay_MerchantID"
+                        Type="text"
+                        ClassName="input-label"
+                        Title="金流ID"
+                        value={pay_MerchantID}
+                        onChange={(e) => onChangePayID(e)}
+                    /> */}
+
+                    {/* <FormInput
+                        Id="pay_HashKey"
+                        Type="password"
+                        ClassName="input-label"
+                        Title="金流Hash Key"
+                        value={pay_HashKey}
+                        onChange={(e) => onChangePayKey(e)}
+                    /> */}
+
+                    {/* <FormInput
+                        Id="pay_HashIV"
+                        Type="password"
+                        ClassName="input-label"
+                        Title="金流Hash IV"
+                        value={pay_HashIV}
+                        onChange={(e) => onChangePayIV(e)}
+                    /> */}
 
                     <div className="form-btn-group">
                         <button className="form-save" type="submit">

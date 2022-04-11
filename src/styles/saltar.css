@@ -1691,8 +1691,8 @@ nav.closeNav {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 150px;
-  margin-left: 80px;
+  width: 230px;
+  margin-left: 30px;
 }
 
 .management-row-box .ticket-btn {
@@ -1974,8 +1974,43 @@ nav.closeNav {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 150px;
-  margin-left: 80px;
+  width: 230px;
+  margin-left: 30px;
+}
+
+.member-row-box .pay {
+  width: 45px;
+  height: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: none;
+  border-radius: 8px;
+  background-color: rgba(165, 165, 165, 0.3);
+  cursor: pointer;
+}
+
+.member-row-box .pay:checked {
+  background-color: rgba(255, 168, 61, 0.3);
+}
+
+.member-row-box .pay:hover {
+  border: 2.5px solid #a5a5a5;
+}
+
+.member-row-box .pay img {
+  width: 30px;
+  height: 30px;
 }
 
 .member-row-box .check {
@@ -2005,7 +2040,7 @@ nav.closeNav {
 }
 
 .member-row-box .check:hover {
-  border: 2.5px solid #a5a5a5;
+  border: 2.5px solid green;
 }
 
 .member-row-box .delete {
@@ -3650,8 +3685,8 @@ nav.closeNav {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 150px;
-  margin-left: 80px;
+  width: 230px;
+  margin-left: 30px;
 }
 
 .custmerList .custmer-row-box .check {
