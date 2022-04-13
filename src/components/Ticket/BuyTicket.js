@@ -52,7 +52,7 @@ const BuyTicket = () => {
         is_active: false,
     });
 
-    const [userDataView, setUserDataView] = useState(true);
+    const [userDataNotEdit, setUserDataNotEdit] = useState(true);
     const location = useLocation();
     const history = useHistory();
 
@@ -69,7 +69,6 @@ const BuyTicket = () => {
             setTicketId(ticketId);
             setBuyTicketId(buyTicketId);
             setActivityData(activityData);
-            console.log(userData);
 
             if (uid !== "") {
                 userData.Customer_Id = Customer_Id;
@@ -86,7 +85,7 @@ const BuyTicket = () => {
                 userData.is_active = is_active;
 
                 if (userData.Customer_Id == null) {
-                    setUserDataView(false);
+                    setUserDataNotEdit(false);
                 }
 
                 setUserData(userData);
@@ -139,6 +138,11 @@ const BuyTicket = () => {
             ECPayFormEle.submit();
         }
     }, []);
+
+    const onUserDataNotEdit = (e) => {
+        // e.preventDefault();
+        setUserDataNotEdit(false);
+    };
 
     const onEmailChangeHandler = (e) => {
         setUserData({
@@ -237,7 +241,7 @@ const BuyTicket = () => {
         let needValidMail = true;
         if (userData.Customer_Id !== null) {
             newCus = false;
-            if (userData.is_active === true) {
+            if (userData.is_active === true && userDataNotEdit === true) {
                 needValidMail = false;
             }
         }
@@ -398,6 +402,11 @@ const BuyTicket = () => {
                         </p>
                     </div>
                 </div>
+
+                <button className="edit-btn" onClick={onUserDataNotEdit}>
+                    修改個人資料
+                </button>
+
                 <form className="buy-form" onSubmit={submitHandler}>
                     <FormInput
                         Id="email"
@@ -407,7 +416,7 @@ const BuyTicket = () => {
                         notice="*建議填寫學校信箱以享有學生專屬優惠！"
                         value={userData.email}
                         Handler={onEmailChangeHandler}
-                        disabled={userDataView}
+                        disabled={userDataNotEdit}
                     />
                     <FormInput
                         Id="NID"
@@ -417,7 +426,7 @@ const BuyTicket = () => {
                         notice="*配合政府實名制規定，填寫真實身份證字號，以利現場工作人員查驗身份"
                         value={userData.NID}
                         Handler={onNIDChangeHandler}
-                        disabled={userDataView}
+                        disabled={userDataNotEdit}
                     />
                     <FormInput
                         Id="userName"
@@ -427,7 +436,7 @@ const BuyTicket = () => {
                         notice="*填寫真實姓名，以利現場工作人員查驗身份"
                         value={userData.name}
                         Handler={onNameChangeHandler}
-                        disabled={userDataView}
+                        disabled={userDataNotEdit}
                     />
                     <FormInput
                         Id="telNumber"
@@ -436,7 +445,7 @@ const BuyTicket = () => {
                         Title="聯絡電話(必填)"
                         value={userData.phone}
                         Handler={onPhoneChangeHandler}
-                        disabled={userDataView.is_old}
+                        disabled={userDataNotEdit}
                     />
                     <p>性別</p>
                     <div className="input-radio-group">
