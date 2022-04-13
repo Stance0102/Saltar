@@ -2200,6 +2200,28 @@ nav.closeNav {
   margin-right: 10px;
 }
 
+.buy-ticket .container .edit-btn {
+  width: 100px;
+  height: 35px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ffa83d;
+  color: #fff;
+  font-size: .9rem;
+  font-family: "NotoSansCJKtc-Medium";
+  margin-top: 15px;
+  -webkit-transition-duration: .3s;
+          transition-duration: .3s;
+}
+
+.buy-ticket .container .edit-btn:hover {
+  background-color: #fff;
+  border: #ffa83d 2px solid;
+  color: #ffa83d;
+  -webkit-transition-duration: .3s;
+          transition-duration: .3s;
+}
+
 .buy-ticket .container .buy-form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2214,7 +2236,7 @@ nav.closeNav {
   width: 100%;
   max-width: 100%;
   height: 100%;
-  margin-top: 40px;
+  margin-top: 15px;
 }
 
 .buy-ticket .container .buy-form .input-label {

@@ -1,7 +1,7 @@
 import _axios from "axios";
 
-const url = "https://saltar.taipei/api/";
-// const url = "https://saltar.taipei/test/api/";
+// const url = "https://saltar.taipei/api/";
+const url = "https://saltar.taipei/test/api/";
 
 let pendingRequests = new Map();
 let store;
