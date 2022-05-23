@@ -139,7 +139,7 @@ const Update = () => {
                     <FormInput
                         Id="startDate"
                         ClassName="input-label"
-                        Type="date"
+                        Type="datetime-local"
                         Handler={onStartTimeChange}
                         Title="開始時間"
                         max={actEndTime}
@@ -149,7 +149,7 @@ const Update = () => {
                     <FormInput
                         Id="endDate"
                         ClassName="input-label"
-                        Type="date"
+                        Type="datetime-local"
                         Handler={onEndTimeChange}
                         Title="結束時間"
                         max={actEndTime}

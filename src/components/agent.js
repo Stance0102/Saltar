@@ -50,7 +50,8 @@ const updateAccount = async (
     phone,
     school
     // devicetoken,
-    // is_admin
+    // is_admin,
+    // is_society
 ) => {
     return axios.put(`/Account/update/${userId}`, {
         username: email,
@@ -61,6 +62,7 @@ const updateAccount = async (
         school: school,
         devicetoken: "string",
         is_admin: true,
+        is_society: false,
     });
 };
 
@@ -138,9 +140,9 @@ const updateGroup = async (
         phone_number: phone_number,
         address: "address",
         // is_active: is_active,
-        // pay_MerchantID: pay_MerchantID,
-        // pay_HashKey: pay_HashKey,
-        // pay_HashIV: pay_HashIV,
+        pay_MerchantID: "pay_MerchantID",
+        pay_HashKey: "pay_HashKey",
+        pay_HashIV: "pay_HashIV",
     });
 };
 
@@ -246,9 +248,12 @@ const selectActivity = async (
 
 const selectActivityByGroupId = async (
     //群組Id
-    groupId
+    groupId,
+    from
 ) => {
-    return axios.get(`/Activity/get/group/${groupId}`);
+    return axios.get(`/Activity/get/group/${groupId}`, {
+        params: { from: from },
+    });
 };
 
 const updateActivity = async (
@@ -349,12 +354,18 @@ const createTicket = async (
     ticket_Name,
     //票券數量
     peopleMaximum,
-    //票券販賣開始時間?
+    //票券販賣開始時間
     startTime,
-    //票券販賣結束時間?
+    //票券販賣結束時間
     endTime,
+    //入場時間
+    entryTime,
     //價錢
     price,
+    //套票
+    is_package,
+    //組團時間限制
+    joinDeadLine,
     //開放狀態? true false
     is_active
 ) => {
@@ -363,8 +374,11 @@ const createTicket = async (
         peopleMaxium: peopleMaximum,
         startTime: startTime,
         endTime: endTime,
+        entryTime: entryTime,
         price: price,
         act: actId,
+        is_package: is_package,
+        joinDeadLine: joinDeadLine,
         is_active: is_active,
         count: 0,
     });
@@ -416,11 +430,25 @@ const updateTicket = async (
     });
 };
 
-const createTicketMember = async (customerId, ticketId) => {
+const createTicketMember = async (customerId, ticketId, payment) => {
     return axios.post(`/tickets/member/create`, {
         customerInfo: customerId,
         ticket: ticketId,
+        payment: payment,
         is_active: true,
+    });
+};
+
+const createPackageTicketMember = async (vaild_code, customerId) => {
+    return axios.post(`/tickets/member/package/create`, {
+        vaild_code: vaild_code,
+        Customer_Id: customerId,
+    });
+};
+
+const deletePackageTicket = async (packageId) => {
+    return axios.post(`/tickets/member/package/deleteTest`, {
+        packageId: packageId,
     });
 };
 
@@ -728,6 +756,8 @@ export {
     selectTicketByActivityId,
     updateTicket,
     createTicketMember,
+    createPackageTicketMember,
+    deletePackageTicket,
     updateTicketMember,
     deleteTicketMember,
     sendCusValidMail,

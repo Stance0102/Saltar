@@ -14,7 +14,7 @@ const ManagementActivity = () => {
 
     useEffect(() => {
         const setupData = async () => {
-            const response = await selectActivityByGroupId(groupId);
+            const response = await selectActivityByGroupId(groupId, "Activity");
             if (response.status == 200) {
                 switch (response.data.status) {
                     case 0:

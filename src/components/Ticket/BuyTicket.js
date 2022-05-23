@@ -9,12 +9,12 @@ import {
     sendTicketMail,
     createCustomerWithBuyTicket,
     updateCustomer,
-    genECPayOrder,
 } from "../agent";
 import Swal from "sweetalert2";
 // Img
 import cart_icon from "../../images/cart_icon.svg";
 import Organizer_icon from "../../images/Organizer_icon.svg";
+import LineLogin from "../Account/LineLogin";
 
 const BuyTicket = () => {
     const {
@@ -36,23 +36,8 @@ const BuyTicket = () => {
     const [ticketData, setTicketData] = useState("");
     const [activityData, setActivityData] = useState("");
     const [imagePreview, setImagePreview] = useState("");
-    const [ecPayForm, setECPayForm] = useState("");
-    const [userData, setUserData] = useState({
-        customer_Id: "",
-        email: "",
-        name: "",
-        phone: "",
-        UID: "",
-        NID: "",
-        sex: "",
-        payment: "",
-        customer_note: "",
-        customer_tag: "",
-        customer_type: "",
-        is_active: false,
-    });
+    const [userData, setUserData] = useState({});
 
-    const [userDataNotEdit, setUserDataNotEdit] = useState(true);
     const location = useLocation();
     const history = useHistory();
 
@@ -69,41 +54,33 @@ const BuyTicket = () => {
             setTicketId(ticketId);
             setBuyTicketId(buyTicketId);
             setActivityData(activityData);
-
             if (uid !== "") {
+                if (Customer_Id == null) {
+                    Swal.fire({
+                        title: "請先註冊",
+                        confirmButtonText: "前往註冊帳號",
+                        confirmButtonColor: "#ffb559",
+                        icon: "info",
+                    }).then(() => {
+                        history.push("/lineEdit");
+                    });
+                }
                 userData.Customer_Id = Customer_Id;
-                userData.email = mail;
-                userData.name = actualname;
+                userData.mail = mail;
+                userData.actualname = actualname;
                 userData.phone = phone;
-                userData.UID = uid;
+                userData.uid = uid;
                 userData.NID = NID;
                 userData.sex = sex;
-                userData.payment = payment;
+                userData.payment = "online";
                 userData.customer_note = customer_note;
                 userData.customer_tag = customer_tag;
                 userData.customer_type = customer_type;
                 userData.is_active = is_active;
 
-                if (userData.Customer_Id == null) {
-                    setUserDataNotEdit(false);
-                }
-
                 setUserData(userData);
             } else {
-                userData.Customer_Id = null;
-                userData.email = null;
-                userData.name = null;
-                userData.phone = null;
-                userData.UID = null;
-                userData.NID = null;
-                userData.sex = null;
-                userData.payment = null;
-                userData.customer_note = null;
-                userData.customer_tag = null;
-                userData.customer_type = null;
-                userData.is_active = false;
-
-                setUserData(userData);
+                LineLogin();
             }
         }
 
@@ -139,22 +116,24 @@ const BuyTicket = () => {
         }
     }, []);
 
-    const onUserDataNotEdit = (e) => {
-        // e.preventDefault();
-        setUserDataNotEdit(false);
+    const onUserDataEdit = (e) => {
+        e.preventDefault();
+        history.push({
+            pathname: "/lineEdit",
+        });
     };
 
     const onEmailChangeHandler = (e) => {
         setUserData({
             ...userData,
-            email: e.target.value,
+            mail: e.target.value,
         });
     };
 
     const onNameChangeHandler = (e) => {
         setUserData({
             ...userData,
-            name: e.target.value,
+            actualname: e.target.value,
         });
     };
 
@@ -209,10 +188,10 @@ const BuyTicket = () => {
         e.preventDefault();
         const {
             Customer_Id,
-            email,
-            name,
+            mail,
+            actualname,
             phone,
-            UID,
+            uid,
             NID,
             customer_type,
             customer_tag,
@@ -221,8 +200,8 @@ const BuyTicket = () => {
             payment,
         } = userData;
         if (
-            email === "" ||
-            name === "" ||
+            mail === "" ||
+            actualname === "" ||
             phone === "" ||
             NID === "" ||
             sex === undefined ||
@@ -241,16 +220,16 @@ const BuyTicket = () => {
         let needValidMail = true;
         if (userData.Customer_Id !== null) {
             newCus = false;
-            if (userData.is_active === true && userDataNotEdit === true) {
+            if (userData.is_active === true) {
                 needValidMail = false;
             }
         }
         if (newCus) {
             const response = await createCustomerWithBuyTicket(
-                name,
+                actualname,
                 phone,
-                email,
-                UID,
+                mail,
+                uid,
                 NID,
                 sex == "male"
             );
@@ -262,118 +241,100 @@ const BuyTicket = () => {
                     break;
             }
         } else {
-            const updateResponse = await updateCustomer(
-                Customer_Id,
-                name,
-                phone,
-                email,
-                customer_type,
-                customer_tag,
-                customer_note,
-                NID,
-                UID,
-                sex == "male",
-                payment
-            );
-
-            switch (updateResponse.data.status) {
-                case 0:
-                    if (needValidMail) {
-                        sendValid(Customer_Id);
-                    } else {
-                        const CreateResponse = await createTicketMember(
-                            Customer_Id,
-                            ticketId
+            if (needValidMail) {
+                sendValid(Customer_Id);
+            } else {
+                const CreateResponse = await createTicketMember(
+                    Customer_Id,
+                    ticketId,
+                    payment
+                );
+                switch (CreateResponse.data.status) {
+                    case 0:
+                        const mailResponse = await sendTicketMail(
+                            CreateResponse.data.results.Id
                         );
-                        switch (CreateResponse.data.status) {
+                        if (!ticketData.is_package) {
+                            if (payment == "online") {
+                                Swal.fire({
+                                    title: "購買完成",
+                                    text: "請先完成付款",
+                                    confirmButtonText: "前往付款",
+                                    confirmButtonColor: "#ffb559",
+                                    icon: "info",
+                                }).then(() => {
+                                    history.push({
+                                        pathname: `/payment`,
+                                        state: {
+                                            joinedListId:
+                                                CreateResponse.data.results.Id,
+                                            userData: userData,
+                                            ticketData: ticketData,
+                                            activityData: activityData,
+                                        },
+                                    });
+                                });
+                                break;
+                            }
+                        }
+
+                        switch (mailResponse.data.status) {
                             case 0:
-                                // console.log(CreateResponse.data); // Joined List Id
-                                const mailResponse = await sendTicketMail(
-                                    CreateResponse.data.results.Id
-                                );
-
-                                if (payment == "online") {
-                                    const ecpayResponse = await genECPayOrder(
-                                        CreateResponse.data.results.Id
-                                    );
-
-                                    switch (ecpayResponse.data.status) {
-                                        case 0:
-                                            setECPayForm(
-                                                ecpayResponse.data.msg
-                                            );
-                                            document.forms["data_set"].submit();
-                                            break;
-                                        case 19:
-                                            Swal.fire({
-                                                title: "查無訂單",
-                                                text: "請聯絡Saltar客服或活動主辦方！",
-                                                confirmButtonText: "繼續",
-                                                confirmButtonColor: "#ffb559",
-                                                icon: "success",
-                                            });
-                                            break;
-                                    }
-
-                                    setECPayForm(ecpayResponse.data.msg);
-                                }
-
-                                switch (mailResponse.data.status) {
-                                    case 0:
-                                        Swal.fire({
-                                            title: "購票成功",
-                                            text: "飛奔前往信箱！",
-                                            confirmButtonText: "繼續",
-                                            confirmButtonColor: "#ffb559",
-                                            icon: "success",
-                                        }).then(() => {
-                                            history.push({
-                                                pathname: "/ticketInformation",
-                                                state: {
-                                                    ticketId: ticketId,
-                                                    buyTicketId:
-                                                        CreateResponse.data
-                                                            .results.Id,
-                                                    activityData: activityData,
-                                                    userData: userData,
-                                                    sendEmail: true,
-                                                },
-                                            });
-                                        });
-                                        console.log(mailResponse.data.results);
-                                        break;
-                                }
-                                break;
-                            case 17:
                                 Swal.fire({
-                                    title: "酷喔～你已經買過這張票囉",
-                                    confirmButtonText: "確定",
+                                    title: "購票成功",
+                                    text: "飛奔前往信箱！",
+                                    confirmButtonText: "繼續",
                                     confirmButtonColor: "#ffb559",
-                                    icon: "info",
-                                });
-                                break;
-                            case 18:
-                                Swal.fire({
-                                    title: "非常抱歉！這張票已經售完囉",
-                                    confirmButtonText: "確定",
-                                    confirmButtonColor: "#ffb559",
-                                    icon: "info",
-                                });
-                                break;
-                            default:
-                                Swal.fire({
-                                    title: "發生不明錯誤",
-                                    confirmButtonText: "確定",
-                                    confirmButtonColor: "#ffb559",
-                                    icon: "info",
+                                    icon: "success",
+                                }).then(() => {
+                                    history.push({
+                                        pathname: "/ticketInformation",
+                                        state: {
+                                            ticketId: ticketId,
+                                            buyTicketId:
+                                                CreateResponse.data.results.Id,
+                                            activityData: activityData,
+                                            userData: userData,
+                                            sendEmail: true,
+                                        },
+                                    });
                                 });
                                 break;
                         }
                         break;
-                    }
-
-                default:
-                    break;
+                    case 1:
+                        Swal.fire({
+                            title: "非常抱歉！這張票已經售完囉",
+                            confirmButtonText: "確定",
+                            confirmButtonColor: "#ffb559",
+                            icon: "info",
+                        });
+                        break;
+                    case 17:
+                        Swal.fire({
+                            title: "酷喔～你已經買過這張票囉",
+                            confirmButtonText: "確定",
+                            confirmButtonColor: "#ffb559",
+                            icon: "info",
+                        });
+                        break;
+                    case 18:
+                        Swal.fire({
+                            title: "非常抱歉！這張票已經售完囉",
+                            confirmButtonText: "確定",
+                            confirmButtonColor: "#ffb559",
+                            icon: "info",
+                        });
+                        break;
+                    default:
+                        Swal.fire({
+                            title: "發生不明錯誤",
+                            confirmButtonText: "確定",
+                            confirmButtonColor: "#ffb559",
+                            icon: "info",
+                        });
+                        break;
+                }
             }
         }
     };
@@ -403,7 +364,7 @@ const BuyTicket = () => {
                     </div>
                 </div>
 
-                <button className="edit-btn" onClick={onUserDataNotEdit}>
+                <button className="edit-btn" onClick={onUserDataEdit}>
                     修改個人資料
                 </button>
 
@@ -414,9 +375,9 @@ const BuyTicket = () => {
                         ClassName="input-label"
                         Title="學校信箱或個人信箱(必填)"
                         notice="*建議填寫學校信箱以享有學生專屬優惠！"
-                        value={userData.email}
+                        value={userData.mail}
                         Handler={onEmailChangeHandler}
-                        disabled={userDataNotEdit}
+                        disabled={true}
                     />
                     <FormInput
                         Id="NID"
@@ -426,7 +387,7 @@ const BuyTicket = () => {
                         notice="*配合政府實名制規定，填寫真實身份證字號，以利現場工作人員查驗身份"
                         value={userData.NID}
                         Handler={onNIDChangeHandler}
-                        disabled={userDataNotEdit}
+                        disabled={true}
                     />
                     <FormInput
                         Id="userName"
@@ -434,9 +395,9 @@ const BuyTicket = () => {
                         ClassName="input-label"
                         Title="姓名(必填)"
                         notice="*填寫真實姓名，以利現場工作人員查驗身份"
-                        value={userData.name}
+                        value={userData.actualname}
                         Handler={onNameChangeHandler}
-                        disabled={userDataNotEdit}
+                        disabled={true}
                     />
                     <FormInput
                         Id="telNumber"
@@ -445,7 +406,7 @@ const BuyTicket = () => {
                         Title="聯絡電話(必填)"
                         value={userData.phone}
                         Handler={onPhoneChangeHandler}
-                        disabled={userDataNotEdit}
+                        disabled={true}
                     />
                     <p>性別</p>
                     <div className="input-radio-group">
@@ -457,6 +418,7 @@ const BuyTicket = () => {
                             value="male"
                             name="sex"
                             Handler={onSexChangeHandler}
+                            checked={userData.sex}
                         />
 
                         <FormInput
@@ -467,11 +429,12 @@ const BuyTicket = () => {
                             value="female"
                             name="sex"
                             Handler={onSexChangeHandler}
+                            checked={!userData.sex}
                         />
                     </div>
                     <p>付款方式</p>
                     <div className="input-radio-group">
-                        <FormInput
+                        {/* <FormInput
                             Id="payment"
                             Type="radio"
                             ClassName=""
@@ -479,7 +442,7 @@ const BuyTicket = () => {
                             value="cash"
                             name="payment"
                             Handler={onPaymentChangeHandler}
-                        />
+                        /> */}
 
                         <FormInput
                             Id="payment"
@@ -488,6 +451,7 @@ const BuyTicket = () => {
                             Title="線上付款(目前僅提供信用卡、金融卡付款)"
                             value="online"
                             name="payment"
+                            checked
                             Handler={onPaymentChangeHandler}
                         />
                     </div>
@@ -498,7 +462,6 @@ const BuyTicket = () => {
                     </div>
                     <button className="buy-btn">確認購買</button>
                 </form>
-                <div dangerouslySetInnerHTML={{ __html: ecPayForm }}></div>
             </div>
         </div>
     );

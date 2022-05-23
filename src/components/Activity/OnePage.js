@@ -110,6 +110,7 @@ const OnePage = ({ activityId }) => {
     const buyTicketHandler = (e, ticketId) => {
         e.preventDefault();
         if (uid == "") {
+            localStorage.setItem("lineReDirect", "onePage");
             localStorage.setItem("lineReDirectId", activityId);
             // const dispatch = useDispatch();
             // let localStorageToken = localStorage.getItem("token");
@@ -119,9 +120,13 @@ const OnePage = ({ activityId }) => {
             // }
             LineLogin();
         } else {
+            const tempActivityData = {
+                ...activityData,
+                act_Name: activityData.title,
+            };
             history.push({
                 pathname: "/buyTicket",
-                state: { ticketId: ticketId, activityData: activityData },
+                state: { ticketId: ticketId, activityData: tempActivityData },
             });
         }
     };
@@ -393,6 +398,7 @@ const ACT_Ticket = ({ tickets, org_Name, buyTicketHandler }) => {
             startTime,
             endTime,
             price,
+            is_package,
             peopleMaxium,
             count,
             Id: ticketId,
@@ -424,6 +430,8 @@ const ACT_Ticket = ({ tickets, org_Name, buyTicketHandler }) => {
                         <button className="soldout-btn">已結束售票</button>
                     ) : count >= peopleMaxium ? (
                         <button className="soldout-btn">已售完</button>
+                    ) : is_package == true && count >= 1 ? (
+                        <button className="soldout-btn">組團中</button>
                     ) : (
                         <button
                             className="buy-btn"
