@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import qs from "qs";
-import { decodeToken, selectMailFormate } from "../agent";
+import { decodeToken, selectMailFormate, deletePackageTicket } from "../agent";
 import Swal from "sweetalert2";
+import ClipboardCopy from "../common/ClipboardCopy.js";
 // Img
 import checked_icon from "../../images/checked_icon.svg";
 import vector_gray_Icon from "../../images/vector_gray_Icon.svg";
@@ -41,6 +42,10 @@ const Information = () => {
                             if (mailResponse.status === 200) {
                                 switch (mailResponse.data.status) {
                                     case 0:
+                                        const joined =
+                                            mailResponse.data.results.joined;
+                                        const ticket =
+                                            mailResponse.data.results.ticket;
                                         setActivityData(
                                             mailResponse.data.results.act
                                         );
@@ -53,6 +58,34 @@ const Information = () => {
                                         setQRcode(
                                             mailResponse.data.results.QRcode
                                         );
+                                        if (
+                                            joined.payment == "online" &&
+                                            !joined.is_pay &&
+                                            ticket.count == ticket.peopleMaxium
+                                        ) {
+                                            Swal.fire({
+                                                title: "請先付款",
+                                                confirmButtonText: "前往付款",
+                                                confirmButtonColor: "#ffb559",
+                                                icon: "info",
+                                            }).then(() => {
+                                                history.push({
+                                                    pathname: `/payment`,
+                                                    state: {
+                                                        joinedListId: joined.Id,
+                                                        userData:
+                                                            mailResponse.data
+                                                                .results.joined,
+                                                        ticketData:
+                                                            mailResponse.data
+                                                                .results.ticket,
+                                                        activityData:
+                                                            mailResponse.data
+                                                                .results.act,
+                                                    },
+                                                });
+                                            });
+                                        }
                                         break;
                                     default:
                                         Swal.fire({
@@ -92,13 +125,17 @@ const Information = () => {
         }
     }, []);
 
+    const deletePackage = async () => {
+        // const response = await deletePackageTicket(packageId);
+    };
+
     return (
         <>
             <div className="buy-ticket">
-                <div id="success">
+                {/* <div id="success">
                     <img src={checked_icon} alt="" />
                     <p>酷小子你的信箱驗證成功了！</p>
-                </div>
+                </div> */}
                 <div className="title">
                     <img src={vector_gray_Icon} alt="" />
                     我的票卷
@@ -116,10 +153,33 @@ const Information = () => {
                         <img src={check_Ticket} alt="" />
                         驗票 QR Code
                     </p>
-                    <div className="qrcode">
-                        <img src={`data:image/jpeg;base64,${QRcode}`} />
-                        請使用此QR Code進場！
-                    </div>
+                    {ticketData.is_pay ? (
+                        <div className="qrcode">
+                            <img src={`data:image/jpeg;base64,${QRcode}`} />
+                            請使用此QR Code進場！
+                        </div>
+                    ) : (
+                        <div
+                            style={{
+                                display: "flex",
+                                width: "100%",
+                                marginTop: "10px",
+                                justifyContent: "center",
+                            }}
+                        >
+                            <p
+                                style={{
+                                    display: "flex",
+                                    width: "90%",
+                                    justifyContent: "center",
+                                }}
+                            >
+                                付款完成後即可查看QR Code！
+                                <br />
+                                若為套票則須等待人數齊全才可付款！
+                            </p>
+                        </div>
+                    )}
                 </div>
                 <div className="ticket-detail">
                     <p>
@@ -134,9 +194,31 @@ const Information = () => {
                     <div className="detail-row">
                         聯絡電話： {userData.phone}
                     </div>
-                    {/* <div className="detail-row">
+                    {ticketData.is_package ? (
+                        <>
+                            <div className="detail-row">
+                                邀請連結：
+                                <ClipboardCopy
+                                    copyText={`${window.location.origin}/packageInvite?code=${ticketData.vaild_code}`}
+                                    className={"btn"}
+                                />
+                            </div>
+                        </>
+                    ) : null}
+                    <div className="detail-row">
                         付款方式：{" "}
-                        {userData.payment === "cash" ? "現金付款" : "線上付款"}
+                        {userData.payment === "online"
+                            ? "線上付款"
+                            : "現金付款"}
+                    </div>
+
+                    {/* <div className="detail-row">
+                        <input
+                            className="btn"
+                            type="button"
+                            value="取消組團"
+                            onClick={deletePackage}
+                        />
                     </div> */}
                     <div className="line">
                         <hr />

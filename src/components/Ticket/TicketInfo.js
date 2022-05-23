@@ -10,21 +10,6 @@ import receip from "../../images/receip.svg";
 // 這是 payment 為 true 的 view
 
 const TicketInfo = () => {
-    const {
-        Customer_Id,
-        mail,
-        actualname,
-        phone,
-        uid,
-        NID,
-        sex,
-        payment,
-        customer_note,
-        customer_tag,
-        customer_type,
-        is_active,
-    } = useSelector((state) => state.Customer);
-
     const [ticketId, setTicketId] = useState("");
     const [buyTicketId, setBuyTicketId] = useState("");
     const [ticketData, setTicketData] = useState("");
@@ -56,42 +41,12 @@ const TicketInfo = () => {
             ticketId = location.state.ticketId;
             buyTicketId = location.state.buyTicketId;
             activityData = location.state.activityData;
+            userData = location.state.userData;
             setImagePreview(activityData.imagePreview[0]);
             setTicketId(ticketId);
             setBuyTicketId(buyTicketId);
             setActivityData(activityData);
-
-            if (uid !== "") {
-                userData.Customer_Id = Customer_Id;
-                userData.email = mail;
-                userData.name = actualname;
-                userData.phone = phone;
-                userData.UID = uid;
-                userData.NID = NID;
-                userData.sex = sex;
-                userData.payment = payment;
-                userData.customer_note = customer_note;
-                userData.customer_tag = customer_tag;
-                userData.customer_type = customer_type;
-                userData.is_active = is_active;
-
-                setUserData(userData);
-            } else {
-                userData.Customer_Id = "";
-                userData.email = "";
-                userData.name = "";
-                userData.phone = "";
-                userData.UID = "";
-                userData.NID = "";
-                userData.sex = "";
-                userData.payment = "";
-                userData.customer_note = "";
-                userData.customer_tag = "";
-                userData.customer_type = "";
-                userData.is_active = false;
-
-                setUserData(userData);
-            }
+            setUserData(userData);
         }
 
         if (ticketId !== "") {
@@ -153,10 +108,10 @@ const TicketInfo = () => {
                         聯絡電話： {userData.phone}
                     </div>
                     <div className="detail-row">
-                        付款方式：{" "}
-                        {userData.payment === "cash"
-                            ? "現金付款(未付款)"
-                            : "線上付款"}
+                        付款方式： {console.log(userData)}
+                        {userData.payment === "online"
+                            ? "線上付款"
+                            : "現金付款(未付款)"}
                     </div>
                     <div className="line">
                         <hr />

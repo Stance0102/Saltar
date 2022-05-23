@@ -2068,6 +2068,194 @@ nav.closeNav {
   border: 2.5px solid #ff3737;
 }
 
+.payment {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100vw;
+  min-height: 100vh;
+}
+
+.payment .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  width: 40%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: #fff;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+  .payment .container {
+    width: 90%;
+  }
+}
+
+.payment .container .edit-btn {
+  width: 100px;
+  height: 35px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ffa83d;
+  color: #fff;
+  font-size: .9rem;
+  font-family: "NotoSansCJKtc-Medium";
+  margin-top: 15px;
+  -webkit-transition-duration: .3s;
+          transition-duration: .3s;
+}
+
+.payment .container .payment-form {
+  width: 100%;
+}
+
+.payment .container .payment-form .payment-price {
+  display: flex;
+  width: 100%;
+}
+
+.payment .container .payment-form .payment-price .activity-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.payment .container .payment-form .payment-price .activity-box .activity-name {
+  width: 100%;
+  margin-top: 15px;
+  font-size: 1.4rem;
+  font-family: "NotoSansCJKtc-Bold";
+}
+
+.payment .container .payment-form .payment-price .activity-box .ticket-name {
+  width: 100%;
+  margin-left: 40px;
+  font-size: 1.2rem;
+  font-family: "NotoSansCJKtc-Medium";
+}
+
+.payment .container .payment-form .payment-price .total-box {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 50%;
+  margin-top: 15px;
+}
+
+.payment .container .payment-form .payment-price .total-box .total-price {
+  font-size: 1.7rem;
+  color: #4ca46f;
+  font-family: "NotoSansCJKtc-Bold";
+}
+
+.payment .container .payment-form .input-label {
+  font-size: 1rem;
+  font-family: "NotoSansCJKtc-Bold";
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  margin-bottom: 10px;
+  width: 100%;
+  color: #000000;
+}
+
+.payment .container .payment-form input{
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.payment .container .payment-form p {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  font-size: 1rem;
+  font-family: "NotoSansCJKtc-Bold";
+}
+
+.payment .container .payment-form .input-radio-group {
+  font-size: 1rem;
+  font-family: "NotoSansCJKtc-Bold";
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 10px;
+  color: #a5a5a5;
+}
+
+.payment .container .payment-form .input-radio-group label {
+  height: 20px;
+}
+
+.payment .container .payment-form .input-radio-group input[type="radio"] {
+  width: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 20px;
+}
+
+.payment .container .payment-form .buy-btn {
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 8px;
+  background-color: #ffa83d;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  color: #fff;
+  font-size: 1.2rem;
+  font-family: "NotoSansCJKtc-Medium";
+}
+
 .buy-ticket {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2576,6 +2764,21 @@ nav.closeNav {
   font-family: "NotoSansCJKtc-Regular";
 }
 
+.buy-ticket .ticket-detail .detail-row .btn {
+  width: 100px;
+  height: 35px;
+  border: none;
+  border-radius: 8px;
+  padding-left: 0px;
+  background-color: #ffa83d;
+  color: #fff;
+  font-size: .9rem;
+  font-family: "NotoSansCJKtc-Medium";
+  margin-top: 15px;
+  -webkit-transition-duration: .3s;
+          transition-duration: .3s;
+}
+
 .buy-ticket .ticket-detail .line {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2638,7 +2841,6 @@ nav.closeNav {
   max-width: 100%;
   padding-top: 15px;
   padding-bottom: 20px;
-  padding-left: 20px;
   padding-right: 20px;
   display: -webkit-box;
   display: -ms-flexbox;

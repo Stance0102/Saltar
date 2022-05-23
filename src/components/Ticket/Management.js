@@ -14,7 +14,7 @@ const Management = () => {
 
     useEffect(() => {
         const setupData = async () => {
-            const response = await selectActivityByGroupId(groupId);
+            const response = await selectActivityByGroupId(groupId, "Ticket");
             if (response.status == 200) {
                 switch (response.data.status) {
                     case 0:
@@ -25,6 +25,18 @@ const Management = () => {
         };
         setupData();
     }, []);
+
+    const getByteLen = (text) => {
+        let len = 0;
+        for (let i = 0; i < text.length; i++) {
+            if (text.charCodeAt(i) > 127 || text.charCodeAt(i) == 94) {
+                len += 2;
+            } else {
+                len++;
+            }
+        }
+        return len;
+    };
 
     const ticketHandler = (e, index) => {
         e.preventDefault();
@@ -47,7 +59,19 @@ const Management = () => {
             } else if (result.isDenied) {
                 const { endTime } = activities[index];
                 const tickets = activities[index].tickets.map((ticket) => {
-                    return ticket.ticket_Name;
+                    let space = "";
+                    const textLength =
+                        getByteLen(ticket.ticket_Name) +
+                        getByteLen(ticket.count.toString()) +
+                        getByteLen(ticket.peopleMaxium.toString());
+                    let spaceLength = 40;
+                    if (window.innerWidth <= 768) spaceLength = 24;
+
+                    for (let i = 0; i < spaceLength - textLength; i++) {
+                        space += "&ensp;";
+                    }
+
+                    return `${ticket.ticket_Name}${space}${ticket.count}/${ticket.peopleMaxium}`;
                 });
                 Swal.fire({
                     title: "修改票券",
