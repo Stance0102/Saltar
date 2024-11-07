@@ -164,13 +164,13 @@ const Index = () => {
                     <br />
                     Email：
                     <a href="mailto:fiesta.network.taiwan@gmail.com">
-                        fiesta.network.taiwan@gmail.com
+                        service@saltar.asia
                     </a>
                     <br />
                     Instagram：
                     <a href="https://www.instagram.com/saltar.tw/">saltar.tw</a>
                 </p>
-                <span>&copy; 2021 Fiesta 斯塔科技. All Rights Reserved.</span>
+                <span>&copy; 2024 Saltar 斯塔科技. All Rights Reserved.</span>
             </footer>
         </div>
     );
